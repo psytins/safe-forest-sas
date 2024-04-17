@@ -1,0 +1,124 @@
+/* Original styles you provided with adjustments for layout */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+}
+
+.main {
+    display: flex;
+    min-height: 100vh;
+}
+
+.side-nav {
+    background-color: #333;
+    width: 250px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-nav {
+    background-color: yellow; /* Placeholder color */
+    height: 60px;
+    flex-shrink: 0;
+}
+
+.menu-options {
+    flex-grow: 1;
+    background-color: wheat; /* Placeholder color */
+}
+
+.social-network {
+    background-color: green; /* Placeholder color */
+    height: 60px;
+    flex-shrink: 0;
+}
+
+.main-body {
+    flex-grow: 1;
+    background-color: #eaeaea;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    height: 60px;
+    background-color: orange; /* Placeholder color */
+    flex-shrink: 0;
+}
+
+.panel {
+    flex-grow: 1;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    margin: 20px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group select,
+.form-group input[type="file"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.save-btn {
+    padding: 10px 15px;
+    background-color: #4CAF50; /* Green button */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.save-btn:hover {
+    background-color: #45a049;
+}
+
+.footer {
+    height: 60px;
+    background-color: chocolate; /* Placeholder color */
+    flex-shrink: 0;
+}
+
+/* Responsive adjustment for mobile views */
+@media (max-width: 768px) {
+    .side-nav {
+        width: 100%;
+        height: auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: none;
+    }
+
+    .main-body {
+        padding: 10px;
+    }
+
+    .panel {
+        margin: 10px;
+        padding: 20px;
+    }
+}
