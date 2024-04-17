@@ -20,7 +20,8 @@
                     <img class="menu-options-home-dashboard-icon-img" src="../Images/safe-forest.png">
                 </div>
                 <div class="logo-nav-hamburguer">
-                    <img id="logo-nav-hamburger-btn" onclick="clicked_menu()" src="../Images/hamburger-logo.png"></button>
+                    <img id="logo-nav-hamburger-btn" onclick="clicked_menu()"
+                        src="../Images/hamburger-logo.png"></button>
                 </div>
             </div>
 
@@ -31,7 +32,7 @@
                     </div>
                     <div class="menu-options-home-dashboard">
                         <div class="menu-options-home-dashboard-icon">
-                             <img src="../Images/dashboard-logo.png"> 
+                            <img src="../Images/dashboard-logo.png">
                         </div>
                         <div class="menu-options-home-dashboard-text">
                             <p>Dashboard</p>
@@ -46,7 +47,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="menu-options-settings">
                     <div class="menu-options-settings-label">
                         <p>Settings</p>
@@ -131,35 +132,42 @@
                             <div class="panel-information-statistics-status-online">
                                 <div class="panel-information-statistics-status-online-container">
                                     <div class="panel-information-statistics-status-online-container-number">
-                                        <p>0</p>
+                                        <h1>0</h1>
                                     </div>
                                     <div class="panel-information-statistics-status-online-container-label">
                                         <p>Cameras Online</p>
                                     </div>
                                     <div class="panel-information-statistics-status-online-container-cameras">
-                                        <button class="panel-information-statistics-status-online-container-cameras-btn">My Cameras ></button>
+                                        <button
+                                            class="panel-information-statistics-status-online-container-cameras-btn">My
+                                            Cameras ></button>
                                     </div>
                                 </div>
                             </div>
                             <div class="panel-information-statistics-status-offline">
                                 <div class="panel-information-statistics-status-offline-container">
-                                <div class="panel-information-statistics-status-offline-container-number">
-                                    <p>0</p>
-                                </div>
-                                <div class="panel-information-statistics-status-offline-container-label">
-                                    <p>Cameras Offline</p>
-                                </div>
-                                <div class="panel-information-statistics-status-offline-container-cameras">
-                                    <button class="panel-information-statistics-status-offline-container-cameras-btn">My Cameras ></button>
-                                </div>
+                                    <div class="panel-information-statistics-status-offline-container-number">
+                                        <h1>0</h1>
+                                    </div>
+                                    <div class="panel-information-statistics-status-offline-container-label">
+                                        <p>Cameras Offline</p>
+                                    </div>
+                                    <div class="panel-information-statistics-status-offline-container-cameras">
+                                        <button
+                                            class="panel-information-statistics-status-offline-container-cameras-btn">My
+                                            Cameras ></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="panel-information-statistics-smoke">
+                            <div class="panel-information-statistics-smoke-title">
+                                <p>Overall smoke detected</p>
+                            </div>
                             <div class="panel-information-statistics-smoke-container">
                                 <div class="panel-information-statistics-smoke-24-hours">
                                     <div class="panel-information-statistics-smoke-24-hours-number">
-                                        <p>0</p>
+                                        <h1>0</h1>
                                     </div>
                                     <div class="panel-information-statistics-smoke-24-hours-label">
                                         <p>Last 24 Hours</p>
@@ -168,7 +176,7 @@
 
                                 <div class="panel-information-statistics-smoke-7-days">
                                     <div class="panel-information-statistics-smoke-7-days-number">
-                                        <p>0</p>
+                                        <h1>0</h1>
                                     </div>
                                     <div class="panel-information-statistics-smoke-7-days-label">
                                         <p>Last 7 Days</p>
@@ -177,7 +185,7 @@
 
                                 <div class="panel-information-statistics-smoke-30-days">
                                     <div class="panel-information-statistics-smoke-30-days-number">
-                                        <p>0</p>
+                                        <h1>0</h1>
                                     </div>
                                     <div class="panel-information-statistics-smoke-30-days-label">
                                         <p>Last 30 Days</p>
@@ -187,50 +195,41 @@
                         </div>
                     </div>
                     <div class="panel-information-detections">
-                        <table class="panel-information-detections-table">
-                            <tr class="panel-information-detections-table-header">
-                              <th>Sensitivity</th>
-                              <th>Camera</th>
-                              <th>Last Detection</th>
-                              <th>30 Day Status</th>
-                            </tr>
-                            <tr class="panel-information-detections-table-content">
-                              <td>example1</td>
-                              <td>example1</td>
-                              <td>example1</td>
-                              <td>example1</td>
-                            </tr>
-                            <tr class="panel-information-detections-table-content">
-                                <td>example2</td>
-                                <td>example2</td>
-                                <td>example2</td>
-                                <td>example2</td>
-                            </tr>
-                            <tr class="panel-information-detections-table-content">
-                                <td>example3</td>
-                                <td>example3</td>
-                                <td>example3</td>
-                                <td>example3</td>
-                            </tr>
-                            <tr class="panel-information-detections-table-content">
-                                <td>example4</td>
-                                <td>example4</td>
-                                <td>example4</td>
-                                <td>example4</td>
-                            </tr>
-                            <tr class="panel-information-detections-table-content">
-                                <td>example5</td>
-                                <td>example5</td>
-                                <td>example5</td>
-                                <td>example5</td>
-                            </tr>
-                            <tr class="panel-information-detections-table-content">
-                                <td>example6</td>
-                                <td>example6</td>
-                                <td>example6</td>
-                                <td>example6</td>
-                            </tr>
-                          </table>
+                        <div class="panel-information-detections-title">
+                            <p>Latest detection date and time for all cameras</p>
+                        </div>
+                        <div class="panel-information-detections-table">
+                            <table class="camera-table">
+                                <thead>
+                                    <tr>
+                                        <th>Camera name</th>
+                                        <th>Last detected date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Canon EOS 5D Mark IV</td>
+                                        <td>2024-04-10</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Canon EOS 5D Mark IV</td>
+                                        <td>2024-04-10</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Canon EOS 5D Mark IV</td>
+                                        <td>2024-04-10</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Canon EOS 5D Mark IV</td>
+                                        <td>2024-04-10</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Canon EOS 5D Mark IV</td>
+                                        <td>2024-04-10</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
@@ -267,7 +266,7 @@
                 </div>
             </div>
         </div>
-    </div>  
+    </div>
 
 </body>
 

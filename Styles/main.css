@@ -4,48 +4,48 @@
     font-family: 'ROBOTO-SERIF';
     src: url('../Fonts/RobotoSerif/RobotoSerif-Italic-VariableFont_GRAD\,opsz\,wdth\,wght.ttf');
     src: url('../Fonts/RobotoSerif/RobotoSerif-VariableFont_GRAD\,opsz\,wdth\,wght.ttf');
-   }
+}
 
-*{
+* {
     margin: 0;
     font-family: "ROBOTO-SERIF";
 }
 
-.main{
+.main {
     width: 100vw;
     height: 100vh;
     display: flex;
 }
 
-.main-body{
+.main-body {
     width: 80vw;
     height: 100vh;
     transition: width 0.3s ease;
 }
 
 /*################# SIDEBAR #################*/
-.side-nav{
+.side-nav {
     background-color: black;
     height: 100vh;
     width: 20vw;
     transition: width 0.3s ease;
 }
 
-.logo-nav{
+.logo-nav {
     display: flex;
     width: 20vw;
     height: 19.85vh;
     border-bottom: 1px #f2f2f2 solid;
 }
 
-.logo-nav-logo{
+.logo-nav-logo {
     display: flex;
     width: 70vw;
-    justify-content:center;
+    justify-content: center;
     height: 19.85vh;
 }
 
-.menu-options-home-dashboard-icon-img{
+.menu-options-home-dashboard-icon-img {
     display: flex;
     flex-shrink: 0;
     align-self: center;
@@ -55,10 +55,10 @@
 
 .menu-options-home-dashboard-icon-img:hover {
     border-radius: 10px;
-    background-color:#f2f2f2;
+    background-color: #f2f2f2;
 }
 
-.logo-nav-hamburguer{
+.logo-nav-hamburguer {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -66,7 +66,7 @@
     height: 19.85vh;
 }
 
-#logo-nav-hamburger-btn{
+#logo-nav-hamburger-btn {
     border-radius: 5px;
     cursor: pointer;
     border: 20px;
@@ -74,11 +74,11 @@
     transition: width 0.3s ease;
 }
 
-#logo-nav-hamburger-btn:hover{
+#logo-nav-hamburger-btn:hover {
     background-color: lightgray;
 }
 
-.menu-options{
+.menu-options {
     width: 20vw;
     height: 70vh;
     display: flex;
@@ -86,11 +86,11 @@
     align-items: start;
 }
 
-.menu-options img{
+.menu-options img {
     width: 40%;
 }
 
-.menu-options-home{
+.menu-options-home {
     width: 100%;
     height: 30%;
     margin-top: 5%;
@@ -101,7 +101,7 @@
     transition: width 0.3s ease;
 }
 
-.menu-options-home-label{
+.menu-options-home-label {
     display: flex;
     align-items: center;
     height: 35px;
@@ -110,7 +110,7 @@
     border-bottom: 2px white solid;
 }
 
-.menu-options-home-dashboard{
+.menu-options-home-dashboard {
     cursor: pointer;
     margin-top: 2%;
     display: flex;
@@ -118,34 +118,34 @@
     height: 25%;
 }
 
- .menu-options-home-dashboard-icon{
+.menu-options-home-dashboard-icon {
     display: flex;
     justify-content: center;
     align-self: center;
     height: fit-content;
     margin-left: 3%;
-} 
+}
 
-.menu-options-home-dashboard-text{
+.menu-options-home-dashboard-text {
     display: flex;
     justify-content: start;
     align-items: center;
     width: 50%;
 }
 
-.menu-options-home-dashboard:hover{
+.menu-options-home-dashboard:hover {
     background-color: #b7d93d;
     color: black;
 }
 
-.menu-options-home-camera{
+.menu-options-home-camera {
     display: flex;
     cursor: pointer;
     width: 100%;
     height: 25%;
 }
 
-.menu-options-home-camera-icon{
+.menu-options-home-camera-icon {
     display: flex;
     justify-content: center;
     align-self: center;
@@ -153,19 +153,19 @@
     margin-left: 3%;
 }
 
-.menu-options-home-camera-text{
+.menu-options-home-camera-text {
     display: flex;
     justify-content: start;
     align-items: center;
     width: 50%;
 }
 
-.menu-options-home-camera:hover{
+.menu-options-home-camera:hover {
     background-color: #b7d93d;
     color: black;
 }
 
-.menu-options-settings{
+.menu-options-settings {
     color: white;
     display: flex;
     flex-direction: column;
@@ -176,7 +176,7 @@
     margin-top: 5%;
 }
 
-.menu-options-settings-label{
+.menu-options-settings-label {
     display: flex;
     align-items: center;
     height: 35px;
@@ -185,7 +185,7 @@
     border-bottom: 2px white solid;
 }
 
-.menu-options-settings-general{
+.menu-options-settings-general {
     cursor: pointer;
     margin-top: 2%;
     display: flex;
@@ -193,7 +193,7 @@
     height: 25%;
 }
 
-.menu-options-settings-general-icon{
+.menu-options-settings-general-icon {
     display: flex;
     justify-content: center;
     align-self: center;
@@ -201,26 +201,26 @@
     margin-left: 3%;
 }
 
-.menu-options-settings-general-text{
+.menu-options-settings-general-text {
     display: flex;
     justify-content: start;
     align-items: center;
     width: 50%;
 }
 
-.menu-options-settings-general:hover{
+.menu-options-settings-general:hover {
     background-color: #b7d93d;
     color: black;
 }
 
-.menu-options-settings-security{
+.menu-options-settings-security {
     cursor: pointer;
     display: flex;
     width: 100%;
     height: 25%;
 }
 
-.menu-options-settings-security-icon{
+.menu-options-settings-security-icon {
     display: flex;
     justify-content: center;
     align-self: center;
@@ -228,26 +228,26 @@
     margin-left: 3%;
 }
 
-.menu-options-settings-security-text{
+.menu-options-settings-security-text {
     display: flex;
     justify-content: start;
     align-items: center;
     width: 50%;
 }
 
-.menu-options-settings-security:hover{
+.menu-options-settings-security:hover {
     background-color: #b7d93d;
     color: black;
 }
 
-.menu-options-settings-alert{
+.menu-options-settings-alert {
     cursor: pointer;
     display: flex;
     width: 100%;
     height: 25%;
 }
 
-.menu-options-settings-alert-icon{
+.menu-options-settings-alert-icon {
     display: flex;
     justify-content: center;
     align-self: center;
@@ -255,7 +255,7 @@
     margin-left: 3%;
 }
 
-.menu-options-settings-alert-text{
+.menu-options-settings-alert-text {
     display: flex;
     justify-content: start;
     align-items: center;
@@ -263,13 +263,13 @@
 }
 
 
-.menu-options-settings-alert:hover{
+.menu-options-settings-alert:hover {
     background-color: #b7d93d;
     color: black;
 }
 
 /*################# SOCIAL NETWORK #################*/
-.social-network{
+.social-network {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -278,11 +278,11 @@
     border-top: 1px #f2f2f2 solid;
 }
 
-.social-network img{
+.social-network img {
     width: 40%;
 }
 
-.social-network div{
+.social-network div {
     width: 25%;
     height: 100%;
     display: flex;
@@ -290,28 +290,28 @@
     align-items: center;
 }
 
-.social-network div:hover{
-background-color: #b7d93d;
+.social-network div:hover {
+    background-color: #b7d93d;
 }
 
 
 /*################# HEADER #################*/
 
-.header{
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #f2f2f2; 
+    background-color: #f2f2f2;
     width: 80vw;
     height: 19.85vh;
     border-bottom: 1px black solid;
 }
 
-.header img{
+.header img {
     width: 50%;
 }
 
-.header-greeting{
+.header-greeting {
     display: flex;
     flex-direction: column;
     width: 50%;
@@ -319,11 +319,12 @@ background-color: #b7d93d;
     margin-left: 5%;
 }
 
-.header-greeting h1{
-    font-weight: 500; /*Defines from thin to thick characters. 400 is the same as normal, and 700 is the same as bold*/
+.header-greeting h1 {
+    font-weight: 500;
+    /*Defines from thin to thick characters. 400 is the same as normal, and 700 is the same as bold*/
 }
 
-.header-greeting-top{
+.header-greeting-top {
     display: flex;
     align-items: center;
     height: 50%;
@@ -331,7 +332,7 @@ background-color: #b7d93d;
     /* background-color: #f2f2f2;*/
 }
 
-.header-greeting-bottom{
+.header-greeting-bottom {
     display: flex;
     height: 50%;
     width: 100%;
@@ -340,7 +341,7 @@ background-color: #b7d93d;
     /* background-color: #f2f2f2; */
 }
 
-.header-options{
+.header-options {
     display: flex;
     justify-content: flex-end;
     width: 50%;
@@ -348,36 +349,37 @@ background-color: #b7d93d;
     margin-right: 3%;
 }
 
-.header-options-addcamera{
+.header-options-addcamera {
     margin-right: 5%;
 }
 
 
-.header-options-addcamera button{
+.header-options-addcamera button {
     height: 50%;
 
 }
 
-.header-options-language{
+.header-options-language {
     display: flex;
     justify-content: center;
 }
 
-.header-options-notifications{
+.header-options-notifications {
     display: flex;
     justify-content: center;
 }
 
-.header-options-leave{
+.header-options-leave {
     display: flex;
     justify-content: center;
 }
-.header-options-leave img{
+
+.header-options-leave img {
     width: 35%;
     margin-left: 3%;
 }
 
-.header-options div{
+.header-options div {
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -386,275 +388,275 @@ background-color: #b7d93d;
 
 /*################# PANEL #################*/
 
-.panel{   
-    display: flex; 
+.panel {
+    display: flex;
     width: 80vw;
     height: 70vh;
 }
 
-.panel-information{
+.panel-information {
     display: flex;
     flex-direction: column;
+    align-items: center;
     height: 100%;
     width: 50%;
 }
 
-.panel-information-statistics{
+.panel-information-statistics {
     display: flex;
     flex-direction: column;
+    align-items: center;
     height: 100%;
     width: 100%;
 }
 
-.panel-information-statistics-status{
+.panel-information-statistics h1 {
+    font-weight: 500;
+    /*Defines from thin to thick characters. 400 is the same as normal, and 700 is the same as bold*/
+}
+
+.panel-information-statistics-status {
     display: flex;
-    align-items: center;
     height: 50%;
     width: 100%;
 }
 
- .panel-information-statistics-status-online{
+.panel-information-statistics-status-online {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 50%;
     height: 100%;
-} 
+}
 
-.panel-information-statistics-status-online-container{
+.panel-information-statistics-status-online-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    border-radius: 10px;
+    align-items: flex-start;
+    justify-content: space-evenly;
     width: 90%;
     height: 90%;
     background-color: #b7d93d;
 }
 
-.panel-information-statistics-status-online-container-number{
-    display: flex;
-    align-self: center;
+.panel-information-statistics-status-online-container-number {
     height: 30%;
+    margin-left: 5%;
 }
 
-.panel-information-statistics-status-online-container-label{
+.panel-information-statistics-status-online-container-label {
+    margin-left: 5%;
+
+}
+
+.panel-information-statistics-status-online-container-cameras {
     display: flex;
+    width: 80%;
+    margin-left: 5%;
+
 }
 
-.panel-information-statistics-status-online-container-cameras{
-    display: flex;
-    justify-content: center;
-    width: 95%;
-}
-
-.panel-information-statistics-status-online-container-cameras button{
+.panel-information-statistics-status-online-container-cameras button {
     background: none;
     border-radius: 5px;
     border: 1px black solid;
-     background-color: #f2f2f2; 
+    background-color: #f2f2f2;
     width: 100%;
 }
 
-.panel-information-statistics-status-online-container-cameras button:hover{
+.panel-information-statistics-status-online-container-cameras button:hover {
     background-color: lightgray;
 }
 
-.panel-information-statistics-status-offline{
+.panel-information-statistics-status-offline {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     width: 50%;
     height: 100%;
 }
 
-.panel-information-statistics-status-offline-container{
+.panel-information-statistics-status-offline-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    border-radius: 10px;
+    align-items: flex-start;
+    justify-content: space-evenly;
     width: 90%;
     height: 90%;
     background-color: #b7d93d;
 }
 
-.panel-information-statistics-status-offline-container-number{
-    display: flex;
-    align-self: center;
+.panel-information-statistics-status-offline-container-label {
+    margin-left: 5%;
+
+}
+
+.panel-information-statistics-status-offline-container-number {
     height: 30%;
+    margin-left: 5%;
 }
 
-.panel-information-statistics-status-offline-container-cameras{
+.panel-information-statistics-status-offline-container-cameras {
     display: flex;
-    justify-content: center;
-    width: 95%;
+    width: 80%;
+    margin-left: 5%;
 }
 
-.panel-information-statistics-status-offline-container-cameras button{
+.panel-information-statistics-status-offline-container-cameras button {
     background: none;
     border-radius: 5px;
     border: 1px black solid;
-     background-color: #f2f2f2; 
+    background-color: #f2f2f2;
     width: 100%;
 }
 
-.panel-information-statistics-status-offline-container-cameras button:hover{
-background-color: lightgray;
-}
-
-.panel-information-statistics-smoke{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 50%;
-}
-
-.panel-information-statistics-smoke-container{
-    display: flex;
-    width: 95%;
-    height: 90%;
-    border-radius: 10px;
+.panel-information-statistics-status-offline-container-cameras button:hover {
     background-color: lightgray;
 }
 
-.panel-information-statistics-smoke-24-hours{
+.panel-information-statistics-smoke {
+    background-color: lightgray;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    width: 95%;
+    height: 50%;
+}
+
+.panel-information-statistics-smoke-title {
+    font-size: small;
+    margin: 1%;
+    color: gray;
+}
+
+.panel-information-statistics-smoke-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.panel-information-statistics-smoke-24-hours {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     height: 100%;
     flex-grow: 1;
 }
 
-.panel-information-statistics-smoke-24-hours-number{
+.panel-information-statistics-smoke-24-hours-number {
     display: flex;
-    align-items: baseline;
-    justify-content: center;
-    width: 100%;
+    margin-left: 8%;
+    width: 95%;
     height: 55%;
 }
 
-.panel-information-statistics-smoke-24-hours-label{
+.panel-information-statistics-smoke-24-hours-label {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: start;
-    width: 100%;
+    width: 95%;
     height: fit-content;
+    margin-left: 8%;
+
 }
 
-.panel-information-statistics-smoke-7-days{
+.panel-information-statistics-smoke-7-days {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: center;
     height: 100%;
     flex-grow: 1;
     border-left: 1px black solid;
     border-right: 1px black solid;
 }
 
-.panel-information-statistics-smoke-7-days-number{
+.panel-information-statistics-smoke-7-days-number {
     display: flex;
-    align-items: baseline;
-    justify-content: center;
-    width: 100%;
+    margin-left: 8%;
+    width: 95%;
     height: 55%;
 }
 
-.panel-information-statistics-smoke-7-days-label{
+.panel-information-statistics-smoke-7-days-label {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: start;
-    width: 100%;
+    width: 95%;
     height: fit-content;
+    margin-left: 8%;
 }
 
-.panel-information-statistics-smoke-30-days{
+.panel-information-statistics-smoke-30-days {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: center;
     height: 100%;
     flex-grow: 1;
 }
 
-.panel-information-statistics-smoke-30-days-number{
+.panel-information-statistics-smoke-30-days-number {
     display: flex;
-    align-items: baseline;
-    justify-content: center;
-    width: 100%;
+    margin-left: 8%;
+    width: 95%;
     height: 55%;
 }
 
-.panel-information-statistics-smoke-30-days-label{
+.panel-information-statistics-smoke-30-days-label {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: start;
-    width: 100%;
+    width: 95%;
     height: fit-content;
+    margin-left: 8%;
 }
 
-.panel-information-detections{
+.panel-information-detections {
     display: flex;
-    align-content: center;
+    flex-direction: column;
     justify-content: center;
-    height: 100%;
-    width: 100%;
+    align-items: center;
+    height: 95%;
+    width: 95%;
+    background-color: lightgray;
+    margin-top: 2%;
+    margin-bottom: 2%;
+
+}
+
+.panel-information-detections-title {
+    color: gray;
+    margin: 1%;
+    width: 98%;
+    font-size: small;
 }
 
 .panel-information-detections-table {
     display: flex;
-    flex-direction: column;
+    height: 95%;
     width: 95%;
-    height: 98%;
-    border: 1px black solid;
-    border-radius: 5px;
-    size-adjust: none;
-  }
-  
-  .panel-information-detections-table table {
+    justify-content: start;   
+    margin-top: 2%;
+    margin-bottom: 2%;
+    font-size: small;
+}
+
+.camera-table {
     width: 100%;
+    border: solid 1px gray;
     border-collapse: collapse;
-  }
-  
-  .panel-information-detections-table th {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px black solid;
-    border-spacing: 0px;
-    padding: 2vh;
-    flex-grow: 1;
-    width: fit-content;
+    border-spacing: 0;  
+}
+.camera-table thead th {
+    border: solid 1px gray;
+    color: black;
+    padding: 10px;
+    text-align: left;
+}
+.camera-table tbody td {
+    border: solid 1px gray;
+    color: #333;
+    padding: 10px;
+}
 
-    width: 100%;
-    background-color: lightgray;
-  }
-
-  
-  .panel-information-detections-table-header {
-    display: flex;
-  }
-
-  .panel-information-detections-table-content {
-    display: flex;
-    width: 100%;
-  }
-
-  .panel-information-detections-table-content td{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px black solid;
-    border-spacing: 0px;
-    padding: 0.5%;
-    flex-grow: 1;
-    width: 25%;
-  }
-  
-.panel-camera{
+.panel-camera {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -662,7 +664,7 @@ background-color: lightgray;
     width: 50%;
 }
 
-.panel-camera-container{
+.panel-camera-container {
     border-radius: 5px;
     width: 95%;
     height: 97%;
@@ -671,37 +673,37 @@ background-color: lightgray;
 
 /*################# FOOTER #################*/
 
-.footer{
+.footer {
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    background-color: #f2f2f2; 
+    background-color: #f2f2f2;
     width: 80vw;
     height: 9.88vh;
     border-top: 1px black solid;
 }
 
 
-.footer-info{
+.footer-info {
     display: flex;
     flex-direction: column;
     height: 100%;
     padding-left: 20px;
 }
 
-.footer-info div{
+.footer-info div {
     display: flex;
     align-items: center;
     height: 50%;
 }
 
-.footer-update{
+.footer-update {
     display: flex;
     flex-direction: row;
     padding-right: 20px;
 }
 
-.footer-update div{
+.footer-update div {
     display: flex;
     flex-direction: row;
     align-items: center;
