@@ -86,8 +86,8 @@ function clicked_menu() {
         menu_home.style.width = "100%";
         menu_settings.style.width = "100%";
     
-        sidebar.style.width = "20%";
-        main.style.width = "80%";
+        sidebar.style.width = "15%";
+        main.style.width = "85%";
 
         dashboard_div.style.justifyContent = "";
         dashboard_text.style.display = '';

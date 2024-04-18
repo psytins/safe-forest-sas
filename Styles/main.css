@@ -1,3 +1,12 @@
+/*
+Colors for wireframe:
+
+#CDCDCD -> For components
+#D9D9D9 -> Dark Grey
+#EAEAEA -> Light Grey
+#102026 -> Blue Black
+*/
+
 /*################# MAIN #################*/
 
 @font-face {
@@ -18,31 +27,32 @@
 }
 
 .main-body {
-    width: 80vw;
+    background-color: #EAEAEA;
+    width: 85vw;
     height: 100vh;
     transition: width 0.3s ease;
 }
 
 /*################# SIDEBAR #################*/
 .side-nav {
-    background-color: black;
+    background-color: #D9D9D9;
     height: 100vh;
-    width: 20vw;
+    width: 15vw;
     transition: width 0.3s ease;
 }
 
 .logo-nav {
     display: flex;
-    width: 20vw;
-    height: 19.85vh;
-    border-bottom: 1px #f2f2f2 solid;
+    width: 15vw;
+    height: 12.85vh;
+    border-bottom: 1px #102026 solid;
 }
 
 .logo-nav-logo {
     display: flex;
     width: 70vw;
     justify-content: center;
-    height: 19.85vh;
+    height: 12.85vh;
 }
 
 .menu-options-home-dashboard-icon-img {
@@ -53,17 +63,12 @@
     width: 50%;
 }
 
-.menu-options-home-dashboard-icon-img:hover {
-    border-radius: 10px;
-    background-color: #f2f2f2;
-}
-
 .logo-nav-hamburguer {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 30vw;
-    height: 19.85vh;
+    height: 12.85vh;
 }
 
 #logo-nav-hamburger-btn {
@@ -74,13 +79,9 @@
     transition: width 0.3s ease;
 }
 
-#logo-nav-hamburger-btn:hover {
-    background-color: lightgray;
-}
-
 .menu-options {
-    width: 20vw;
-    height: 70vh;
+    width: 15vw;
+    height: 77vh;
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -94,7 +95,7 @@
     width: 100%;
     height: 30%;
     margin-top: 5%;
-    color: white;
+    color: #102026;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -107,7 +108,7 @@
     height: 35px;
     width: 60%;
     margin-left: 10%;
-    border-bottom: 2px white solid;
+    border-bottom: 2px #102026 solid;
 }
 
 .menu-options-home-dashboard {
@@ -135,7 +136,7 @@
 
 .menu-options-home-dashboard:hover {
     background-color: #b7d93d;
-    color: black;
+    color: white;
 }
 
 .menu-options-home-camera {
@@ -162,11 +163,11 @@
 
 .menu-options-home-camera:hover {
     background-color: #b7d93d;
-    color: black;
+    color: white;
 }
 
 .menu-options-settings {
-    color: white;
+    color: #102026;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -182,7 +183,7 @@
     height: 35px;
     width: 60%;
     margin-left: 10%;
-    border-bottom: 2px white solid;
+    border-bottom: 2px #102026 solid;
 }
 
 .menu-options-settings-general {
@@ -210,7 +211,7 @@
 
 .menu-options-settings-general:hover {
     background-color: #b7d93d;
-    color: black;
+    color: white;
 }
 
 .menu-options-settings-security {
@@ -237,7 +238,7 @@
 
 .menu-options-settings-security:hover {
     background-color: #b7d93d;
-    color: black;
+    color: white;
 }
 
 .menu-options-settings-alert {
@@ -265,7 +266,7 @@
 
 .menu-options-settings-alert:hover {
     background-color: #b7d93d;
-    color: black;
+    color: white;
 }
 
 /*################# SOCIAL NETWORK #################*/
@@ -273,13 +274,13 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    width: 20vw;
+    width: 15vw;
     height: 9.88vh;
-    border-top: 1px #f2f2f2 solid;
+    border-top: 1px #102026 solid;
 }
 
 .social-network img {
-    width: 40%;
+    width: 60%;
 }
 
 .social-network div {
@@ -301,9 +302,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #f2f2f2;
-    width: 80vw;
-    height: 19.85vh;
+    background-color: #EAEAEA;
+    width: 85vw;
+    height: 12.85vh;
     border-bottom: 1px black solid;
 }
 
@@ -390,8 +391,8 @@
 
 .panel {
     display: flex;
-    width: 80vw;
-    height: 70vh;
+    width: 85vw;
+    height: 77vh;
 }
 
 .panel-information {
@@ -437,7 +438,7 @@
     justify-content: space-evenly;
     width: 90%;
     height: 90%;
-    background-color: #b7d93d;
+    background-color: #CDCDCD;
 }
 
 .panel-information-statistics-status-online-container-number {
@@ -458,10 +459,8 @@
 }
 
 .panel-information-statistics-status-online-container-cameras button {
-    background: none;
-    border-radius: 5px;
     border: 1px black solid;
-    background-color: #f2f2f2;
+    background-color: #CDCDCD;
     width: 100%;
 }
 
@@ -485,7 +484,7 @@
     justify-content: space-evenly;
     width: 90%;
     height: 90%;
-    background-color: #b7d93d;
+    background-color: #CDCDCD;
 }
 
 .panel-information-statistics-status-offline-container-label {
@@ -505,10 +504,8 @@
 }
 
 .panel-information-statistics-status-offline-container-cameras button {
-    background: none;
-    border-radius: 5px;
     border: 1px black solid;
-    background-color: #f2f2f2;
+    background-color: #CDCDCD;
     width: 100%;
 }
 
@@ -517,7 +514,7 @@
 }
 
 .panel-information-statistics-smoke {
-    background-color: lightgray;
+    background-color: #CDCDCD;
     display: flex;
     flex-direction: column;
     width: 95%;
@@ -615,7 +612,7 @@
     align-items: center;
     height: 95%;
     width: 95%;
-    background-color: lightgray;
+    background-color: #CDCDCD;
     margin-top: 2%;
     margin-bottom: 2%;
 
@@ -668,7 +665,7 @@
     border-radius: 5px;
     width: 95%;
     height: 97%;
-    background-color: #b7d93d;
+    background-color: #CDCDCD;
 }
 
 /*################# FOOTER #################*/
@@ -676,26 +673,27 @@
 .footer {
     display: flex;
     justify-content: space-between;
-    flex-direction: row;
-    background-color: #f2f2f2;
-    width: 80vw;
+    background-color: #EAEAEA;
+    width: 85vw;
     height: 9.88vh;
     border-top: 1px black solid;
+    color: gray;
+    font-size: small;
 }
 
 
 .footer-info {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     height: 100%;
-    padding-left: 20px;
+    margin-left: 2%;
 }
 
-.footer-info div {
-    display: flex;
-    align-items: center;
-    height: 50%;
+.footer-info-top {
+    margin-bottom: 2%;
 }
+
 
 .footer-update {
     display: flex;
