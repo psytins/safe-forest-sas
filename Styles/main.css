@@ -316,12 +316,13 @@ Colors for wireframe:
     display: flex;
     flex-direction: column;
     width: 50%;
-    height: 50%;
+    height: 60%;
     margin-left: 5%;
 }
 
-.header-greeting h1 {
-    font-weight: 500;
+.header-greeting h1,
+h2 {
+    font-weight: 600;
     /*Defines from thin to thick characters. 400 is the same as normal, and 700 is the same as bold*/
 }
 
@@ -338,7 +339,6 @@ Colors for wireframe:
     height: 50%;
     width: 100%;
     align-items: center;
-    margin-left: 1%;
     /* background-color: #f2f2f2; */
 }
 
@@ -629,29 +629,52 @@ Colors for wireframe:
     display: flex;
     height: 95%;
     width: 95%;
-    justify-content: start;   
+    justify-content: start;
     margin-top: 2%;
     margin-bottom: 2%;
     font-size: small;
 }
 
+/*#################################### CAMERA CSS ####################################*/
 .camera-table {
     width: 100%;
     border: solid 1px gray;
     border-collapse: collapse;
-    border-spacing: 0;  
+    border-spacing: 0;
 }
+
 .camera-table thead th {
     border: solid 1px gray;
     color: black;
     padding: 10px;
     text-align: left;
+    width: 18vw;
 }
+
 .camera-table tbody td {
     border: solid 1px gray;
     color: #333;
     padding: 10px;
+    width: 18vw;
 }
+
+.camera-table tbody {
+    height: 30vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.camera-table tbody,
+thead {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.camera-list-long tbody{
+    height: 60vh;
+}
+/*########################################################################*/
 
 .panel-camera {
     display: flex;
@@ -662,11 +685,39 @@ Colors for wireframe:
 }
 
 .panel-camera-container {
-    border-radius: 5px;
     width: 95%;
     height: 97%;
     background-color: #CDCDCD;
 }
+
+.panel-camera-container-top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.panel-camera-container-top-title {
+    margin: 2%;
+}
+
+.panel-camera-container-top-search {
+    margin: 2%;
+}
+
+.panel-camera-container-top-search input {
+    background-color: white;
+    background-image: url('../Images/search-icon.png');
+    height: 20px;
+    background-position: 3px;
+    background-repeat: no-repeat;
+    padding-left: 30px;
+}
+
+.panel-camera-container-table {
+    margin: 2%;
+}
+
 
 /*################# FOOTER #################*/
 
