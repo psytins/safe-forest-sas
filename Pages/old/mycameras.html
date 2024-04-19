@@ -5,9 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>My Cameras</title>
     <link rel="stylesheet" href="../Styles/main.css">
-    <script src="../Scripts/dashboard.js"></script>
 </head>
 
 <body>
@@ -29,52 +28,52 @@
                     <div class="menu-options-home-label">
                         <p>Home</p>
                     </div>
-                    <div class="menu-options-home-dashboard">
+                    <a href="dashboard.html" class="menu-options-home-dashboard">
                         <div class="menu-options-home-dashboard-icon">
                             <img src="../Images/dashboard-logo.png">
                         </div>
                         <div class="menu-options-home-dashboard-text">
                             <p>Dashboard</p>
                         </div>
-                    </div>
-                    <div class="menu-options-home-camera">
+                    </a>
+                    <a href="mycameras.html" class="menu-options-home-camera">
                         <div class="menu-options-home-camera-icon">
                             <img src="../Images/camera-logo.png">
                         </div>
                         <div class="menu-options-home-camera-text">
                             <p>My Cameras</p>
                         </div>
-                    </div>
+                    </a>
                 </div>
 
                 <div class="menu-options-settings">
                     <div class="menu-options-settings-label">
                         <p>Settings</p>
                     </div>
-                    <div class="menu-options-settings-general">
+                    <a href="general.html" class="menu-options-settings-general">
                         <div class="menu-options-settings-general-icon">
                             <img src="../Images/general-logo.png">
                         </div>
                         <div class="menu-options-settings-general-text">
                             <p>General</p>
                         </div>
-                    </div>
-                    <div class="menu-options-settings-security">
+                    </a>
+                    <a href="security.html" class="menu-options-settings-security">
                         <div class="menu-options-settings-security-icon">
                             <img src="../Images/security-logo.png">
                         </div>
                         <div class="menu-options-settings-security-text">
                             <p>Security</p>
                         </div>
-                    </div>
-                    <div class="menu-options-settings-alert">
+                    </a>
+                    <a href="contacts.html" class="menu-options-settings-alert">
                         <div class="menu-options-settings-alert-icon">
                             <img src="../Images/alert-logo.png">
                         </div>
                         <div class="menu-options-settings-alert-text">
                             <p>Alert Contacts</p>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
 
@@ -122,150 +121,7 @@
                 </div>
             </div>
             <div class="panel">
-                <div class="panel-information">
-                    <div class="panel-information-statistics">
-                        <div class="panel-information-statistics-status">
-                            <div class="panel-information-statistics-status-online">
-                                <div class="panel-information-statistics-status-online-container">
-                                    <div class="panel-information-statistics-status-online-container-number">
-                                        <h1>0</h1>
-                                    </div>
-                                    <div class="panel-information-statistics-status-online-container-label">
-                                        <p>Cameras Online</p>
-                                    </div>
-                                    <div class="panel-information-statistics-status-online-container-cameras">
-                                        <button
-                                            class="panel-information-statistics-status-online-container-cameras-btn">My
-                                            Cameras ></button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel-information-statistics-status-offline">
-                                <div class="panel-information-statistics-status-offline-container">
-                                    <div class="panel-information-statistics-status-offline-container-number">
-                                        <h1>0</h1>
-                                    </div>
-                                    <div class="panel-information-statistics-status-offline-container-label">
-                                        <p>Cameras Offline</p>
-                                    </div>
-                                    <div class="panel-information-statistics-status-offline-container-cameras">
-                                        <button
-                                            class="panel-information-statistics-status-offline-container-cameras-btn">My
-                                            Cameras ></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel-information-statistics-smoke">
-                            <div class="panel-information-statistics-smoke-title">
-                                <p>Overall smoke detected</p>
-                            </div>
-                            <div class="panel-information-statistics-smoke-container">
-                                <div class="panel-information-statistics-smoke-24-hours">
-                                    <div class="panel-information-statistics-smoke-24-hours-number">
-                                        <h1>0</h1>
-                                    </div>
-                                    <div class="panel-information-statistics-smoke-24-hours-label">
-                                        <p>Last 24 Hours</p>
-                                    </div>
-                                </div>
-
-                                <div class="panel-information-statistics-smoke-7-days">
-                                    <div class="panel-information-statistics-smoke-7-days-number">
-                                        <h1>0</h1>
-                                    </div>
-                                    <div class="panel-information-statistics-smoke-7-days-label">
-                                        <p>Last 7 Days</p>
-                                    </div>
-                                </div>
-
-                                <div class="panel-information-statistics-smoke-30-days">
-                                    <div class="panel-information-statistics-smoke-30-days-number">
-                                        <h1>0</h1>
-                                    </div>
-                                    <div class="panel-information-statistics-smoke-30-days-label">
-                                        <p>Last 30 Days</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-information-detections">
-                        <div class="panel-information-detections-title">
-                            <p>Latest detection date and time for all cameras</p>
-                        </div>
-                        <div class="panel-information-detections-table">
-                            <div class="tbl-header"> <!-- Start Table Here -->
-                                <table cellpadding="0" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Camera</th>
-                                            <th>Last Detected</th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>
-                            <div class="tbl-content">
-                                <table cellpadding="0" cellspacing="0">
-                                    <tbody>
-                                        <!-- Paste your data here -->
-                                        <tr>
-                                            <td>LTK-AI</td>
-                                            <td>2024-04-10 16:34:21</td>
-                                        </tr>
-                                        <tr>
-                                            <td>LTK-AI</td>
-                                            <td>2024-04-10 16:34:21</td>
-                                        </tr>
-                                        <tr>
-                                            <td>LTK-AI</td>
-                                            <td>2024-04-10 16:34:21</td>
-                                        </tr>
-                                        <tr>
-                                            <td>LTK-AI</td>
-                                            <td>2024-04-10 16:34:21</td>
-                                        </tr>
-                                        <tr>
-                                            <td>LTK-AI</td>
-                                            <td>2024-04-10 16:34:21</td>
-                                        </tr>
-                                        <tr>
-                                            <td>LTK-AI</td>
-                                            <td>2024-04-10 16:34:21</td>
-                                        </tr>
-                                        <tr>
-                                            <td>LTK-AI</td>
-                                            <td>2024-04-10 16:34:21</td>
-                                        </tr>
-                                        <tr>
-                                            <td>LTK-AI</td>
-                                            <td>2024-04-10 16:34:21</td>
-                                        </tr>
-                                        <tr>
-                                            <td>LTK-AI</td>
-                                            <td>2024-04-10 16:34:21</td>
-                                        </tr>
-                                        <tr>
-                                            <td>LTK-AI</td>
-                                            <td>2024-04-10 16:34:21</td>
-                                        </tr>
-                                        <tr>
-                                            <td>LTK-AI</td>
-                                            <td>2024-04-10 16:34:21</td>
-                                        </tr>
-                                        <tr>
-                                            <td>LTK-AI</td>
-                                            <td>2024-04-10 16:34:21</td>
-                                        </tr>
-                                        <!-- Repeat this pattern for all rows of your data -->
-                                    </tbody>
-                                </table>
-                            </div> <!-- End Table Here -->
-                        </div>
-                    </div>
-                </div>
-
-                <div class="panel-camera">
+                <div class="panel-mycamera">
                     <div class="panel-camera-container">
                         <div class="panel-camera-container-top">
                             <div class="panel-camera-container-top-title">
@@ -275,7 +131,7 @@
                                 <input type="text" name="camera-search" placeholder="Search camera">
                             </div>
                         </div>
-                        <div class="panel-camera-container-table">
+                        <div class="panel-mycamera-container-table">
                             <div class="tbl-header"> <!-- Start Table Here -->
                                 <table cellpadding="0" cellspacing="0">
                                     <thead>
@@ -294,49 +150,49 @@
                                         <!-- Paste your data here -->
                                         <tr>
                                             <td>70%</td>
-                                            <td>LTK-AI</td>
+                                            <td><a href="#">LTK-AI</a></td>
                                             <td>2024-04-10 16:34:21</td>
                                             <td>N/A</td>
                                         </tr>
                                         <tr>
                                             <td>70%</td>
-                                            <td>LTK-AI</td>
+                                            <td><a href="#">LTK-AI</a></td>
                                             <td>2024-04-10 16:34:21</td>
                                             <td>N/A</td>
                                         </tr>
                                         <tr>
                                             <td>70%</td>
-                                            <td>LTK-AI</td>
+                                            <td><a href="#">LTK-AI</a></td>
                                             <td>2024-04-10 16:34:21</td>
                                             <td>N/A</td>
                                         </tr>
                                         <tr>
                                             <td>70%</td>
-                                            <td>LTK-AI</td>
+                                            <td><a href="#">LTK-AI</a></td>
                                             <td>2024-04-10 16:34:21</td>
                                             <td>N/A</td>
                                         </tr>
                                         <tr>
                                             <td>70%</td>
-                                            <td>LTK-AI</td>
+                                            <td><a href="#">LTK-AI</a></td>
                                             <td>2024-04-10 16:34:21</td>
                                             <td>N/A</td>
                                         </tr>
                                         <tr>
                                             <td>70%</td>
-                                            <td>LTK-AI</td>
+                                            <td><a href="#">LTK-AI</a></td>
                                             <td>2024-04-10 16:34:21</td>
                                             <td>N/A</td>
                                         </tr>
                                         <tr>
                                             <td>70%</td>
-                                            <td>LTK-AI</td>
+                                            <td><a href="#">LTK-AI</a></td>
                                             <td>2024-04-10 16:34:21</td>
                                             <td>N/A</td>
                                         </tr>
                                         <tr>
                                             <td>70%</td>
-                                            <td>LTK-AI</td>
+                                            <td><a href="#">LTK-AI</a></td>
                                             <td>2024-04-10 16:34:21</td>
                                             <td>N/A</td>
                                         </tr>
@@ -379,6 +235,8 @@
         </div>
     </div>
 
+    <script src="../Scripts/dashboard.js"></script>
+    <script src="../Scripts/main.js"></script>
 </body>
 
 </html>
