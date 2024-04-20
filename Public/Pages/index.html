@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../Styles/main.css">
 </head>
 
-<body>
+<body onload="loadIndex()">
     <div class="main">
         <div class="side-nav">
 
@@ -26,7 +26,7 @@
                     <div class="menu-options-home-label">
                         <p>Home</p>
                     </div>
-                    <button href="#dashboard" onclick="showContainer('dashboard')" class="menu-options-home-dashboard">
+                    <button href="#dashboard" onclick="showContainerIndex('dashboard')" class="menu-options-home-dashboard">
                         <div class="menu-options-home-dashboard-icon">
                             <img src="../../Images/dashboard-logo.png">
                         </div>
@@ -34,7 +34,7 @@
                             <p>Dashboard</p>
                         </div>
                     </button>
-                    <button href="#mycameras" onclick="showContainer('mycameras')" class="menu-options-home-camera">
+                    <button href="#mycameras" onclick="showContainerIndex('mycameras')" class="menu-options-home-camera">
                         <div class="menu-options-home-camera-icon">
                             <img src="../../Images/camera-logo.png">
                         </div>
@@ -48,7 +48,7 @@
                     <div class="menu-options-settings-label">
                         <p>Settings</p>
                     </div>
-                    <button href="#general" onclick="showContainer('general')" class="menu-options-settings-general">
+                    <button href="#general" onclick="showContainerIndex('general')" class="menu-options-settings-general">
                         <div class="menu-options-settings-general-icon">
                             <img src="../../Images/general-logo.png">
                         </div>
@@ -56,7 +56,7 @@
                             <p>General</p>
                         </div>
                     </button>
-                    <button href="#security" onclick="showContainer('security')" class="menu-options-settings-security">
+                    <button href="#security" onclick="showContainerIndex('security')" class="menu-options-settings-security">
                         <div class="menu-options-settings-security-icon">
                             <img src="../../Images/security-logo.png">
                         </div>
@@ -64,7 +64,7 @@
                             <p>Security</p>
                         </div>
                     </button>
-                    <button href="#contacts" onclick="showContainer('contacts')" class="menu-options-settings-alert">
+                    <button href="#contacts" onclick="showContainerIndex('contacts')" class="menu-options-settings-alert">
                         <div class="menu-options-settings-alert-icon">
                             <img src="../../Images/alert-logo.png">
                         </div>

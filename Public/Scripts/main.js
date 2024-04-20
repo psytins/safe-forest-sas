@@ -2,7 +2,7 @@
 // Get tables ...
 
 // Functions
-function showContainer(id) {
+function showContainerIndex(id) {
 
     //Put all none
     document.getElementById("dashboard").style.display = "none";
@@ -16,7 +16,23 @@ function showContainer(id) {
     if (status == "none") {
         document.getElementById(id).style.display = "flex";
     }
-    else if (status == "block") {
+    else if (status == "flex") {
+        document.getElementById(id).style.display = "none";
+    }
+}
+
+function showContainerAuthentication(id) {
+
+    document.getElementById("register").style.display = "none";
+    document.getElementById("login").style.display = "none";
+
+
+    var status = document.getElementById(id).style.display;
+
+    if (status == "none") {
+        document.getElementById(id).style.display = "flex";
+    }
+    else if (status == "flex") {
         document.getElementById(id).style.display = "none";
     }
 }
@@ -143,10 +159,19 @@ function performLogin() {
 
 // Event Listeners
 
-// Initialize
+// Initialize - Load Functions
 
-//First view
-document.getElementById("mycameras").style.display = "none";
-document.getElementById("general").style.display = "none";
-document.getElementById("security").style.display = "none";
-document.getElementById("contacts").style.display = "none";
+//First view - index - Load on authentication page
+function loadIndex() {
+    document.getElementById("mycameras").style.display = "none";
+    document.getElementById("general").style.display = "none";
+    document.getElementById("security").style.display = "none";
+    document.getElementById("contacts").style.display = "none";
+}
+
+//First view - authentication - Load on authentication page
+function loadAuthentication() {
+    document.getElementById("login").style.display = "none";
+}
+
+

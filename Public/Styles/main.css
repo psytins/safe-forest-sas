@@ -938,7 +938,7 @@ td {
     width: 92.5%;
 }
 #input-terms{
-    width: 25px;
+    width: 15px;
 }
 
 .panel-auth-container-register-form-base-info{
@@ -1002,6 +1002,10 @@ td {
 }
 .panel-auth-container-register-form-contact-info-terms{
     display: flex;
+}
+.panel-auth-container-register-form-contact-info-terms p{
+    font-size: small;
+    margin-right: 2%;
 }
 
 

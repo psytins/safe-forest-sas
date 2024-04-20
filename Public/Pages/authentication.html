@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../Styles/main.css">
 </head>
 
-<body>
+<body onload="loadAuthentication()">
     <div class="main">
         <div class="main-body-auth">
             <div class="header-auth">
@@ -44,15 +44,15 @@
                                 </div>
                                 <div class="panel-auth-container-register-form-base-info-email">
                                     <label for="input-email">Email</label>
-                                    <input type="text" id="input-email">
+                                    <input type="email" id="input-email">
                                 </div>
                                 <div class="panel-auth-container-register-form-base-info-password">
                                     <label for="input-pass">Password</label>
-                                    <input type="text" id="input-pass">
+                                    <input type="password" id="input-pass">
                                 </div>
                                 <div class="panel-auth-container-register-form-base-info-confirm-password">
                                     <label for="input-cpass">Confirm password</label>
-                                    <input type="text" id="input-cpass">
+                                    <input type="password" id="input-cpass">
                                 </div>
                             </div>
                             <div class="panel-auth-container-register-form-division"></div>
@@ -81,8 +81,16 @@
                         </div>
                         <div class="panel-auth-container-register-altlogin">
                             <p>Have an account?</p>
-                            <a href="#">&nbsp;<b>Log in</b></a>
+                            <a href="#login" onclick="showContainerAuthentication('login')">&nbsp;<b>Log in</b></a>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-auth" id="login">
+                <div class="panel-auth-container">
+                    <div class="panel-auth-container-register">
+                        <a href="#register" onclick="showContainerAuthentication('register')">&nbsp;<b>Register</b></a>
                     </div>
                 </div>
             </div>
