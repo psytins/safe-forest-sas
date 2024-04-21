@@ -21,7 +21,7 @@
                         <h2>Welcome to Safe Forest.</h2>
                     </div>
                     <div class="header-greeting-bottom-label">
-                        <p>Please register your account</p>
+                        <p>Please authenticate into your account</p>
                     </div>
                 </div>
 
@@ -90,7 +90,25 @@
             <div class="panel-auth" id="login">
                 <div class="panel-auth-container">
                     <div class="panel-auth-container-register">
-                        <a href="#register" onclick="showContainerAuthentication('register')">&nbsp;<b>Register</b></a>
+                        <div class="panel-auth-container-register-form">
+                            <div class="panel-auth-container-register-form-base-info">
+                                <div class="panel-auth-container-register-form-base-info-email">
+                                    <label for="input-email">Email</label>
+                                    <input type="email" id="login-input-email">
+                                </div>
+                                <div class="panel-auth-container-register-form-base-info-password">
+                                    <label for="input-pass">Password</label>
+                                    <input type="password" id="login-input-pass">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-auth-container-register-submit">
+                            <button>Connect</button>
+                        </div>
+                        <div class="panel-auth-container-register-altlogin">
+                            <p>Don't have an account?</p>
+                            <a href="#login" onclick="showContainerAuthentication('register')">&nbsp;<b>Sign up</b></a>
+                        </div>
                     </div>
                 </div>
             </div>
