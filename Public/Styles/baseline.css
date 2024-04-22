@@ -1,0 +1,61 @@
+body{
+    margin: 0;
+}
+
+.main{
+    background-color: red;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
+.side-nav{
+    background-color: black;
+    width: 20vw;
+    height: 100vh;
+}
+
+.logo-nav{
+    background-color: yellow;
+    width: 20vw;
+    height: 19.85vh;
+    border-bottom: 1px black solid;
+}
+
+.menu-options{
+    background-color: wheat;
+    width: 20vw;
+    height: 70vh;
+}
+
+.social-network{
+    background-color: green;
+    width: 20vw;
+    height: 9.88vh;
+    border-top: 1px black solid;
+}
+
+
+.main-body{
+    background-color: aqua;
+    width: 80vw;
+    height: 100vh;
+}
+
+.header{
+    background-color: orange;
+    width: 80vw;
+    height: 19.85vh;
+    border-bottom: 1px black solid;
+}
+.panel{    
+    background-color: greenyellow;
+    width: 80vw;
+    height: 70vh;
+}
+.footer{
+    background-color: chocolate;
+    width: 80vw;
+    height: 9.88vh;
+    border-top: 1px black solid;
+}
