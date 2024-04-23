@@ -53,9 +53,11 @@ body {
 }
 
 .panel {
-    background-color: greenyellow;
+    background-color: white;
     width: 80vw;
     height: 70vh;
+    display: flex;
+    flex-direction: row;
 }
 
 .footer {
@@ -65,16 +67,17 @@ body {
     border-top: 1px black solid;
 }
 
+/* Cameras styles */
+
 table {
-    width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
     border-radius: 10px;
     overflow: hidden;
     background-color: #f2f2f2;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
-/* Cameras styles */
 
 th,
 td {
@@ -103,3 +106,52 @@ th {
     border-radius: 4px;
 }
 
+.table-container {
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: lightgray;
+    border: 1px solid black;
+}
+
+.camera-settings {
+    position: relative; /* Ensure proper positioning */
+    display: flex; /* Use flexbox for centering */
+    flex-direction: column; /* Arrange items vertically */
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
+    width: 48%; /* Adjust width as needed */
+    background-color: lightgray; /* Example background color */
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid black;
+}
+
+.settings-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: black;
+    padding: 5px 10px;
+    border-top-left-radius: 5px;
+    font-weight: bold;
+}
+
+.settings-instructions {
+    margin-top: 10px;
+    color: #555;
+    font-size: 14px;
+    text-align: center; /* Align text in the center */
+}
+
+.table-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 5px;
+    margin-right: 5px;
+}
