@@ -85,16 +85,21 @@ function searchTable(searchID, tableID) {
 // ------------------------------------------------
 // Requests
 function registerAccount() {
-    const username = document.getElementById('newUsername').value;
-    const email = document.getElementById('newEmail').value;
-    const password = document.getElementById('newPassword').value;
+    const fname = document.getElementById('input-fname').value;
+    const lname = document.getElementById('input-lname').value;
+    const email = document.getElementById('input-email').value;
+    const password = document.getElementById('input-pass').value;
+    const phone = document.getElementById('input-phone').value;
+    const region = document.getElementById('input-region').value;
+    const reference_code = null
+    const logo = null
 
-    fetch('/api/auth/register', {
+    fetch('/account-regist', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, email, password }),
+        body: JSON.stringify({ fname, lname, password, email, phone, region, reference_code, logo }),
     })
         .then(response => {
             if (!response.ok) {
