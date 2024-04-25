@@ -114,6 +114,7 @@ function registerAccount() {
 
             // Handle success ...
             alert("Registration successful");
+            showContainerAuthentication('login');
             // ...
 
         })
