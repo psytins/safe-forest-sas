@@ -440,6 +440,14 @@ h2 {
 .header-options-leave {
     display: flex;
     justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.header-options-leave:hover {
+    background-color: gray;
 }
 
 .header-options-leave img {

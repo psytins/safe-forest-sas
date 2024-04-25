@@ -34,17 +34,16 @@ router.post('/account-authentication', (req, res) => {
         email: req.body.email,
     });
 
-    User.findOne({ email: authEntry.email, password: authEntry.password })
+    User.findOne({where: { email: authEntry.email, password: authEntry.password }})
         .then(user => {
             if (!user) {
-                alert("Invalid credentials, please try again.")
                 return res.status(401).json({ error: 'Invalid credentials' });
             }
 
             //Generate a new token
             const authToken = require('../Secure/authToken')(user);
             //Store it in a new cookie ---
-            res.cookie('token', authToken, {httpOnly: true});
+            res.cookie('token', authToken, { httpOnly: true });
             // ---
 
             const name = user.first_name + " " + user.last_name;
@@ -54,6 +53,12 @@ router.post('/account-authentication', (req, res) => {
             console.error('Error during login:', error);
             res.status(500).json({ error: 'Error during login' });
         });
+});
+
+// SignOUT
+router.post('/account-signout', (req, res) => {
+    res.clearCookie('token');
+    res.json({ message: 'Sign out successful' });
 });
 
 //UPDATE

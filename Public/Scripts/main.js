@@ -164,9 +164,26 @@ function performLogin() {
         })
         .catch(error => {
             console.error('Login failed:', error);
-
-            // Display error message to the user in a user-friendly way
             alert('Login failed. Please check your credentials and try again.');
+        });
+}
+
+function signOut() {
+    // fetch to sign out
+    fetch('/api/auth/account-signout', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then(response => {
+            // Handle response, then redirect
+            sessionStorage.clear();
+            window.location.href = '/authentication';
+        })
+        .catch(error => {
+            // Handle error
+            console.error('An error occured:', error);
         });
 }
 // ------------------------------------------------
