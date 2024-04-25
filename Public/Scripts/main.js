@@ -83,18 +83,20 @@ function searchTable(searchID, tableID) {
 
 
 // ------------------------------------------------
-// Requests
+// Requests to server ----------
+
 function registerAccount() {
+
     const fname = document.getElementById('input-fname').value;
     const lname = document.getElementById('input-lname').value;
     const email = document.getElementById('input-email').value;
     const password = document.getElementById('input-pass').value;
     const phone = document.getElementById('input-phone').value;
     const region = document.getElementById('input-region').value;
-    const reference_code = null
-    const logo = null
+    const reference_code = null // tmp
+    const logo = null // tmp
 
-    fetch('/account-regist', {
+    fetch('api/auth/account-regist', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -128,7 +130,7 @@ function performLogin() {
     const password = document.getElementById('password').value;
 
     fetch('/api/auth/login', {
-        method: 'POST',
+        method: 'POST', // TODO: NEED TO BE A GET REQUEST !!!!
         headers: {
             'Content-Type': 'application/json',
         },
