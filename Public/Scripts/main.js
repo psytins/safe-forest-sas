@@ -80,7 +80,18 @@ function searchTable(searchID, tableID) {
     }
 }
 
+function getGreetingTime() {
+    const now = new Date();
+    const hour = now.getHours();
 
+    if (hour >= 5 && hour < 12) {
+        return "Good morning";
+    } else if (hour >= 12 && hour < 18) {
+        return "Good afternoon";
+    } else {
+        return "Good night";
+    }
+}
 
 // ------------------------------------------------
 // Requests to server ----------
@@ -127,11 +138,12 @@ function registerAccount() {
 }
 
 function performLogin() {
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+    const email = document.getElementById('login-input-email').value;
+    const password = document.getElementById('login-input-pass').value;
 
-    fetch('/api/auth/login', {
-        method: 'POST', // TODO: NEED TO BE A GET REQUEST !!!!
+    // fetch to validade login
+    fetch('/api/auth/account-authentication', {
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
@@ -144,17 +156,11 @@ function performLogin() {
             return response.json();
         })
         .then(data => {
-            console.log('Login successful:', data);
+            alert('Login successful! ' + data);
 
             //Handle Success ...
-            // Store the authentication token securely
-            //localStorage.setItem('authToken', data.authToken);
-            //localStorage.setItem('username', data.username);
-            //localStorage.setItem('userId', data.user_id);
-            // ...
-
-            // Example: Redirect to another page after successful login
-            //window.location.href = '/dashboard.html';
+            sessionStorage.setItem('name', data.name);
+            window.location.href = '/dashboard';
         })
         .catch(error => {
             console.error('Login failed:', error);
@@ -175,6 +181,8 @@ function loadIndex() {
     document.getElementById("general").style.display = "none";
     document.getElementById("security").style.display = "none";
     document.getElementById("contacts").style.display = "none";
+
+    document.getElementById("greetings").innerText = getGreetingTime() + ", " + sessionStorage.getItem("name");
 }
 
 //First view - authentication - Load on authentication page

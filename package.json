@@ -18,7 +18,11 @@
   },
   "homepage": "https://github.com/psytins/safe-forest-sas#readme",
   "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.9.6",
     "path": "^0.12.7",
     "sequelize": "^6.37.3"

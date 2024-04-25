@@ -4,7 +4,7 @@ const router = express.Router();
 //DB Model for authentication
 const User = require('../Model/authenticationModel');
 
-// CREATE
+// CREATE - register
 router.post('/account-regist', (req, res) => {
     const newRegist = new User({
         first_name: req.body.fname,
@@ -27,10 +27,33 @@ router.post('/account-regist', (req, res) => {
         });
 });
 
-// READ
-router.get('/account-authentication', async (req, res) => {
-    const users = await User.findAll();
-    res.json(users);
+// READ - login
+router.post('/account-authentication', (req, res) => {
+    const authEntry = new User({
+        password: req.body.password,
+        email: req.body.email,
+    });
+
+    User.findOne({ email: authEntry.email, password: authEntry.password })
+        .then(user => {
+            if (!user) {
+                alert("Invalid credentials, please try again.")
+                return res.status(401).json({ error: 'Invalid credentials' });
+            }
+
+            //Generate a new token
+            const authToken = require('../Secure/authToken')(user);
+            //Store it in a new cookie ---
+            res.cookie('token', authToken, {httpOnly: true});
+            // ---
+
+            const name = user.first_name + " " + user.last_name;
+            res.json({ message: 'Login successful', name });
+        })
+        .catch(error => {
+            console.error('Error during login:', error);
+            res.status(500).json({ error: 'Error during login' });
+        });
 });
 
 //UPDATE

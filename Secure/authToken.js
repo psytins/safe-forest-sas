@@ -2,12 +2,10 @@ const jwt = require('jsonwebtoken');
 const secretKey = require('./keyGeneration');
 
 function generateAuthToken(user) {
-  
   console.log("User payload: " + user);
 
   const payload = {
-    userId: user._id,
-    username: user.name,
+    user_id: user.id,
     // Add other user-related information as needed
   };
 
@@ -17,7 +15,7 @@ function generateAuthToken(user) {
   };
 
   // Sign the token with the secret key
-  const token = jwt.sign(payload, secretKey, options);
+  const token = jwt.sign(payload, process.env.JWT_SECRET, options);
 
   return token;
 }

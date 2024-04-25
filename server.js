@@ -1,7 +1,9 @@
 //Main Server with MySQL Integration ------------
 
 //Import External Routes ------------
+require('dotenv').config();
 const express = require('express');
+const cookieParser = require('cookie-parser');
 const path = require('path');
 
 const app = express();
@@ -17,6 +19,7 @@ const verifyToken = require('./Secure/verifyToken');
 //Apply application Routes ------------
 //External application routes (Middleware)
 app.use(express.json());
+app.use(cookieParser());
 
 // ------------ Debug ------------ 
 // // Temporary middleware to log all incoming requests
@@ -30,9 +33,15 @@ app.use(express.json());
 app.use('/api/auth', authenticationRoute);
 //...
 
+//Default route
+app.get('/', (req, res) => {
+    res.redirect("/dashboard");
+});
+
 //Protected route for index page (only signed users can access)
-app.get('/', verifyToken, (req, res) => {
-    console.log("User is authenticated! Entering index page...");
+app.get('/dashboard', verifyToken, (req, res) => {
+    console.log("User is authenticated! Entering dashboard page...");
+    res.sendFile(path.join(__dirname, 'Public/Pages/index.html'));
 });
 
 //Route for authentication page
