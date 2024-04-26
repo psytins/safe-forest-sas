@@ -1,0 +1,33 @@
+{
+  "name": "safe-forest-sas",
+  "version": "1.0.0",
+  "description": "Development of a SAS (Software As a Service) application for the detection of forest fires.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/psytins/safe-forest-sas.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/psytins/safe-forest-sas/issues"
+  },
+  "homepage": "https://github.com/psytins/safe-forest-sas#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.9.6",
+    "path": "^0.12.7",
+    "sequelize": "^6.37.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
