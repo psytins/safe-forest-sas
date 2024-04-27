@@ -1,4 +1,4 @@
-// MySQL DB connection - (only used when a request to use the database is open) ---------------- 
+// MySQL DB connection ---------------- 
 const { Sequelize } = require('sequelize');
 const mysql = require('mysql2');
 const fs = require('fs');
