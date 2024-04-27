@@ -1061,3 +1061,17 @@ td {
 /*################# END AUTHENTICATION PAGE #################*/
 /*#######################################################*/
 
+/*      General Account Settings CSS     */
+
+
+.panel-general-account {
+    display: flex;
+    flex-direction: column;
+    background-color: #CDCDCD;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    height: 90%;
+}
+
+
