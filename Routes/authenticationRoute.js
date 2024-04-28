@@ -1,11 +1,13 @@
 //API route for Authentication using CRUD
 const express = require('express');
 const router = express.Router();
+//const bcrypt = require('bcrypt');
 //DB Model for authentication
 const User = require('../Model/authenticationModel');
 
 // CREATE - register
 router.post('/account-regist', (req, res) => {
+    //const hashedPassword = await bcrypt.hash(password, 10);
     const newRegist = new User({
         first_name: req.body.fname,
         last_name: req.body.lname,
