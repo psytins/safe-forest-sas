@@ -7,7 +7,7 @@ const db_table = process.env.DB_TABLE;
 const db_user = process.env.DB_USER;
 
 const db_pass = process.env.DB_SECRET;
-const cert_path = process.env.JP_DB_PATH;
+const cert_path = process.env.GV_DB_PATH;
 
 const host = process.env.DB_HOST;
 
