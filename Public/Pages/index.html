@@ -26,7 +26,8 @@
                     <div class="menu-options-home-label">
                         <p>Home</p>
                     </div>
-                    <button href="#dashboard" onclick="showContainerIndex('dashboard')" class="menu-options-home-dashboard">
+                    <button href="#dashboard" onclick="showContainerIndex('dashboard')"
+                        class="menu-options-home-dashboard">
                         <div class="menu-options-home-dashboard-icon">
                             <img src="../Images/dashboard-logo.png">
                         </div>
@@ -34,7 +35,8 @@
                             <p>Dashboard</p>
                         </div>
                     </button>
-                    <button href="#mycameras" onclick="showContainerIndex('mycameras')" class="menu-options-home-camera">
+                    <button href="#mycameras" onclick="showContainerIndex('mycameras')"
+                        class="menu-options-home-camera">
                         <div class="menu-options-home-camera-icon">
                             <img src="../Images/camera-logo.png">
                         </div>
@@ -48,7 +50,8 @@
                     <div class="menu-options-settings-label">
                         <p>Settings</p>
                     </div>
-                    <button href="#general" onclick="showContainerIndex('general')" class="menu-options-settings-general">
+                    <button href="#general" onclick="showContainerIndex('general')"
+                        class="menu-options-settings-general">
                         <div class="menu-options-settings-general-icon">
                             <img src="../Images/general-logo.png">
                         </div>
@@ -56,7 +59,8 @@
                             <p>General</p>
                         </div>
                     </button>
-                    <button href="#security" onclick="showContainerIndex('security')" class="menu-options-settings-security">
+                    <button href="#security" onclick="showContainerIndex('security')"
+                        class="menu-options-settings-security">
                         <div class="menu-options-settings-security-icon">
                             <img src="../Images/security-logo.png">
                         </div>
@@ -64,7 +68,8 @@
                             <p>Security</p>
                         </div>
                     </button>
-                    <button href="#contacts" onclick="showContainerIndex('contacts')" class="menu-options-settings-alert">
+                    <button href="#contacts" onclick="showContainerIndex('contacts')"
+                        class="menu-options-settings-alert">
                         <div class="menu-options-settings-alert-icon">
                             <img src="../Images/alert-logo.png">
                         </div>
@@ -266,7 +271,8 @@
                                 <h1>My Cameras</h1>
                             </div>
                             <div class="panel-camera-container-top-search">
-                                <input id="searchInput" onkeyup="searchTable('searchInput', 'searchDashboard')" type="text" name="camera-search" placeholder="Search camera">
+                                <input id="searchInput" onkeyup="searchTable('searchInput', 'searchDashboard')"
+                                    type="text" name="camera-search" placeholder="Search camera">
                             </div>
                         </div>
                         <div class="panel-camera-container-table">
@@ -339,7 +345,9 @@
                                 <h1>My Cameras</h1>
                             </div>
                             <div class="panel-camera-container-top-search">
-                                <input type="text" id="searchInputMyCameras" onkeyup="searchTable('searchInputMyCameras', 'searchMyCameras')" name="camera-search" placeholder="Search camera">
+                                <input type="text" id="searchInputMyCameras"
+                                    onkeyup="searchTable('searchInputMyCameras', 'searchMyCameras')"
+                                    name="camera-search" placeholder="Search camera">
                             </div>
                         </div>
                         <div class="panel-mycamera-container-table">
@@ -405,12 +413,50 @@
             </div>
 
             <div class="panel" id="general">
-                <div class="coming-soon">
-                    <div class="coming-soon-header">
-                        <h1>Coming Soon!</h1>
+                <div class="panel-general-account">
+                    <div class="panel-general-account-title">
+                        <h1>Personal Profile</h1>
                     </div>
-                    <div class="coming-soon-icon">
-                        <img src="../Images/construction-icon.png" alt="construction">
+                    <div class="panel-general-account-inputs">
+                        <div class="panel-general-account-inputs-names">
+                            <div class="panel-general-account-names-firstname">
+                                <label for="fname">First Name</label>
+                                <input type="text" id="fname" name="firstname">
+                            </div>
+                            <div class="panel-general-account-names-lastname">
+                                <label for="lname">Last Name</label>
+                                <input type="text" id="lname" name="lastname">
+                            </div>
+                        </div>
+                        <div class="panel-general-account-email">
+                            <label for="email">Email</label>
+                            <input type="text" id="email" name="email">
+                        </div>
+                        <div class="panel-general-account-country">
+                            <label for="input-region">Country/Region *</label>
+                            <select name="input-region" id="input-region">
+                                <option value="Norte">Norte</option>
+                                <option value="Centro">Centro</option>
+                                <option value="Lisboa e Vale do Tejo">Lisboa e Vale do Tejo</option>
+                                <option value="Alentejo">Alentejo</option>
+                                <option value="Algarve">Algarve</option>
+                                <option value="Região Autónoma dos Açores">Região Autónoma dos Açores</option>
+                                <option value="Região Autónoma da Madeira">Região Autónoma da Madeira</option>
+                            </select>
+                        </div>
+                        <div class="panel-general-account-reference-code">
+                            <label for="ref-code">Reference Code</label>
+                            <input type="text" id="ref-code" name="reference-code">
+                        </div>
+                        <div class="panel-general-account-upload-logo">
+                            <label for="uplogo">Upload Logo (.png)</label>
+                            <div class="file-input-wrapper">
+                                <input type="file" id="uplogo" name="upload-logo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-general-account-button">
+                        <button>Save Changes</button>
                     </div>
                 </div>
             </div>
@@ -505,6 +551,7 @@
 
     <script src="../Scripts/dashboard.js"></script>
     <script src="../Scripts/main.js"></script>
+    <script src="../Scripts/generalSettings.js"></script>
 
 </body>
 
