@@ -11,8 +11,8 @@ Colors for wireframe:
 
 @font-face {
     font-family: 'ROBOTO-SERIF';
-    src: url('../../Fonts/RobotoSerif/RobotoSerif-Italic-VariableFont_GRAD\,opsz\,wdth\,wght.ttf');
-    src: url('../../Fonts/RobotoSerif/RobotoSerif-VariableFont_GRAD\,opsz\,wdth\,wght.ttf');
+    src: url('../Fonts/RobotoSerif/RobotoSerif-Italic-VariableFont_GRAD\,opsz\,wdth\,wght.ttf');
+    src: url('../Fonts/RobotoSerif/RobotoSerif-VariableFont_GRAD\,opsz\,wdth\,wght.ttf');
 }
 
 @keyframes fadeInAnimation {
@@ -109,7 +109,7 @@ h1 {
 
 .logo-nav-logo {
     width: 70%;
-    background-image: url("../../Images/safe-forest.png");
+    background-image: url("../Images/safe-forest.png");
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -124,7 +124,7 @@ h1 {
     border: none;
     width: 100%;
     height: 100%;
-    background-image: url("../../Images/hamburger-logo.png");
+    background-image: url("../Images/hamburger-logo.png");
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -440,6 +440,14 @@ h2 {
 .header-options-leave {
     display: flex;
     justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.header-options-leave:hover {
+    background-color: gray;
 }
 
 .header-options-leave img {
@@ -809,7 +817,7 @@ td {
 
 .panel-camera-container-top-search input {
     background-color: white;
-    background-image: url('../../Images/search-icon.png');
+    background-image: url('../Images/search-icon.png');
     height: 25px;
     background-position: 95%;
     background-repeat: no-repeat;
@@ -1218,3 +1226,7 @@ td {
     font-size: small;
 }
 /*#######################################################*/
+
+/*################# END AUTHENTICATION PAGE #################*/
+/*#######################################################*/
+
