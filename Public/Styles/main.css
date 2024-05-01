@@ -881,7 +881,7 @@ td {
 
 .panel-security{
     height: 95%;
-    width: 70%;
+    width: 95%;
     margin-left: 2.5%;
     display: flex;
     justify-content: center;
@@ -1295,16 +1295,11 @@ td {
     width: 20%;
     height: 9%;
     padding-left: 80%;
-    font-size: 10px;
 }
 
 .panel-general-account-button button {
     width: 80%;
     height: 50%;
-    font-size: 1.15vw;
-    background-color: #EAEAEA;
-    color: #000000;
-    border: none;
     cursor: pointer;
 }
 

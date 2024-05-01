@@ -160,6 +160,9 @@ function performLogin() {
 
             //Handle Success ...
             sessionStorage.setItem('name', data.name);
+            sessionStorage.setItem('email', data.email);
+            sessionStorage.setItem('country', data.country);
+            sessionStorage.setItem('refCode', data.ref_code);
             window.location.href = '/dashboard';
         })
         .catch(error => {
@@ -200,6 +203,16 @@ function loadIndex() {
     document.getElementById("contacts").style.display = "none";
 
     document.getElementById("greetings").innerText = getGreetingTime() + ", " + sessionStorage.getItem("name");
+
+    //General Personal Profile - Placeholders
+    const fname = sessionStorage.getItem("name").split(" ")[0];
+    const lname = sessionStorage.getItem("name").split(" ")[1];
+    
+    document.getElementById("fname").placeholder = fname;
+    document.getElementById("lname").placeholder = lname;
+    document.getElementById("email").placeholder = sessionStorage.getItem('email');
+    document.getElementById("input-region").value = sessionStorage.getItem('country');
+    document.getElementById("ref-code").placeholder = sessionStorage.getItem('refCode');;
 }
 
 //First view - authentication - Load on authentication page
