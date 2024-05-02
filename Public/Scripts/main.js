@@ -93,6 +93,39 @@ function getGreetingTime() {
     }
 }
 
+function showAuthenticationFormError(error) {
+    const fname = document.getElementById('input-fname');
+    const lname = document.getElementById('input-lname');
+    const email = document.getElementById('input-email');
+    const password = document.getElementById('input-pass');
+    const cpassword = document.getElementById('input-cpass');
+    const phone = document.getElementById('input-phone');
+
+    const loginEmail = document.getElementById('login-input-email');
+    const loginPassword = document.getElementById('login-input-pass');
+    
+    // show error in case form inputs are not filled
+    fname.value === '' ? fname.style.borderColor = "red" : fname.style.borderColor = "black";
+    lname.value === '' ? lname.style.borderColor = "red" : lname.style.borderColor = "black";
+    email.value === '' ? email.style.borderColor = "red" : email.style.borderColor = "black";
+    password.value === '' ? password.style.borderColor = "red" : password.style.borderColor = "black";
+    cpassword.value === '' ? cpassword.style.borderColor = "red" : cpassword.style.borderColor = "black";
+    phone.value === '' ? phone.style.borderColor = "red" : phone.style.borderColor = "black";
+
+    loginEmail.value === '' ? loginEmail.style.borderColor = "red" : loginEmail.style.borderColor = "black";
+    loginPassword.value === '' ? loginPassword.style.borderColor = "red" : loginPassword.style.borderColor = "black";
+
+    // show error in case email already exists
+    if(cpassword != password){
+        cpassword.innerHTML = "Password don't match";
+        cpassword.style.borderColor = "red";
+    }
+    else if(error.status == 406){ // email already exists 
+        email.innerHTML = "Email already exists";
+        email.style.borderColor = "red";
+    }
+}
+
 // ------------------------------------------------
 // Requests to server ----------
 
@@ -102,6 +135,7 @@ function registerAccount() {
     const lname = document.getElementById('input-lname').value;
     const email = document.getElementById('input-email').value;
     const password = document.getElementById('input-pass').value;
+    const cpassword = document.getElementById('input-cpass').value;
     const phone = document.getElementById('input-phone').value;
     const region = document.getElementById('input-region').value;
     const reference_code = null // tmp
@@ -112,7 +146,7 @@ function registerAccount() {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ fname, lname, password, email, phone, region, reference_code, logo }),
+        body: JSON.stringify({ fname, lname, password, cpassword, email, phone, region, reference_code, logo }),
     })
         .then(response => {
             if (!response.ok) {
@@ -132,7 +166,7 @@ function registerAccount() {
         .catch(error => {
             console.error('Registration failed:', error);
             // Handle error ... 
-            alert('Registration failed:', error);
+            showAuthenticationFormError(error);
             // ...
         });
 }
@@ -167,6 +201,7 @@ function performLogin() {
         })
         .catch(error => {
             console.error('Login failed:', error);
+            showAuthenticationFormError();
             alert('Login failed. Please check your credentials and try again.');
         });
 }
@@ -207,7 +242,7 @@ function loadIndex() {
     //General Personal Profile - Placeholders
     const fname = sessionStorage.getItem("name").split(" ")[0];
     const lname = sessionStorage.getItem("name").split(" ")[1];
-    
+
     document.getElementById("fname").placeholder = fname;
     document.getElementById("lname").placeholder = lname;
     document.getElementById("email").placeholder = sessionStorage.getItem('email');
