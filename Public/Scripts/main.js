@@ -1,4 +1,5 @@
 // DOM Elements
+const VERSION = "1.0.0";
 // Get tables ...
 
 // Functions
@@ -200,6 +201,7 @@ function loadIndex() {
     document.getElementById("contacts").style.display = "none";
 
     document.getElementById("greetings").innerText = getGreetingTime() + ", " + sessionStorage.getItem("name");
+    document.getElementById("application-version").innerText = VERSION;
 }
 
 //First view - authentication - Load on authentication page
