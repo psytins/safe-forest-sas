@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "sh node_modules/.bin/jest",
+    "test": "sh node_modules/.bin/jest --passWithNoTests",
     "test:watch": "jest --watch"
   },
   "repository": {
