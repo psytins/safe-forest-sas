@@ -4,7 +4,9 @@
   "description": "Development of a SAS (Software As a Service) application for the detection of forest fires.",
   "main": "server.js",
   "scripts": {
-    "test": "jest"
+    "start": "node server.js",
+    "test": "node_modules/.bin/jest",
+    "test:watch": "jest --watch"
   },
   "repository": {
     "type": "git",
