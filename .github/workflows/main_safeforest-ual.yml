@@ -1,37 +1,46 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: Build and deploy container app to Azure Web App - safeforest-ual
+name: Deploy Node.js to Azure Web App
 
 on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+  [push]
+
+# CONFIGURATION
+# For help, go to https://github.com/Azure/Actions
+#
+# 1. Set up the following secrets in your repository:
+#   AZURE_WEBAPP_PUBLISH_PROFILE
+#
+# 2. Change these variables for your configuration:
+env:
+  AZURE_WEBAPP_NAME: safeforest-ual                    # set this to your application's name
+  AZURE_WEBAPP_PACKAGE_PATH: '/home/site/wwwroot'      # set this to the path to your web app project, defaults to the repository root
+  NODE_VERSION: '16.x'                                 # set this to the node version to use
 
 jobs:
   build:
-    runs-on: 'ubuntu-latest'
+    runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
+      - name: Set up Node.js version
+        uses: actions/setup-node@v3
+        with:
+          node-version:  ${{ env.NODE_VERSION }}
 
-    - name: Log in to registry
-      uses: docker/login-action@v2
-      with:
-        registry: https://index.docker.io/v1/
-        username: ${{ secrets.AzureAppService_ContainerUsername_705be52446c14fea8ab6a763558e8091 }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_2f08a3400de448c3a4e53109d395d2f2 }}
+      - name: npm install, build, and test
+        run: |
+          npm install
+          npm run build --if-present
+          # npm run test --if-present
 
-    - name: Build and push container image to registry
-      uses: docker/build-push-action@v3
-      with:
-        push: true
-        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_705be52446c14fea8ab6a763558e8091 }}/mcr.microsoft.com/appsvc/staticsite:${{ github.sha }}
-        file: ./Dockerfile
+      - name: Zip artifact for deployment
+        run: zip release.zip ./* -r
+
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v3
+        with:
+          name: node-app
+          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -41,11 +50,19 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
-    - name: Deploy to Azure Web App
-      id: deploy-to-webapp
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: 'safeforest-ual'
-        slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_f03f5e2dcddd4d60a4dc6c7f2e35c4e8 }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_705be52446c14fea8ab6a763558e8091 }}/mcr.microsoft.com/appsvc/staticsite:${{ github.sha }}'
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v3
+        with:
+          name: node-app
+
+      - name: Unzip artifact for deployment
+        run: unzip release.zip
+
+      - name: 'Deploy to Azure Web App'
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          slot-name: 'production'
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_f03f5e2dcddd4d60a4dc6c7f2e35c4e8 }}
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
