@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser');
 const path = require('path');
 
 const app = express();
-const port = 8888;
+const port = 8080;
 
 //Import Internal Routes ------------
 //note: first go into internal route, then go into internal db model, then go into internal db connection
