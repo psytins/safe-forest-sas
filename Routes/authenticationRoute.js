@@ -21,26 +21,29 @@ router.post('/account-regist', (req, res) => {
 
     // Validate Register
     if (!newRegist.first_name || !newRegist.last_name || !newRegist.password
-        || !newRegist.email || !newRegist.phone || !newRegist.region) {
-        return res.status(400).json({ error: 'Please fill all required fields.' });
+        || !newRegist.email || !newRegist.phone || !newRegist.country) {
+        return res.status(401).json({ error: 'Please fill all required fields.' });
     }
-    else if (User.findOne({ where: { email: authEntry.email } })) {
-        return res.status(406).json({ error: 'Email already exists.' });
-    }
-    else if(newRegist.password != req.body.cpassword)
-    {
-        return res.status(400).json({ error: 'Password dont match.' });
-    }
-    else {
-        newRegist.save()
-            .then(savedEntry => {
-                res.status(201).json(savedEntry);
-            })
-            .catch(error => {
-                console.error('Error saving regist entry:', error);
-                res.status(500).json({ error: 'Error saving regist entry' });
-            });
-    }
+
+    User.findOne({ where: { email: newRegist.email } }).then(user => {
+        if (user) { // found existing email
+            return res.status(402).json({ error: 'Email already exists.' });
+        } else {
+            if (newRegist.password != req.body.cpassword) {
+                return res.status(403).json({ error: 'Password dont match.' });
+            }
+            else {
+                newRegist.save()
+                    .then(savedEntry => {
+                        res.status(201).json(savedEntry);
+                    })
+                    .catch(error => {
+                        console.error('Error saving regist entry:', error);
+                        res.status(500).json({ error: 'Error saving regist entry' });
+                    });
+            }
+        }
+    });
 });
 
 // READ - login

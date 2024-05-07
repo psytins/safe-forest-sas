@@ -35,24 +35,24 @@
                                 <div class="panel-auth-container-register-form-base-info-name">
                                     <div class="panel-auth-container-register-form-base-info-name-first">
                                         <label for="input-fname">First name *</label>
-                                        <input type="text" id="input-fname">
+                                        <input type="text" id="input-fname" required>
                                     </div>                                    
                                     <div class="panel-auth-container-register-form-base-info-name-last">
                                         <label for="input-lname">Last name *</label>
-                                        <input type="text" id="input-lname">
-                                    </div>                                    
+                                        <input type="text" id="input-lname" required>
+                                    </div>  
                                 </div>
                                 <div class="panel-auth-container-register-form-base-info-email">
                                     <label for="input-email">Email *</label>
-                                    <input type="email" id="input-email">
+                                    <input type="email" id="input-email" required>
                                 </div>
                                 <div class="panel-auth-container-register-form-base-info-password">
                                     <label for="input-pass">Password *</label>
-                                    <input type="password" id="input-pass">
+                                    <input type="password" id="input-pass" required>
                                 </div>
                                 <div class="panel-auth-container-register-form-base-info-confirm-password">
                                     <label for="input-cpass">Confirm password *</label>
-                                    <input type="password" id="input-cpass">
+                                    <input type="password" id="input-cpass" required>
                                 </div>
                             </div>
                             <div class="panel-auth-container-register-form-division"></div>
@@ -63,11 +63,11 @@
                                 <div class="panel-auth-container-register-form-contact-info-info">
                                     <div class="panel-auth-container-register-form-contact-info-info-phone">
                                         <label for="input-phone">Phone number *</label>
-                                        <input type="number" id="input-phone">
+                                        <input type="number" id="input-phone" required>
                                     </div>
                                     <div class="panel-auth-container-register-form-contact-info-info-region">
                                         <label for="input-region">Select your region *</label>
-                                        <select name="input-region" id="input-region">
+                                        <select name="input-region" id="input-region" required>
                                             <option value="Norte">Norte</option>
                                             <option value="Centro">Centro</option>
                                             <option value="Lisboa e Vale do Tejo">Lisboa e Vale do Tejo</option>
@@ -80,7 +80,7 @@
                                 </div>
                                 <div class="panel-auth-container-register-form-contact-info-terms">
                                     <p>By clicking here, you <b>agree</b> to our terms of service and privacy policy *</p>
-                                    <input type="checkbox" name="input-terms" id="input-terms">
+                                    <input type="checkbox" name="input-terms" id="input-terms" required>
                                 </div>
                             </div>
                         </div>
@@ -97,16 +97,16 @@
 
             <div class="panel-auth" id="login">
                 <div class="panel-auth-container">
-                    <form class="panel-auth-container-register">
+                    <form id="form-login" class="panel-auth-container-register">
                         <div class="panel-auth-container-register-form">
                             <div class="panel-auth-container-register-form-base-info">
                                 <div class="panel-auth-container-register-form-base-info-email">
                                     <label for="input-email">Email</label>
-                                    <input type="email" id="login-input-email">
+                                    <input type="email" id="login-input-email" required>
                                 </div>
                                 <div class="panel-auth-container-register-form-base-info-password">
                                     <label for="input-passs">Password</label>
-                                    <input type="password" id="login-input-pass">
+                                    <input type="password" id="login-input-pass" required>
                                 </div>
                             </div>
                         </div>

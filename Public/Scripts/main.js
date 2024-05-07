@@ -37,23 +37,6 @@ function showContainerAuthentication(id) {
     }
 }
 
-function validateForm(className) {
-
-    const content = document.getElementById(className).value;
-    const validateRegex = new RegExp("^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$");
-
-    // if contains only spaces
-    if (content.trim == "")
-        return false;
-
-    //check regex
-    if (!validateRegex.test(content))
-        return false;
-
-    return true;
-
-}
-
 function searchTable(searchID, tableID) {
     // Declare variables
     var input, filter, table, tr, td, i, txtValue;
@@ -93,37 +76,35 @@ function getGreetingTime() {
     }
 }
 
-function showAuthenticationFormError(error) {
+function validateRegisterForm() {
+    const ERROR_COLOR = 'red';
+    const DEFAULT_COLOR = 'black'
+
     const fname = document.getElementById('input-fname');
     const lname = document.getElementById('input-lname');
     const email = document.getElementById('input-email');
     const password = document.getElementById('input-pass');
     const cpassword = document.getElementById('input-cpass');
     const phone = document.getElementById('input-phone');
+    const terms = document.getElementById('input-terms');
+
+    //phone number regex
+    //check if ticket is checked
+    if (!terms.checked) {
+        return false;
+    }
+
+    return true;
+}
+
+function validateLoginForm() {
+    const ERROR_COLOR = 'red';
+    const DEFAULT_COLOR = 'black'
 
     const loginEmail = document.getElementById('login-input-email');
     const loginPassword = document.getElementById('login-input-pass');
-    
-    // show error in case form inputs are not filled
-    fname.value === '' ? fname.style.borderColor = "red" : fname.style.borderColor = "black";
-    lname.value === '' ? lname.style.borderColor = "red" : lname.style.borderColor = "black";
-    email.value === '' ? email.style.borderColor = "red" : email.style.borderColor = "black";
-    password.value === '' ? password.style.borderColor = "red" : password.style.borderColor = "black";
-    cpassword.value === '' ? cpassword.style.borderColor = "red" : cpassword.style.borderColor = "black";
-    phone.value === '' ? phone.style.borderColor = "red" : phone.style.borderColor = "black";
 
-    loginEmail.value === '' ? loginEmail.style.borderColor = "red" : loginEmail.style.borderColor = "black";
-    loginPassword.value === '' ? loginPassword.style.borderColor = "red" : loginPassword.style.borderColor = "black";
-
-    // show error in case email already exists
-    if(cpassword != password){
-        cpassword.innerHTML = "Password don't match";
-        cpassword.style.borderColor = "red";
-    }
-    else if(error.status == 406){ // email already exists 
-        email.innerHTML = "Email already exists";
-        email.style.borderColor = "red";
-    }
+    return true;
 }
 
 // ------------------------------------------------
@@ -141,69 +122,77 @@ function registerAccount() {
     const reference_code = null // tmp
     const logo = null // tmp
 
-    fetch('api/auth/account-regist', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ fname, lname, password, cpassword, email, phone, region, reference_code, logo }),
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Registration successful:', data);
+    if (validateRegisterForm()) {
 
-            // Handle success ...
-            alert("Registration successful");
-            showContainerAuthentication('login');
-            // ...
-
+        fetch('api/auth/account-regist', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ fname, lname, password, cpassword, email, phone, region, reference_code, logo }),
         })
-        .catch(error => {
-            console.error('Registration failed:', error);
-            // Handle error ... 
-            showAuthenticationFormError(error);
-            // ...
-        });
+            .then(response => {
+                if (response.status == 401) {
+                    throw new Error(`Please fill all required fields! Status: ${response.status}`);
+                } else if (response.status == 402) {
+                    throw new Error(`Email already exists! Status: ${response.status}`);
+                } else if (response.status == 403) {
+                    throw new Error(`Password dont match! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Registration successful:', data);
+
+                // Handle success ...
+                alert("Registration successful");
+                showContainerAuthentication('login');
+                // ...
+
+            })
+            .catch(error => {
+                console.error('Registration failed:', error);
+                // Handle error ... 
+                alert(error);
+                // ...
+            });
+    }
 }
 
 function performLogin() {
     const email = document.getElementById('login-input-email').value;
     const password = document.getElementById('login-input-pass').value;
 
-    // fetch to validade login
-    fetch('/api/auth/account-authentication', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
+    if (validateLoginForm()) {
+        // fetch to validade login
+        fetch('/api/auth/account-authentication', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password }),
         })
-        .then(data => {
-            alert('Login successful! ' + data);
+            .then(response => {
+                if (response.status == 401) {
+                    throw new Error(`Invalid Credentials! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                alert('Login successful! ' + data);
 
-            //Handle Success ...
-            sessionStorage.setItem('name', data.name);
-            sessionStorage.setItem('email', data.email);
-            sessionStorage.setItem('country', data.country);
-            sessionStorage.setItem('refCode', data.ref_code);
-            window.location.href = '/dashboard';
-        })
-        .catch(error => {
-            console.error('Login failed:', error);
-            showAuthenticationFormError();
-            alert('Login failed. Please check your credentials and try again.');
-        });
+                //Handle Success ...
+                sessionStorage.setItem('name', data.name);
+                sessionStorage.setItem('email', data.email);
+                sessionStorage.setItem('country', data.country);
+                sessionStorage.setItem('refCode', data.ref_code);
+                window.location.href = '/dashboard';
+            })
+            .catch(error => {
+                console.error('Login failed:', error);
+                alert(error);
+            });
+    }
 }
 
 function signOut() {
