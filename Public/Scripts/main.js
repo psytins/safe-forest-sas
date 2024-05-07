@@ -1,4 +1,5 @@
 // DOM Elements
+const VERSION = "1.0.0";
 // Get tables ...
 
 // Functions
@@ -237,6 +238,7 @@ function loadIndex() {
     document.getElementById("email").placeholder = sessionStorage.getItem('email');
     document.getElementById("input-region").value = sessionStorage.getItem('country');
     document.getElementById("ref-code").placeholder = sessionStorage.getItem('refCode');;
+    document.getElementById("application-version").innerText = VERSION;
 }
 
 //First view - authentication - Load on authentication page

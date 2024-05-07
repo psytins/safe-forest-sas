@@ -7,7 +7,10 @@ const db_table = process.env.DB_TABLE;
 const db_user = process.env.DB_USER //para mudar para local, usar variavél: DB_LOCAL_USER;
 
 const db_pass = process.env.DB_SECRET //para mudar para local, usar variavél: DB_LOCAL_SECRET;
-const cert_path = process.env.GV_DB_PATH;
+
+/// const cert_path = process.env.GV_DB_PATH; // for development
+
+/// const cert_path = process.env.DB_CERT_PATH; // for production
 
 const host = process.env.DB_HOST //para mudar para local, usar variavél: DB_LOCAL_HOST;
 
