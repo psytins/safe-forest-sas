@@ -873,8 +873,176 @@ td {
     align-items: center;
 }
 
-/*################# AUTHENTICATION PAGE #################*/
+/*#################### SECURITY PAGE ####################*/
+
+#security{
+    justify-content: start;
+}
+
+.panel-security{
+    height: 95%;
+    width: 95%;
+    margin-left: 2.5%;
+    display: flex;
+    justify-content: center;
+    justify-self: start;
+    align-items: center;
+    flex-direction: column;
+}
+
+.panel-security-information{
+    display: flex;
+    flex-direction: column;
+    background-color: #D9D9D9;
+    width: 100%;
+    height: 65%;
+    margin-bottom: 2.5%;
+}
+
+.panel-security-information-label{
+    height: fit-content;
+    width: fit-content;
+    margin-left: 1%;
+    margin-top: 1%;
+}
+
+.panel-security-information-form{
+    display: flex;
+    flex-direction: column;
+    justify-self: flex-end;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.panel-security-information-current-password{
+    height: fit-content;
+}
+
+.panel-security-information-current-password p{
+    width: fit-content;
+    height: fit-content;
+    margin-left: 1%;
+}
+
+.panel-security-information-current-password input{
+    width: fit-content;
+    height: fit-content;
+    margin-left: 1%;
+    width: 95%;
+    height: 25px
+}
+
+.panel-security-information-new-password{
+    height: fit-content;
+    margin-top: 1%;
+}
+
+.panel-security-information-new-password p{
+    width: fit-content;
+    height: fit-content;
+    margin-left: 1%;
+}
+
+.panel-security-information-new-password input{
+    width: fit-content;
+    height: fit-content;
+    margin-left: 1%;
+    width: 95%;
+    height: 25px
+}
+
+.panel-security-information-confirm-password{
+    margin-top: 1%;
+}
+
+.panel-security-information-confirm-password p{
+    width: fit-content;
+    height: fit-content;
+    margin-left: 1%;
+    width: 90%;
+    height: 25px
+}
+
+.panel-security-information-confirm-password input{
+    width: fit-content;
+    height: fit-content;
+    margin-left: 1%;
+    width: 95%;
+    height: 25px
+}
+
+.panel-security-information-change{
+    display: flex;
+    justify-content: end;
+    align-content: end;
+    width: 95%;
+    margin-top: 2%;
+    margin-left: 1.5%;
+}
+
+.panel-security-information-change button {
+    padding: 10px 5%;
+}
+
+.panel-security-danger{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: #D9D9D9;
+    height: 30%;
+}
+
+.panel-security-danger-label{
+    display: flex;
+    align-self: start;
+    height: fit-content;
+    width: fit-content;
+    margin-left: 1%;
+    margin-top: 1%;
+}
+
+.panel-security-danger-delete-account {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 50%;
+    width: 100%;
+}
+
+.panel-security-danger-delete-account-label{
+    display: flex;
+    margin-left: 1%;
+}
+
+.panel-security-danger-delete-account-option {
+    display: flex;
+    width: 100%;
+}
+
+.panel-security-danger-delete-account-text {
+    display: flex;
+    flex: 1;
+    margin-left: 1%;
+    align-items: center;
+}
+
+.panel-security-danger-delete-account-button {
+    display: flex;
+    flex: 1;
+    margin-right: 4%;
+    justify-content: end;
+}
+
+.panel-security-danger-delete-account-button button {
+    padding: 10px 5%;
+}
+
+
 /*#######################################################*/
+
+/*################# AUTHENTICATION PAGE #################*/
+
 .header-auth {
     display: flex;
     justify-items: center;
@@ -1060,4 +1228,83 @@ td {
 
 /*################# END AUTHENTICATION PAGE #################*/
 /*#######################################################*/
+
+/*#######################################################*/
+/*      General Account Settings CSS     */
+
+
+.panel-general-account {
+    background-color: #CDCDCD;
+    width: 95%;
+    height: 97%;
+}
+
+.panel-general-account-title {
+    width: 30w;
+    margin-left: 3%;
+    margin-top: 4%;
+}
+
+.panel-general-account-inputs {
+    width: 81%;
+    height: 78%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    font-size: 16px;
+    padding-left: 7%;
+}
+
+.panel-general-account-inputs input[type="text"] {
+    width: 95%;
+    padding: 1%;
+}
+
+.panel-general-account-inputs-names input[type="text"] {
+    width: 30vw;
+    height: 50%;
+    padding: 1%;
+}
+
+.panel-general-account-inputs-names {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+}
+
+.panel-general-account-country {
+    width: 97%;
+}
+
+.panel-general-account-country select {
+    width: 100%;
+    height: 67%;
+    padding: 8px;
+    border: 1px solid #000000;
+    border-radius: 0px;
+    background-color: #fff;
+}
+
+
+.panel-general-account-upload-logo {
+    margin-bottom: 20px;
+}
+
+
+.panel-general-account-button {
+    width: 20%;
+    height: 9%;
+    padding-left: 80%;
+}
+
+.panel-general-account-button button {
+    width: 80%;
+    height: 50%;
+    cursor: pointer;
+}
+
+.panel-general-account-button button:hover {
+    background-color: #D9D9D9;
+}
+
 
