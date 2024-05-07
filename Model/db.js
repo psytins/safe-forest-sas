@@ -10,7 +10,7 @@ const db_pass = process.env.DB_SECRET //para mudar para local, usar variavél: D
 
 /// const cert_path = process.env.GV_DB_PATH; // for development
 
-/// const cert_path = process.env.DB_CERT_PATH; // for production
+const cert_path = process.env.DB_CERT_PATH; // for production
 
 const host = process.env.DB_HOST //para mudar para local, usar variavél: DB_LOCAL_HOST;
 
