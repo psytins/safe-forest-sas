@@ -105,7 +105,31 @@ function validateLoginForm() {
     const loginEmail = document.getElementById('login-input-email');
     const loginPassword = document.getElementById('login-input-pass');
 
+    if (!loginEmail.value || !loginPassword.value) {
+        return false;
+    }
+
     return true;
+}
+
+function validateNewPasswordForm() {
+    const ERROR_COLOR = 'red';
+    const DEFAULT_COLOR = 'black'
+
+    const current_password = document.getElementById("input-current-password");
+    const new_password = document.getElementById("input-new-password");
+    const confirm_new_password = document.getElementById("input-confirm-password");
+
+    if (!confirm("ARE YOU SURE ?")) {
+        return false;
+    }
+
+    if (!current_password.value || !new_password.value || !confirm_new_password.value) {
+        return false;
+    }
+
+    return true;
+
 }
 
 // ------------------------------------------------
@@ -132,7 +156,7 @@ function registerAccount() {
             },
             body: JSON.stringify({ fname, lname, password, cpassword, email, phone, region, reference_code, logo }),
         })
-            .then(response => {
+            .then(response => { // data validation
                 if (response.status == 401) {
                     throw new Error(`Please fill all required fields! Status: ${response.status}`);
                 } else if (response.status == 402) {
@@ -183,6 +207,7 @@ function performLogin() {
                 alert('Login successful! ' + data);
 
                 //Handle Success ...
+                sessionStorage.setItem('_id', data.userID);
                 sessionStorage.setItem('name', data.name);
                 sessionStorage.setItem('email', data.email);
                 sessionStorage.setItem('country', data.country);
@@ -214,6 +239,53 @@ function signOut() {
             console.error('An error occured:', error);
         });
 }
+
+function changePassword() {
+    const current_password = document.getElementById("input-current-password").value;
+    const new_password = document.getElementById("input-new-password").value;
+    const confirm_new_password = document.getElementById("input-confirm-password").value;
+
+    const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
+
+    if (validateNewPasswordForm()) {
+
+        fetch('api/auth/account-change-password', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ current_password, new_password, confirm_new_password, userID }),
+        })
+            .then(response => { // data validation
+                if (response.status == 401) {
+                    throw new Error(`Please fill all required fields! Status: ${response.status}`);
+                } else if (response.status == 402) {
+                    throw new Error(`Current Password is wrong! Status: ${response.status}`);
+                } else if (response.status == 403) {
+                    throw new Error(`Password dont match! Status: ${response.status}`);
+                } else if (response.status == 404) {
+                    throw new Error(`User not found! Status: ${response.status}`);
+                }
+
+                return response.json();
+            })
+            .then(data => {
+                console.log('New password is set:', data);
+
+                // Handle success ...
+                alert("New password is set! Please authenticate with the new password.");
+                //signOut()
+                // ...
+
+            })
+            .catch(error => {
+                console.error('An error occured:', error);
+                // Handle error ... 
+                alert("Something went wrong... " + error);
+                // ...
+            });
+    }
+}
 // ------------------------------------------------
 
 // Event Listeners
@@ -227,7 +299,7 @@ function loadIndex() {
     document.getElementById("security").style.display = "none";
     document.getElementById("contacts").style.display = "none";
 
-    document.getElementById("greetings").innerText = getGreetingTime() + ", " + sessionStorage.getItem("name");
+    document.getElementById("greetings").innerText = getGreetingTime() + ", " + sessionStorage.getItem("name") + " #" + sessionStorage.getItem("_id");
 
     //General Personal Profile - Placeholders
     const fname = sessionStorage.getItem("name").split(" ")[0];

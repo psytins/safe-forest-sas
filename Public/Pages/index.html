@@ -26,7 +26,7 @@
                     <div class="menu-options-home-label">
                         <p>Home</p>
                     </div>
-                    <button href="#dashboard" onclick="showContainerIndex('dashboard')"
+                    <button onclick="showContainerIndex('dashboard')"
                         class="menu-options-home-dashboard">
                         <div class="menu-options-home-dashboard-icon">
                             <img src="../Images/dashboard-logo.png">
@@ -35,7 +35,7 @@
                             <p>Dashboard</p>
                         </div>
                     </button>
-                    <button href="#mycameras" onclick="showContainerIndex('mycameras')"
+                    <button onclick="showContainerIndex('mycameras')"
                         class="menu-options-home-camera">
                         <div class="menu-options-home-camera-icon">
                             <img src="../Images/camera-logo.png">
@@ -50,7 +50,7 @@
                     <div class="menu-options-settings-label">
                         <p>Settings</p>
                     </div>
-                    <button href="#general" onclick="showContainerIndex('general')"
+                    <button onclick="showContainerIndex('general')"
                         class="menu-options-settings-general">
                         <div class="menu-options-settings-general-icon">
                             <img src="../Images/profile-logo.png">
@@ -59,7 +59,7 @@
                             <p>Profile</p>
                         </div>
                     </button>
-                    <button href="#security" onclick="showContainerIndex('security')"
+                    <button onclick="showContainerIndex('security')"
                         class="menu-options-settings-security">
                         <div class="menu-options-settings-security-icon">
                             <img src="../Images/security-logo.png">
@@ -68,7 +68,7 @@
                             <p>Security</p>
                         </div>
                     </button>
-                    <button href="#contacts" onclick="showContainerIndex('contacts')"
+                    <button onclick="showContainerIndex('contacts')"
                         class="menu-options-settings-alert">
                         <div class="menu-options-settings-alert-icon">
                             <img src="../Images/alert-logo.png">
@@ -503,24 +503,24 @@
                         <div class="panel-security-information-label">
                             <h1>Security and Login</h1>
                         </div>
-                        <div class="panel-security-information-form">
+                        <form class="panel-security-information-form">
                             <div class="panel-security-information-current-password">
                                 <p>Current Password</p>
-                                <input id="input-current-password">
+                                <input id="input-current-password" required>
                             </div>
                             <div class="panel-security-information-new-password">
                                 <p>New Password</p>
-                                <input id="input-new-password">
+                                <input id="input-new-password" required>
                             </div>
 
                             <div class="panel-security-information-confirm-password">
                                 <p>Confirm New Password</p>
-                                <input id="input-confirm-password">
+                                <input id="input-confirm-password" required>
                             </div>
                             <div class="panel-security-information-change">
-                                <button>Change</button>
+                                <button onclick="changePassword()">Change</button>
                             </div>
-                        </div>
+                        </form>
                     </div>
                     <div class="panel-security-danger">
                         <div class="panel-security-danger-label">
