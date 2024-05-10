@@ -22,7 +22,7 @@ const Camera = sequelize.define('camera', {
         type: Sequelize.INTEGER,
         allowNull: false, unique: true
     },
-    camera_endpoit: Sequelize.STRING,
+    camera_endpoint: Sequelize.STRING,
     country: Sequelize.STRING,
     gps_location: Sequelize.STRING,
     site_name: Sequelize.STRING,

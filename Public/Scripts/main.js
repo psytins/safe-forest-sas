@@ -30,7 +30,7 @@ function toggleCancelMenu() {
     }
 }
 
-function selectPlan(plan){
+function selectPlan(plan) {
     var plan = document.getElementById(plan)
     var parentElement = plan.parentElement;
 
@@ -169,6 +169,22 @@ function validateDeleteAccount() {
     }
 
     if (!confirm("THIS WILL DELETE YOUR ACCOUNT AND ALL OF YOUR DATA, FOREVER! ARE YOU STILL SURE?")) {
+        return false;
+    }
+
+    return true;
+}
+
+function validateRegisterCamera() {
+    const ERROR_COLOR = 'red';
+    const DEFAULT_COLOR = 'black'
+
+    const friendly_name = document.getElementById("add-camera-friendly-name");
+    const country = document.getElementById("add-camera-country");
+    const gps_location = document.getElementById("add-camera-location");
+
+    if (!friendly_name.value || !country.value || !gps_location.value) {
+        alert("Please...");
         return false;
     }
 
@@ -332,7 +348,7 @@ function changePassword() {
 
 function deleteAccount() {
     const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
-    
+
     if (validateDeleteAccount()) {
         fetch('/api/auth/account-delete', {
             method: 'POST',
@@ -349,6 +365,85 @@ function deleteAccount() {
             .catch(error => {
                 // Handle error
                 console.error('An error occured:', error);
+            });
+    }
+}
+
+function registerCamera() {
+    const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer // FK
+    const camera_name = document.getElementById("add-camera-friendly-name").value; // temp
+    const friendly_name = document.getElementById("add-camera-friendly-name").value;
+    const sensitivity = 80; // temp
+    const last_detected = null; //temp
+    const subscription_plan = 1; // FK //temp free
+    const camera_endpoint = null; //temp
+    const country = document.getElementById("add-camera-country").value;
+    const gps_location = document.getElementById("add-camera-location").value;
+    const site_name = document.getElementById("add-camera-site-name").value;
+    const brand_model = document.getElementById("add-camera-brand-model").value;
+    const azimuth_bearing = document.getElementById("add-camera-azimuth-bearing").value;
+    const camera_web_admin = document.getElementById("add-camera-admin-url").value;
+    const public_ip_address = document.getElementById("add-camera-public-ip").value;
+    const input_method = "HTTPS-POST"; //temp
+    const current_status = 1; //temp
+    const last_1_day = null; //temp
+    const last_7_days = null; //temp
+    const last_30_days = null; //temp
+
+    if (validateRegisterCamera()) {
+
+        fetch('api/camera/regist', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(
+                {
+                    userID,
+                    camera_name,
+                    friendly_name,
+                    sensitivity,
+                    last_detected,
+                    subscription_plan,
+                    camera_endpoint,
+                    country,
+                    gps_location,
+                    site_name,
+                    brand_model,
+                    azimuth_bearing,
+                    camera_web_admin,
+                    public_ip_address,
+                    input_method,
+                    current_status,
+                    last_1_day,
+                    last_7_days,
+                    last_30_days
+                }),
+        })
+            .then(response => { // data validation
+                if (response.status == 401) {
+                    throw new Error(`Please fill all required fields! Status: ${response.status}`);
+                } else if (response.status == 402) {
+                    throw new Error(`Camera already registered! Status: ${response.status}`);
+                } else if (response.status == 403) {
+                    // error 403
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Camera Registration successful:', data);
+
+                // Handle success ...
+                alert("Camera Registration successful!");
+                location.reload();
+                // ...
+
+            })
+            .catch(error => {
+                console.error('Registration failed:', error);
+                // Handle error ... 
+                alert(error);
+                // ...
             });
     }
 }

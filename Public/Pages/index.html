@@ -177,8 +177,8 @@
                 </div>
                 <div class="add-camera-menu-options">
                     <div class="add-camera-menu-options-left">
-                        <label for="add-camera-camera-name">Friendly Name*</label>
-                        <input type="text" id="add-camera-camera-name" placeholder="Friendly Name" required>
+                        <label for="add-camera-friendly-name">Friendly Name*</label>
+                        <input type="text" id="add-camera-friendly-name" placeholder="Friendly Name" required>
                         <label for="add-camera-country">Country*</label>
                         <input type="text" id="add-camera-country" placeholder="Select Country" required>
                         <label for="add-camera-brand-model">Brand & Model</label>
@@ -189,8 +189,8 @@
                     <div class="add-camera-menu-options-right">
                         <label for="add-camera-location">GPS Location*</label>
                         <input type="text" id="add-camera-location" placeholder="GPS Location">
-                        <label for="add-camera-site-url">Site Name</label>
-                        <input type="text" id="add-camera-site-url" placeholder="Site Name">
+                        <label for="add-camera-site-name">Site Name</label>
+                        <input type="text" id="add-camera-site-name" placeholder="Site Name">
                         <label for="add-camera-azimuth-bearing">Azimuth / Bearing</label>
                         <input type="text" id="add-camera-azimuth-bearing" value="0">
                         <label for="add-camera-public-ip">Camera Public IP Address</label>
@@ -198,7 +198,7 @@
                     </div>
                 </div>
                 <div class="add-camera-menu-button">
-                    <button type="button">Add Camera</button>
+                    <button type="button" onclick="registerCamera()">Add Camera</button>
                 </div>
             </div>
 
