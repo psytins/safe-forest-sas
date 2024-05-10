@@ -130,6 +130,20 @@ router.post('/account-change-password', (req, res) => {
         });
 });
 
-//DELETE
+//DELETE ACCOUNT
+router.post('/account-delete', (req, res) => {
+    const searchUser = new User({
+        id: req.body.userID,
+    });
+
+    User.destroy({ where: { id: searchUser.id } })
+        .then(rowsDestroyed => {
+            res.json({ message: `Deleted ${rowsDestroyed} row(s).` });
+        })
+        .catch(error => {
+            console.error('Error deleting user:', error);
+            return res.status(500).json({ error: 'Error deleting user' });
+        });
+});
 
 module.exports = router;

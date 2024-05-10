@@ -87,7 +87,8 @@ function validateRegisterForm() {
     const phone = document.getElementById('input-phone');
     const terms = document.getElementById('input-terms');
 
-    //phone number regex
+    //phone number regex TODO!
+    //email regex TODO!
     //check if ticket is checked
     if (!terms.checked) {
         alert("Please accept our terms and conditions.");
@@ -120,7 +121,7 @@ function validateNewPasswordForm() {
     const new_password = document.getElementById("input-new-password");
     const confirm_new_password = document.getElementById("input-confirm-password");
 
-    if (!confirm("ARE YOU SURE ?")) {
+    if (!confirm("ARE YOU SURE?")) {
         return false;
     }
 
@@ -131,6 +132,22 @@ function validateNewPasswordForm() {
 
     return true;
 
+}
+
+function validateDeleteAccount() {
+    if (!confirm("ARE YOU SURE?")) {
+        return false;
+    }
+
+    if (!confirm("THIS IS A DANGEROUS MOVE. ARE YOU STILL SURE?")) {
+        return false;
+    }
+
+    if (!confirm("THIS WILL DELETE YOUR ACCOUNT AND ALL OF YOUR DATA, FOREVER! ARE YOU STILL SURE?")) {
+        return false;
+    }
+
+    return true;
 }
 
 // ------------------------------------------------
@@ -217,7 +234,6 @@ function performLogin() {
             .catch(error => {
                 console.error('Login failed:', error);
                 alert(error);
-                
             });
     }
 }
@@ -238,7 +254,7 @@ function signOut() {
         .catch(error => {
             // Handle error
             console.error('An error occured:', error);
-            
+
         });
 }
 
@@ -284,8 +300,30 @@ function changePassword() {
                 console.error('An error occured:', error);
                 // Handle error ... 
                 alert("Something went wrong... " + error);
-                
                 // ...
+            });
+    }
+}
+
+function deleteAccount() {
+    const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
+    
+    if (validateDeleteAccount()) {
+        fetch('/api/auth/account-delete', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ userID }),
+        })
+            .then(response => {
+                // Handle response, then redirect
+                alert("Your account has been deleted. Goodbye, and thank your for using our services.");
+                signOut();
+            })
+            .catch(error => {
+                // Handle error
+                console.error('An error occured:', error);
             });
     }
 }
