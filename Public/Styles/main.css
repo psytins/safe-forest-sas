@@ -537,7 +537,7 @@ h1 {
     z-index: 90;
 }
 
-.add-camera-menu-options-left p{
+.add-camera-menu-options-left label{
     margin-left: 5%;
 }
 
@@ -554,7 +554,7 @@ h1 {
     padding-right: 5%;
 }
 
-.add-camera-menu-options-right p{
+.add-camera-menu-options-right label{
     margin-left: 5%;
 }
 
