@@ -100,7 +100,7 @@
                 </div>
                 <div class="header-options">
                     <div class="header-options-addcamera">
-                        <button>Add Camera</button>
+                        <button onclick=toggleCancelMenu()>Add Camera</button>
                     </div>
                     <div class="header-options-language">
                         <img src="../Images/language-logo.png">
@@ -112,6 +112,86 @@
                         <p>Leave</p>
                         <img src="../Images/logout-logo.png">
                     </button>
+                </div>
+            </div>
+
+            <div class="panel"  id="add-camera-menu">
+                <div class="add-camera-menu-cancel">
+                    <img onclick=toggleCancelMenu() src="../Images/cancel-logo.png">
+                </div>
+                <div class="add-camera-plans">
+                    <div id="free" class="add-camera-plans-free" onclick="selectPlan(this.id)">
+                        <div class="add-camera-plans-free-title">
+                            <h4>Free Plan</h4>
+                        </div>
+                        <div class="add-camera-plans-free-price">
+                            <h4>Free</h4>
+                        </div>
+                        <div class="add-camera-plans-free-description">
+                            <p>No Credit Card Required</p>
+                        </div>
+                        <div class="add-camera-plans-free-checks">
+                            <p>10-min checks</p>
+                        </div>
+                    </div>
+                    <div id = "standard" class="add-camera-plans-standard" onclick="selectPlan(this.id)">
+                        <div class="add-camera-plans-standard-title">
+                            <h4>Standard Plan</h4>
+                        </div>
+                        <div class="add-camera-plans-standard-price">
+                            <h4>49 € /month</h4>
+                        </div>
+                        <div class="add-camera-plans-standard-description">
+                            <p>Per fixed camera or present position</p>
+                        </div>
+                        <div class="add-camera-plans-standard-checks">
+                            <p>1-min checks</p>
+                        </div>
+                    </div>
+                    <div id ="premium" class="add-camera-plans-premium" onclick="selectPlan(this.id)">
+                        <div class="add-camera-plans-premium-title">
+                            <h4>Premium Plan</h4>
+                        </div>
+                        <div class="add-camera-plans-premium-price">
+                            <h4>99 € /month</h4>
+                        </div>
+                        <div class="add-camera-plans-premium-description">
+                            <p>Per fixed camera or present position</p>
+                        </div>
+                        <div class="add-camera-plans-premium-checks">
+                            <p>30-second checks</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="add-camera-menu-title">
+                    <h1>Add Camera</h1>
+
+                </div>
+                <div class="add-camera-menu-options">
+                    <div class="add-camera-menu-options-left">
+                        <p>Friendly Name</p>
+                        <input>
+                        <p>Country</p>
+                        <input>
+                        <p>Brand and Model</p>
+                        <input>
+                        <p>Camera web Admin URL</p>
+                        <input>
+                    </div>
+                    <div class="add-camera-menu-options-right">
+                        <p>GPS Location</p>
+                        <input>
+                        <p>Site Name</p>
+                        <input>
+                        <p>Azimuth / Bearing</p>
+                        <input>
+                        <p>Camera Public IP Address</p>
+                        <input>
+                    </div>
+                </div>
+                <div class="add-camera-menu-button">
+                    <button>Add Camera</button>
                 </div>
             </div>
 

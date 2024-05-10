@@ -21,6 +21,31 @@ function showContainerIndex(id) {
     }
 }
 
+function toggleCancelMenu() {
+    const menu = document.getElementById('add-camera-menu');
+    if (menu.style.display === 'flex') {
+        menu.style.display = 'none';
+    } else {
+        menu.style.display = 'flex';
+    }
+}
+
+function selectPlan(plan){
+    var plan = document.getElementById(plan)
+    var parentElement = plan.parentElement;
+
+    for (var i = 0; i < parentElement.children.length; i++) {
+        var child = parentElement.children[i];
+        if (child.tagName.toLowerCase() === "div") {
+            child.style.backgroundColor = "white";
+            child.classList.remove("selected");
+        }
+    }
+    plan.style.backgroundColor = "gray"
+    plan.classList.toggle("selected");
+
+}
+
 function showContainerAuthentication(id) {
 
     document.getElementById("register").style.display = "none";
