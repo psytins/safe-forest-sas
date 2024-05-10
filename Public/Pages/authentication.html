@@ -67,7 +67,7 @@
                                     </div>
                                     <div class="panel-auth-container-register-form-contact-info-info-region">
                                         <label for="input-region">Select your region *</label>
-                                        <select name="input-region" id="input-region" required>
+                                        <select id="input-region">
                                             <option value="Norte">Norte</option>
                                             <option value="Centro">Centro</option>
                                             <option value="Lisboa e Vale do Tejo">Lisboa e Vale do Tejo</option>
@@ -80,16 +80,16 @@
                                 </div>
                                 <div class="panel-auth-container-register-form-contact-info-terms">
                                     <p>By clicking here, you <b>agree</b> to our terms of service and privacy policy *</p>
-                                    <input type="checkbox" name="input-terms" id="input-terms" required>
+                                    <input type="checkbox" id="input-terms" required>
                                 </div>
                             </div>
                         </div>
                         <div class="panel-auth-container-register-submit">
-                            <button onclick="registerAccount()">Register</button>
+                            <button type="button" onclick="registerAccount()">Register</button>
                         </div>
                         <div class="panel-auth-container-register-altlogin">
                             <p>Have an account?</p>
-                            <a href="#login" onclick="showContainerAuthentication('login')">&nbsp;<b>Log in</b></a>
+                            <a onclick="showContainerAuthentication('login')">&nbsp;<b>Log in</b></a>
                         </div>
                     </form>
                 </div>
@@ -101,21 +101,21 @@
                         <div class="panel-auth-container-register-form">
                             <div class="panel-auth-container-register-form-base-info">
                                 <div class="panel-auth-container-register-form-base-info-email">
-                                    <label for="input-email">Email</label>
+                                    <label for="login-input-email">Email</label>
                                     <input type="email" id="login-input-email" required>
                                 </div>
                                 <div class="panel-auth-container-register-form-base-info-password">
-                                    <label for="input-passs">Password</label>
+                                    <label for="login-input-pass">Password</label>
                                     <input type="password" id="login-input-pass" required>
                                 </div>
                             </div>
                         </div>
                         <div class="panel-auth-container-register-submit">
-                            <button onclick="performLogin()">Connect</button>
+                            <button type="button" onclick="performLogin()">Connect</button>
                         </div>
                         <div class="panel-auth-container-register-altlogin">
                             <p>Don't have an account?</p>
-                            <a href="#register" onclick="showContainerAuthentication('register')">&nbsp;<b>Sign up</b></a>
+                            <a onclick="showContainerAuthentication('register')">&nbsp;<b>Sign up</b></a>
                         </div>
                     </form>
                 </div>

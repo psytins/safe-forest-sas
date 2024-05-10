@@ -35,11 +35,11 @@ router.post('/account-regist', (req, res) => {
             else {
                 newRegist.save()
                     .then(savedEntry => {
-                        res.status(201).json(savedEntry);
+                        return res.status(201).json(savedEntry);
                     })
                     .catch(error => {
                         console.error('Error saving regist entry:', error);
-                        res.status(500).json({ error: 'Error saving regist entry' });
+                        return res.status(500).json({ error: 'Error saving regist entry' });
                     });
             }
         }
@@ -69,15 +69,16 @@ router.post('/account-authentication', (req, res) => {
                 res.cookie('token', authToken, { httpOnly: true });
                 // ---
 
+                const userID = user.id;
                 const name = user.first_name + " " + user.last_name;
                 const email = user.email;
                 const country = user.country;
                 const ref_code = user.reference_code;
-                res.json({ message: 'Login successful', name, email, country, ref_code });
+                return res.json({ message: 'Login successful', userID, name, email, country, ref_code });
             })
             .catch(error => {
                 console.error('Error during login:', error);
-                res.status(500).json({ error: 'Error during login' });
+                return res.status(500).json({ error: 'Error during login' });
             });
     }
 });
@@ -85,10 +86,49 @@ router.post('/account-authentication', (req, res) => {
 // SignOUT
 router.post('/account-signout', (req, res) => {
     res.clearCookie('token');
-    res.json({ message: 'Sign out successful' });
+    return res.json({ message: 'Sign out successful' });
 });
 
-//UPDATE
+// UPDATE - change password
+router.post('/account-change-password', (req, res) => {
+    const searchUser = new User({
+        id: req.body.userID,
+    });
+
+    current_password = req.body.current_password;
+    new_password = req.body.new_password;
+    confirm_new_password = req.body.confirm_new_password;
+
+    // Validate Register
+    if (!current_password || !new_password || !confirm_new_password) {
+        return res.status(401).json({ error: 'Please fill all required fields.' });
+    }
+
+    User.findOne({ where: { id: searchUser.id } })
+        .then(user => {
+            if (!user) {
+                return res.status(404).json({ error: 'User not found' });
+            }
+
+            if (user.password !== current_password) {
+                return res.status(402).json({ error: 'Current Password is wrong.' });
+            } else {
+                if (new_password !== confirm_new_password) {
+                    return res.status(403).json({ error: 'Password dont match.' });
+                }
+                else {
+                    // save the new password
+                    user.password = new_password;
+                    user.save();
+                    return res.json({ message: 'Changed password.' });
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Error updating user entry:', error);
+            return res.status(500).json({ error: 'Error updating user entry' });
+        });
+});
 
 //DELETE
 

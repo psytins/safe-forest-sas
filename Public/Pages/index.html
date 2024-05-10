@@ -17,7 +17,7 @@
                 <div class="logo-nav-logo">
                 </div>
                 <div class="logo-nav-hamburguer">
-                    <button id="logo-nav-hamburger-btn" onclick="clicked_menu()"></button>
+                    <button type="button" id="logo-nav-hamburger-btn" onclick="clicked_menu()"></button>
                 </div>
             </div>
 
@@ -26,7 +26,7 @@
                     <div class="menu-options-home-label">
                         <p>Home</p>
                     </div>
-                    <button href="#dashboard" onclick="showContainerIndex('dashboard')"
+                    <button type="button" onclick="showContainerIndex('dashboard')"
                         class="menu-options-home-dashboard">
                         <div class="menu-options-home-dashboard-icon">
                             <img src="../Images/dashboard-logo.png">
@@ -35,7 +35,7 @@
                             <p>Dashboard</p>
                         </div>
                     </button>
-                    <button href="#mycameras" onclick="showContainerIndex('mycameras')"
+                    <button type="button" onclick="showContainerIndex('mycameras')"
                         class="menu-options-home-camera">
                         <div class="menu-options-home-camera-icon">
                             <img src="../Images/camera-logo.png">
@@ -50,7 +50,7 @@
                     <div class="menu-options-settings-label">
                         <p>Settings</p>
                     </div>
-                    <button href="#general" onclick="showContainerIndex('general')"
+                    <button type="button" onclick="showContainerIndex('general')"
                         class="menu-options-settings-general">
                         <div class="menu-options-settings-general-icon">
                             <img src="../Images/profile-logo.png">
@@ -59,7 +59,7 @@
                             <p>Profile</p>
                         </div>
                     </button>
-                    <button href="#security" onclick="showContainerIndex('security')"
+                    <button type="button" onclick="showContainerIndex('security')"
                         class="menu-options-settings-security">
                         <div class="menu-options-settings-security-icon">
                             <img src="../Images/security-logo.png">
@@ -68,7 +68,7 @@
                             <p>Security</p>
                         </div>
                     </button>
-                    <button href="#contacts" onclick="showContainerIndex('contacts')"
+                    <button type="button" onclick="showContainerIndex('contacts')"
                         class="menu-options-settings-alert">
                         <div class="menu-options-settings-alert-icon">
                             <img src="../Images/alert-logo.png">
@@ -105,7 +105,7 @@
                 </div>
                 <div class="header-options">
                     <div class="header-options-addcamera">
-                        <button>Add Camera</button>
+                        <button type="button">Add Camera</button>
                     </div>
                     <div class="header-options-language">
                         <img src="../Images/language-logo.png">
@@ -113,7 +113,7 @@
                     <div class="header-options-notifications">
                         <img src="../Images/notification-logo.png">
                     </div>
-                    <button onclick="signOut()" class="header-options-leave">
+                    <button type="button" onclick="signOut()" class="header-options-leave">
                         <p>Leave</p>
                         <img src="../Images/logout-logo.png">
                     </button>
@@ -133,7 +133,7 @@
                                         <p>Cameras Online</p>
                                     </div>
                                     <div class="panel-information-statistics-status-online-container-cameras">
-                                        <button
+                                        <button type="button"
                                             class="panel-information-statistics-status-online-container-cameras-btn">My
                                             Cameras ></button>
                                     </div>
@@ -148,7 +148,7 @@
                                         <p>Cameras Offline</p>
                                     </div>
                                     <div class="panel-information-statistics-status-offline-container-cameras">
-                                        <button
+                                        <button type="button"
                                             class="panel-information-statistics-status-offline-container-cameras-btn">My
                                             Cameras ></button>
                                     </div>
@@ -492,7 +492,7 @@
                         </div>
                     </div>
                     <div class="panel-general-account-button">
-                        <button>Save Changes</button>
+                        <button type="button">Save Changes</button>
                     </div>
                 </div>
             </div>
@@ -503,24 +503,24 @@
                         <div class="panel-security-information-label">
                             <h1>Security and Login</h1>
                         </div>
-                        <div class="panel-security-information-form">
+                        <form class="panel-security-information-form">
                             <div class="panel-security-information-current-password">
                                 <p>Current Password</p>
-                                <input id="input-current-password">
+                                <input id="input-current-password" required>
                             </div>
                             <div class="panel-security-information-new-password">
                                 <p>New Password</p>
-                                <input id="input-new-password">
+                                <input id="input-new-password" required>
                             </div>
 
                             <div class="panel-security-information-confirm-password">
                                 <p>Confirm New Password</p>
-                                <input id="input-confirm-password">
+                                <input id="input-confirm-password" required>
                             </div>
                             <div class="panel-security-information-change">
-                                <button>Change</button>
+                                <button type="button" onclick="changePassword()">Change</button>
                             </div>
-                        </div>
+                        </form>
                     </div>
                     <div class="panel-security-danger">
                         <div class="panel-security-danger-label">
@@ -535,7 +535,7 @@
                                     <p>Delete your account and account data</p>
                                 </div>
                                 <div class="panel-security-danger-delete-account-button">
-                                    <button>Delete Account</button>
+                                    <button type="button" >Delete Account</button>
                                 </div>
                             </div>
                         </div>
