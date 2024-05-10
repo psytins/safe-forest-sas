@@ -1,5 +1,5 @@
 // DOM Elements
-const VERSION = "1.1.1";
+const VERSION = "1.1.2";
 // Get tables ...
 
 // Functions
@@ -319,6 +319,7 @@ function loadIndex() {
 //First view - authentication - Load on authentication page
 function loadAuthentication() {
     document.getElementById("login").style.display = "none";
+    document.getElementById("application-version").innerText = VERSION;
 }
 
 
