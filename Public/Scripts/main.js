@@ -1,10 +1,9 @@
 // DOM Elements
-const VERSION = "1.1.0";
+const VERSION = "1.1.1";
 // Get tables ...
 
 // Functions
 function showContainerIndex(id) {
-
     //Put all none
     document.getElementById("dashboard").style.display = "none";
     document.getElementById("mycameras").style.display = "none";
@@ -23,7 +22,6 @@ function showContainerIndex(id) {
 }
 
 function showContainerAuthentication(id) {
-
     document.getElementById("register").style.display = "none";
     document.getElementById("login").style.display = "none";
 
@@ -92,6 +90,7 @@ function validateRegisterForm() {
     //phone number regex
     //check if ticket is checked
     if (!terms.checked) {
+        alert("Please accept our terms and conditions.");
         return false;
     }
 
@@ -106,6 +105,7 @@ function validateLoginForm() {
     const loginPassword = document.getElementById('login-input-pass');
 
     if (!loginEmail.value || !loginPassword.value) {
+        alert("Please...");
         return false;
     }
 
@@ -125,6 +125,7 @@ function validateNewPasswordForm() {
     }
 
     if (!current_password.value || !new_password.value || !confirm_new_password.value) {
+        alert("Please...");
         return false;
     }
 
@@ -136,7 +137,6 @@ function validateNewPasswordForm() {
 // Requests to server ----------
 
 function registerAccount() {
-
     const fname = document.getElementById('input-fname').value;
     const lname = document.getElementById('input-lname').value;
     const email = document.getElementById('input-email').value;
@@ -217,6 +217,7 @@ function performLogin() {
             .catch(error => {
                 console.error('Login failed:', error);
                 alert(error);
+                
             });
     }
 }
@@ -237,6 +238,7 @@ function signOut() {
         .catch(error => {
             // Handle error
             console.error('An error occured:', error);
+            
         });
 }
 
@@ -274,7 +276,7 @@ function changePassword() {
 
                 // Handle success ...
                 alert("New password is set! Please authenticate with the new password.");
-                //signOut()
+                signOut()
                 // ...
 
             })
@@ -282,6 +284,7 @@ function changePassword() {
                 console.error('An error occured:', error);
                 // Handle error ... 
                 alert("Something went wrong... " + error);
+                
                 // ...
             });
     }

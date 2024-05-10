@@ -67,7 +67,7 @@
                                     </div>
                                     <div class="panel-auth-container-register-form-contact-info-info-region">
                                         <label for="input-region">Select your region *</label>
-                                        <select name="input-region" id="input-region" required>
+                                        <select id="input-region">
                                             <option value="Norte">Norte</option>
                                             <option value="Centro">Centro</option>
                                             <option value="Lisboa e Vale do Tejo">Lisboa e Vale do Tejo</option>
@@ -80,12 +80,12 @@
                                 </div>
                                 <div class="panel-auth-container-register-form-contact-info-terms">
                                     <p>By clicking here, you <b>agree</b> to our terms of service and privacy policy *</p>
-                                    <input type="checkbox" name="input-terms" id="input-terms" required>
+                                    <input type="checkbox" id="input-terms" required>
                                 </div>
                             </div>
                         </div>
                         <div class="panel-auth-container-register-submit">
-                            <button onclick="registerAccount()">Register</button>
+                            <button type="button" onclick="registerAccount()">Register</button>
                         </div>
                         <div class="panel-auth-container-register-altlogin">
                             <p>Have an account?</p>
@@ -111,7 +111,7 @@
                             </div>
                         </div>
                         <div class="panel-auth-container-register-submit">
-                            <button onclick="performLogin()">Connect</button>
+                            <button type="button" onclick="performLogin()">Connect</button>
                         </div>
                         <div class="panel-auth-container-register-altlogin">
                             <p>Don't have an account?</p>

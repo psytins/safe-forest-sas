@@ -35,11 +35,11 @@ router.post('/account-regist', (req, res) => {
             else {
                 newRegist.save()
                     .then(savedEntry => {
-                        res.status(201).json(savedEntry);
+                        return res.status(201).json(savedEntry);
                     })
                     .catch(error => {
                         console.error('Error saving regist entry:', error);
-                        res.status(500).json({ error: 'Error saving regist entry' });
+                        return res.status(500).json({ error: 'Error saving regist entry' });
                     });
             }
         }
@@ -74,11 +74,11 @@ router.post('/account-authentication', (req, res) => {
                 const email = user.email;
                 const country = user.country;
                 const ref_code = user.reference_code;
-                res.json({ message: 'Login successful', userID, name, email, country, ref_code });
+                return res.json({ message: 'Login successful', userID, name, email, country, ref_code });
             })
             .catch(error => {
                 console.error('Error during login:', error);
-                res.status(500).json({ error: 'Error during login' });
+                return res.status(500).json({ error: 'Error during login' });
             });
     }
 });
@@ -86,7 +86,7 @@ router.post('/account-authentication', (req, res) => {
 // SignOUT
 router.post('/account-signout', (req, res) => {
     res.clearCookie('token');
-    res.json({ message: 'Sign out successful' });
+    return res.json({ message: 'Sign out successful' });
 });
 
 // UPDATE - change password
@@ -120,13 +120,13 @@ router.post('/account-change-password', (req, res) => {
                     // save the new password
                     user.password = new_password;
                     user.save();
-                    res.json({ message: 'Changed password.' });
+                    return res.json({ message: 'Changed password.' });
                 }
             }
         })
         .catch(error => {
             console.error('Error updating user entry:', error);
-            res.status(500).json({ error: 'Error updating user entry' });
+            return res.status(500).json({ error: 'Error updating user entry' });
         });
 });
 
