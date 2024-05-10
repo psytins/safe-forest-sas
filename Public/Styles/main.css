@@ -336,6 +336,249 @@ h1 {
     color: white;
 }
 
+/*################# ADD CAMERA MENU #################*/
+
+#add-camera-menu{
+    display: none; 
+    position: fixed;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    flex-direction: column;
+    height: fit-content;
+    width: 50%;
+    background-color: #CDCDCD;
+    z-index: 1000;
+    border: 1px black solid;
+}
+
+.add-camera-menu-cancel{
+    display: flex;
+    justify-content: end;
+    width: 100%;
+    z-index: 90;
+}
+
+.add-camera-menu-cancel img{
+    height: 100%;
+    background: none;
+    border: none;
+}
+
+.add-camera-menu-cancel img:hover{
+    cursor: pointer;
+    background-color: gray;
+}
+
+.add-camera-plans{
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    justify-content: space-evenly;
+}
+
+ .add-camera-plans-free{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 25%;
+    height: fit-content;
+    padding: 1%;
+}
+
+.add-camera-plans-free:hover{
+    background-color: gray;
+    cursor: pointer;
+}
+
+.add-camera-plans-free-title{
+    display: flex;
+    justify-content: center;
+}
+
+.add-camera-plans-free-price{
+    display: flex;
+    margin-top: 1%;
+    margin-left: 5%;
+}
+
+.add-camera-plans-free-description{
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    margin-left: 5%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    align-content: center;
+    height: 100%;
+}
+
+.add-camera-plans-free-checks{
+    display: flex;
+    height: 20%;
+    margin-left: 5%;
+    margin-top: 2%;
+    align-items: end;
+}
+
+ .add-camera-plans-standard{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 25%;
+    height: fit-content;
+    padding: 1%;
+}
+
+.add-camera-plans-standard:hover{
+    background-color: gray;
+    cursor: pointer;
+}
+
+.add-camera-plans-standard-title{
+    display: flex;
+    justify-content: center;
+}
+
+.add-camera-plans-standard-price{
+    display: flex;
+    margin-top: 1%;
+    margin-left: 5%;
+}
+
+.add-camera-plans-standard-description{
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    margin-left: 5%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    align-content: center;
+    height: 100%;
+}
+
+.add-camera-plans-standard-checks{
+    display: flex;
+    height: 20%;
+    margin-left: 5%;
+    margin-top: 2%;
+    align-items: end;
+}
+
+
+ .add-camera-plans-premium{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 25%;
+    height: fit-content;
+    padding: 1%;
+}
+
+.add-camera-plans-premium:hover{
+    background-color: gray;
+    cursor: pointer;
+}
+
+.add-camera-plans-premium-title{
+    display: flex;
+    justify-content: center;
+}
+
+.add-camera-plans-premium-price{
+    display: flex;
+    margin-top: 1%;
+    margin-left: 5%;
+}
+
+.add-camera-plans-premium-description{
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    margin-left: 5%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    align-content: center;
+    height: 100%;
+}
+
+.add-camera-plans-premium-checks{
+    display: flex;
+    height: 20%;
+    margin-left: 5%;
+    margin-top: 2%;
+    align-items: end;
+}
+
+.add-camera-menu-title{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    width: 100%;
+    z-index: 90;
+}
+
+.add-camera-menu-title h1{
+    margin-left: 3%;
+}
+
+.add-camera-menu-options{
+    display: flex;
+    width: 100%;
+    z-index: 900;
+    justify-content: space-between;
+}
+
+.add-camera-menu-options-left{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    z-index: 90;
+}
+
+.add-camera-menu-options-left p{
+    margin-left: 5%;
+}
+
+.add-camera-menu-options-left input{
+    margin-left: 5%;
+    margin-bottom: 2%;
+}
+
+.add-camera-menu-options-right{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    z-index: 90;
+    padding-right: 5%;
+}
+
+.add-camera-menu-options-right p{
+    margin-left: 5%;
+}
+
+.add-camera-menu-options-right input{
+    margin-left: 5%;
+    margin-bottom: 2%;
+}
+
+.add-camera-menu-button{
+    display: flex;
+    z-index: 90;
+    justify-content: end;
+    width: 100%;
+    padding: 2%;
+}
+
+.add-camera-menu-button button{
+    margin-right: 5%;
+    cursor: pointer;
+    padding: 10px 5%;
+}
+
+/*###################################################*/
+
 /*################# SOCIAL NETWORK #################*/
 .social-network {
     display: flex;
@@ -1225,6 +1468,7 @@ td {
     color: gray;
     font-size: small;
 }
+/*#######################################################*/
 
 /*################# END AUTHENTICATION PAGE #################*/
 /*#######################################################*/

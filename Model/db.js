@@ -5,6 +5,7 @@ const fs = require('fs');
 
 const db_table = process.env.DB_TABLE;
 
+
 const db_user = process.env.DB_USER //para mudar para mysql azure, descomentar
 //const db_user = process.env.DB_LOCAL_USER; //para mudar para local, descomentar
 
