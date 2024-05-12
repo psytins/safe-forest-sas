@@ -46,6 +46,20 @@ function selectPlan(plan){
 
 }
 
+function resetOtherRadioButtons(clickedButton, groupName) {
+    const radioButtons = document.querySelectorAll('input[type="radio"][name="' + groupName + '"]');
+    radioButtons.forEach(button => {
+        if (button !== clickedButton) {
+            button.checked = false;
+        }
+    });
+}
+
+function updateValue(val) {
+    var value = val/10
+    document.getElementById('scrollValue').innerText = value;
+}
+
 function showContainerAuthentication(id) {
 
     document.getElementById("register").style.display = "none";
