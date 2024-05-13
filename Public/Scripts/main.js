@@ -447,6 +447,40 @@ function registerCamera() {
             });
     }
 }
+
+function loadCameraList() {
+    fetch('/api/camera/list-cameras', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            const tbodyMyCameras = document.getElementById("dynamicListCamera-mycameras");
+            const tbodyDashboard = document.getElementById("dynamicListCamera-dashboard");
+            data.cameras.forEach(camera => {
+                var dynamicEntry =
+                    `
+                <tr>
+                    <td>#${camera.id}</td>
+                    <td>${camera.sensitivity}%</td>
+                    <td>${camera.camera_name}</td>
+                    <td>${camera.last_detected === null ? "N/A" : camera.last_detected}</td>
+                    <td>${camera.current_status === 1 ? "Online" : "Offline"}</td>
+                </tr>
+                `
+                tbodyMyCameras.innerHTML += dynamicEntry
+                tbodyDashboard.innerHTML += dynamicEntry
+            });
+        })
+        .catch(error => {
+            console.error('Camera Listing failed:', error);
+            alert(error);
+        });
+}
 // ------------------------------------------------
 
 // Event Listeners
@@ -472,6 +506,9 @@ function loadIndex() {
     document.getElementById("input-region").value = sessionStorage.getItem('country');
     document.getElementById("ref-code").placeholder = sessionStorage.getItem('refCode');;
     document.getElementById("application-version").innerText = VERSION;
+
+    // Load Camera List - My Camera
+    loadCameraList()
 }
 
 //First view - authentication - Load on authentication page

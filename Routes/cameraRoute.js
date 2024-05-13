@@ -47,6 +47,17 @@ router.post('/regist', (req, res) => {
     });
 });
 
+router.get('/list-cameras', (req, res) => {
+    Camera.findAll()
+        .then(cameras => {
+            return res.json({cameras});
+
+        })
+        .catch(error => {
+            console.error('Error during camera listing:', error);
+            return res.status(500).json({ error: 'Error during camera listing' });
+        });
+});
 
 // ...
 
