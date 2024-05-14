@@ -24,9 +24,6 @@ router.post('/regist', (req, res) => {
         public_ip_address: req.body.public_ip_address,
         input_method: req.body.input_method,
         current_status: req.body.current_status,
-        last_1_day: req.body.last_1_day,
-        last_7_days: req.body.last_7_days,
-        last_30_days: req.body.last_30_days,
     });
 
     // Validate Camera Register
@@ -47,8 +44,14 @@ router.post('/regist', (req, res) => {
     });
 });
 
-router.get('/list-cameras', (req, res) => {
-    Camera.findAll()
+router.post('/list-cameras', (req, res) => {
+    Camera.findAll(
+        {
+            where:{
+                user: req.body.userID
+            }
+        }
+    )
         .then(cameras => {
             return res.json({cameras});
 

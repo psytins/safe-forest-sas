@@ -386,9 +386,6 @@ function registerCamera() {
     const public_ip_address = document.getElementById("add-camera-public-ip").value;
     const input_method = "HTTPS-POST"; //temp
     const current_status = 1; //temp
-    const last_1_day = null; //temp
-    const last_7_days = null; //temp
-    const last_30_days = null; //temp
 
     if (validateRegisterCamera()) {
 
@@ -414,10 +411,7 @@ function registerCamera() {
                     camera_web_admin,
                     public_ip_address,
                     input_method,
-                    current_status,
-                    last_1_day,
-                    last_7_days,
-                    last_30_days
+                    current_status
                 }),
         })
             .then(response => { // data validation
@@ -449,11 +443,13 @@ function registerCamera() {
 }
 
 async function loadCameraList() {
+    const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
     const cameraList = await fetch('/api/camera/list-cameras', {
-        method: 'GET',
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-        }
+        },
+        body: JSON.stringify({ userID }),
     })
         .then(response => {
             return response.json();
@@ -511,8 +507,8 @@ function loadDashboardInformation(cameraList) {
     var onlineCamera = 0
     var offlineCamera = 0
 
-    var last24 = 10 //tmp
-    var last7 = 30 //tmp
+    var last24 = 2 //tmp
+    var last7 = 14 //tmp
     var last30 = 23 //tmp
 
     cameraList.forEach(camera => {
@@ -522,10 +518,6 @@ function loadDashboardInformation(cameraList) {
         else if (camera.current_status == 0) {
             offlineCamera++
         }
-
-        //last24 += camera.last_1_day
-        //last7 += camera.last_7_day
-        //last30 += camera.last_30_day    
     });
 
     activeCameras.innerText = onlineCamera

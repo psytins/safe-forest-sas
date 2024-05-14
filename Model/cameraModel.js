@@ -32,9 +32,6 @@ const Camera = sequelize.define('camera', {
     public_ip_address: Sequelize.STRING,
     input_method: Sequelize.INTEGER,
     current_status: Sequelize.INTEGER,
-    last_1_day: Sequelize.INTEGER,
-    last_7_days: Sequelize.INTEGER,
-    last_30_days: Sequelize.INTEGER,
     // -- must have in every table:
     createdAt: {
         type: Sequelize.DATE,
