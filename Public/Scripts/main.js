@@ -448,8 +448,8 @@ function registerCamera() {
     }
 }
 
-function loadCameraList() {
-    fetch('/api/camera/list-cameras', {
+async function loadCameraList() {
+    const cameraList = await fetch('/api/camera/list-cameras', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -472,14 +472,62 @@ function loadCameraList() {
                     <td>${camera.current_status === 1 ? "Online" : "Offline"}</td>
                 </tr>
                 `
-                tbodyMyCameras.innerHTML += dynamicEntry
-                tbodyDashboard.innerHTML += dynamicEntry
+                tbodyMyCameras.innerHTML += dynamicEntry;
+                tbodyDashboard.innerHTML += dynamicEntry;
             });
+
+            return data.cameras
         })
         .catch(error => {
             console.error('Camera Listing failed:', error);
             alert(error);
         });
+
+    return cameraList
+}
+
+function loadDashboardInformation(cameraList) {
+    const activeCameras = document.getElementById("active-cameras")
+    const totalCameras = document.getElementById("total-cameras")
+
+    const camerasOnline = document.getElementById("cameras-online")
+    const camerasOffline = document.getElementById("cameras-offline")
+
+    const last24Hours = document.getElementById("last-24-hours")
+    const last7Days = document.getElementById("last-7-days")
+    const last30Days = document.getElementById("last-30-days")
+
+    var total = cameraList.length
+    var onlineCamera = 0
+    var offlineCamera = 0
+
+    var last24 = 10 //tmp
+    var last7 = 30 //tmp
+    var last30 = 23 //tmp
+
+    cameraList.forEach(camera => {
+        if (camera.current_status == 1) {
+            onlineCamera++
+        }
+        else if (camera.current_status == 0) {
+            offlineCamera++
+        }
+
+        //last24 += camera.last_1_day
+        //last7 += camera.last_7_day
+        //last30 += camera.last_30_day    
+    });
+
+    activeCameras.innerText = onlineCamera
+    totalCameras.innerText = total
+
+    camerasOnline.innerText = onlineCamera
+    camerasOffline.innerText = offlineCamera
+
+    last24Hours.innerText = last24
+    last7Days.innerText = last7
+    last30Days.innerText = last30
+
 }
 // ------------------------------------------------
 
@@ -488,7 +536,7 @@ function loadCameraList() {
 // Initialize - Load Functions
 
 //First view - index - Load on authentication page
-function loadIndex() {
+async function loadIndex() {
     document.getElementById("mycameras").style.display = "none";
     document.getElementById("general").style.display = "none";
     document.getElementById("security").style.display = "none";
@@ -508,7 +556,8 @@ function loadIndex() {
     document.getElementById("application-version").innerText = VERSION;
 
     // Load Camera List - My Camera
-    loadCameraList()
+    const cameraList = await loadCameraList()
+    loadDashboardInformation(cameraList)
 }
 
 //First view - authentication - Load on authentication page

@@ -771,6 +771,7 @@ h2 {
 .panel-information-statistics-status-online-container-number {
     height: 30%;
     margin-left: 5%;
+    font-size: x-large;
 }
 
 .panel-information-statistics-status-online-container-label {
@@ -822,6 +823,7 @@ h2 {
 .panel-information-statistics-status-offline-container-number {
     height: 30%;
     margin-left: 5%;
+    font-size: x-large;
 }
 
 .panel-information-statistics-status-offline-container-cameras {
@@ -870,8 +872,9 @@ h2 {
 
 .panel-information-statistics-smoke-24-hours-number {
     display: flex;
+    justify-content: space-evenly;
     margin-left: 8%;
-    width: 95%;
+    width: 35%;
     height: 55%;
 }
 
@@ -896,8 +899,9 @@ h2 {
 
 .panel-information-statistics-smoke-7-days-number {
     display: flex;
+    justify-content: space-evenly;
     margin-left: 8%;
-    width: 95%;
+    width: 35%;
     height: 55%;
 }
 
@@ -919,8 +923,9 @@ h2 {
 
 .panel-information-statistics-smoke-30-days-number {
     display: flex;
+    justify-content: space-evenly;
     margin-left: 8%;
-    width: 95%;
+    width: 35%;
     height: 55%;
 }
 

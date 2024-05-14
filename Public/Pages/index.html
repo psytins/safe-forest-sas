@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SafeForest</title>
     <link rel="stylesheet" href="../Styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body onload="loadIndex()">
@@ -100,7 +101,7 @@
                         <h2 id="greetings"></h2>
                     </div>
                     <div class="header-greeting-bottom">
-                        <p>You are currently using 0 of your 0 cameras</p>
+                        <p>You are currently using&nbsp;<p id="active-cameras"></p>&nbsp;of your&nbsp;<p id="total-cameras"></p>&nbsp;cameras</p>
                     </div>
                 </div>
                 <div class="header-options">
@@ -209,7 +210,7 @@
                             <div class="panel-information-statistics-status-online">
                                 <div class="panel-information-statistics-status-online-container">
                                     <div class="panel-information-statistics-status-online-container-number">
-                                        <h1>0</h1>
+                                        <h1 id="cameras-online"></h1>
                                     </div>
                                     <div class="panel-information-statistics-status-online-container-label">
                                         <p>Cameras Online</p>
@@ -224,7 +225,7 @@
                             <div class="panel-information-statistics-status-offline">
                                 <div class="panel-information-statistics-status-offline-container">
                                     <div class="panel-information-statistics-status-offline-container-number">
-                                        <h1>0</h1>
+                                        <h1 id="cameras-offline"></h1>
                                     </div>
                                     <div class="panel-information-statistics-status-offline-container-label">
                                         <p>Cameras Offline</p>
@@ -244,7 +245,8 @@
                             <div class="panel-information-statistics-smoke-container">
                                 <div class="panel-information-statistics-smoke-24-hours">
                                     <div class="panel-information-statistics-smoke-24-hours-number">
-                                        <h1>0</h1>
+                                        <i class="fa fa-fire fa-2x" aria-hidden="true"></i>
+                                        <h1 id="last-24-hours"></h1>
                                     </div>
                                     <div class="panel-information-statistics-smoke-24-hours-label">
                                         <p>Last 24 Hours</p>
@@ -253,7 +255,8 @@
 
                                 <div class="panel-information-statistics-smoke-7-days">
                                     <div class="panel-information-statistics-smoke-7-days-number">
-                                        <h1>0</h1>
+                                        <i class="fa fa-fire fa-2x" aria-hidden="true"></i>
+                                        <h1 id="last-7-days"></h1>
                                     </div>
                                     <div class="panel-information-statistics-smoke-7-days-label">
                                         <p>Last 7 Days</p>
@@ -262,7 +265,8 @@
 
                                 <div class="panel-information-statistics-smoke-30-days">
                                     <div class="panel-information-statistics-smoke-30-days-number">
-                                        <h1>0</h1>
+                                        <i class="fa fa-fire fa-2x" aria-hidden="true"></i>
+                                        <h1 id="last-30-days"></h1>
                                     </div>
                                     <div class="panel-information-statistics-smoke-30-days-label">
                                         <p>Last 30 Days</p>
