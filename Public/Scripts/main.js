@@ -461,7 +461,16 @@ async function loadCameraList() {
         .then(data => {
             const tbodyMyCameras = document.getElementById("dynamicListCamera-mycameras");
             const tbodyDashboard = document.getElementById("dynamicListCamera-dashboard");
+            const tbodyLastDetect = document.getElementById("dynamicListCamera-dashboard-last-detection")
             data.cameras.forEach(camera => {
+                var dynamicEntryLD =
+                    `
+                <tr>
+                    <td>#${camera.id}</td>
+                    <td>${camera.camera_name}</td>
+                    <td>${camera.last_detected === null ? "N/A" : camera.last_detected}</td>
+                </tr>
+                `
                 var dynamicEntry =
                     `
                 <tr>
@@ -474,6 +483,7 @@ async function loadCameraList() {
                 `
                 tbodyMyCameras.innerHTML += dynamicEntry;
                 tbodyDashboard.innerHTML += dynamicEntry;
+                tbodyLastDetect.innerHTML += dynamicEntryLD;
             });
 
             return data.cameras
