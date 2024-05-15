@@ -7,12 +7,13 @@ const cookieParser = require('cookie-parser');
 const path = require('path');
 
 const app = express();
-const port = 8888;
+const port = 8080;
 
 //Import Internal Routes ------------
 //note: first go into internal route, then go into internal db model, then go into internal db connection
 //      to create the db connection.
 const authenticationRoute = require('./Routes/authenticationRoute');
+const cameraRoute = require('./Routes/cameraRoute');
 const verifyToken = require('./Secure/verifyToken');
 //...
 
@@ -31,6 +32,7 @@ app.use(cookieParser());
 
 //Internal application routes ------------
 app.use('/api/auth', authenticationRoute);
+app.use('/api/camera', cameraRoute);
 //...
 
 //Default route

@@ -17,7 +17,7 @@
                 <div class="logo-nav-logo">
                 </div>
                 <div class="logo-nav-hamburguer">
-                    <button id="logo-nav-hamburger-btn" onclick="clicked_menu()"></button>
+                    <button type="button" id="logo-nav-hamburger-btn" onclick="clicked_menu()"></button>
                 </div>
             </div>
 
@@ -26,7 +26,8 @@
                     <div class="menu-options-home-label">
                         <p>Home</p>
                     </div>
-                    <button href="#dashboard" onclick="showContainerIndex('dashboard')" class="menu-options-home-dashboard">
+                    <button type="button" onclick="showContainerIndex('dashboard')"
+                        class="menu-options-home-dashboard">
                         <div class="menu-options-home-dashboard-icon">
                             <img src="../Images/dashboard-logo.png">
                         </div>
@@ -34,7 +35,8 @@
                             <p>Dashboard</p>
                         </div>
                     </button>
-                    <button href="#mycameras" onclick="showContainerIndex('mycameras')" class="menu-options-home-camera">
+                    <button type="button" onclick="showContainerIndex('mycameras')"
+                        class="menu-options-home-camera">
                         <div class="menu-options-home-camera-icon">
                             <img src="../Images/camera-logo.png">
                         </div>
@@ -48,15 +50,17 @@
                     <div class="menu-options-settings-label">
                         <p>Settings</p>
                     </div>
-                    <button href="#general" onclick="showContainerIndex('general')" class="menu-options-settings-general">
+                    <button type="button" onclick="showContainerIndex('general')"
+                        class="menu-options-settings-general">
                         <div class="menu-options-settings-general-icon">
-                            <img src="../Images/general-logo.png">
+                            <img src="../Images/profile-logo.png">
                         </div>
                         <div class="menu-options-settings-general-text">
-                            <p>General</p>
+                            <p>Profile</p>
                         </div>
                     </button>
-                    <button href="#security" onclick="showContainerIndex('security')" class="menu-options-settings-security">
+                    <button type="button" onclick="showContainerIndex('security')"
+                        class="menu-options-settings-security">
                         <div class="menu-options-settings-security-icon">
                             <img src="../Images/security-logo.png">
                         </div>
@@ -64,7 +68,8 @@
                             <p>Security</p>
                         </div>
                     </button>
-                    <button href="#contacts" onclick="showContainerIndex('contacts')" class="menu-options-settings-alert">
+                    <button type="button" onclick="showContainerIndex('contacts')"
+                        class="menu-options-settings-alert">
                         <div class="menu-options-settings-alert-icon">
                             <img src="../Images/alert-logo.png">
                         </div>
@@ -100,7 +105,9 @@
                 </div>
                 <div class="header-options">
                     <div class="header-options-addcamera">
+
                         <button onclick=toggleCancelMenu()>Add Camera</button>
+
                     </div>
                     <div class="header-options-language">
                         <img src="../Images/language-logo.png">
@@ -108,7 +115,7 @@
                     <div class="header-options-notifications">
                         <img src="../Images/notification-logo.png">
                     </div>
-                    <button onclick="signOut()" class="header-options-leave">
+                    <button type="button" onclick="signOut()" class="header-options-leave">
                         <p>Leave</p>
                         <img src="../Images/logout-logo.png">
                     </button>
@@ -166,108 +173,34 @@
                         </div>
                     </div>
                 </div>
-                <div class="add-camera-options">                    
-                    <div class="add-camera-menu-inputs">
-                        <div class="add-camera-menu-inputs-left">
-                            <p>Friendly Name</p>
-                            <input>
-                            <p>Country</p>
-                            <input>
-                            <p>Brand and Model</p>
-                            <input>
-                            <p>Camera web Admin URL</p>
-                            <input>
-                        </div>
-                        <div class="add-camera-menu-inputs-right">
-                            <p>GPS Location</p>
-                            <input>
-                            <p>Site Name</p>
-                            <input>
-                            <p>Azimuth / Bearing</p>
-                            <input>
-                            <p>Camera Public IP Address</p>
-                            <input>
-                        </div>
-                    </div>
-
-                    <div class="add-camera-options-imageInput">
-                        <div class="add-camera-options-imageInput-title">
-                            <h3>Image Input Method</h3>
-                        </div>
-                        <div class="add-camera-options-imageInput-options">
-                            <input type="radio" name="image-input-option" value="post" id="post" onclick="resetOtherRadioButtons(this, 'image-input-option')">
-                            <label for="post">HTTPS Post</label>
-                            <p>Camera uploads images to LookOut</p>
-                            <input type="radio" name="image-input-option" value="get" id="get" onclick="resetOtherRadioButtons(this, 'image-input-option')">
-                            <label for="get">HTTPS Get</label>
-                            <p>LookOut downloads images from camera</p>
-                        </div>
-                    </div>
-
-                    <div class="add-camera-options-detection">
-                        <div class="add-camera-options-detection-title">
-                            <h3>Detection Sensitivity</h3>
-                        </div>
-                        <div class="add-camera-options-detection-options">
-                            <input type="radio" name="detection-option" value="high" id="high" onclick="resetOtherRadioButtons(this, 'detection-option')">
-                            <label for="high">High (70%)</label>
-                            <input type="radio" name="detection-option" value="standard" id="standard" onclick="resetOtherRadioButtons(this, 'detection-option')">
-                            <label for="standard">Standard (75%)</label>
-                            <input type="radio" name="detection-option" value="low" id="low" onclick="resetOtherRadioButtons(this, 'detection-option')">
-                            <label for="low">Low (80%)</label>
-                            <input type="radio" name="detection-option" value="custom" id="custom" onclick="resetOtherRadioButtons(this, 'detection-option')">
-                            <label for="custom">Custom</label>
-                        </div>
-                    </div>
-
-                    <div class="add-camera-options-detectionBoundary">
-                        <div class="add-camera-options-detectionBoundary-title">
-                            <h3>Detection Boundary Size Range</h3>
-                        </div>
-                        <div class="add-camera-options-detectionBoundary-values">
-                            <p>Boundary / Image Size</p>
-                            <input>
-                            <p> % to </p>
-                            <input>
-                            <p> %</p>
-                        </div>
-                    </div>
-
-                    <div class="add-camera-options-doublePositive">
-                        <div class="add-camera-options-doublePositive-title">
-                            <h3>Double Positive?</h3>
-                        </div> 
-                        
-                        <label class="switch">
-                            <input type="checkbox" id="togBtn">
-                            <div class="slider round"></div>
-                        </label>
-                    </div>
-
-                    <div class="add-camera-options-duplication">
-                        <div class="add-camera-options-duplication-title">
-                            <h3>De-duplication & Detection-to-live</h3>
-                        </div>
-                        <div class="add-camera-options-duplication-scrollbar">
-                            <p><span id="scrollValue">0</span> </p>
-                            <input type="range" id="scrollbar" min="0" max="60" value="0" step="10" oninput="updateValue(this.value)">
-                        </div>
-                    </div>
-
-                    <div class="add-camera-options-cameraDown">
-                        <div class="add-camera-options-cameraDown-title">
-                            <h3>Camera Down Status Email Alert</h3>
-                        </div> 
-                        
-                        <label class="switch">
-                            <input type="checkbox" id="togBtn">
-                            <div class="slider round"></div>
-                        </label>
-                    </div>
+                
+                <div class="add-camera-menu-title">
+                    <h1>Add Camera</h1>
 
                 </div>
+                <div class="add-camera-menu-options">
+                    <div class="add-camera-menu-options-left">
+                        <label for="add-camera-camera-name">Friendly Name*</label>
+                        <input type="text" id="add-camera-camera-name" placeholder="Friendly Name" required>
+                        <label for="add-camera-country">Country*</label>
+                        <input type="text" id="add-camera-country" placeholder="Select Country" required>
+                        <label for="add-camera-brand-model">Brand & Model</label>
+                        <input type="text" id="add-camera-brand-model" placeholder="Brand & Model">
+                        <label for="add-camera-admin-url">Camera Web Admin URL</label>
+                        <input type="text" id="add-camera-admin-url" placeholder="https://">
+                    </div>
+                    <div class="add-camera-menu-options-right">
+                        <label for="add-camera-location">GPS Location*</label>
+                        <input type="text" id="add-camera-location" placeholder="GPS Location">
+                        <label for="add-camera-site-url">Site Name</label>
+                        <input type="text" id="add-camera-site-url" placeholder="Site Name">
+                        <label for="add-camera-azimuth-bearing">Azimuth / Bearing</label>
+                        <input type="text" id="add-camera-azimuth-bearing" value="0">
+                        <label for="add-camera-public-ip">Camera Public IP Address</label>
+                        <input type="text" id="add-camera-public-ip" placeholder="Camera Public IP Address">
+                    </div>
+                </div>
                 <div class="add-camera-menu-button">
-                    <button onclick=toggleCancelMenu()>Cancel</button>
                     <button>Add Camera</button>
                 </div>
             </div>
@@ -285,7 +218,7 @@
                                         <p>Cameras Online</p>
                                     </div>
                                     <div class="panel-information-statistics-status-online-container-cameras">
-                                        <button
+                                        <button type="button"
                                             class="panel-information-statistics-status-online-container-cameras-btn">My
                                             Cameras ></button>
                                     </div>
@@ -300,7 +233,7 @@
                                         <p>Cameras Offline</p>
                                     </div>
                                     <div class="panel-information-statistics-status-offline-container-cameras">
-                                        <button
+                                        <button type="button"
                                             class="panel-information-statistics-status-offline-container-cameras-btn">My
                                             Cameras ></button>
                                     </div>
@@ -423,7 +356,8 @@
                                 <h1>My Cameras</h1>
                             </div>
                             <div class="panel-camera-container-top-search">
-                                <input id="searchInput" onkeyup="searchTable('searchInput', 'searchDashboard')" type="text" name="camera-search" placeholder="Search camera">
+                                <input id="searchInput" onkeyup="searchTable('searchInput', 'searchDashboard')"
+                                    type="text" name="camera-search" placeholder="Search camera">
                             </div>
                         </div>
                         <div class="panel-camera-container-table">
@@ -479,6 +413,42 @@
                                             <td>2024-04-19 11:20:33</td>
                                             <td>N/A</td>
                                         </tr>
+                                        <tr>
+                                            <td>78%</td>
+                                            <td><a href="#">CamX-6000</a></td>
+                                            <td>2024-04-19 11:20:33</td>
+                                            <td>N/A</td>
+                                        </tr>
+                                        <tr>
+                                            <td>78%</td>
+                                            <td><a href="#">CamX-6000</a></td>
+                                            <td>2024-04-19 11:20:33</td>
+                                            <td>N/A</td>
+                                        </tr>
+                                        <tr>
+                                            <td>78%</td>
+                                            <td><a href="#">CamX-6000</a></td>
+                                            <td>2024-04-19 11:20:33</td>
+                                            <td>N/A</td>
+                                        </tr>
+                                        <tr>
+                                            <td>78%</td>
+                                            <td><a href="#">CamX-6000</a></td>
+                                            <td>2024-04-19 11:20:33</td>
+                                            <td>N/A</td>
+                                        </tr>
+                                        <tr>
+                                            <td>78%</td>
+                                            <td><a href="#">CamX-6000</a></td>
+                                            <td>2024-04-19 11:20:33</td>
+                                            <td>N/A</td>
+                                        </tr>
+                                        <tr>
+                                            <td>78%</td>
+                                            <td><a href="#">CamX-6000</a></td>
+                                            <td>2024-04-19 11:20:33</td>
+                                            <td>N/A</td>
+                                        </tr>
                                         <!-- Repeat this pattern for all rows of your data -->
                                     </tbody>
                                 </table>
@@ -496,7 +466,9 @@
                                 <h1>My Cameras</h1>
                             </div>
                             <div class="panel-camera-container-top-search">
-                                <input type="text" id="searchInputMyCameras" onkeyup="searchTable('searchInputMyCameras', 'searchMyCameras')" name="camera-search" placeholder="Search camera">
+                                <input type="text" id="searchInputMyCameras"
+                                    onkeyup="searchTable('searchInputMyCameras', 'searchMyCameras')"
+                                    name="camera-search" placeholder="Search camera">
                             </div>
                         </div>
                         <div class="panel-mycamera-container-table">
@@ -562,12 +534,50 @@
             </div>
 
             <div class="panel" id="general">
-                <div class="coming-soon">
-                    <div class="coming-soon-header">
-                        <h1>Coming Soon!</h1>
+                <div class="panel-general-account">
+                    <div class="panel-general-account-title">
+                        <h1>Personal Profile</h1>
                     </div>
-                    <div class="coming-soon-icon">
-                        <img src="../Images/construction-icon.png" alt="construction">
+                    <div class="panel-general-account-inputs">
+                        <div class="panel-general-account-inputs-names">
+                            <div class="panel-general-account-names-firstname">
+                                <label for="fname">First Name</label>
+                                <input type="text" id="fname" name="firstname">
+                            </div>
+                            <div class="panel-general-account-names-lastname">
+                                <label for="lname">Last Name</label>
+                                <input type="text" id="lname" name="lastname">
+                            </div>
+                        </div>
+                        <div class="panel-general-account-email">
+                            <label for="email">Email</label>
+                            <input type="text" id="email" name="email">
+                        </div>
+                        <div class="panel-general-account-country">
+                            <label for="input-region">Country / Region</label>
+                            <select name="input-region" id="input-region">
+                                <option value="Norte">Norte</option>
+                                <option value="Centro">Centro</option>
+                                <option value="Lisboa e Vale do Tejo">Lisboa e Vale do Tejo</option>
+                                <option value="Alentejo">Alentejo</option>
+                                <option value="Algarve">Algarve</option>
+                                <option value="Região Autónoma dos Açores">Região Autónoma dos Açores</option>
+                                <option value="Região Autónoma da Madeira">Região Autónoma da Madeira</option>
+                            </select>
+                        </div>
+                        <div class="panel-general-account-reference-code">
+                            <label for="ref-code">Reference Code</label>
+                            <input type="text" id="ref-code" name="reference-code">
+                        </div>
+                        <div class="panel-general-account-upload-logo">
+                            <label for="uplogo">Upload Logo (.png)</label>
+                            <div class="file-input-wrapper">
+                                <input type="file" id="uplogo" name="upload-logo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-general-account-button">
+                        <button type="button">Save Changes</button>
                     </div>
                 </div>
             </div>
@@ -576,26 +586,27 @@
                 <div class="panel-security">
                     <div class="panel-security-information">
                         <div class="panel-security-information-label">
-                            <h1>Security And Login</h1>
+
+                            <h1>Security and Login</h1>
                         </div>
-                        <div class="panel-security-information-form">
+                        <form class="panel-security-information-form">
                             <div class="panel-security-information-current-password">
                                 <p>Current Password</p>
-                                <input id="input-current-password">
+                                <input type="password" id="input-current-password" required>
                             </div>
                             <div class="panel-security-information-new-password">
                                 <p>New Password</p>
-                                <input id="input-new-password">
+                                <input type="password" id="input-new-password" required>
                             </div>
 
                             <div class="panel-security-information-confirm-password">
                                 <p>Confirm New Password</p>
-                                <input id="input-confirm-password">
+                                <input type="password" id="input-confirm-password" required>
                             </div>
                             <div class="panel-security-information-change">
-                                <button>Change</button>
+                                <button type="button" onclick="changePassword()">Change</button>
                             </div>
-                        </div>
+                        </form>
                     </div>
                     <div class="panel-security-danger">
                         <div class="panel-security-danger-label">
@@ -610,7 +621,7 @@
                                     <p>Delete your account and account data</p>
                                 </div>
                                 <div class="panel-security-danger-delete-account-button">
-                                    <button>Delete Account</button>
+                                    <button type="button" onclick="deleteAccount()" >Delete Account</button>
                                 </div>
                             </div>
                         </div>
@@ -632,7 +643,7 @@
             <div class="footer">
                 <div class="footer-info">
                     <div class="footer-info-top">
-                        <p>Leitek | UAL @ Academic Project</p>
+                        <p>Leitek | UAL @ Academic Project | build <label id="application-version"></label></p>
                     </div>
                     <div class="footer-info-bottom">
                         <p>Gonçalo Vidal | João Paulo | Duarte Rodrigues | João Calisto</p>
@@ -662,6 +673,7 @@
 
     <script src="../Scripts/dashboard.js"></script>
     <script src="../Scripts/main.js"></script>
+    <script src="../Scripts/generalSettings.js"></script>
 
 </body>
 
