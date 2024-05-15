@@ -629,12 +629,9 @@ input:checked + .slider:after{
     z-index: 90;
 }
 
-<<<<<<< HEAD
-=======
 .add-camera-menu-options-left label{
     margin-left: 5%;
 }
->>>>>>> 2e74f3f7eb9481c7e9a0440c5b970aa989de7cf8
 
 .add-camera-menu-inputs-left input{
     margin-bottom: 2%;
