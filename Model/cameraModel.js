@@ -1,16 +1,16 @@
-// Schema for Authentication Model
+// Schema for Camera Model
 const { Sequelize } = require('sequelize');
 
 const sequelize = require('../Model/db'); // get MySQL connection
 
 // Define a model - must be equal to mysql schema! 
 const Camera = sequelize.define('camera', {
-    id: {
+    cameraID: {
         type: Sequelize.INTEGER,
         allowNull: false, unique: true,
         primaryKey: true, autoIncrement: true
     },
-    user: { // FK for user
+    user_id: { // FK for user
         type: Sequelize.INTEGER,
         allowNull: false, unique: true
     },

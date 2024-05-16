@@ -442,6 +442,45 @@ function registerCamera() {
     }
 }
 
+async function loadLastDetectionList() {
+    const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
+    const lastDetectionList = await fetch('/api/camera/list-last-detection', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userID }),
+    })
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            const tbodyLastDetect = document.getElementById("dynamicListCamera-dashboard-last-detection")
+            data.detections.forEach(detection => {
+                var dynamicEntryLD =
+                    `
+                <tr>
+                    <td>#${detection.detectionID}</td>
+                    <td>${detection.camera.camera_name}</td>
+                    <td>${detection.description === null ? "N/A" : detection.description}</td>
+                    <td>${detection.time}</td>
+                    <td>${detection.createdAt}</td>
+                </tr>
+                `
+                tbodyLastDetect.innerHTML += dynamicEntryLD;
+            });
+
+            return data.detections;
+        })
+        .catch(error => {
+            console.error('Last Detect Listing failed:', error);
+            alert(error);
+        });
+
+    return lastDetectionList;
+}
+
+
 async function loadCameraList() {
     const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
     const cameraList = await fetch('/api/camera/list-cameras', {
@@ -457,20 +496,11 @@ async function loadCameraList() {
         .then(data => {
             const tbodyMyCameras = document.getElementById("dynamicListCamera-mycameras");
             const tbodyDashboard = document.getElementById("dynamicListCamera-dashboard");
-            const tbodyLastDetect = document.getElementById("dynamicListCamera-dashboard-last-detection")
             data.cameras.forEach(camera => {
-                var dynamicEntryLD =
-                    `
-                <tr>
-                    <td>#${camera.id}</td>
-                    <td>${camera.camera_name}</td>
-                    <td>${camera.last_detected === null ? "N/A" : camera.last_detected}</td>
-                </tr>
-                `
                 var dynamicEntry =
                     `
                 <tr>
-                    <td>#${camera.id}</td>
+                    <td>#${camera.cameraID}</td>
                     <td>${camera.sensitivity}%</td>
                     <td>${camera.camera_name}</td>
                     <td>${camera.last_detected === null ? "N/A" : camera.last_detected}</td>
@@ -479,17 +509,16 @@ async function loadCameraList() {
                 `
                 tbodyMyCameras.innerHTML += dynamicEntry;
                 tbodyDashboard.innerHTML += dynamicEntry;
-                tbodyLastDetect.innerHTML += dynamicEntryLD;
             });
 
-            return data.cameras
+            return data.cameras;
         })
         .catch(error => {
             console.error('Camera Listing failed:', error);
             alert(error);
         });
 
-    return cameraList
+    return cameraList;
 }
 
 function loadDashboardInformation(cameraList) {
@@ -559,6 +588,8 @@ async function loadIndex() {
 
     // Load Camera List - My Camera
     const cameraList = await loadCameraList()
+    const lastDetectionList = await loadLastDetectionList()
+    console.log(lastDetectionList)
     loadDashboardInformation(cameraList)
 }
 

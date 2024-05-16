@@ -1,23 +1,24 @@
-// Schema for Authentication Model
+// Schema for Detection Model
 const { Sequelize } = require('sequelize');
 
 const sequelize = require('../Model/db'); // get MySQL connection
 
 // Define a model - must be equal to mysql schema! 
-const User = sequelize.define('user', {
-    userID: {
+const Detection = sequelize.define('detection', {
+    detectionID: {
         type: Sequelize.INTEGER,
         allowNull: false, unique: true,
         primaryKey: true, autoIncrement: true
     },
-    first_name: Sequelize.STRING,
-    last_name: Sequelize.STRING,
-    password: Sequelize.STRING,
-    email: Sequelize.STRING,
-    phone: Sequelize.STRING,
-    country: Sequelize.STRING,
-    reference_code: Sequelize.STRING,
-    logo: Sequelize.STRING, //temp string
+    camera_id: { // FK for camera
+        type: Sequelize.INTEGER,
+        allowNull: false, unique: true
+    },
+    description: Sequelize.STRING,
+    time: {
+        type: Sequelize.TIME,
+        allowNull: false
+    },
     // -- must have in every table:
     createdAt: {
         type: Sequelize.DATE,
@@ -28,11 +29,11 @@ const User = sequelize.define('user', {
         allowNull: false
     }
 }, {
-    tableName: 'user'
+    tableName: 'detection'
 },
 );
 
 //Sync the model with the database
 sequelize.sync();
 
-module.exports = User;
+module.exports = Detection;

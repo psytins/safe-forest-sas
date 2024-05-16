@@ -4,11 +4,12 @@ const router = express.Router();
 //const bcrypt = require('bcrypt');
 //DB Model for authentication
 const Camera = require('../Model/cameraModel');
+const Detection = require('../Model/detectionModel');
 
 // CREATE - register
 router.post('/regist', (req, res) => {
     const newRegist = new Camera({
-        user: req.body.userID,
+        user_id: req.body.userID,
         camera_name: req.body.camera_name,
         friendly_name: req.body.friendly_name,
         sensitivity: req.body.sensitivity,
@@ -47,13 +48,13 @@ router.post('/regist', (req, res) => {
 router.post('/list-cameras', (req, res) => {
     Camera.findAll(
         {
-            where:{
-                user: req.body.userID
+            where: {
+                user_id: req.body.userID
             }
         }
     )
         .then(cameras => {
-            return res.json({cameras});
+            return res.json({ cameras });
 
         })
         .catch(error => {
@@ -62,6 +63,37 @@ router.post('/list-cameras', (req, res) => {
         });
 });
 
+router.post('/list-last-detection', (req, res) => {
+    Camera.hasMany(Detection, {
+        foreignKey: 'camera_id',
+        sourceKey: 'cameraID'
+    });
+    Detection.belongsTo(Camera, {
+        foreignKey: 'camera_id',
+        targetKey: 'cameraID'
+    });
+    Detection.findAll(
+        {
+            include: [{
+                model: Camera,
+                where: { user_id: req.body.userID },
+                required: true,
+            }]
+        }
+    )
+        .then(detections => {
+            return res.json({ detections });
+
+        })
+        .catch(error => {
+            console.error('Error during detection listing:', error);
+            return res.status(500).json({ error: 'Error during detection listing' });
+        });
+});
+
+
 // ...
+
+
 
 module.exports = router;
