@@ -69,7 +69,7 @@ router.post('/account-authentication', (req, res) => {
                 res.cookie('token', authToken, { httpOnly: true });
                 // ---
 
-                const userID = user.id;
+                const userID = user.userID;
                 const name = user.first_name + " " + user.last_name;
                 const email = user.email;
                 const country = user.country;
@@ -92,7 +92,7 @@ router.post('/account-signout', (req, res) => {
 // UPDATE - change password
 router.post('/account-change-password', (req, res) => {
     const searchUser = new User({
-        id: req.body.userID,
+        userID: req.body.userID,
     });
 
     current_password = req.body.current_password;
@@ -104,7 +104,7 @@ router.post('/account-change-password', (req, res) => {
         return res.status(401).json({ error: 'Please fill all required fields.' });
     }
 
-    User.findOne({ where: { id: searchUser.id } })
+    User.findOne({ where: { userID: searchUser.userID } })
         .then(user => {
             if (!user) {
                 return res.status(404).json({ error: 'User not found' });
@@ -130,6 +130,20 @@ router.post('/account-change-password', (req, res) => {
         });
 });
 
-//DELETE
+//DELETE ACCOUNT
+router.post('/account-delete', (req, res) => {
+    const searchUser = new User({
+        userID: req.body.userID,
+    });
+
+    User.destroy({ where: { userID: searchUser.userID } })
+        .then(rowsDestroyed => {
+            res.json({ message: `Deleted ${rowsDestroyed} row(s).` });
+        })
+        .catch(error => {
+            console.error('Error deleting user:', error);
+            return res.status(500).json({ error: 'Error deleting user' });
+        });
+});
 
 module.exports = router;

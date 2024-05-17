@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SafeForest</title>
     <link rel="stylesheet" href="../Styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body onload="loadIndex()">
@@ -100,12 +101,14 @@
                         <h2 id="greetings"></h2>
                     </div>
                     <div class="header-greeting-bottom">
-                        <p>You are currently using 0 of your 0 cameras</p>
+                        <p>You are currently using&nbsp;<p id="active-cameras"></p>&nbsp;of your&nbsp;<p id="total-cameras"></p>&nbsp;cameras</p>
                     </div>
                 </div>
                 <div class="header-options">
                     <div class="header-options-addcamera">
-                        <button type="button">Add Camera</button>
+
+                        <button onclick=toggleCancelMenu()>Add Camera</button>
+
                     </div>
                     <div class="header-options-language">
                         <img src="../Images/language-logo.png">
@@ -120,6 +123,86 @@
                 </div>
             </div>
 
+            <div class="panel"  id="add-camera-menu">
+                <div class="add-camera-menu-cancel">
+                    <img onclick=toggleCancelMenu() src="../Images/cancel-logo.png">
+                </div>
+                <div class="add-camera-plans">
+                    <div id="free" class="add-camera-plans-free" onclick="selectPlan(this.id)">
+                        <div class="add-camera-plans-free-title">
+                            <h4>Free Plan</h4>
+                        </div>
+                        <div class="add-camera-plans-free-price">
+                            <h4>Free</h4>
+                        </div>
+                        <div class="add-camera-plans-free-description">
+                            <p>No Credit Card Required</p>
+                        </div>
+                        <div class="add-camera-plans-free-checks">
+                            <p>10-min checks</p>
+                        </div>
+                    </div>
+                    <div id = "standard" class="add-camera-plans-standard" onclick="selectPlan(this.id)">
+                        <div class="add-camera-plans-standard-title">
+                            <h4>Standard Plan</h4>
+                        </div>
+                        <div class="add-camera-plans-standard-price">
+                            <h4>49 € /month</h4>
+                        </div>
+                        <div class="add-camera-plans-standard-description">
+                            <p>Per fixed camera or present position</p>
+                        </div>
+                        <div class="add-camera-plans-standard-checks">
+                            <p>1-min checks</p>
+                        </div>
+                    </div>
+                    <div id ="premium" class="add-camera-plans-premium" onclick="selectPlan(this.id)">
+                        <div class="add-camera-plans-premium-title">
+                            <h4>Premium Plan</h4>
+                        </div>
+                        <div class="add-camera-plans-premium-price">
+                            <h4>99 € /month</h4>
+                        </div>
+                        <div class="add-camera-plans-premium-description">
+                            <p>Per fixed camera or present position</p>
+                        </div>
+                        <div class="add-camera-plans-premium-checks">
+                            <p>30-second checks</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="add-camera-menu-title">
+                    <h1>Add Camera</h1>
+
+                </div>
+                <div class="add-camera-menu-options">
+                    <div class="add-camera-menu-options-left">
+                        <label for="add-camera-friendly-name">Friendly Name*</label>
+                        <input type="text" id="add-camera-friendly-name" placeholder="Friendly Name" required>
+                        <label for="add-camera-country">Country*</label>
+                        <input type="text" id="add-camera-country" placeholder="Select Country" required>
+                        <label for="add-camera-brand-model">Brand & Model</label>
+                        <input type="text" id="add-camera-brand-model" placeholder="Brand & Model">
+                        <label for="add-camera-admin-url">Camera Web Admin URL</label>
+                        <input type="text" id="add-camera-admin-url" placeholder="https://">
+                    </div>
+                    <div class="add-camera-menu-options-right">
+                        <label for="add-camera-location">GPS Location*</label>
+                        <input type="text" id="add-camera-location" placeholder="GPS Location">
+                        <label for="add-camera-site-name">Site Name</label>
+                        <input type="text" id="add-camera-site-name" placeholder="Site Name">
+                        <label for="add-camera-azimuth-bearing">Azimuth / Bearing</label>
+                        <input type="text" id="add-camera-azimuth-bearing" value="0">
+                        <label for="add-camera-public-ip">Camera Public IP Address</label>
+                        <input type="text" id="add-camera-public-ip" placeholder="Camera Public IP Address">
+                    </div>
+                </div>
+                <div class="add-camera-menu-button">
+                    <button type="button" onclick="registerCamera()">Add Camera</button>
+                </div>
+            </div>
+
             <div class="panel" id="dashboard">
                 <div class="panel-information">
                     <div class="panel-information-statistics">
@@ -127,7 +210,7 @@
                             <div class="panel-information-statistics-status-online">
                                 <div class="panel-information-statistics-status-online-container">
                                     <div class="panel-information-statistics-status-online-container-number">
-                                        <h1>0</h1>
+                                        <h1 id="cameras-online"></h1>
                                     </div>
                                     <div class="panel-information-statistics-status-online-container-label">
                                         <p>Cameras Online</p>
@@ -142,7 +225,7 @@
                             <div class="panel-information-statistics-status-offline">
                                 <div class="panel-information-statistics-status-offline-container">
                                     <div class="panel-information-statistics-status-offline-container-number">
-                                        <h1>0</h1>
+                                        <h1 id="cameras-offline"></h1>
                                     </div>
                                     <div class="panel-information-statistics-status-offline-container-label">
                                         <p>Cameras Offline</p>
@@ -162,7 +245,8 @@
                             <div class="panel-information-statistics-smoke-container">
                                 <div class="panel-information-statistics-smoke-24-hours">
                                     <div class="panel-information-statistics-smoke-24-hours-number">
-                                        <h1>0</h1>
+                                        <i class="fa fa-fire fa-2x" aria-hidden="true"></i>
+                                        <h1 id="last-24-hours"></h1>
                                     </div>
                                     <div class="panel-information-statistics-smoke-24-hours-label">
                                         <p>Last 24 Hours</p>
@@ -171,7 +255,8 @@
 
                                 <div class="panel-information-statistics-smoke-7-days">
                                     <div class="panel-information-statistics-smoke-7-days-number">
-                                        <h1>0</h1>
+                                        <i class="fa fa-fire fa-2x" aria-hidden="true"></i>
+                                        <h1 id="last-7-days"></h1>
                                     </div>
                                     <div class="panel-information-statistics-smoke-7-days-label">
                                         <p>Last 7 Days</p>
@@ -180,7 +265,8 @@
 
                                 <div class="panel-information-statistics-smoke-30-days">
                                     <div class="panel-information-statistics-smoke-30-days-number">
-                                        <h1>0</h1>
+                                        <i class="fa fa-fire fa-2x" aria-hidden="true"></i>
+                                        <h1 id="last-30-days"></h1>
                                     </div>
                                     <div class="panel-information-statistics-smoke-30-days-label">
                                         <p>Last 30 Days</p>
@@ -198,65 +284,19 @@
                                 <table cellpadding="0" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Camera</th>
-                                            <th>Last Detected</th>
+                                            <th>Detection ID</th>
+                                            <th>Camera Name</th>
+                                            <th>Description</th>
+                                            <th>Detection Time</th>
+                                            <th>Detection Date</th>
                                         </tr>
                                     </thead>
                                 </table>
                             </div>
                             <div class="tbl-content">
                                 <table cellpadding="0" cellspacing="0">
-                                    <tbody>
-                                        <!-- Paste your data here -->
-                                        <tr>
-                                            <td><a href="#">CamX-2000</a></td>
-                                            <td>2024-04-15 08:45:12</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">CamX-3000</a></td>
-                                            <td>2024-04-16 14:22:55</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">CamX-1000</a></td>
-                                            <td>2024-04-17 10:11:36</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">CamX-4000</a></td>
-                                            <td>2024-04-18 09:30:48</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">CamX-5000</a></td>
-                                            <td>2024-04-18 15:55:21</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">CamX-6000</a></td>
-                                            <td>2024-04-19 11:20:33</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">CamX-7000</a></td>
-                                            <td>2024-04-20 16:44:45</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">CamX-8000</a></td>
-                                            <td>2024-04-21 08:15:57</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">CamX-9000</a></td>
-                                            <td>2024-04-22 13:38:09</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">CamX-10000</a></td>
-                                            <td>2024-04-23 10:09:21</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">CamX-11000</a></td>
-                                            <td>2024-04-24 15:32:33</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">CamX-12000</a></td>
-                                            <td>2024-04-25 12:03:45</td>
-                                        </tr>
-                                        <!-- Repeat this pattern for all rows of your data -->
+                                    <tbody id="dynamicListCamera-dashboard-last-detection">
+                                        <!-- Dynamic data here -->
                                     </tbody>
                                 </table>
                             </div> <!-- End Table Here -->
@@ -280,91 +320,19 @@
                                 <table cellpadding="0" cellspacing="0">
                                     <thead>
                                         <tr>
+                                            <th>Camera ID</th>
                                             <th>Sensitivity</th>
-                                            <th>Camera</th>
+                                            <th>Camera Name</th>
                                             <th>Last Detected</th>
-                                            <th>30 Day Status</th>
+                                            <th>Current Status</th>
                                         </tr>
                                     </thead>
                                 </table>
                             </div>
                             <div class="tbl-content-large" id="searchDashboard">
                                 <table cellpadding="0" cellspacing="0">
-                                    <tbody>
-                                        <!-- Paste your data here -->
-                                        <tr>
-                                            <td>70%</td>
-                                            <td><a href="#">CamX-2000</a></td>
-                                            <td>2024-04-15 08:45:12</td>
-                                            <td>N/A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>75%</td>
-                                            <td><a href="#">CamX-3000</a></td>
-                                            <td>2024-04-16 14:22:55</td>
-                                            <td>N/A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>80%</td>
-                                            <td><a href="#">CamX-1000</a></td>
-                                            <td>2024-04-17 10:11:36</td>
-                                            <td>N/A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>65%</td>
-                                            <td><a href="#">CamX-4000</a></td>
-                                            <td>2024-04-18 09:30:48</td>
-                                            <td>N/A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>72%</td>
-                                            <td><a href="#">CamX-5000</a></td>
-                                            <td>2024-04-18 15:55:21</td>
-                                            <td>N/A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>78%</td>
-                                            <td><a href="#">CamX-6000</a></td>
-                                            <td>2024-04-19 11:20:33</td>
-                                            <td>N/A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>78%</td>
-                                            <td><a href="#">CamX-6000</a></td>
-                                            <td>2024-04-19 11:20:33</td>
-                                            <td>N/A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>78%</td>
-                                            <td><a href="#">CamX-6000</a></td>
-                                            <td>2024-04-19 11:20:33</td>
-                                            <td>N/A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>78%</td>
-                                            <td><a href="#">CamX-6000</a></td>
-                                            <td>2024-04-19 11:20:33</td>
-                                            <td>N/A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>78%</td>
-                                            <td><a href="#">CamX-6000</a></td>
-                                            <td>2024-04-19 11:20:33</td>
-                                            <td>N/A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>78%</td>
-                                            <td><a href="#">CamX-6000</a></td>
-                                            <td>2024-04-19 11:20:33</td>
-                                            <td>N/A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>78%</td>
-                                            <td><a href="#">CamX-6000</a></td>
-                                            <td>2024-04-19 11:20:33</td>
-                                            <td>N/A</td>
-                                        </tr>
-                                        <!-- Repeat this pattern for all rows of your data -->
+                                    <tbody id="dynamicListCamera-dashboard">
+                                        <!-- Dynamic data here -->
                                     </tbody>
                                 </table>
                             </div> <!-- End Table Here -->
@@ -391,55 +359,19 @@
                                 <table cellpadding="0" cellspacing="0">
                                     <thead>
                                         <tr>
+                                            <th>Camera ID</th>
                                             <th>Sensitivity</th>
-                                            <th>Camera</th>
+                                            <th>Camera Name</th>
                                             <th>Last Detected</th>
-                                            <th>30 Day Status</th>
+                                            <th>Current Status</th>
                                         </tr>
                                     </thead>
                                 </table>
                             </div>
                             <div class="tbl-content-large" id="searchMyCameras">
                                 <table cellpadding="0" cellspacing="0">
-                                    <tbody>
-                                        <!-- Paste your data here -->
-                                        <tr>
-                                            <td>70%</td>
-                                            <td><a href="#">CamX-2000</a></td>
-                                            <td>2024-04-15 08:45:12</td>
-                                            <td>N/A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>75%</td>
-                                            <td><a href="#">CamX-3000</a></td>
-                                            <td>2024-04-16 14:22:55</td>
-                                            <td>N/A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>80%</td>
-                                            <td><a href="#">CamX-1000</a></td>
-                                            <td>2024-04-17 10:11:36</td>
-                                            <td>N/A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>65%</td>
-                                            <td><a href="#">CamX-4000</a></td>
-                                            <td>2024-04-18 09:30:48</td>
-                                            <td>N/A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>72%</td>
-                                            <td><a href="#">CamX-5000</a></td>
-                                            <td>2024-04-18 15:55:21</td>
-                                            <td>N/A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>78%</td>
-                                            <td><a href="#">CamX-6000</a></td>
-                                            <td>2024-04-19 11:20:33</td>
-                                            <td>N/A</td>
-                                        </tr>
-                                        <!-- Repeat this pattern for all rows of your data -->
+                                    <tbody id="dynamicListCamera-mycameras">
+                                        <!-- Dynamic data here -->
                                     </tbody>
                                 </table>
                             </div> <!-- End Table Here -->
@@ -501,21 +433,22 @@
                 <div class="panel-security">
                     <div class="panel-security-information">
                         <div class="panel-security-information-label">
+
                             <h1>Security and Login</h1>
                         </div>
                         <form class="panel-security-information-form">
                             <div class="panel-security-information-current-password">
                                 <p>Current Password</p>
-                                <input id="input-current-password" required>
+                                <input type="password" id="input-current-password" required>
                             </div>
                             <div class="panel-security-information-new-password">
                                 <p>New Password</p>
-                                <input id="input-new-password" required>
+                                <input type="password" id="input-new-password" required>
                             </div>
 
                             <div class="panel-security-information-confirm-password">
                                 <p>Confirm New Password</p>
-                                <input id="input-confirm-password" required>
+                                <input type="password" id="input-confirm-password" required>
                             </div>
                             <div class="panel-security-information-change">
                                 <button type="button" onclick="changePassword()">Change</button>
@@ -535,7 +468,7 @@
                                     <p>Delete your account and account data</p>
                                 </div>
                                 <div class="panel-security-danger-delete-account-button">
-                                    <button type="button" >Delete Account</button>
+                                    <button type="button" onclick="deleteAccount()" >Delete Account</button>
                                 </div>
                             </div>
                         </div>
@@ -588,6 +521,7 @@
     <script src="../Scripts/dashboard.js"></script>
     <script src="../Scripts/main.js"></script>
     <script src="../Scripts/generalSettings.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
 </body>
 

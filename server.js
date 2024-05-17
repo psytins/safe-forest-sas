@@ -13,6 +13,7 @@ const port = 8080;
 //note: first go into internal route, then go into internal db model, then go into internal db connection
 //      to create the db connection.
 const authenticationRoute = require('./Routes/authenticationRoute');
+const cameraRoute = require('./Routes/cameraRoute');
 const verifyToken = require('./Secure/verifyToken');
 //...
 
@@ -31,6 +32,7 @@ app.use(cookieParser());
 
 //Internal application routes ------------
 app.use('/api/auth', authenticationRoute);
+app.use('/api/camera', cameraRoute);
 //...
 
 //Default route
