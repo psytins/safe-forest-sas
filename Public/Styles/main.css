@@ -370,96 +370,6 @@ h1 {
     background-color: gray;
 }
 
-.add-camera-options{
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    max-height: 400px;
-    width: 100%;
-    overflow-x: hidden;
-}
-
-.add-camera-options div{
-    margin-left: 2%;
-}
-
-.add-camera-options h3{
-    margin-bottom: 1%;
-    margin-top: 1%;
-}
-
-.add-camera-options
-
-/**/
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 90px;
-    height: 34px;
-  }
-  
-.switch input {
-    display:none;
-}
-
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
-    border-radius: 34px;
-}
-
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: black;
-    -webkit-transition: .4s;
-    transition: .4s;
-    border-radius: 50%;
-}
-
-input:checked + .slider {
-    background-color: gray;
-}
-
-input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
-}
-
-input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(55px);
-}
-
-.slider:after{
-    content:'No';
-    color: black;
-    display: block;
-    position: absolute;
-    transform: translate(-50%,-50%);
-    top: 50%;
-    left: 50%;
-    font-size: 15px;
-    font-family: Verdana, sans-serif;
-}
-
-input:checked + .slider:after{  
-    content:'Yes';
-}
-  
-/**/
-
 .add-camera-plans{
     display: flex;
     width: 100%;
@@ -601,6 +511,95 @@ input:checked + .slider:after{
     align-items: end;
 }
 
+/**/
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 90px;
+    height: 34px;
+  }
+  
+.switch input {
+    display:none;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: black;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: gray;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(55px);
+}
+
+.slider:after{
+    content:'No';
+    color: black;
+    display: block;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    font-size: 15px;
+    font-family: Verdana, sans-serif;
+}
+
+input:checked + .slider:after{  
+    content:'Yes';
+}
+  
+/**/
+
+.add-camera-menu-options{
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    max-height: 45vh;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.add-camera-menu-options div{
+    margin-left: 2%;
+}
+
+.add-camera-menu-options h3{
+    margin-bottom: 1%;
+    margin-top: 1%;
+}
+
+
 .add-camera-menu-title{
     display: flex;
     justify-content: space-between;
@@ -614,7 +613,7 @@ input:checked + .slider:after{
     margin-left: 3%;
 }
 
-.add-camera-menu-inputs{
+.add-camera-menu-options-settings{
     display: flex;
     width: 100%;
     z-index: 900;
@@ -622,31 +621,38 @@ input:checked + .slider:after{
     /* margin-left: 5%; */
 }
 
-.add-camera-menu-inputs-left{
+.add-camera-menu-options-settings-left{
     display: flex;
     flex-direction: column;
     width: 50%;
     z-index: 90;
 }
 
-.add-camera-menu-options-left label{
-    margin-left: 5%;
+.add-camera-menu-options-settings-left label{
 }
 
-.add-camera-menu-inputs-left input{
+.add-camera-menu-options-settings-left input{
     margin-bottom: 2%;
+    width: 90%;
 }
 
-.add-camera-menu-inputs-right{
+.add-camera-menu-options-settings-right{
     display: flex;
     flex-direction: column;
     width: 50%;
     z-index: 90;
-    padding-right: 5%;
 }
 
-.add-camera-menu-options-right label{
-    margin-left: 5%;
+.add-camera-menu-options-settings-right label{
+}
+
+.add-camera-menu-options-settings-right input{
+    margin-bottom: 2%;
+    width: 90%;
+}
+
+.add-camera-options-imageInput-options p{
+    margin-left: 2%;
 }
 
 .add-camera-menu-inputs-right input{
