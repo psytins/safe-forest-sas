@@ -5,6 +5,7 @@ const router = express.Router();
 //DB Model for authentication
 const Camera = require('../Model/cameraModel');
 const Detection = require('../Model/detectionModel');
+const { Sequelize } = require('sequelize');
 
 // CREATE - register
 router.post('/regist', (req, res) => {
@@ -91,7 +92,76 @@ router.post('/list-last-detection', (req, res) => {
         });
 });
 
+router.post('/overall-detection', async (req, res) => {
 
+    Camera.hasMany(Detection, {
+        foreignKey: 'camera_id',
+        sourceKey: 'cameraID'
+    });
+    Detection.belongsTo(Camera, {
+        foreignKey: 'camera_id',
+        targetKey: 'cameraID'
+    });
+
+    const now = new Date();
+    const dateTime24HB = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+    const dateTime7DB = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+    const dateTime30DB = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+
+    const last24Hours = await Detection.findAll({
+        include: [{
+            model: Camera,
+            where: { user_id: req.body.userID },
+            required: true,
+        }],
+        where: {
+            createdAt: {
+                [Sequelize.Op.gte]: dateTime24HB.toISOString().split('T')[0]
+            },
+            time: {
+                [Sequelize.Op.gte]: dateTime24HB.toTimeString().split(' ')[0]
+            }
+        }
+    });
+
+    const last7Days = await Detection.findAll({
+        include: [{
+            model: Camera,
+            where: { user_id: req.body.userID },
+            required: true,
+        }],
+        where: {
+            createdAt: {
+                [Sequelize.Op.gte]: dateTime7DB.toISOString().split('T')[0]
+            },
+            time: {
+                [Sequelize.Op.gte]: dateTime7DB.toTimeString().split(' ')[0]
+            }
+        }
+    });
+
+    const last30Days = await Detection.findAll({
+        include: [{
+            model: Camera,
+            where: { user_id: req.body.userID },
+            required: true,
+        }],
+        where: {
+            createdAt: {
+                [Sequelize.Op.gte]: dateTime30DB.toISOString().split('T')[0]
+            },
+            time: {
+                [Sequelize.Op.gte]: dateTime30DB.toTimeString().split(' ')[0]
+            }
+        }
+    });
+
+    return res.json({
+        last24Hours,
+        last7Days,
+        last30Days
+    });
+});
 // ...
 
 

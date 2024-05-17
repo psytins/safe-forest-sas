@@ -1,5 +1,5 @@
 // DOM Elements
-const VERSION = "1.1.3";
+const VERSION = "1.2.0";
 // Get tables ...
 
 // Functions
@@ -442,6 +442,30 @@ function registerCamera() {
     }
 }
 
+async function loadOverallDetection() {
+    const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
+    const overallDetections = await fetch('/api/camera/overall-detection', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userID }),
+    })
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            odList = [data.last24Hours, data.last7Days, data.last30Days]
+            return odList
+        })
+        .catch(error => {
+            console.error('Last Detect Listing failed:', error);
+            alert(error);
+        });
+
+    return overallDetections;
+}
+
 async function loadLastDetectionList() {
     const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
     const lastDetectionList = await fetch('/api/camera/list-last-detection', {
@@ -521,7 +545,7 @@ async function loadCameraList() {
     return cameraList;
 }
 
-function loadDashboardInformation(cameraList) {
+function loadDashboardInformation(cameraList, l24h, l7days, l30days) {
     const activeCameras = document.getElementById("active-cameras")
     const totalCameras = document.getElementById("total-cameras")
 
@@ -536,9 +560,9 @@ function loadDashboardInformation(cameraList) {
     var onlineCamera = 0
     var offlineCamera = 0
 
-    var last24 = 2 //tmp
-    var last7 = 14 //tmp
-    var last30 = 23 //tmp
+    var last24 = l24h.length
+    var last7 = l7days.length
+    var last30 = l30days.length
 
     cameraList.forEach(camera => {
         if (camera.current_status == 1) {
@@ -589,8 +613,8 @@ async function loadIndex() {
     // Load Camera List - My Camera
     const cameraList = await loadCameraList()
     const lastDetectionList = await loadLastDetectionList()
-    console.log(lastDetectionList)
-    loadDashboardInformation(cameraList)
+    const odDetections = await loadOverallDetection()
+    loadDashboardInformation(cameraList, odDetections[0], odDetections[1], odDetections[2])
 }
 
 //First view - authentication - Load on authentication page
