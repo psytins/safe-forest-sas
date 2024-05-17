@@ -527,7 +527,7 @@ async function loadCameraList() {
                     <td>#${camera.cameraID}</td>
                     <td>${camera.sensitivity}%</td>
                     <td>${camera.camera_name}</td>
-                    <td>${camera.last_detected === null ? "N/A" : camera.last_detected}</td>
+                    <td>${camera.last_detected === null ? "N/A" : moment(camera.last_detected).format('YYYY-MM-DD -> HH:mm:ss')}</td>
                     <td>${camera.current_status === 1 ? "Online" : "Offline"}</td>
                 </tr>
                 `
@@ -610,7 +610,7 @@ async function loadIndex() {
     document.getElementById("ref-code").placeholder = sessionStorage.getItem('refCode');;
     document.getElementById("application-version").innerText = VERSION;
 
-    // Load Camera List - My Camera
+    // Load Dashboard Data and MyCamera List
     const cameraList = await loadCameraList()
     const lastDetectionList = await loadLastDetectionList()
     const odDetections = await loadOverallDetection()
