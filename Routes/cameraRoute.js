@@ -108,6 +108,10 @@ router.post('/overall-detection', async (req, res) => {
     const dateTime7DB = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
     const dateTime30DB = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
 
+    console.log(dateTime24HB)
+    console.log(dateTime7DB)
+    console.log(dateTime30DB)
+
     const last24Hours = await Detection.findAll({
         include: [{
             model: Camera,
@@ -116,10 +120,7 @@ router.post('/overall-detection', async (req, res) => {
         }],
         where: {
             createdAt: {
-                [Sequelize.Op.gte]: dateTime24HB.toISOString().split('T')[0]
-            },
-            time: {
-                [Sequelize.Op.gte]: dateTime24HB.toTimeString().split(' ')[0]
+                [Sequelize.Op.gte]: dateTime24HB
             }
         }
     });
@@ -132,10 +133,7 @@ router.post('/overall-detection', async (req, res) => {
         }],
         where: {
             createdAt: {
-                [Sequelize.Op.gte]: dateTime7DB.toISOString().split('T')[0]
-            },
-            time: {
-                [Sequelize.Op.gte]: dateTime7DB.toTimeString().split(' ')[0]
+                [Sequelize.Op.gte]: dateTime7DB
             }
         }
     });
@@ -148,10 +146,7 @@ router.post('/overall-detection', async (req, res) => {
         }],
         where: {
             createdAt: {
-                [Sequelize.Op.gte]: dateTime30DB.toISOString().split('T')[0]
-            },
-            time: {
-                [Sequelize.Op.gte]: dateTime30DB.toTimeString().split(' ')[0]
+                [Sequelize.Op.gte]: dateTime30DB
             }
         }
     });
