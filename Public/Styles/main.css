@@ -585,7 +585,7 @@ input:checked + .slider:after{
     display: flex;
     flex-direction: column;
     overflow-y: auto;
-    max-height: 45vh;
+    max-height: 27vh;
     width: 100%;
     overflow-x: hidden;
 }
@@ -666,12 +666,26 @@ input:checked + .slider:after{
 
 .add-camera-options-detectionBoundary-values{
     display: flex;
+    align-items: center;
 }
 
 .add-camera-options-detectionBoundary-values input{
     margin-left: 1%;
     margin-right: 1%;
-    width: 2vw;
+    width: 1.5vw;
+    text-align: center;
+    border: none;
+}
+
+.add-camera-options-confirmations{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 90%;
+}
+
+.add-camera-options-confirmations input{
+margin-top: 2%;
 }
 
 .add-camera-menu-button{

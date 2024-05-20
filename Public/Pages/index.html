@@ -234,10 +234,10 @@
                     </div>
                     <div class="add-camera-options-detectionBoundary-values">
                         <p>Boundary / Image Size</p>
-                        <input>
-                        <p> % to </p>
-                        <input>
-                        <p> %</p>
+                        <input value="0">
+                        <span> % to </span>
+                        <input value="100">
+                        <span> %</span>
                     </div>
                 </div>
 
@@ -257,7 +257,10 @@
                         <h3>De-duplication & Detection-to-live</h3>
                     </div>
                     <div class="add-camera-options-duplication-scrollbar">
-                        <p><span id="scrollValue">0</span> </p>
+                        <p>
+                            <span id="scrollValue">0</span>
+                            <span>minutes</span>
+                         </p>
                         <input type="range" id="scrollbar" min="0" max="60" value="0" step="10" oninput="updateValue(this.value)">
                     </div>
                 </div>
@@ -266,18 +269,28 @@
                     <div class="add-camera-options-cameraDown-title">
                         <h3>Camera Down Status Email Alert</h3>
                     </div> 
-                    
                     <label class="switch">
                         <input type="checkbox" id="togBtn">
                         <div class="slider round"></div>
                     </label>
                 </div>
-            </div>
 
-                <div class="add-camera-menu-button">
-                    <button onclick=toggleCancelMenu()>Cancel</button>
-                    <button>Add Camera</button>
-                </div>
+        </div>
+        <div class="add-camera-options-confirmations">
+            <div class="add-camera-options-confirmations-imageAnonymity"> 
+                <input type="checkbox">
+                <label>Customer Understands and agrees that RoboticsCats may randomly sample customer's image for AI wildfire detection development. All images will be used anonymously and deleted after development</label>
+            </div>
+            <div class="add-camera-options-confirmations-storagePrivacy"> 
+                <input type="checkbox">
+                <label>Customer understands and agrees that RoboticsCats will delete raw images after 7 days. Please uncheck if you want to delete raw images immediatly after AI detection</label>
+            </div>
+        </div>
+
+            <div class="add-camera-menu-button">
+                <button onclick=toggleCancelMenu()>Cancel</button>
+                <button>Add Camera</button>
+            </div>
             </div>
 
             <div class="panel" id="dashboard">
