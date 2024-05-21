@@ -1,5 +1,5 @@
 // DOM Elements
-const VERSION = "1.3.0";
+const VERSION = "1.3.1";
 // Get tables ...
 
 // Functions
