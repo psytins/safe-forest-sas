@@ -336,6 +336,249 @@ h1 {
     color: white;
 }
 
+/*################# ADD CAMERA MENU #################*/
+
+#add-camera-menu{
+    display: none; 
+    position: fixed;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    flex-direction: column;
+    height: fit-content;
+    width: 50%;
+    background-color: #CDCDCD;
+    z-index: 1000;
+    border: 1px black solid;
+}
+
+.add-camera-menu-cancel{
+    display: flex;
+    justify-content: end;
+    width: 100%;
+    z-index: 90;
+}
+
+.add-camera-menu-cancel img{
+    height: 100%;
+    background: none;
+    border: none;
+}
+
+.add-camera-menu-cancel img:hover{
+    cursor: pointer;
+    background-color: gray;
+}
+
+.add-camera-plans{
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    justify-content: space-evenly;
+}
+
+ .add-camera-plans-free{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 25%;
+    height: fit-content;
+    padding: 1%;
+}
+
+.add-camera-plans-free:hover{
+    background-color: gray;
+    cursor: pointer;
+}
+
+.add-camera-plans-free-title{
+    display: flex;
+    justify-content: center;
+}
+
+.add-camera-plans-free-price{
+    display: flex;
+    margin-top: 1%;
+    margin-left: 5%;
+}
+
+.add-camera-plans-free-description{
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    margin-left: 5%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    align-content: center;
+    height: 100%;
+}
+
+.add-camera-plans-free-checks{
+    display: flex;
+    height: 20%;
+    margin-left: 5%;
+    margin-top: 2%;
+    align-items: end;
+}
+
+ .add-camera-plans-standard{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 25%;
+    height: fit-content;
+    padding: 1%;
+}
+
+.add-camera-plans-standard:hover{
+    background-color: gray;
+    cursor: pointer;
+}
+
+.add-camera-plans-standard-title{
+    display: flex;
+    justify-content: center;
+}
+
+.add-camera-plans-standard-price{
+    display: flex;
+    margin-top: 1%;
+    margin-left: 5%;
+}
+
+.add-camera-plans-standard-description{
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    margin-left: 5%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    align-content: center;
+    height: 100%;
+}
+
+.add-camera-plans-standard-checks{
+    display: flex;
+    height: 20%;
+    margin-left: 5%;
+    margin-top: 2%;
+    align-items: end;
+}
+
+
+ .add-camera-plans-premium{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 25%;
+    height: fit-content;
+    padding: 1%;
+}
+
+.add-camera-plans-premium:hover{
+    background-color: gray;
+    cursor: pointer;
+}
+
+.add-camera-plans-premium-title{
+    display: flex;
+    justify-content: center;
+}
+
+.add-camera-plans-premium-price{
+    display: flex;
+    margin-top: 1%;
+    margin-left: 5%;
+}
+
+.add-camera-plans-premium-description{
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    margin-left: 5%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    align-content: center;
+    height: 100%;
+}
+
+.add-camera-plans-premium-checks{
+    display: flex;
+    height: 20%;
+    margin-left: 5%;
+    margin-top: 2%;
+    align-items: end;
+}
+
+.add-camera-menu-title{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    width: 100%;
+    z-index: 90;
+}
+
+.add-camera-menu-title h1{
+    margin-left: 3%;
+}
+
+.add-camera-menu-options{
+    display: flex;
+    width: 100%;
+    z-index: 900;
+    justify-content: space-between;
+}
+
+.add-camera-menu-options-left{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    z-index: 90;
+}
+
+.add-camera-menu-options-left label{
+    margin-left: 5%;
+}
+
+.add-camera-menu-options-left input{
+    margin-left: 5%;
+    margin-bottom: 2%;
+}
+
+.add-camera-menu-options-right{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    z-index: 90;
+    padding-right: 5%;
+}
+
+.add-camera-menu-options-right label{
+    margin-left: 5%;
+}
+
+.add-camera-menu-options-right input{
+    margin-left: 5%;
+    margin-bottom: 2%;
+}
+
+.add-camera-menu-button{
+    display: flex;
+    z-index: 90;
+    justify-content: end;
+    width: 100%;
+    padding: 2%;
+}
+
+.add-camera-menu-button button{
+    margin-right: 5%;
+    cursor: pointer;
+    padding: 10px 5%;
+}
+
+/*###################################################*/
+
 /*################# SOCIAL NETWORK #################*/
 .social-network {
     display: flex;
@@ -528,6 +771,7 @@ h2 {
 .panel-information-statistics-status-online-container-number {
     height: 30%;
     margin-left: 5%;
+    font-size: x-large;
 }
 
 .panel-information-statistics-status-online-container-label {
@@ -579,6 +823,7 @@ h2 {
 .panel-information-statistics-status-offline-container-number {
     height: 30%;
     margin-left: 5%;
+    font-size: x-large;
 }
 
 .panel-information-statistics-status-offline-container-cameras {
@@ -627,8 +872,9 @@ h2 {
 
 .panel-information-statistics-smoke-24-hours-number {
     display: flex;
+    justify-content: space-evenly;
     margin-left: 8%;
-    width: 95%;
+    width: 35%;
     height: 55%;
 }
 
@@ -653,8 +899,9 @@ h2 {
 
 .panel-information-statistics-smoke-7-days-number {
     display: flex;
+    justify-content: space-evenly;
     margin-left: 8%;
-    width: 95%;
+    width: 35%;
     height: 55%;
 }
 
@@ -676,8 +923,9 @@ h2 {
 
 .panel-information-statistics-smoke-30-days-number {
     display: flex;
+    justify-content: space-evenly;
     margin-left: 8%;
-    width: 95%;
+    width: 35%;
     height: 55%;
 }
 
@@ -873,8 +1121,176 @@ td {
     align-items: center;
 }
 
-/*################# AUTHENTICATION PAGE #################*/
+/*#################### SECURITY PAGE ####################*/
+
+#security{
+    justify-content: start;
+}
+
+.panel-security{
+    height: 95%;
+    width: 95%;
+    margin-left: 2.5%;
+    display: flex;
+    justify-content: center;
+    justify-self: start;
+    align-items: center;
+    flex-direction: column;
+}
+
+.panel-security-information{
+    display: flex;
+    flex-direction: column;
+    background-color: #D9D9D9;
+    width: 100%;
+    height: 65%;
+    margin-bottom: 2.5%;
+}
+
+.panel-security-information-label{
+    height: fit-content;
+    width: fit-content;
+    margin-left: 1%;
+    margin-top: 1%;
+}
+
+.panel-security-information-form{
+    display: flex;
+    flex-direction: column;
+    justify-self: flex-end;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.panel-security-information-current-password{
+    height: fit-content;
+}
+
+.panel-security-information-current-password p{
+    width: fit-content;
+    height: fit-content;
+    margin-left: 1%;
+}
+
+.panel-security-information-current-password input{
+    width: fit-content;
+    height: fit-content;
+    margin-left: 1%;
+    width: 95%;
+    height: 25px
+}
+
+.panel-security-information-new-password{
+    height: fit-content;
+    margin-top: 1%;
+}
+
+.panel-security-information-new-password p{
+    width: fit-content;
+    height: fit-content;
+    margin-left: 1%;
+}
+
+.panel-security-information-new-password input{
+    width: fit-content;
+    height: fit-content;
+    margin-left: 1%;
+    width: 95%;
+    height: 25px
+}
+
+.panel-security-information-confirm-password{
+    margin-top: 1%;
+}
+
+.panel-security-information-confirm-password p{
+    width: fit-content;
+    height: fit-content;
+    margin-left: 1%;
+    width: 90%;
+    height: 25px
+}
+
+.panel-security-information-confirm-password input{
+    width: fit-content;
+    height: fit-content;
+    margin-left: 1%;
+    width: 95%;
+    height: 25px
+}
+
+.panel-security-information-change{
+    display: flex;
+    justify-content: end;
+    align-content: end;
+    width: 95%;
+    margin-top: 2%;
+    margin-left: 1.5%;
+}
+
+.panel-security-information-change button {
+    padding: 10px 5%;
+}
+
+.panel-security-danger{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: #D9D9D9;
+    height: 30%;
+}
+
+.panel-security-danger-label{
+    display: flex;
+    align-self: start;
+    height: fit-content;
+    width: fit-content;
+    margin-left: 1%;
+    margin-top: 1%;
+}
+
+.panel-security-danger-delete-account {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 50%;
+    width: 100%;
+}
+
+.panel-security-danger-delete-account-label{
+    display: flex;
+    margin-left: 1%;
+}
+
+.panel-security-danger-delete-account-option {
+    display: flex;
+    width: 100%;
+}
+
+.panel-security-danger-delete-account-text {
+    display: flex;
+    flex: 1;
+    margin-left: 1%;
+    align-items: center;
+}
+
+.panel-security-danger-delete-account-button {
+    display: flex;
+    flex: 1;
+    margin-right: 4%;
+    justify-content: end;
+}
+
+.panel-security-danger-delete-account-button button {
+    padding: 10px 5%;
+}
+
+
 /*#######################################################*/
+
+/*################# AUTHENTICATION PAGE #################*/
+
 .header-auth {
     display: flex;
     justify-items: center;
@@ -1069,10 +1485,12 @@ select {
     color: gray;
     font-size: small;
 }
+/*#######################################################*/
 
 /*################# END AUTHENTICATION PAGE #################*/
 /*#######################################################*/
 
+/*#######################################################*/
 /*      General Account Settings CSS     */
 
 
@@ -1138,16 +1556,11 @@ select {
     width: 20%;
     height: 9%;
     padding-left: 80%;
-    font-size: 10px;
 }
 
 .panel-general-account-button button {
     width: 80%;
     height: 50%;
-    font-size: 1.15vw;
-    background-color: #EAEAEA;
-    color: #000000;
-    border: none;
     cursor: pointer;
 }
 
