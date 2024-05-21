@@ -504,7 +504,6 @@ async function loadLastDetectionList() {
     return lastDetectionList;
 }
 
-
 async function loadCameraList() {
     const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
     const cameraList = await fetch('/api/camera/list-cameras', {
@@ -521,7 +520,8 @@ async function loadCameraList() {
             const tbodyMyCameras = document.getElementById("dynamicListCamera-mycameras");
             const tbodyDashboard = document.getElementById("dynamicListCamera-dashboard");
             data.cameras.forEach(camera => {
-                var dynamicEntry =
+                // Dynamic Entry for Dashboard Camera List ----------------
+                var dynamicEntryDS =
                     `
                 <tr>
                     <td>#${camera.cameraID}</td>
@@ -531,8 +531,24 @@ async function loadCameraList() {
                     <td>${camera.current_status === 1 ? "Online" : "Offline"}</td>
                 </tr>
                 `
-                tbodyMyCameras.innerHTML += dynamicEntry;
-                tbodyDashboard.innerHTML += dynamicEntry;
+                // Dynamic Entry for My Camera List ----------------
+                var dynamicEntryMC =
+                    `
+                <tr>
+                    <td>#${camera.cameraID}</td>
+                    <td>${camera.sensitivity}%</td>
+                    <td>${camera.camera_name}</td>
+                    <td>${camera.last_detected === null ? "N/A" : moment(camera.last_detected).format('YYYY-MM-DD -> HH:mm:ss')}</td>
+                    <td>${camera.current_status === 1 ? "Online" : "Offline"}</td>
+                    <td>
+                        <button onclick="changeCameraStatus(${camera.cameraID})" title="On/Off Camera" type="button"><i class="fa fa-power-off" aria-hidden="true"></i></button>
+                        <button onclick="simulateDetection(${camera.cameraID})" title="Simulate a detection" type="button"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                        <button onclick="expandCameraInfo(${camera.cameraID})" title="Expand camera information" type="button"><i class="fa fa-info" aria-hidden="true"></i></button>
+                    </td>
+                </tr>
+                `
+                tbodyMyCameras.innerHTML += dynamicEntryMC;
+                tbodyDashboard.innerHTML += dynamicEntryDS;
             });
 
             return data.cameras;
@@ -543,6 +559,18 @@ async function loadCameraList() {
         });
 
     return cameraList;
+}
+
+function changeCameraStatus(cameraID){
+    alert("Coming Soon: Change camera status for camera #" + cameraID)
+}
+
+function simulateDetection(cameraID){
+    alert("Coming Soon: Simulate detection for camera #" + cameraID)
+}
+
+function expandCameraInfo(cameraID){
+    alert("Coming Soon: Expand camera information for camera #" + cameraID)
 }
 
 function loadDashboardInformation(cameraList, l24h, l7days, l30days) {
