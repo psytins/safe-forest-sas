@@ -119,7 +119,7 @@ router.post('/overall-detection', async (req, res) => {
             required: true,
         }],
         where: {
-            createdAt: {
+            date: {
                 [Sequelize.Op.gte]: dateTime24HB
             }
         }
@@ -132,7 +132,7 @@ router.post('/overall-detection', async (req, res) => {
             required: true,
         }],
         where: {
-            createdAt: {
+            date: {
                 [Sequelize.Op.gte]: dateTime7DB
             }
         }
@@ -145,7 +145,7 @@ router.post('/overall-detection', async (req, res) => {
             required: true,
         }],
         where: {
-            createdAt: {
+            date: {
                 [Sequelize.Op.gte]: dateTime30DB
             }
         }
@@ -155,6 +155,36 @@ router.post('/overall-detection', async (req, res) => {
         last24Hours,
         last7Days,
         last30Days
+    });
+});
+
+// Simulate Detection
+router.post('/simulate-detection', (req, res) => {
+    const now = new Date().toISOString(); // storing in the database in UTC (in the front-end, convert to local)
+
+    const camID = req.body.cameraID;
+
+    const newDetection = new Detection({
+        camera_id: camID,
+        description: null,
+        date: now,
+    });
+
+    Camera.findOne({ where: { cameraID: camID } }).then(camera => {
+        if (!camera) { // don't found camera
+            return res.status(401).json({ error: 'Camera not found' });
+        } else {
+            newDetection.save()
+                .then(savedEntry => {
+                    camera.last_detected = now;
+                    camera.save();
+                    return res.status(201).json(savedEntry);
+                })
+                .catch(error => {
+                    console.error('Error saving regist entry:', error);
+                    return res.status(500).json({ error: 'Error saving regist entry' });
+                });
+        }
     });
 });
 // ...

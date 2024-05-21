@@ -15,8 +15,8 @@ const Detection = sequelize.define('detection', {
         allowNull: false, unique: true
     },
     description: Sequelize.STRING,
-    time: {
-        type: Sequelize.TIME,
+    date: {
+        type: Sequelize.DATE,
         allowNull: false
     },
     // -- must have in every table:

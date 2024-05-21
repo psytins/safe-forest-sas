@@ -1,5 +1,5 @@
 // DOM Elements
-const VERSION = "1.2.1";
+const VERSION = "1.3.0";
 // Get tables ...
 
 // Functions
@@ -487,8 +487,8 @@ async function loadLastDetectionList() {
                     <td>#${detection.detectionID}</td>
                     <td>${detection.camera.camera_name}</td>
                     <td>${detection.description === null ? "N/A" : detection.description}</td>
-                    <td>${detection.time}</td>
-                    <td>${detection.createdAt}</td>
+                    <td>${moment(detection.date).local().format('HH:mm:ss')}</td>
+                    <td>${moment(detection.date).local().format('YYYY-MM-DD')}</td>
                 </tr>
                 `
                 tbodyLastDetect.innerHTML += dynamicEntryLD;
@@ -527,7 +527,7 @@ async function loadCameraList() {
                     <td>#${camera.cameraID}</td>
                     <td>${camera.sensitivity}%</td>
                     <td>${camera.camera_name}</td>
-                    <td>${camera.last_detected === null ? "N/A" : moment(camera.last_detected).format('YYYY-MM-DD -> HH:mm:ss')}</td>
+                    <td>${camera.last_detected === null ? "N/A" : moment(camera.last_detected).local().format('YYYY-MM-DD -> HH:mm:ss')}</td>
                     <td>${camera.current_status === 1 ? "Online" : "Offline"}</td>
                 </tr>
                 `
@@ -538,7 +538,7 @@ async function loadCameraList() {
                     <td>#${camera.cameraID}</td>
                     <td>${camera.sensitivity}%</td>
                     <td>${camera.camera_name}</td>
-                    <td>${camera.last_detected === null ? "N/A" : moment(camera.last_detected).format('YYYY-MM-DD -> HH:mm:ss')}</td>
+                    <td>${camera.last_detected === null ? "N/A" : moment(camera.last_detected).local().format('YYYY-MM-DD -> HH:mm:ss')}</td>
                     <td>${camera.current_status === 1 ? "Online" : "Offline"}</td>
                     <td>
                         <button onclick="changeCameraStatus(${camera.cameraID})" title="On/Off Camera" type="button"><i class="fa fa-power-off" aria-hidden="true"></i></button>
@@ -561,16 +561,53 @@ async function loadCameraList() {
     return cameraList;
 }
 
-function changeCameraStatus(cameraID){
-    alert("Coming Soon: Change camera status for camera #" + cameraID)
+function changeCameraStatus(cameraID) {
+    if (confirm("Current Action: Change camera status for camera #" + cameraID + ". You want to proceed?")) {
+        alert("Coming soon...")
+    }
 }
 
-function simulateDetection(cameraID){
-    alert("Coming Soon: Simulate detection for camera #" + cameraID)
+function simulateDetection(cameraID) {
+    if (confirm("Current Action: Simulate detection for camera #" + cameraID + ". You want to proceed?")) {
+        alert("Proceeding...")
+        fetch('api/camera/simulate-detection', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(
+                {
+                    cameraID
+                }),
+        })
+            .then(response => { // data validation
+                if (response.status == 401) {
+                    throw new Error(`Camera don't exist! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Detection simulation successful:', data);
+
+                // Handle success ...
+                alert("Detection simulation successful");
+                location.reload();
+                // ...
+
+            })
+            .catch(error => {
+                console.error('Registration failed:', error);
+                // Handle error ... 
+                alert(error);
+                // ...
+            });
+    }
 }
 
-function expandCameraInfo(cameraID){
-    alert("Coming Soon: Expand camera information for camera #" + cameraID)
+function expandCameraInfo(cameraID) {
+    if (confirm("Current Action: Expand camera information for camera #" + cameraID + ". You want to proceed?")) {
+        alert("Proceeding...")
+    }
 }
 
 function loadDashboardInformation(cameraList, l24h, l7days, l30days) {
