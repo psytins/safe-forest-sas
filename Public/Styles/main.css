@@ -1557,3 +1557,72 @@ td {
 }
 
 
+/*    Alert Contacts CSS    */
+
+#contacts {
+    flex-direction: column;
+}
+
+.panel-add-contacts {
+    background-color: #CDCDCD;
+    height: 30%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2%;
+    justify-content: space-between;
+}
+
+.panel-add-contacts-title {
+    width: 90%;
+    padding-left: 2%;
+}
+
+.panel-add-contacts-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+    padding-left: 2%;
+}
+
+.panel-add-contacts-addbox {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .panel-add-contacts-addbox label {
+    margin-bottom: 5px; /* Optional: Adds spacing between label and input */
+  }
+  
+
+.panel-add-contacts-addbutton {
+    
+}
+
+
+.panel-show-contacts {
+    background-color: #CDCDCD;
+    height: 60%;
+    width: 90%;
+}
+
+.panel-show-contacts-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+    padding-left: 2%;
+}
+
+.panel-show-contacts-title {
+
+}
+
+.panel-show-contacts-searchbar {
+
+}
+
+.panel-show-contacts-table {
+
+}

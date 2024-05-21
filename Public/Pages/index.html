@@ -478,13 +478,98 @@
                 </div>
             </div>
 
-            <div class="panel" id="contacts">
-                <div class="coming-soon">
-                    <div class="coming-soon-header">
-                        <h1>Coming Soon!</h1>
+            <div class="panel" id="contacts" style="display: flex;">
+                <div class="panel-add-contacts">
+                    <div class="panel-add-contacts-title">
+                        <h1>Alert Contacts</h1>
                     </div>
-                    <div class="coming-soon-icon">
-                        <img src="../Images/construction-icon.png" alt="construction">
+                    <div class="panel-add-contacts-content">
+                        <div class="panel-add-contacts-addbox">
+                            <label for="add-contact">Max. 20 alert contacts can be added</label>
+                            <input type="text" id="add-contact" name="addContact">
+                        </div>
+                        <div class="panel-add-contacts-addbutton">
+                            <button>Add Contact</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-show-contacts">
+                    <div class="panel-show-contacts-content">
+                        <div class="panel-show-contacts-title">
+                            <h1>All Alert Contacts</h1>
+                        </div>
+                        <div class="panel-show-contacts-searchbar">
+                            <input id="searchInput" onkeyup="searchTable('searchInput', 'searchDashboard')"
+                                type="text" name="account-search" placeholder="Search account">
+                        </div>
+                    </div>
+                    <div class="panel-show-contacts-table">
+                        <div class="tbl-header"> <!-- Start Table Here -->
+                            <table cellpadding="0" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Account</th>
+                                        <th>Alert Sent</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="tbl-content">
+                            <table cellpadding="0" cellspacing="0">
+                                <tbody>
+                                    <!-- Paste your data here -->
+                                    <tr>
+                                        <td><a href="#">CamX-2000</a></td>
+                                        <td>2024-04-15 08:45:12</td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="#">CamX-3000</a></td>
+                                        <td>2024-04-16 14:22:55</td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="#">CamX-1000</a></td>
+                                        <td>2024-04-17 10:11:36</td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="#">CamX-4000</a></td>
+                                        <td>2024-04-18 09:30:48</td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="#">CamX-5000</a></td>
+                                        <td>2024-04-18 15:55:21</td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="#">CamX-6000</a></td>
+                                        <td>2024-04-19 11:20:33</td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="#">CamX-7000</a></td>
+                                        <td>2024-04-20 16:44:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="#">CamX-8000</a></td>
+                                        <td>2024-04-21 08:15:57</td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="#">CamX-9000</a></td>
+                                        <td>2024-04-22 13:38:09</td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="#">CamX-10000</a></td>
+                                        <td>2024-04-23 10:09:21</td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="#">CamX-11000</a></td>
+                                        <td>2024-04-24 15:32:33</td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="#">CamX-12000</a></td>
+                                        <td>2024-04-25 12:03:45</td>
+                                    </tr>
+                                    <!-- Repeat this pattern for all rows of your data -->
+                                </tbody>
+                            </table>
+                        </div> <!-- End Table Here -->
                     </div>
                 </div>
             </div>
