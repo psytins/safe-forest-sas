@@ -932,9 +932,11 @@ td {
     height: 70%;
     display: flex;
     justify-content: space-evenly;
-  
+
 }
-.panel-auth-container-register-form input,select{
+
+.panel-auth-container-register-form input,
+select {
     width: 90%;
     height: 3vh;
     margin-top: 1%;
@@ -942,14 +944,16 @@ td {
     background: transparent;
     border: 1px solid black;
 }
-.panel-auth-container-register-form select{
+
+.panel-auth-container-register-form select {
     width: 92.5%;
 }
-#input-terms{
+
+#input-terms {
     width: 15px;
 }
 
-.panel-auth-container-register-form-base-info{
+.panel-auth-container-register-form-base-info {
     height: 70%;
     width: 45%;
     display: flex;
@@ -959,33 +963,36 @@ td {
 }
 
 
-.panel-auth-container-register-form-base-info-name{
+.panel-auth-container-register-form-base-info-name {
     display: flex;
 }
-.panel-auth-container-register-form-base-info-name input{
+
+.panel-auth-container-register-form-base-info-name input {
     width: 80%;
 }
-.panel-auth-container-register-form-base-info-email{
-    display: flex;
-    flex-direction: column;
-}
-.panel-auth-container-register-form-base-info-password{
-    display: flex;
-    flex-direction: column;
-}
-.panel-auth-container-register-form-base-info-confirm-password{
+
+.panel-auth-container-register-form-base-info-email {
     display: flex;
     flex-direction: column;
 }
 
-.panel-auth-container-register-form-division{
+.panel-auth-container-register-form-base-info-password {
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-auth-container-register-form-base-info-confirm-password {
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-auth-container-register-form-division {
     height: 70%;
     border: 1px solid black;
     margin-top: 5%
-
 }
 
-.panel-auth-container-register-form-contact-info{
+.panel-auth-container-register-form-contact-info {
     height: 70%;
     width: 45%;
     display: flex;
@@ -994,37 +1001,41 @@ td {
     margin-top: 5%
 }
 
-.panel-auth-container-register-form-contact-info-info{
+.panel-auth-container-register-form-contact-info-info {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     height: 60%;
 }
-.panel-auth-container-register-form-contact-info-info-phone{
+
+.panel-auth-container-register-form-contact-info-info-phone {
     display: flex;
     flex-direction: column;
 }
-.panel-auth-container-register-form-contact-info-info-region{
+
+.panel-auth-container-register-form-contact-info-info-region {
     display: flex;
     flex-direction: column
 }
-.panel-auth-container-register-form-contact-info-terms{
+
+.panel-auth-container-register-form-contact-info-terms {
     display: flex;
 }
-.panel-auth-container-register-form-contact-info-terms p{
+
+.panel-auth-container-register-form-contact-info-terms p {
     font-size: small;
     margin-right: 2%;
 }
 
 
-.panel-auth-container-register-submit{
+.panel-auth-container-register-submit {
     width: 100%;
     height: 8%;
     display: flex;
     justify-content: center;
 }
 
-.panel-auth-container-register-submit button{
+.panel-auth-container-register-submit button {
     width: 60%;
     height: 100%;
     font-size: larger;
@@ -1034,12 +1045,13 @@ td {
     cursor: pointer;
 
 }
-.panel-auth-container-register-submit button:hover{
+
+.panel-auth-container-register-submit button:hover {
     background-color: grey;
 
 }
 
-.panel-auth-container-register-altlogin{
+.panel-auth-container-register-altlogin {
     width: 100%;
     height: 5%;
     align-items: center;
@@ -1157,7 +1169,7 @@ td {
     display: flex;
     flex-direction: column;
     margin-bottom: 2%;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .panel-add-contacts-title {
@@ -1176,15 +1188,26 @@ td {
 .panel-add-contacts-addbox {
     display: flex;
     flex-direction: column;
-  }
-  
-  .panel-add-contacts-addbox label {
-    margin-bottom: 5px; /* Optional: Adds spacing between label and input */
-  }
-  
+    width: 70%;
+}
+
+.panel-add-contacts-addbox label {
+    margin-bottom: 5px;
+    font-size: 19px;
+}
+
+#add-contact {
+    width: 90%;
+    height: 15%;
+    padding: 10px;
+}
 
 .panel-add-contacts-addbutton {
-    
+    padding-top: 3.2vh;
+}
+
+.panel-add-contacts-addbutton button{
+    font-size: 20px;
 }
 
 
@@ -1200,16 +1223,19 @@ td {
     justify-content: space-between;
     width: 90%;
     padding-left: 2%;
-}
-
-.panel-show-contacts-title {
-
+    padding-top: 1.5%;
 }
 
 .panel-show-contacts-searchbar {
-
+    padding-top: 1%;
 }
 
 .panel-show-contacts-table {
+    margin: 2%;
+}
 
+/* Margin for the show contacts remove buttons */
+.margin-right {
+    margin-left: 50%;
+    display: block;
 }
