@@ -523,7 +523,7 @@ async function loadCameraList() {
                 // Dynamic Entry for Dashboard Camera List ----------------
                 var dynamicEntryDS =
                     `
-                <tr>
+                <tr ${camera.current_status === 1 ? "" : "style='color:grey;'"}>
                     <td>#${camera.cameraID}</td>
                     <td>${camera.sensitivity}%</td>
                     <td>${camera.camera_name}</td>
@@ -534,7 +534,7 @@ async function loadCameraList() {
                 // Dynamic Entry for My Camera List ----------------
                 var dynamicEntryMC =
                     `
-                <tr>
+                <tr ${camera.current_status === 1 ? "" : "style='color:grey;'"}>
                     <td>#${camera.cameraID}</td>
                     <td>${camera.sensitivity}%</td>
                     <td>${camera.camera_name}</td>
@@ -563,7 +563,38 @@ async function loadCameraList() {
 
 function changeCameraStatus(cameraID) {
     if (confirm("Current Action: Change camera status for camera #" + cameraID + ". You want to proceed?")) {
-        alert("Coming soon...")
+        alert("Proceeding...")
+        fetch('api/camera/change-status', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(
+                {
+                    cameraID
+                }),
+        })
+            .then(response => { // data validation
+                if (response.status == 401) {
+                    throw new Error(`Camera don't exist! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Camera status changed successfully:', data);
+
+                // Handle success ...
+                alert("Camera status changed successfully");
+                location.reload();
+                // ...
+
+            })
+            .catch(error => {
+                console.error('Status change failed:', error);
+                // Handle error ... 
+                alert(error);
+                // ...
+            });
     }
 }
 
@@ -582,7 +613,7 @@ function simulateDetection(cameraID) {
         })
             .then(response => { // data validation
                 if (response.status == 401) {
-                    throw new Error(`Camera don't exist! Status: ${response.status}`);
+                    throw new Error(`Camera don't exist or it is offline! Status: ${response.status}`);
                 }
                 return response.json();
             })
@@ -606,7 +637,7 @@ function simulateDetection(cameraID) {
 
 function expandCameraInfo(cameraID) {
     if (confirm("Current Action: Expand camera information for camera #" + cameraID + ". You want to proceed?")) {
-        alert("Proceeding...")
+        alert("Coming soon...")
     }
 }
 

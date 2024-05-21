@@ -171,8 +171,8 @@ router.post('/simulate-detection', (req, res) => {
     });
 
     Camera.findOne({ where: { cameraID: camID } }).then(camera => {
-        if (!camera) { // don't found camera
-            return res.status(401).json({ error: 'Camera not found' });
+        if (!camera || camera.current_status === 0) { // don't found camera or it's offline
+            return res.status(401).json({ error: 'Camera not found or it is offline!' });
         } else {
             newDetection.save()
                 .then(savedEntry => {
@@ -184,6 +184,30 @@ router.post('/simulate-detection', (req, res) => {
                     console.error('Error saving regist entry:', error);
                     return res.status(500).json({ error: 'Error saving regist entry' });
                 });
+        }
+    });
+});
+
+//Change camera status
+router.post('/change-status', (req, res) => {
+    const camID = req.body.cameraID;
+    Camera.findOne({ where: { cameraID: camID } }).then(camera => {
+        if (!camera) { // don't found camera
+            return res.status(401).json({ error: 'Camera not found' });
+        } else {
+            if (camera.current_status === 1) {
+                // Turn off
+                camera.current_status = 0
+                camera.save()
+                return res.status(201).json(camera);
+            } else if (camera.current_status === 0) {
+                // Turn on
+                camera.current_status = 1
+                camera.save()
+                return res.status(201).json(camera);
+            } else {
+                return res.status(500).json({ error: 'Something went wrong...' });
+            }
         }
     });
 });
