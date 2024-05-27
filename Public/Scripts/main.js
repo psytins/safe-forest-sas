@@ -1,6 +1,5 @@
 // DOM Elements
-const VERSION = "1.3.1";
-// Get tables ...
+const VERSION = "1.3.2";
 
 // Functions
 function showContainerIndex(id) {
@@ -191,6 +190,19 @@ function validateRegisterCamera() {
     return true;
 }
 
+function validateAddContact() {
+    const ERROR_COLOR = 'red';
+    const DEFAULT_COLOR = 'black'
+
+    const email = document.getElementById("add-contact");
+    // TODO: Email format validation ...
+    if (!email.value) {
+        alert("Please...");
+        return false;
+    }
+
+    return true;
+}
 // ------------------------------------------------
 // Requests to server ----------
 
@@ -635,12 +647,122 @@ function simulateDetection(cameraID) {
     }
 }
 
+async function loadContactList() {
+    const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
+    const contactList = await fetch('/api/auth/list-contacts', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userID }),
+    })
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            const tbodyContacts = document.getElementById("dynamicListContacts");
+            data.contacts.forEach(contact => {
+                // Dynamic Entry for Contact List ----------------
+                var dynamicEntryContact =
+                    `
+                    <tr>
+                        <td>${contact.email_address}</td>
+                        <td><button onclick="removeContact(${contact.contactID})" title="Remove Contact" type="button"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+                    </tr>
+                `
+                tbodyContacts.innerHTML += dynamicEntryContact;
+            });
+
+            return data.contacts;
+        })
+        .catch(error => {
+            console.error('Contact Listing failed:', error);
+            alert(error);
+        });
+
+    return contactList;
+}
+
+function addContact() {
+    const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer // FK
+    const email = document.getElementById("add-contact").value;
+
+    if (validateAddContact()) {
+
+        fetch('api/auth/add-contacts', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(
+                {
+                    userID,
+                    email,
+                }),
+        })
+            .then(response => { // data validation
+                if (response.status == 401) {
+                    throw new Error(`Please fill all required fields! Status: ${response.status}`);
+                } else if (response.status == 402) {
+                    throw new Error(`Email already exists! Status: ${response.status}`);
+                } else if (response.status == 403) {
+                    // error 403
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Contact added successful:', data);
+
+                // Handle success ...
+                alert("Contact added successful!");
+                location.reload();
+                // ...
+
+            })
+            .catch(error => {
+                console.error('Something failed:', error);
+                // Handle error ... 
+                alert(error);
+                // ...
+            });
+    }
+}
+
+function removeContact(contactID) {
+    if (confirm("Current Action: Remove contact ID #" + contactID + ". You want to proceed?")) {
+        alert("Proceeding...")
+        fetch('/api/auth/contact-delete', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ contactID }),
+        })
+            .then(response => {
+                // Handle response, then redirect
+                alert("Contact Removed");
+                location.reload();
+            })
+            .catch(error => {
+                // Handle error
+                console.error('An error occured:', error);
+            });
+    }
+}
+
+// ------------------------------------------------
+// Other Functions
 function expandCameraInfo(cameraID) {
     if (confirm("Current Action: Expand camera information for camera #" + cameraID + ". You want to proceed?")) {
         alert("Coming soon...")
     }
 }
 
+// ------------------------------------------------
+
+// Event Listeners
+
+// Initialize - Load Functions
 function loadDashboardInformation(cameraList, l24h, l7days, l30days) {
     const activeCameras = document.getElementById("active-cameras")
     const totalCameras = document.getElementById("total-cameras")
@@ -680,13 +802,8 @@ function loadDashboardInformation(cameraList, l24h, l7days, l30days) {
     last30Days.innerText = last30
 
 }
-// ------------------------------------------------
 
-// Event Listeners
-
-// Initialize - Load Functions
-
-//First view - index - Load on authentication page
+//First view - Index Load
 async function loadIndex() {
     document.getElementById("mycameras").style.display = "none";
     document.getElementById("general").style.display = "none";
@@ -707,13 +824,16 @@ async function loadIndex() {
     document.getElementById("application-version").innerText = VERSION;
 
     // Load Dashboard Data and MyCamera List
-    const cameraList = await loadCameraList()
-    const lastDetectionList = await loadLastDetectionList()
-    const odDetections = await loadOverallDetection()
-    loadDashboardInformation(cameraList, odDetections[0], odDetections[1], odDetections[2])
+    const cameraList = await loadCameraList();
+    const lastDetectionList = await loadLastDetectionList();
+    const odDetections = await loadOverallDetection();
+    loadDashboardInformation(cameraList, odDetections[0], odDetections[1], odDetections[2]);
+
+    //Load Contact List
+    const contactList = await loadContactList();
 }
 
-//First view - authentication - Load on authentication page
+//First view - Authentication Load
 function loadAuthentication() {
     document.getElementById("login").style.display = "none";
     document.getElementById("application-version").innerText = VERSION;

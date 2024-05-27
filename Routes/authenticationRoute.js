@@ -4,6 +4,7 @@ const router = express.Router();
 //const bcrypt = require('bcrypt');
 //DB Model for authentication
 const User = require('../Model/authenticationModel');
+const Contact = require('../Model/contactModel')
 
 // CREATE - register
 router.post('/account-regist', (req, res) => {
@@ -130,7 +131,7 @@ router.post('/account-change-password', (req, res) => {
         });
 });
 
-//DELETE ACCOUNT
+//DELETE - ACCOUNT
 router.post('/account-delete', (req, res) => {
     const searchUser = new User({
         userID: req.body.userID,
@@ -145,5 +146,66 @@ router.post('/account-delete', (req, res) => {
             return res.status(500).json({ error: 'Error deleting user' });
         });
 });
+
+// ADD - Contacts
+router.post('/add-contacts', (req, res) => {
+    const newRegist = new Contact({
+        user_id: req.body.userID,
+        email_address: req.body.email,
+    });
+
+    // Validate Contact Register - TODO: Limit to 20 contacts max.
+    // ...
+    Contact.findOne({ where: { email_address: newRegist.email_address } }).then(contact => {
+        if (contact) { // found existing camera
+            return res.status(402).json({ error: 'Email already exists' });
+        } else {
+            newRegist.save()
+                .then(savedEntry => {
+                    return res.status(201).json(savedEntry);
+                })
+                .catch(error => {
+                    console.error('Error saving regist entry:', error);
+                    return res.status(500).json({ error: 'Error saving regist entry' });
+                });
+        }
+    });
+});
+
+// List Contacts
+router.post('/list-contacts', (req, res) => {
+    Contact.findAll(
+        {
+            where: {
+                user_id: req.body.userID
+            }
+        }
+    )
+        .then(contacts => {
+            return res.json({ contacts });
+
+        })
+        .catch(error => {
+            console.error('Error during contact listing:', error);
+            return res.status(500).json({ error: 'Error during contact listing' });
+        });
+});
+
+//DELETE - Contacts
+router.post('/contact-delete', (req, res) => {
+    const searchContact = new Contact({
+        contactID: req.body.contactID,
+    });
+
+    Contact.destroy({ where: { contactID: searchContact.contactID } })
+        .then(rowsDestroyed => {
+            res.json({ message: `Deleted ${rowsDestroyed} row(s).` });
+        })
+        .catch(error => {
+            console.error('Error deleting contact:', error);
+            return res.status(500).json({ error: 'Error deleting contac' });
+        });
+});
+
 
 module.exports = router;

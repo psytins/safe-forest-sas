@@ -28,8 +28,7 @@
                     <div class="menu-options-home-label">
                         <p>Home</p>
                     </div>
-                    <button type="button" onclick="showContainerIndex('dashboard')"
-                        class="menu-options-home-dashboard">
+                    <button type="button" onclick="showContainerIndex('dashboard')" class="menu-options-home-dashboard">
                         <div class="menu-options-home-dashboard-icon">
                             <img src="../Images/dashboard-logo.png">
                         </div>
@@ -37,8 +36,7 @@
                             <p>Dashboard</p>
                         </div>
                     </button>
-                    <button type="button" onclick="showContainerIndex('mycameras')"
-                        class="menu-options-home-camera">
+                    <button type="button" onclick="showContainerIndex('mycameras')" class="menu-options-home-camera">
                         <div class="menu-options-home-camera-icon">
                             <img src="../Images/camera-logo.png">
                         </div>
@@ -52,8 +50,7 @@
                     <div class="menu-options-settings-label">
                         <p>Settings</p>
                     </div>
-                    <button type="button" onclick="showContainerIndex('general')"
-                        class="menu-options-settings-general">
+                    <button type="button" onclick="showContainerIndex('general')" class="menu-options-settings-general">
                         <div class="menu-options-settings-general-icon">
                             <img src="../Images/profile-logo.png">
                         </div>
@@ -70,8 +67,7 @@
                             <p>Security</p>
                         </div>
                     </button>
-                    <button type="button" onclick="showContainerIndex('contacts')"
-                        class="menu-options-settings-alert">
+                    <button type="button" onclick="showContainerIndex('contacts')" class="menu-options-settings-alert">
                         <div class="menu-options-settings-alert-icon">
                             <img src="../Images/alert-logo.png">
                         </div>
@@ -102,7 +98,8 @@
                         <h2 id="greetings"></h2>
                     </div>
                     <div class="header-greeting-bottom">
-                        <p>You are currently using&nbsp;<p id="active-cameras"></p>&nbsp;of your&nbsp;<p id="total-cameras"></p>&nbsp;cameras</p>
+                        <p>You are currently using&nbsp;
+                        <p id="active-cameras"></p>&nbsp;of your&nbsp;<p id="total-cameras"></p>&nbsp;cameras</p>
                     </div>
                 </div>
                 <div class="header-options">
@@ -124,7 +121,7 @@
                 </div>
             </div>
 
-            <div class="panel"  id="add-camera-menu">
+            <div class="panel" id="add-camera-menu">
                 <div class="add-camera-menu-cancel">
                     <img onclick=toggleCancelMenu() src="../Images/cancel-logo.png">
                 </div>
@@ -143,7 +140,7 @@
                             <p>10-min checks</p>
                         </div>
                     </div>
-                    <div id = "standard" class="add-camera-plans-standard" onclick="selectPlan(this.id)">
+                    <div id="standard" class="add-camera-plans-standard" onclick="selectPlan(this.id)">
                         <div class="add-camera-plans-standard-title">
                             <h4>Standard Plan</h4>
                         </div>
@@ -157,7 +154,7 @@
                             <p>1-min checks</p>
                         </div>
                     </div>
-                    <div id ="premium" class="add-camera-plans-premium" onclick="selectPlan(this.id)">
+                    <div id="premium" class="add-camera-plans-premium" onclick="selectPlan(this.id)">
                         <div class="add-camera-plans-premium-title">
                             <h4>Premium Plan</h4>
                         </div>
@@ -172,7 +169,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="add-camera-menu-title">
                     <h1>Add Camera</h1>
 
@@ -470,7 +467,7 @@
                                     <p>Delete your account and account data</p>
                                 </div>
                                 <div class="panel-security-danger-delete-account-button">
-                                    <button type="button" onclick="deleteAccount()" >Delete Account</button>
+                                    <button type="button" onclick="deleteAccount()">Delete Account</button>
                                 </div>
                             </div>
                         </div>
@@ -485,11 +482,11 @@
                     </div>
                     <div class="panel-add-contacts-content">
                         <div class="panel-add-contacts-addbox">
-                            <label for="add-contact">Max. 20 alert contacts can be added</label>
-                            <input type="text" id="add-contact" name="addContact">
+                            <label for="add-contact">Add more emails to send notifications and alerts</label>
+                            <input placeholder="Max. 20 alert contacts can be added" type="email" id="add-contact" name="addContact">
                         </div>
                         <div class="panel-add-contacts-addbutton">
-                            <button>Add Contact</button>
+                            <button type="button" onclick="addContact()">Add Contact</button>
                         </div>
                     </div>
                 </div>
@@ -510,29 +507,15 @@
                                 <thead>
                                     <tr>
                                         <th>Accounts</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                             </table>
                         </div>
                         <div class="tbl-content" id="searchMyAccounts">
                             <table cellpadding="0" cellspacing="0">
-                                <tbody>
-                                    <tr>
-                                        <td><a href="#">joao@gmail.com</a></td>
-                                        <td><button class="remove-button margin-right">Remove</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">goncalo@gmail.com</a></td>
-                                        <td><button class="remove-button margin-right">Remove</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">duarte@gmail.com</a></td>
-                                        <td><button class="remove-button margin-right">Remove</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">calisto@gmail.com</a></td>
-                                        <td><button class="remove-button margin-right">Remove</button></td>
-                                    </tr>
+                                <tbody id="dynamicListContacts">
+                                    <!-- Dynamic data here -->
                                 </tbody>
                             </table>
                         </div>
