@@ -1,5 +1,5 @@
 // DOM Elements
-const VERSION = "1.3.2";
+const VERSION = "1.3.3";
 
 // Functions
 function showContainerIndex(id) {
