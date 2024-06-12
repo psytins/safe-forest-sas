@@ -1,9 +1,9 @@
 /*
 Colors for wireframe:
 
-#CDCDCD -> For components
-#D9D9D9 -> Dark Grey
-#EAEAEA -> Light Grey
+#C0D966 -> For components
+#C0D966 -> GREEN 01
+#F2F2F2 -> Light Grey
 #102026 -> Blue Black
 */
 
@@ -65,14 +65,14 @@ h1 {
 }
 
 .main-body {
-    background-color: #EAEAEA;
+    background-color: #F2F2F2;
     width: 85vw;
     height: 100vh;
     transition: width 0.3s ease;
 }
 
 .main-body-auth {
-    background-color: #EAEAEA;
+    background-color: #F2F2F2;
     width: 100vw;
     height: 100vh;
     transition: width 0.3s ease;
@@ -81,7 +81,7 @@ h1 {
 .coming-soon {
     height: 95%;
     width: 95%;
-    background-color: #D9D9D9;
+    background-color: #C0D966;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -94,7 +94,7 @@ h1 {
 
 /*################# SIDEBAR #################*/
 .side-nav {
-    background-color: #D9D9D9;
+    background-color: #C0D966;
     height: 100vh;
     width: 15vw;
     transition: width 0.3s ease;
@@ -173,7 +173,7 @@ h1 {
     align-items: center;
     margin-left: 10%;
     border-bottom: 2px #102026 solid;
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
 
 .menu-options-home-dashboard {
@@ -198,7 +198,7 @@ h1 {
 }
 
 .menu-options-home-dashboard:hover {
-    background-color: #b7d93d;
+    background-color: #C5D97E;
     color: white;
 }
 
@@ -223,7 +223,7 @@ h1 {
 }
 
 .menu-options-home-camera:hover {
-    background-color: #b7d93d;
+    background-color: #C5D97E;
     color: white;
 }
 
@@ -243,7 +243,7 @@ h1 {
     align-items: center;
     margin-left: 10%;
     border-bottom: 2px #102026 solid;
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
 
 .menu-options-settings-general {
@@ -268,7 +268,7 @@ h1 {
 }
 
 .menu-options-settings-general:hover {
-    background-color: #b7d93d;
+    background-color: #C5D97E;
     color: white;
 }
 
@@ -293,7 +293,7 @@ h1 {
 }
 
 .menu-options-settings-security:hover {
-    background-color: #b7d93d;
+    background-color: #C5D97E;
     color: white;
 }
 
@@ -319,7 +319,7 @@ h1 {
 
 
 .menu-options-settings-alert:hover {
-    background-color: #b7d93d;
+    background-color: #C5D97E;
     color: white;
 }
 
@@ -334,7 +334,7 @@ h1 {
     flex-direction: column;
     height: fit-content;
     width: 50%;
-    background-color: #CDCDCD;
+    background-color: #C0D966;
     z-index: 1000;
     border: 1px black solid;
 }
@@ -589,7 +589,7 @@ h1 {
 }
 
 .social-network div:hover {
-    background-color: #b7d93d;
+    background-color: #C5D97E;
 }
 
 
@@ -599,7 +599,7 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #EAEAEA;
+    background-color: #F2F2F2;
     width: 85vw;
     height: 12.85vh;
     border-bottom: 1px black solid;
@@ -752,7 +752,9 @@ h2 {
     justify-content: space-evenly;
     width: 90%;
     height: 90%;
-    background-color: #CDCDCD;
+    background-color: #F2F2F2;
+    border: #C5D97E 3px solid;
+    border-radius: 5px ;
 }
 
 .panel-information-statistics-status-online-container-number {
@@ -775,7 +777,7 @@ h2 {
 
 .panel-information-statistics-status-online-container-cameras button {
     border: 1px black solid;
-    background-color: #CDCDCD;
+    background-color: #C0D966;
     width: 100%;
 }
 
@@ -790,6 +792,7 @@ h2 {
     justify-content: center;
     width: 50%;
     height: 100%;
+    
 }
 
 .panel-information-statistics-status-offline-container {
@@ -799,7 +802,9 @@ h2 {
     justify-content: space-evenly;
     width: 90%;
     height: 90%;
-    background-color: #CDCDCD;
+    background-color: #F2F2F2;
+    border: #C5D97E 3px solid;
+    border-radius: 5px ;
 }
 
 .panel-information-statistics-status-offline-container-label {
@@ -821,7 +826,7 @@ h2 {
 
 .panel-information-statistics-status-offline-container-cameras button {
     border: 1px black solid;
-    background-color: #CDCDCD;
+    background-color: #C0D966;
     width: 100%;
 }
 
@@ -830,11 +835,13 @@ h2 {
 }
 
 .panel-information-statistics-smoke {
-    background-color: #CDCDCD;
+    background-color: #F2F2F2;
     display: flex;
     flex-direction: column;
     width: 95%;
     height: 50%;
+    border: #C5D97E 3px solid;
+    border-radius: 5px ;
 }
 
 .panel-information-statistics-smoke-title {
@@ -934,9 +941,11 @@ h2 {
     align-items: center;
     height: 95%;
     width: 95%;
-    background-color: #CDCDCD;
+    background-color: #F2F2F2;
     margin-top: 2%;
     margin-bottom: 2%;
+    border: #C5D97E 3px solid;
+    border-radius: 5px ;
 
 }
 
@@ -1030,7 +1039,8 @@ td {
 .panel-camera-container {
     width: 95%;
     height: 97%;
-    background-color: #CDCDCD;
+    background-color: #C5D97E;
+    border-radius: 5px;
 }
 
 .panel-camera-container-top {
@@ -1077,7 +1087,7 @@ td {
 .footer {
     display: flex;
     justify-content: space-between;
-    background-color: #EAEAEA;
+    background-color: #F2F2F2;
     width: 85vw;
     height: 9.88vh;
     border-top: 1px black solid;
@@ -1131,7 +1141,7 @@ td {
 .panel-security-information {
     display: flex;
     flex-direction: column;
-    background-color: #D9D9D9;
+    background-color: #C5D97E;
     width: 100%;
     height: 65%;
     margin-bottom: 2.5%;
@@ -1227,7 +1237,7 @@ td {
     display: flex;
     flex-direction: column;
     width: 100%;
-    background-color: #D9D9D9;
+    background-color: #C5D97E;
     height: 30%;
 }
 
@@ -1285,7 +1295,7 @@ td {
     display: flex;
     justify-items: center;
     align-items: center;
-    background-color: #EAEAEA;
+    background-color: #F2F2F2;
     width: 100vw;
     height: 12.85vh;
     border-bottom: 1px black solid;
@@ -1326,7 +1336,7 @@ td {
 .panel-auth-container-register {
     width: 70%;
     height: 95%;
-    background-color: #CDCDCD;
+    background-color: #C5D97E;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1468,7 +1478,7 @@ select {
 .footer-auth {
     display: flex;
     justify-content: center;
-    background-color: #EAEAEA;
+    background-color: #F2F2F2;
     width: 100vw;
     height: 9.88vh;
     border-top: 1px black solid;
@@ -1486,7 +1496,7 @@ select {
 
 
 .panel-general-account {
-    background-color: #CDCDCD;
+    background-color: #C5D97E;
     width: 95%;
     height: 97%;
 }
@@ -1556,7 +1566,7 @@ select {
 }
 
 .panel-general-account-button button:hover {
-    background-color: #D9D9D9;
+    background-color: #C5D97E;
 }
 
 
@@ -1567,7 +1577,7 @@ select {
 }
 
 .panel-add-contacts {
-    background-color: #CDCDCD;
+    background-color: #C5D97E;
     height: 30%;
     width: 90%;
     display: flex;
@@ -1616,7 +1626,7 @@ select {
 
 
 .panel-show-contacts {
-    background-color: #CDCDCD;
+    background-color: #C5D97E;
     height: 60%;
     width: 90%;
 }
@@ -1662,7 +1672,7 @@ select {
     }
 
     .menu-options-home-dashboard:hover {
-        background-color: #b7d93d;
+        background-color: #C5D97E;
         color: white;
     }
 
@@ -1688,7 +1698,7 @@ select {
     }
 
     .menu-options-settings-general:hover {
-        background-color: #b7d93d;
+        background-color: #C5D97E;
         color: white;
     }
 
@@ -1697,7 +1707,7 @@ select {
     }
 
     .menu-options-settings-security:hover {
-        background-color: #b7d93d;
+        background-color: #C5D97E;
         color: white;
     }
 
@@ -1707,7 +1717,7 @@ select {
 
 
     .menu-options-settings-alert:hover {
-        background-color: #b7d93d;
+        background-color: #C5D97E;
         color: white;
     }
 
@@ -1723,13 +1733,13 @@ select {
     .header-greeting-top {
         display: flex;
         align-items: center;
-        font-size: 0.6rem;
+        font-size: 1.5vw;
         /* background-color: #f2f2f2;*/
     }
 
     .header-greeting-bottom {
 
-        font-size: 0.4rem;
+        font-size: 1.5vw;
         align-items: center;
         /* background-color: #f2f2f2; */
     }
@@ -1743,7 +1753,7 @@ select {
     }
 
     .header-options-leave {
-        font-size: 0.6rem;
+        font-size: 1.5vw;
     }
 
     .header-options-language {
@@ -1770,15 +1780,15 @@ select {
         align-items: center;
         height: 100%;
         width: 100%;
-        font-size: 0.8rem;
+        font-size: 2vw;
     }
 
     th {
-        font-size: 0.4rem;
+        font-size: 1.5vw;
     }
 
     td {
-        font-size: 0.5rem;
+        font-size: 1.5vw;
     }
 
     /*FOOTER*/
@@ -1789,4 +1799,20 @@ select {
     .footer-update {
         display: none;
     }
+
+    /*PANEL - MY CAMERAS*/
+    .panel-camera-container-top-search {
+        margin: 2%;
+    }
+
+    .panel-camera-search{
+        width: 15vw;
+        height: 10vh;
+    }
+
+    .panel-account-search{
+        width: 15vw;
+    }
+
+
 }
