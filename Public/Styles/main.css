@@ -600,11 +600,7 @@ input:checked + .slider:after{
     margin-left: 3%;
 }
 
-<<<<<<< HEAD
-.add-camera-menu-options {
-=======
 .add-camera-menu-options-settings{
->>>>>>> dev_duarte
     display: flex;
     width: 100%;
     z-index: 900;
@@ -612,53 +608,23 @@ input:checked + .slider:after{
     /* margin-left: 5%; */
 }
 
-<<<<<<< HEAD
-.add-camera-menu-options-left {
-=======
 .add-camera-menu-options-settings-left{
->>>>>>> dev_duarte
     display: flex;
     flex-direction: column;
     width: 50%;
     z-index: 90;
 }
 
-<<<<<<< HEAD
-.add-camera-menu-options-left label {
-    margin-left: 5%;
-}
-
-.add-camera-menu-options-left input {
-    margin-left: 5%;
-=======
-.add-camera-menu-options-settings-left label{
-}
-
 .add-camera-menu-options-settings-left input{
->>>>>>> dev_duarte
     margin-bottom: 2%;
     width: 90%;
 }
 
-<<<<<<< HEAD
-.add-camera-menu-options-right {
-=======
 .add-camera-menu-options-settings-right{
->>>>>>> dev_duarte
     display: flex;
     flex-direction: column;
     width: 50%;
     z-index: 90;
-}
-
-<<<<<<< HEAD
-.add-camera-menu-options-right label {
-    margin-left: 5%;
-}
-
-.add-camera-menu-options-right input {
-=======
-.add-camera-menu-options-settings-right label{
 }
 
 .add-camera-menu-options-settings-right input{
@@ -671,14 +637,10 @@ input:checked + .slider:after{
 }
 
 .add-camera-menu-inputs-right input{
->>>>>>> dev_duarte
     margin-left: 5%;
     margin-bottom: 2%;
 }
 
-<<<<<<< HEAD
-.add-camera-menu-button {
-=======
 .add-camera-options-imageInput-options p{
     margin-left: 2%;
 }
@@ -708,7 +670,6 @@ margin-top: 2%;
 }
 
 .add-camera-menu-button{
->>>>>>> dev_duarte
     display: flex;
     z-index: 90;
     justify-content: end;
@@ -717,13 +678,8 @@ margin-top: 2%;
     margin-right: 10%;
 }
 
-<<<<<<< HEAD
-.add-camera-menu-button button {
-    margin-right: 5%;
-=======
 .add-camera-menu-button button{
     margin-left: 1%;
->>>>>>> dev_duarte
     cursor: pointer;
     padding: 10px 5%;
 }
