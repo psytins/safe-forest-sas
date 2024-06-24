@@ -90,6 +90,43 @@ router.post('/account-signout', (req, res) => {
     return res.json({ message: 'Sign out successful' });
 });
 
+// UPDATE - change profile
+router.post('/account-change-profile', (req, res) => {
+    const searchUser = new User({
+        userID: req.body.userID,
+    });
+
+    fname_upd = req.body.fname_upd;
+    lname_upd = req.body.lname_upd;
+    email_upd = req.body.email_upd;
+    ref_code_upd = req.body.ref_code_upd;
+    region_upd = req.body.region_upd;
+    logo_upd = null // tmp
+
+    User.findOne({ where: { userID: searchUser.userID } })
+        .then(user => {
+            if (!user) {
+                return res.status(401).json({ error: 'User not found' });
+            } else {
+                // save the new password
+                user.first_name = fname_upd;
+                user.last_name = lname_upd;
+                user.email = email_upd;
+                user.reference_code = ref_code_upd;
+                user.country = region_upd;
+                user.logo = logo_upd;                
+                user.save();
+                return res.json({ message: 'Profile updated.'});
+            }
+        })
+        .catch(error => {
+            console.error('Error updating user entry:', error);
+            return res.status(500).json({ error: 'Error updating user entry' });
+        });
+});
+
+
+
 // UPDATE - change password
 router.post('/account-change-password', (req, res) => {
     const searchUser = new User({

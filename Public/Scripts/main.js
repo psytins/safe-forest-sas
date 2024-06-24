@@ -55,7 +55,7 @@ function resetOtherRadioButtons(clickedButton, groupName) {
 }
 
 function updateValue(val) {
-    var value = val/10
+    var value = val / 10
     document.getElementById('scrollValue').innerText = value;
 }
 
@@ -170,6 +170,25 @@ function validateNewPasswordForm() {
 
     return true;
 
+}
+
+function validatePersonalProfileForm() {
+    const ERROR_COLOR = 'red';
+    const DEFAULT_COLOR = 'black'
+
+    const fname_upd = document.getElementById('input-fname-upd');
+    const lname_upd = document.getElementById('input-lname-upd');
+    const email_upd = document.getElementById('input-email-upd');
+    const ref_code_upd = document.getElementById('input-ref-code-upd')
+
+    //phone number regex TODO!
+    //email regex TODO!
+
+    if (!confirm("ARE YOU SURE?")) {
+        return false;
+    }
+
+    return true;
 }
 
 function validateDeleteAccount() {
@@ -379,6 +398,54 @@ function changePassword() {
     }
 }
 
+function changePersonalProfile() {
+    const fname_upd = document.getElementById('input-fname-upd').value === "" ? document.getElementById('input-fname-upd').placeholder : document.getElementById('input-fname-upd').value;
+    const lname_upd = document.getElementById('input-lname-upd').value === "" ? document.getElementById('input-lname-upd').placeholder : document.getElementById('input-lname-upd').value;
+    const email_upd = document.getElementById('input-email-upd').value === "" ? document.getElementById('input-email-upd').placeholder : document.getElementById('input-email-upd').value;
+    const ref_code_upd = document.getElementById('input-ref-code-upd').value === "" ? null : document.getElementById('input-ref-code-upd').value;
+    const region_upd = document.getElementById('input-region-upd').value === "" ? document.getElementById('input-region-upd').placeholder : document.getElementById('input-region-upd').value;
+    const logo_upd = null // tmp
+
+    const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
+
+    if (validatePersonalProfileForm()) {
+
+        fetch('api/auth/account-change-profile', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ userID, fname_upd, lname_upd, email_upd, ref_code_upd, region_upd, logo_upd }),
+        })
+            .then(response => { // data validation
+                if (response.status == 401) {
+                    throw new Error(`User not found! Status: ${response.status}`);
+                }
+
+                return response.json();
+            })
+            .then(data => {
+                console.log('Personal Profile updated!', data);
+
+                // Handle success ...
+                alert("Personal Profile updated!");
+                sessionStorage.setItem('name', fname_upd + " " + lname_upd);
+                sessionStorage.setItem('email', email_upd);
+                sessionStorage.setItem('country', region_upd);
+                sessionStorage.setItem('refCode', ref_code_upd);
+                location.reload();
+                // ...
+
+            })
+            .catch(error => {
+                console.error('An error occured:', error);
+                // Handle error ... 
+                alert("Something went wrong... " + error);
+                // ...
+            });
+    }
+}
+
 function deleteAccount() {
     const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
 
@@ -420,9 +487,9 @@ function registerCamera() {
     const current_status = 1;
     const size_from = parseInt(document.getElementById("size-from").value);
     const size_to = parseInt(document.getElementById("size-to").value);
-    const double_positive = document.getElementById('tglBtn').checked ? 1 : 0 ;
-    const time_to_live = parseInt(document.getElementById('time-to-live').value); 
-    const down_status_email = document.getElementById('email-alert').checked ? 1 : 0 ; 
+    const double_positive = document.getElementById('tglBtn').checked ? 1 : 0;
+    const time_to_live = parseInt(document.getElementById('time-to-live').value);
+    const down_status_email = document.getElementById('email-alert').checked ? 1 : 0;
 
     if (validateRegisterCamera()) {
 
@@ -845,11 +912,11 @@ async function loadIndex() {
     const fname = sessionStorage.getItem("name").split(" ")[0];
     const lname = sessionStorage.getItem("name").split(" ")[1];
 
-    document.getElementById("fname").placeholder = fname;
-    document.getElementById("lname").placeholder = lname;
-    document.getElementById("email").placeholder = sessionStorage.getItem('email');
-    document.getElementById("input-region").value = sessionStorage.getItem('country');
-    document.getElementById("ref-code").placeholder = sessionStorage.getItem('refCode');;
+    document.getElementById("input-fname-upd").placeholder = fname;
+    document.getElementById("input-lname-upd").placeholder = lname;
+    document.getElementById("input-email-upd").placeholder = sessionStorage.getItem('email');
+    document.getElementById("input-region-upd").value = sessionStorage.getItem('country');
+    document.getElementById("input-ref-code-upd").placeholder = sessionStorage.getItem('refCode');;
     document.getElementById("application-version").innerText = VERSION;
 
     // Load Dashboard Data and MyCamera List

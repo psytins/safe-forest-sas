@@ -481,20 +481,20 @@
                         <div class="panel-general-account-inputs-names">
                             <div class="panel-general-account-names-firstname">
                                 <label for="fname">First Name</label>
-                                <input type="text" id="fname" name="firstname">
+                                <input type="text" id="input-fname-upd" name="firstname">
                             </div>
                             <div class="panel-general-account-names-lastname">
                                 <label for="lname">Last Name</label>
-                                <input type="text" id="lname" name="lastname">
+                                <input type="text" id="input-lname-upd" name="lastname">
                             </div>
                         </div>
                         <div class="panel-general-account-email">
                             <label for="email">Email</label>
-                            <input type="text" id="email" name="email">
+                            <input type="text" id="input-email-upd" name="email">
                         </div>
                         <div class="panel-general-account-country">
                             <label for="input-region">Country / Region</label>
-                            <select name="input-region" id="input-region">
+                            <select name="input-region" id="input-region-upd">
                                 <option value="Norte">Norte</option>
                                 <option value="Centro">Centro</option>
                                 <option value="Lisboa e Vale do Tejo">Lisboa e Vale do Tejo</option>
@@ -506,17 +506,17 @@
                         </div>
                         <div class="panel-general-account-reference-code">
                             <label for="ref-code">Reference Code</label>
-                            <input type="text" id="ref-code" name="reference-code">
+                            <input type="text" id="input-ref-code-upd" name="reference-code">
                         </div>
                         <div class="panel-general-account-upload-logo">
                             <label for="uplogo">Upload Logo (.png)</label>
                             <div class="file-input-wrapper">
-                                <input type="file" id="uplogo" name="upload-logo">
+                                <input type="file" id="input-logo-upd" name="upload-logo">
                             </div>
                         </div>
                     </div>
                     <div class="panel-general-account-button">
-                        <button type="button">Save Changes</button>
+                        <button onclick="changePersonalProfile()" type="button">Save Changes</button>
                     </div>
                 </div>
             </div>
