@@ -3,6 +3,7 @@
 //Import External Routes ------------
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 
@@ -14,11 +15,13 @@ const port = 8080;
 //      to create the db connection.
 const authenticationRoute = require('./Routes/authenticationRoute');
 const cameraRoute = require('./Routes/cameraRoute');
+const emailRoute = require('./Routes/emailRoute');
 const verifyToken = require('./Secure/verifyToken');
 //...
 
 //Apply application Routes ------------
 //External application routes (Middleware)
+app.use(cors()); // Enable CORS for all routes
 app.use(express.json());
 app.use(cookieParser());
 
@@ -33,6 +36,7 @@ app.use(cookieParser());
 //Internal application routes ------------
 app.use('/api/auth', authenticationRoute);
 app.use('/api/camera', cameraRoute);
+app.use('/api/email-sender', emailRoute);
 //...
 
 //Default route

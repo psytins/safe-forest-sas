@@ -1,5 +1,8 @@
 // DOM Elements
-const VERSION = "1.4.0";
+const VERSION = "1.5.0";
+const AlertType = Object.freeze({
+    CAMERA_DOWN: 0,
+});
 
 // Functions
 function showContainerIndex(id) {
@@ -242,6 +245,14 @@ function validateAddContact() {
     }
 
     return true;
+}
+
+function sendAlert(alertType) {
+    switch (alertType) {
+        case 0: // Camera down alert
+            sendEmail("Camera Down");
+            break
+    }
 }
 // ------------------------------------------------
 // Requests to server ----------
@@ -693,6 +704,8 @@ function changeCameraStatus(cameraID) {
 
                 // Handle success ...
                 alert("Camera status changed successfully");
+                //Send alert
+                sendAlert(AlertType.CAMERA_DOWN)
                 location.reload();
                 // ...
 
@@ -846,6 +859,23 @@ function removeContact(contactID) {
     }
 }
 
+async function sendEmail(subject){
+    const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
+    await fetch('/api/email-sender/send-email', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userID, subject }),
+    })
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            console.log('Email sent successfully:', data);
+        });
+}
+
 // ------------------------------------------------
 // Other Functions
 function expandCameraInfo(cameraID) {
@@ -934,5 +964,3 @@ function loadAuthentication() {
     document.getElementById("login").style.display = "none";
     document.getElementById("application-version").innerText = VERSION;
 }
-
-
