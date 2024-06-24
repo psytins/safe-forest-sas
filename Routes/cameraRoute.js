@@ -26,6 +26,11 @@ router.post('/regist', (req, res) => {
         public_ip_address: req.body.public_ip_address,
         input_method: req.body.input_method,
         current_status: req.body.current_status,
+        size_from: req.body.size_from,
+        size_to: req.body.size_to,
+        double_positive: req.body.double_positive,
+        time_to_live: req.body.time_to_live,
+        down_status_email: req.body.down_status_email,
     });
 
     // Validate Camera Register

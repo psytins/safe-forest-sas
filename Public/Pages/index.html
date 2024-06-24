@@ -122,7 +122,7 @@
                 </div>
             </div>
 
-            <div class="panel"  id="add-camera-menu">
+            <div class="panel" id="add-camera-menu">
                 <!-- <div class="add-camera-menu-cancel">
                     <img onclick=toggleCancelMenu() src="../Images/cancel-logo.png">
                 </div> -->
@@ -176,121 +176,131 @@
 
                 <div class="add-camera-menu-options">
                     <div class="add-camera-menu-options-settings">
-                    <div class="add-camera-menu-options-settings-left">
-                        <label for="add-camera-camera-name">Friendly Name*</label>
-                        <input type="text" id="add-camera-camera-name" placeholder="Friendly Name" required>
-                        <label for="add-camera-country">Country*</label>
-                        <input type="text" id="add-camera-country" placeholder="Select Country" required>
-                        <label for="add-camera-brand-model">Brand & Model</label>
-                        <input type="text" id="add-camera-brand-model" placeholder="Brand & Model">
-                        <label for="add-camera-admin-url">Camera Web Admin URL</label>
-                        <input type="text" id="add-camera-admin-url" placeholder="https://">
+                        <div class="add-camera-menu-options-settings-left">
+                            <label for="add-camera-camera-name">Friendly Name*</label>
+                            <input type="text" id="add-camera-camera-name" placeholder="Friendly Name" required>
+                            <label for="add-camera-country">Country*</label>
+                            <input type="text" id="add-camera-country" placeholder="Select Country" required>
+                            <label for="add-camera-brand-model">Brand & Model</label>
+                            <input type="text" id="add-camera-brand-model" placeholder="Brand & Model">
+                            <label for="add-camera-admin-url">Camera Web Admin URL</label>
+                            <input type="text" id="add-camera-admin-url" placeholder="https://">
+                        </div>
+                        <div class="add-camera-menu-options-settings-right">
+                            <label for="add-camera-location">GPS Location*</label>
+                            <input type="text" id="add-camera-location" placeholder="GPS Location">
+                            <label for="add-camera-site-name">Site Name</label>
+                            <input type="text" id="add-camera-site-name" placeholder="Site Name">
+                            <label for="add-camera-azimuth-bearing">Azimuth / Bearing</label>
+                            <input type="text" id="add-camera-azimuth-bearing" value="0">
+                            <label for="add-camera-public-ip">Camera Public IP Address</label>
+                            <input type="text" id="add-camera-public-ip" placeholder="Camera Public IP Address">
+                        </div>
                     </div>
-                    <div class="add-camera-menu-options-settings-right">
-                        <label for="add-camera-location">GPS Location*</label>
-                        <input type="text" id="add-camera-location" placeholder="GPS Location">
-                        <label for="add-camera-site-name">Site Name</label>
-                        <input type="text" id="add-camera-site-name" placeholder="Site Name">
-                        <label for="add-camera-azimuth-bearing">Azimuth / Bearing</label>
-                        <input type="text" id="add-camera-azimuth-bearing" value="0">
-                        <label for="add-camera-public-ip">Camera Public IP Address</label>
-                        <input type="text" id="add-camera-public-ip" placeholder="Camera Public IP Address">
+
+                    <div class="add-camera-options-imageInput">
+                        <div class="add-camera-options-imageInput-title">
+                            <h3>Image Input Method</h3>
+                        </div>
+                        <div class="add-camera-options-imageInput-options">
+                            <input type="radio" name="image-input-option" value="HTTPS-POST" id="post"
+                                onclick="resetOtherRadioButtons(this, 'image-input-option')">
+                            <label for="post">HTTPS Post</label>
+                            <p>Camera uploads images to LookOut</p>
+                            <input type="radio" name="image-input-option" value="HTTPS-GET" id="get"
+                                onclick="resetOtherRadioButtons(this, 'image-input-option')">
+                            <label for="get">HTTPS Get</label>
+                            <p>LookOut downloads images from camera</p>
+                        </div>
+                    </div>
+
+                    <div class="add-camera-options-detection">
+                        <div class="add-camera-options-detection-title">
+                            <h3>Detection Sensitivity</h3>
+                        </div>
+                        <div class="add-camera-options-detection-options">
+                            <input type="radio" name="detection-option" value="70" id="high"
+                                onclick="resetOtherRadioButtons(this, 'detection-option')">
+                            <label for="high">High (70%)</label>
+                            <input type="radio" name="detection-option" value="75" id="standard"
+                                onclick="resetOtherRadioButtons(this, 'detection-option')">
+                            <label for="standard">Standard (75%)</label>
+                            <input type="radio" name="detection-option" value="80" id="low"
+                                onclick="resetOtherRadioButtons(this, 'detection-option')">
+                            <label for="low">Low (80%)</label>
+                            <input type="radio" name="detection-option" value="custom" id="custom"
+                                onclick="resetOtherRadioButtons(this, 'detection-option')">
+                            <label for="custom">Custom</label>
+                        </div>
+                    </div>
+
+                    <div class="add-camera-options-detectionBoundary">
+                        <div class="add-camera-options-detectionBoundary-title">
+                            <h3>Detection Boundary Size Range</h3>
+                        </div>
+                        <div class="add-camera-options-detectionBoundary-values">
+                            <p>Boundary / Image Size</p>
+                            <input id="size-from" value="0">
+                            <span> % to </span>
+                            <input id="size-to" value="100">
+                            <span> %</span>
+                        </div>
+                    </div>
+
+                    <div class="add-camera-options-doublePositive">
+                        <div class="add-camera-options-doublePositive-title">
+                            <h3>Double Positive?</h3>
+                        </div>
+
+                        <label class="switch">
+                            <input type="checkbox" id="tglBtn">
+                            <div class="slider round"></div>
+                        </label>
+                    </div>
+
+                    <div class="add-camera-options-duplication">
+                        <div class="add-camera-options-duplication-title">
+                            <h3>De-duplication & Detection-to-live</h3>
+                        </div>
+                        <div class="add-camera-options-duplication-scrollbar">
+                            <p>
+                                <span id="scrollValue">0</span>
+                                <span>minutes</span>
+                            </p>
+                            <input type="range" id="time-to-live" min="0" max="60" value="0" step="10"
+                                oninput="updateValue(this.value)">
+                        </div>
+                    </div>
+
+                    <div class="add-camera-options-cameraDown">
+                        <div class="add-camera-options-cameraDown-title">
+                            <h3>Camera Down Status Email Alert</h3>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="email-alert">
+                            <div class="slider round"></div>
+                        </label>
+                    </div>
+                </div>
+                <div class="add-camera-options-confirmations">
+                    <div class="add-camera-options-confirmations-imageAnonymity">
+                        <input type="checkbox">
+                        <label>Customer Understands and agrees that RoboticsCats may randomly sample customer's
+                            image for AI wildfire detection development. All images will be used anonymously and
+                            deleted after development</label>
+                    </div>
+                    <div class="add-camera-options-confirmations-storagePrivacy">
+                        <input type="checkbox">
+                        <label>Customer understands and agrees that RoboticsCats will delete raw images after 7
+                            days. Please uncheck if you want to delete raw images immediatly after AI
+                            detection</label>
                     </div>
                 </div>
 
-                <div class="add-camera-options-imageInput">
-                    <div class="add-camera-options-imageInput-title">
-                        <h3>Image Input Method</h3>
-                    </div>
-                    <div class="add-camera-options-imageInput-options">
-                        <input type="radio" name="image-input-option" value="post" id="post" onclick="resetOtherRadioButtons(this, 'image-input-option')">
-                        <label for="post">HTTPS Post</label>
-                        <p>Camera uploads images to LookOut</p>
-                        <input type="radio" name="image-input-option" value="get" id="get" onclick="resetOtherRadioButtons(this, 'image-input-option')">
-                        <label for="get">HTTPS Get</label>
-                        <p>LookOut downloads images from camera</p>
-                    </div>
+                <div class="add-camera-menu-button">
+                    <button onclick="toggleCancelMenu()">Cancel</button>
+                    <button type="button" onclick="registerCamera()">Add Camera</button>
                 </div>
-
-                <div class="add-camera-options-detection">
-                    <div class="add-camera-options-detection-title">
-                        <h3>Detection Sensitivity</h3>
-                    </div>
-                    <div class="add-camera-options-detection-options">
-                        <input type="radio" name="detection-option" value="high" id="high" onclick="resetOtherRadioButtons(this, 'detection-option')">
-                        <label for="high">High (70%)</label>
-                        <input type="radio" name="detection-option" value="standard" id="standard" onclick="resetOtherRadioButtons(this, 'detection-option')">
-                        <label for="standard">Standard (75%)</label>
-                        <input type="radio" name="detection-option" value="low" id="low" onclick="resetOtherRadioButtons(this, 'detection-option')">
-                        <label for="low">Low (80%)</label>
-                        <input type="radio" name="detection-option" value="custom" id="custom" onclick="resetOtherRadioButtons(this, 'detection-option')">
-                        <label for="custom">Custom</label>
-                    </div>
-                </div>
-
-                <div class="add-camera-options-detectionBoundary">
-                    <div class="add-camera-options-detectionBoundary-title">
-                        <h3>Detection Boundary Size Range</h3>
-                    </div>
-                    <div class="add-camera-options-detectionBoundary-values">
-                        <p>Boundary / Image Size</p>
-                        <input value="0">
-                        <span> % to </span>
-                        <input value="100">
-                        <span> %</span>
-                    </div>
-                </div>
-
-                <div class="add-camera-options-doublePositive">
-                    <div class="add-camera-options-doublePositive-title">
-                        <h3>Double Positive?</h3>
-                    </div> 
-                    
-                    <label class="switch">
-                        <input type="checkbox" id="togBtn">
-                        <div class="slider round"></div>
-                    </label>
-                </div>
-
-                <div class="add-camera-options-duplication">
-                    <div class="add-camera-options-duplication-title">
-                        <h3>De-duplication & Detection-to-live</h3>
-                    </div>
-                    <div class="add-camera-options-duplication-scrollbar">
-                        <p>
-                            <span id="scrollValue">0</span>
-                            <span>minutes</span>
-                         </p>
-                        <input type="range" id="scrollbar" min="0" max="60" value="0" step="10" oninput="updateValue(this.value)">
-                    </div>
-                </div>
-
-                <div class="add-camera-options-cameraDown">
-                    <div class="add-camera-options-cameraDown-title">
-                        <h3>Camera Down Status Email Alert</h3>
-                    </div> 
-                    <label class="switch">
-                        <input type="checkbox" id="togBtn">
-                        <div class="slider round"></div>
-                    </label>
-                </div>
-
-        </div>
-        <div class="add-camera-options-confirmations">
-            <div class="add-camera-options-confirmations-imageAnonymity"> 
-                <input type="checkbox">
-                <label>Customer Understands and agrees that RoboticsCats may randomly sample customer's image for AI wildfire detection development. All images will be used anonymously and deleted after development</label>
-            </div>
-            <div class="add-camera-options-confirmations-storagePrivacy"> 
-                <input type="checkbox">
-                <label>Customer understands and agrees that RoboticsCats will delete raw images after 7 days. Please uncheck if you want to delete raw images immediatly after AI detection</label>
-            </div>
-        </div>
-
-            <div class="add-camera-menu-button">
-                <button onclick=toggleCancelMenu()>Cancel</button>
-                <button>Add Camera</button>
-            </div>
             </div>
 
             <div class="panel" id="dashboard">
@@ -391,8 +401,9 @@
                                 <h1>My Cameras</h1>
                             </div>
                             <div class="panel-camera-container-top-search">
-                                <input class="panel-camera-search" id="searchInput" onkeyup="searchTable('searchInput', 'searchDashboard')"
-                                    type="text" name="camera-search" placeholder="Search camera">
+                                <input class="panel-camera-search" id="searchInput"
+                                    onkeyup="searchTable('searchInput', 'searchDashboard')" type="text"
+                                    name="camera-search" placeholder="Search camera">
                             </div>
                         </div>
                         <div class="panel-camera-container-table">
@@ -565,7 +576,8 @@
                     <div class="panel-add-contacts-content">
                         <div class="panel-add-contacts-addbox">
                             <label for="add-contact">Add more emails to send notifications and alerts</label>
-                            <input placeholder="Max. 20 alert contacts can be added" type="email" id="add-contact" name="addContact">
+                            <input placeholder="Max. 20 alert contacts can be added" type="email" id="add-contact"
+                                name="addContact">
                         </div>
                         <div class="panel-add-contacts-addbutton">
                             <button type="button" onclick="addContact()">Add Contact</button>

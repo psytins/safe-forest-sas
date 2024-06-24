@@ -192,7 +192,7 @@ function validateRegisterCamera() {
     const ERROR_COLOR = 'red';
     const DEFAULT_COLOR = 'black'
 
-    const friendly_name = document.getElementById("add-camera-friendly-name");
+    const friendly_name = document.getElementById("add-camera-camera-name");
     const country = document.getElementById("add-camera-country");
     const gps_location = document.getElementById("add-camera-location");
 
@@ -397,12 +397,11 @@ function deleteAccount() {
 
 function registerCamera() {
     const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer // FK
-    const camera_name = document.getElementById("add-camera-friendly-name").value; // temp
-    const friendly_name = document.getElementById("add-camera-friendly-name").value;
-    const sensitivity = 80; // temp
-    const last_detected = null; //temp
+    const camera_name = document.getElementById("add-camera-camera-name").value;
+    const friendly_name = document.getElementById("add-camera-camera-name").value;
+    const sensitivity = parseInt(document.querySelector('input[name="detection-option"]:checked').value);
+    const last_detected = null;
     const subscription_plan = 1; // FK //temp free
-    const camera_endpoint = null; //temp
     const country = document.getElementById("add-camera-country").value;
     const gps_location = document.getElementById("add-camera-location").value;
     const site_name = document.getElementById("add-camera-site-name").value;
@@ -410,8 +409,13 @@ function registerCamera() {
     const azimuth_bearing = document.getElementById("add-camera-azimuth-bearing").value;
     const camera_web_admin = document.getElementById("add-camera-admin-url").value;
     const public_ip_address = document.getElementById("add-camera-public-ip").value;
-    const input_method = "HTTPS-POST"; //temp
-    const current_status = 1; //temp
+    const input_method = document.querySelector('input[name="image-input-option"]:checked').value;
+    const current_status = 1;
+    const size_from = parseInt(document.getElementById("size-from").value);
+    const size_to = parseInt(document.getElementById("size-to").value);
+    const double_positive = document.getElementById('tglBtn').checked ? 1 : 0 ;
+    const time_to_live = parseInt(document.getElementById('time-to-live').value); 
+    const down_status_email = document.getElementById('email-alert').checked ? 1 : 0 ; 
 
     if (validateRegisterCamera()) {
 
@@ -428,7 +432,6 @@ function registerCamera() {
                     sensitivity,
                     last_detected,
                     subscription_plan,
-                    camera_endpoint,
                     country,
                     gps_location,
                     site_name,
@@ -437,7 +440,12 @@ function registerCamera() {
                     camera_web_admin,
                     public_ip_address,
                     input_method,
-                    current_status
+                    current_status,
+                    size_from,
+                    size_to,
+                    double_positive,
+                    time_to_live,
+                    down_status_email
                 }),
         })
             .then(response => { // data validation
