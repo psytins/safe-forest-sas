@@ -5,11 +5,10 @@ const sequelize = require('../Model/db'); // get MySQL connection
 
 // Define a model - must be equal to mysql schema! 
 const User = sequelize.define('user', {
-    id: {
+    userID: {
         type: Sequelize.INTEGER,
         allowNull: false, unique: true,
-        primaryKey: true, autoIncrement:
-            true
+        primaryKey: true, autoIncrement: true
     },
     first_name: Sequelize.STRING,
     last_name: Sequelize.STRING,

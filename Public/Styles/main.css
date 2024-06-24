@@ -1,9 +1,9 @@
 /*
 Colors for wireframe:
 
-#CDCDCD -> For components
-#D9D9D9 -> Dark Grey
-#EAEAEA -> Light Grey
+#C0D966 -> For components
+#C0D966 -> GREEN 01
+#F2F2F2 -> Light Grey
 #102026 -> Blue Black
 */
 
@@ -65,14 +65,14 @@ h1 {
 }
 
 .main-body {
-    background-color: #EAEAEA;
+    background-color: #F2F2F2;
     width: 85vw;
     height: 100vh;
     transition: width 0.3s ease;
 }
 
 .main-body-auth {
-    background-color: #EAEAEA;
+    background-color: #F2F2F2;
     width: 100vw;
     height: 100vh;
     transition: width 0.3s ease;
@@ -81,7 +81,7 @@ h1 {
 .coming-soon {
     height: 95%;
     width: 95%;
-    background-color: #D9D9D9;
+    background-color: #C0D966;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -94,7 +94,7 @@ h1 {
 
 /*################# SIDEBAR #################*/
 .side-nav {
-    background-color: #D9D9D9;
+    background-color: #C0D966;
     height: 100vh;
     width: 15vw;
     transition: width 0.3s ease;
@@ -105,10 +105,11 @@ h1 {
     width: 15vw;
     height: 12.85vh;
     border-bottom: 1px #102026 solid;
+    justify-content: center;
 }
 
 .logo-nav-logo {
-    width: 70%;
+    width: 100%;
     background-image: url("../Images/safe-forest.png");
     background-repeat: no-repeat;
     background-position: center;
@@ -159,7 +160,7 @@ h1 {
 .menu-options-home {
     width: 100%;
     height: 30%;
-    margin-top: 5%;
+    margin-top: 5vh;
     color: #102026;
     display: flex;
     flex-direction: column;
@@ -167,23 +168,19 @@ h1 {
     transition: width 0.3s ease;
 }
 
-
-
 .menu-options-home-label {
     display: flex;
     align-items: center;
-    height: 35px;
-    width: 60%;
     margin-left: 10%;
     border-bottom: 2px #102026 solid;
+    font-size: 1rem;
 }
 
 .menu-options-home-dashboard {
     cursor: pointer;
     margin-top: 2%;
     display: flex;
-    width: 100%;
-    height: 25%;
+    font-size: 0.8rem;
 }
 
 .menu-options-home-dashboard-icon {
@@ -198,19 +195,17 @@ h1 {
     display: flex;
     justify-content: start;
     align-items: center;
-    width: 50%;
 }
 
 .menu-options-home-dashboard:hover {
-    background-color: #b7d93d;
+    background-color: #C5D97E;
     color: white;
 }
 
 .menu-options-home-camera {
     display: flex;
     cursor: pointer;
-    width: 100%;
-    height: 25%;
+    font-size: 0.8rem;
 }
 
 .menu-options-home-camera-icon {
@@ -225,11 +220,10 @@ h1 {
     display: flex;
     justify-content: start;
     align-items: center;
-    width: 50%;
 }
 
 .menu-options-home-camera:hover {
-    background-color: #b7d93d;
+    background-color: #C5D97E;
     color: white;
 }
 
@@ -247,18 +241,16 @@ h1 {
 .menu-options-settings-label {
     display: flex;
     align-items: center;
-    height: 35px;
-    width: 60%;
     margin-left: 10%;
     border-bottom: 2px #102026 solid;
+    font-size: 1rem;
 }
 
 .menu-options-settings-general {
     cursor: pointer;
     margin-top: 2%;
     display: flex;
-    width: 100%;
-    height: 25%;
+    font-size: 0.8rem;
 }
 
 .menu-options-settings-general-icon {
@@ -273,19 +265,17 @@ h1 {
     display: flex;
     justify-content: start;
     align-items: center;
-    width: 50%;
 }
 
 .menu-options-settings-general:hover {
-    background-color: #b7d93d;
+    background-color: #C5D97E;
     color: white;
 }
 
 .menu-options-settings-security {
     cursor: pointer;
     display: flex;
-    width: 100%;
-    height: 25%;
+    font-size: 0.8rem;
 }
 
 .menu-options-settings-security-icon {
@@ -300,19 +290,17 @@ h1 {
     display: flex;
     justify-content: start;
     align-items: center;
-    width: 50%;
 }
 
 .menu-options-settings-security:hover {
-    background-color: #b7d93d;
+    background-color: #C5D97E;
     color: white;
 }
 
 .menu-options-settings-alert {
     cursor: pointer;
     display: flex;
-    width: 100%;
-    height: 25%;
+    font-size: 0.8rem;
 }
 
 .menu-options-settings-alert-icon {
@@ -327,14 +315,376 @@ h1 {
     display: flex;
     justify-content: start;
     align-items: center;
-    width: 50%;
 }
 
 
 .menu-options-settings-alert:hover {
-    background-color: #b7d93d;
+    background-color: #C5D97E;
     color: white;
 }
+
+/*################# ADD CAMERA MENU #################*/
+
+#add-camera-menu {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    flex-direction: column;
+    height: fit-content;
+    width: 50%;
+    background-color: #C0D966;
+    z-index: 1000;
+    border: 1px black solid;
+}
+
+.add-camera-menu-cancel {
+    display: flex;
+    justify-content: end;
+    width: 100%;
+    z-index: 90;
+}
+
+.add-camera-menu-cancel img {
+    height: 100%;
+    background: none;
+    border: none;
+}
+
+.add-camera-menu-cancel img:hover {
+    cursor: pointer;
+    background-color: gray;
+}
+
+.add-camera-plans {
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    justify-content: space-evenly;
+    padding-bottom: 2%;
+}
+
+.add-camera-plans-free {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 25%;
+    height: fit-content;
+    padding: 1%;
+}
+
+.add-camera-plans-free:hover {
+    background-color: gray;
+    cursor: pointer;
+}
+
+.add-camera-plans-free-title {
+    display: flex;
+    justify-content: center;
+}
+
+.add-camera-plans-free-price {
+    display: flex;
+    margin-top: 1%;
+    margin-left: 5%;
+}
+
+.add-camera-plans-free-description {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    margin-left: 5%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    align-content: center;
+    height: 100%;
+}
+
+.add-camera-plans-free-checks {
+    display: flex;
+    height: 20%;
+    margin-left: 5%;
+    margin-top: 2%;
+    align-items: end;
+}
+
+.add-camera-plans-standard {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 25%;
+    height: fit-content;
+    padding: 1%;
+}
+
+.add-camera-plans-standard:hover {
+    background-color: gray;
+    cursor: pointer;
+}
+
+.add-camera-plans-standard-title {
+    display: flex;
+    justify-content: center;
+}
+
+.add-camera-plans-standard-price {
+    display: flex;
+    margin-top: 1%;
+    margin-left: 5%;
+}
+
+.add-camera-plans-standard-description {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    margin-left: 5%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    align-content: center;
+    height: 100%;
+}
+
+.add-camera-plans-standard-checks {
+    display: flex;
+    height: 20%;
+    margin-left: 5%;
+    margin-top: 2%;
+    align-items: end;
+}
+
+
+.add-camera-plans-premium {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 25%;
+    height: fit-content;
+    padding: 1%;
+}
+
+.add-camera-plans-premium:hover {
+    background-color: gray;
+    cursor: pointer;
+}
+
+.add-camera-plans-premium-title {
+    display: flex;
+    justify-content: center;
+}
+
+.add-camera-plans-premium-price {
+    display: flex;
+    margin-top: 1%;
+    margin-left: 5%;
+}
+
+.add-camera-plans-premium-description {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    margin-left: 5%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    align-content: center;
+    height: 100%;
+}
+
+.add-camera-plans-premium-checks {
+    display: flex;
+    height: 20%;
+    margin-left: 5%;
+    margin-top: 2%;
+    align-items: end;
+}
+
+/**/
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 90px;
+    height: 34px;
+  }
+  
+.switch input {
+    display:none;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: black;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: gray;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(55px);
+}
+
+.slider:after{
+    content:'No';
+    color: black;
+    display: block;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    font-size: 15px;
+    font-family: Verdana, sans-serif;
+}
+
+input:checked + .slider:after{  
+    content:'Yes';
+}
+  
+/**/
+
+.add-camera-menu-options{
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    max-height: 27vh;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.add-camera-menu-options div{
+    margin-left: 2%;
+}
+
+.add-camera-menu-options h3{
+    margin-bottom: 1%;
+    margin-top: 1%;
+}
+
+
+.add-camera-menu-title{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    width: 100%;
+    z-index: 90;
+}
+
+.add-camera-menu-title h1 {
+    margin-left: 3%;
+}
+
+.add-camera-menu-options-settings{
+    display: flex;
+    width: 100%;
+    z-index: 900;
+    justify-content: space-between; 
+    /* margin-left: 5%; */
+}
+
+.add-camera-menu-options-settings-left{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    z-index: 90;
+}
+
+.add-camera-menu-options-settings-left input{
+    margin-bottom: 2%;
+    width: 90%;
+}
+
+.add-camera-menu-options-settings-right{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    z-index: 90;
+}
+
+.add-camera-menu-options-settings-right input{
+    margin-bottom: 2%;
+    width: 90%;
+}
+
+.add-camera-options-imageInput-options p{
+    margin-left: 2%;
+}
+
+.add-camera-menu-inputs-right input{
+    margin-left: 5%;
+    margin-bottom: 2%;
+}
+
+.add-camera-options-imageInput-options p{
+    margin-left: 2%;
+}
+
+.add-camera-options-detectionBoundary-values{
+    display: flex;
+    align-items: center;
+}
+
+.add-camera-options-detectionBoundary-values input{
+    margin-left: 1%;
+    margin-right: 1%;
+    width: 1.5vw;
+    text-align: center;
+    border: none;
+}
+
+.add-camera-options-confirmations{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 90%;
+}
+
+.add-camera-options-confirmations input{
+margin-top: 2%;
+}
+
+.add-camera-menu-button{
+    display: flex;
+    z-index: 90;
+    justify-content: end;
+    width: 100%;
+    padding: 2%;
+    margin-right: 10%;
+}
+
+.add-camera-menu-button button{
+    margin-left: 1%;
+    cursor: pointer;
+    padding: 10px 5%;
+}
+
+/*###################################################*/
 
 /*################# SOCIAL NETWORK #################*/
 .social-network {
@@ -359,7 +709,7 @@ h1 {
 }
 
 .social-network div:hover {
-    background-color: #b7d93d;
+    background-color: #C5D97E;
 }
 
 
@@ -369,7 +719,7 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #EAEAEA;
+    background-color: #F2F2F2;
     width: 85vw;
     height: 12.85vh;
     border-bottom: 1px black solid;
@@ -522,12 +872,15 @@ h2 {
     justify-content: space-evenly;
     width: 90%;
     height: 90%;
-    background-color: #CDCDCD;
+    background-color: #F2F2F2;
+    border: #C5D97E 3px solid;
+    border-radius: 5px ;
 }
 
 .panel-information-statistics-status-online-container-number {
     height: 30%;
     margin-left: 5%;
+    font-size: 1rem;
 }
 
 .panel-information-statistics-status-online-container-label {
@@ -544,7 +897,7 @@ h2 {
 
 .panel-information-statistics-status-online-container-cameras button {
     border: 1px black solid;
-    background-color: #CDCDCD;
+    background-color: #C0D966;
     width: 100%;
 }
 
@@ -559,6 +912,7 @@ h2 {
     justify-content: center;
     width: 50%;
     height: 100%;
+    
 }
 
 .panel-information-statistics-status-offline-container {
@@ -568,7 +922,9 @@ h2 {
     justify-content: space-evenly;
     width: 90%;
     height: 90%;
-    background-color: #CDCDCD;
+    background-color: #F2F2F2;
+    border: #C5D97E 3px solid;
+    border-radius: 5px ;
 }
 
 .panel-information-statistics-status-offline-container-label {
@@ -579,6 +935,7 @@ h2 {
 .panel-information-statistics-status-offline-container-number {
     height: 30%;
     margin-left: 5%;
+    font-size: 1rem;
 }
 
 .panel-information-statistics-status-offline-container-cameras {
@@ -589,7 +946,7 @@ h2 {
 
 .panel-information-statistics-status-offline-container-cameras button {
     border: 1px black solid;
-    background-color: #CDCDCD;
+    background-color: #C0D966;
     width: 100%;
 }
 
@@ -598,11 +955,13 @@ h2 {
 }
 
 .panel-information-statistics-smoke {
-    background-color: #CDCDCD;
+    background-color: #F2F2F2;
     display: flex;
     flex-direction: column;
     width: 95%;
     height: 50%;
+    border: #C5D97E 3px solid;
+    border-radius: 5px ;
 }
 
 .panel-information-statistics-smoke-title {
@@ -627,9 +986,11 @@ h2 {
 
 .panel-information-statistics-smoke-24-hours-number {
     display: flex;
+    justify-content: space-evenly;
     margin-left: 8%;
-    width: 95%;
+    width: 35%;
     height: 55%;
+    font-size: 0.8rem;
 }
 
 .panel-information-statistics-smoke-24-hours-label {
@@ -653,9 +1014,11 @@ h2 {
 
 .panel-information-statistics-smoke-7-days-number {
     display: flex;
+    justify-content: space-evenly;
     margin-left: 8%;
-    width: 95%;
+    width: 35%;
     height: 55%;
+    font-size: 0.8rem;
 }
 
 .panel-information-statistics-smoke-7-days-label {
@@ -676,9 +1039,11 @@ h2 {
 
 .panel-information-statistics-smoke-30-days-number {
     display: flex;
+    justify-content: space-evenly;
     margin-left: 8%;
-    width: 95%;
+    width: 35%;
     height: 55%;
+    font-size: 0.8rem;
 }
 
 .panel-information-statistics-smoke-30-days-label {
@@ -696,9 +1061,11 @@ h2 {
     align-items: center;
     height: 95%;
     width: 95%;
-    background-color: #CDCDCD;
+    background-color: #F2F2F2;
     margin-top: 2%;
     margin-bottom: 2%;
+    border: #C5D97E 3px solid;
+    border-radius: 5px ;
 
 }
 
@@ -745,7 +1112,7 @@ th {
     padding: 20px 15px;
     text-align: left;
     font-weight: 500;
-    font-size: 12px;
+    font-size: 0.6rem;
     text-transform: uppercase;
 }
 
@@ -754,7 +1121,7 @@ td {
     text-align: left;
     vertical-align: middle;
     font-weight: 300;
-    font-size: 12px;
+    font-size: 0.6rem;
     border-bottom: solid 1px rgba(255, 255, 255, 0.1);
 }
 
@@ -792,7 +1159,8 @@ td {
 .panel-camera-container {
     width: 95%;
     height: 97%;
-    background-color: #CDCDCD;
+    background-color: #C5D97E;
+    border-radius: 5px;
 }
 
 .panel-camera-container-top {
@@ -839,7 +1207,7 @@ td {
 .footer {
     display: flex;
     justify-content: space-between;
-    background-color: #EAEAEA;
+    background-color: #F2F2F2;
     width: 85vw;
     height: 9.88vh;
     border-top: 1px black solid;
@@ -873,13 +1241,181 @@ td {
     align-items: center;
 }
 
-/*################# AUTHENTICATION PAGE #################*/
+/*#################### SECURITY PAGE ####################*/
+
+#security {
+    justify-content: start;
+}
+
+.panel-security {
+    height: 95%;
+    width: 95%;
+    margin-left: 2.5%;
+    display: flex;
+    justify-content: center;
+    justify-self: start;
+    align-items: center;
+    flex-direction: column;
+}
+
+.panel-security-information {
+    display: flex;
+    flex-direction: column;
+    background-color: #C5D97E;
+    width: 100%;
+    height: 65%;
+    margin-bottom: 2.5%;
+}
+
+.panel-security-information-label {
+    height: fit-content;
+    width: fit-content;
+    margin-left: 1%;
+    margin-top: 1%;
+}
+
+.panel-security-information-form {
+    display: flex;
+    flex-direction: column;
+    justify-self: flex-end;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.panel-security-information-current-password {
+    height: fit-content;
+}
+
+.panel-security-information-current-password p {
+    width: fit-content;
+    height: fit-content;
+    margin-left: 1%;
+}
+
+.panel-security-information-current-password input {
+    width: fit-content;
+    height: fit-content;
+    margin-left: 1%;
+    width: 95%;
+    height: 25px
+}
+
+.panel-security-information-new-password {
+    height: fit-content;
+    margin-top: 1%;
+}
+
+.panel-security-information-new-password p {
+    width: fit-content;
+    height: fit-content;
+    margin-left: 1%;
+}
+
+.panel-security-information-new-password input {
+    width: fit-content;
+    height: fit-content;
+    margin-left: 1%;
+    width: 95%;
+    height: 25px
+}
+
+.panel-security-information-confirm-password {
+    margin-top: 1%;
+}
+
+.panel-security-information-confirm-password p {
+    width: fit-content;
+    height: fit-content;
+    margin-left: 1%;
+    width: 90%;
+    height: 25px
+}
+
+.panel-security-information-confirm-password input {
+    width: fit-content;
+    height: fit-content;
+    margin-left: 1%;
+    width: 95%;
+    height: 25px
+}
+
+.panel-security-information-change {
+    display: flex;
+    justify-content: end;
+    align-content: end;
+    width: 95%;
+    margin-top: 2%;
+    margin-left: 1.5%;
+}
+
+.panel-security-information-change button {
+    padding: 10px 5%;
+}
+
+.panel-security-danger {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: #C5D97E;
+    height: 30%;
+}
+
+.panel-security-danger-label {
+    display: flex;
+    align-self: start;
+    height: fit-content;
+    width: fit-content;
+    margin-left: 1%;
+    margin-top: 1%;
+}
+
+.panel-security-danger-delete-account {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 50%;
+    width: 100%;
+}
+
+.panel-security-danger-delete-account-label {
+    display: flex;
+    margin-left: 1%;
+}
+
+.panel-security-danger-delete-account-option {
+    display: flex;
+    width: 100%;
+}
+
+.panel-security-danger-delete-account-text {
+    display: flex;
+    flex: 1;
+    margin-left: 1%;
+    align-items: center;
+}
+
+.panel-security-danger-delete-account-button {
+    display: flex;
+    flex: 1;
+    margin-right: 4%;
+    justify-content: end;
+}
+
+.panel-security-danger-delete-account-button button {
+    padding: 10px 5%;
+}
+
+
 /*#######################################################*/
+
+/*################# AUTHENTICATION PAGE #################*/
+
 .header-auth {
     display: flex;
     justify-items: center;
     align-items: center;
-    background-color: #EAEAEA;
+    background-color: #F2F2F2;
     width: 100vw;
     height: 12.85vh;
     border-bottom: 1px black solid;
@@ -920,7 +1456,7 @@ td {
 .panel-auth-container-register {
     width: 70%;
     height: 95%;
-    background-color: #CDCDCD;
+    background-color: #C5D97E;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -932,9 +1468,11 @@ td {
     height: 70%;
     display: flex;
     justify-content: space-evenly;
-  
+
 }
-.panel-auth-container-register-form input,select{
+
+.panel-auth-container-register-form input,
+select {
     width: 90%;
     height: 3vh;
     margin-top: 1%;
@@ -942,14 +1480,16 @@ td {
     background: transparent;
     border: 1px solid black;
 }
-.panel-auth-container-register-form select{
+
+.panel-auth-container-register-form select {
     width: 92.5%;
 }
-#input-terms{
+
+#input-terms {
     width: 15px;
 }
 
-.panel-auth-container-register-form-base-info{
+.panel-auth-container-register-form-base-info {
     height: 70%;
     width: 45%;
     display: flex;
@@ -959,33 +1499,36 @@ td {
 }
 
 
-.panel-auth-container-register-form-base-info-name{
+.panel-auth-container-register-form-base-info-name {
     display: flex;
 }
-.panel-auth-container-register-form-base-info-name input{
+
+.panel-auth-container-register-form-base-info-name input {
     width: 80%;
 }
-.panel-auth-container-register-form-base-info-email{
-    display: flex;
-    flex-direction: column;
-}
-.panel-auth-container-register-form-base-info-password{
-    display: flex;
-    flex-direction: column;
-}
-.panel-auth-container-register-form-base-info-confirm-password{
+
+.panel-auth-container-register-form-base-info-email {
     display: flex;
     flex-direction: column;
 }
 
-.panel-auth-container-register-form-division{
+.panel-auth-container-register-form-base-info-password {
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-auth-container-register-form-base-info-confirm-password {
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-auth-container-register-form-division {
     height: 70%;
     border: 1px solid black;
     margin-top: 5%
-
 }
 
-.panel-auth-container-register-form-contact-info{
+.panel-auth-container-register-form-contact-info {
     height: 70%;
     width: 45%;
     display: flex;
@@ -994,37 +1537,41 @@ td {
     margin-top: 5%
 }
 
-.panel-auth-container-register-form-contact-info-info{
+.panel-auth-container-register-form-contact-info-info {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     height: 60%;
 }
-.panel-auth-container-register-form-contact-info-info-phone{
+
+.panel-auth-container-register-form-contact-info-info-phone {
     display: flex;
     flex-direction: column;
 }
-.panel-auth-container-register-form-contact-info-info-region{
+
+.panel-auth-container-register-form-contact-info-info-region {
     display: flex;
     flex-direction: column
 }
-.panel-auth-container-register-form-contact-info-terms{
+
+.panel-auth-container-register-form-contact-info-terms {
     display: flex;
 }
-.panel-auth-container-register-form-contact-info-terms p{
+
+.panel-auth-container-register-form-contact-info-terms p {
     font-size: small;
     margin-right: 2%;
 }
 
 
-.panel-auth-container-register-submit{
+.panel-auth-container-register-submit {
     width: 100%;
     height: 8%;
     display: flex;
     justify-content: center;
 }
 
-.panel-auth-container-register-submit button{
+.panel-auth-container-register-submit button {
     width: 60%;
     height: 100%;
     font-size: larger;
@@ -1034,12 +1581,13 @@ td {
     cursor: pointer;
 
 }
-.panel-auth-container-register-submit button:hover{
+
+.panel-auth-container-register-submit button:hover {
     background-color: grey;
 
 }
 
-.panel-auth-container-register-altlogin{
+.panel-auth-container-register-altlogin {
     width: 100%;
     height: 5%;
     align-items: center;
@@ -1050,7 +1598,7 @@ td {
 .footer-auth {
     display: flex;
     justify-content: center;
-    background-color: #EAEAEA;
+    background-color: #F2F2F2;
     width: 100vw;
     height: 9.88vh;
     border-top: 1px black solid;
@@ -1058,6 +1606,333 @@ td {
     font-size: small;
 }
 
+/*#######################################################*/
+
 /*################# END AUTHENTICATION PAGE #################*/
 /*#######################################################*/
 
+/*#######################################################*/
+/*      General Account Settings CSS     */
+
+
+.panel-general-account {
+    background-color: #C5D97E;
+    width: 95%;
+    height: 97%;
+}
+
+.panel-general-account-title {
+    width: 30w;
+    margin-left: 3%;
+    margin-top: 4%;
+}
+
+.panel-general-account-inputs {
+    width: 81%;
+    height: 78%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    font-size: 16px;
+    padding-left: 7%;
+}
+
+.panel-general-account-inputs input[type="text"] {
+    width: 95%;
+    padding: 1%;
+}
+
+.panel-general-account-inputs-names input[type="text"] {
+    width: 30vw;
+    height: 50%;
+    padding: 1%;
+}
+
+.panel-general-account-inputs-names {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+}
+
+.panel-general-account-country {
+    width: 97%;
+}
+
+.panel-general-account-country select {
+    width: 100%;
+    height: 67%;
+    padding: 8px;
+    border: 1px solid #000000;
+    border-radius: 0px;
+    background-color: #fff;
+}
+
+
+.panel-general-account-upload-logo {
+    margin-bottom: 20px;
+}
+
+
+.panel-general-account-button {
+    width: 20%;
+    height: 9%;
+    padding-left: 80%;
+}
+
+.panel-general-account-button button {
+    width: 80%;
+    height: 50%;
+    cursor: pointer;
+}
+
+.panel-general-account-button button:hover {
+    background-color: #C5D97E;
+}
+
+
+/*    Alert Contacts CSS    */
+
+#contacts {
+    flex-direction: column;
+}
+
+.panel-add-contacts {
+    background-color: #C5D97E;
+    height: 30%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2%;
+    justify-content: space-evenly;
+}
+
+.panel-add-contacts-title {
+    width: 90%;
+    padding-left: 2%;
+}
+
+.panel-add-contacts-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+    padding-left: 2%;
+}
+
+.panel-add-contacts-addbox {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.panel-add-contacts-addbox label {
+    margin-bottom: 5px;
+    font-size: 19px;
+}
+
+#add-contact {
+    width: 90%;
+    height: 15%;
+    padding: 10px;
+}
+
+.panel-add-contacts-addbutton {
+    padding-top: 3.2vh;
+}
+
+.panel-add-contacts-addbutton button {
+    font-size: 20px;
+}
+
+
+.panel-show-contacts {
+    background-color: #C5D97E;
+    height: 60%;
+    width: 90%;
+}
+
+.panel-show-contacts-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+    padding-left: 2%;
+    padding-top: 1.5%;
+}
+
+.panel-show-contacts-searchbar {
+    padding-top: 1%;
+}
+
+.panel-show-contacts-table {
+    margin: 2%;
+}
+
+/* Margin for the show contacts remove buttons */
+.margin-right {
+    margin-left: 50%;
+    display: block;
+}
+
+@media only screen and (max-width: 968px) {
+
+    /*################# SIDEBAR #################*/
+
+    .logo-nav-hamburguer {
+        display: none;
+    }
+
+    .menu-options-home-label {
+        display: none;
+    }
+
+
+    .menu-options-home-dashboard-text {
+        display: none;
+    }
+
+    .menu-options-home-dashboard:hover {
+        background-color: #C5D97E;
+        color: white;
+    }
+
+    .menu-options-home-camera-text {
+        display: none;
+    }
+
+
+    .menu-options-settings-label {
+        display: none;
+    }
+
+    .menu-options-settings-general {
+        cursor: pointer;
+        margin-top: 2%;
+        display: flex;
+        width: 100%;
+        height: 25%;
+    }
+
+    .menu-options-settings-general-text {
+        display: none;
+    }
+
+    .menu-options-settings-general:hover {
+        background-color: #C5D97E;
+        color: white;
+    }
+
+    .menu-options-settings-security-text {
+        display: none;
+    }
+
+    .menu-options-settings-security:hover {
+        background-color: #C5D97E;
+        color: white;
+    }
+
+    .menu-options-settings-alert-text {
+        display: none;
+    }
+
+
+    .menu-options-settings-alert:hover {
+        background-color: #C5D97E;
+        color: white;
+    }
+
+    /*HEADER*/
+    .header-greeting {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        height: 60%;
+        margin-left: 5%;
+    }
+
+    .header-greeting-top {
+        display: flex;
+        align-items: center;
+        font-size: 1.5vw;
+        /* background-color: #f2f2f2;*/
+    }
+
+    .header-greeting-bottom {
+
+        font-size: 1.5vw;
+        align-items: center;
+        /* background-color: #f2f2f2; */
+    }
+
+    .header-options-addcamera {
+        display: none;
+    }
+
+    .header-options-addcamera button {
+        display: none;
+    }
+
+    .header-options-leave {
+        font-size: 1.5vw;
+    }
+
+    .header-options-language {
+        display: flex;
+        justify-content: center;
+        size: 10px;
+    }
+
+    .header-options-notifications {
+        display: flex;
+        justify-content: center;
+        size: 10px;
+    }
+
+    /*PANEL - DASHBOARD*/
+
+    .panel-camera {
+        display: none;
+    }
+
+    .panel-information {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        font-size: 2vw;
+    }
+
+    th {
+        font-size: 1.5vw;
+    }
+
+    td {
+        font-size: 1.5vw;
+    }
+
+    /*FOOTER*/
+    .footer-info {
+        font-size: 0.6rem;
+    }
+
+    .footer-update {
+        display: none;
+    }
+
+    /*PANEL - MY CAMERAS*/
+    .panel-camera-container-top-search {
+        margin: 2%;
+    }
+
+    .panel-camera-search{
+        width: 15vw;
+        height: 10vh;
+    }
+
+    .panel-account-search{
+        width: 15vw;
+    }
+
+
+}
