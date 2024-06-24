@@ -204,7 +204,7 @@
                         </div>
                         <div class="add-camera-options-imageInput-options">
                             <input type="radio" name="image-input-option" value="HTTPS-POST" id="post"
-                                onclick="resetOtherRadioButtons(this, 'image-input-option')">
+                                onclick="resetOtherRadioButtons(this, 'image-input-option')" checked>
                             <label for="post">HTTPS Post</label>
                             <p>Camera uploads images to LookOut</p>
                             <input type="radio" name="image-input-option" value="HTTPS-GET" id="get"
@@ -223,7 +223,7 @@
                                 onclick="resetOtherRadioButtons(this, 'detection-option')">
                             <label for="high">High (70%)</label>
                             <input type="radio" name="detection-option" value="75" id="standard"
-                                onclick="resetOtherRadioButtons(this, 'detection-option')">
+                                onclick="resetOtherRadioButtons(this, 'detection-option')" checked>
                             <label for="standard">Standard (75%)</label>
                             <input type="radio" name="detection-option" value="80" id="low"
                                 onclick="resetOtherRadioButtons(this, 'detection-option')">
@@ -284,13 +284,13 @@
                 </div>
                 <div class="add-camera-options-confirmations">
                     <div class="add-camera-options-confirmations-imageAnonymity">
-                        <input type="checkbox">
+                        <input id="policy-01" type="checkbox">
                         <label>Customer Understands and agrees that RoboticsCats may randomly sample customer's
                             image for AI wildfire detection development. All images will be used anonymously and
                             deleted after development</label>
                     </div>
                     <div class="add-camera-options-confirmations-storagePrivacy">
-                        <input type="checkbox">
+                        <input id="policy-02" type="checkbox">
                         <label>Customer understands and agrees that RoboticsCats will delete raw images after 7
                             days. Please uncheck if you want to delete raw images immediatly after AI
                             detection</label>

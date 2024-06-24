@@ -195,6 +195,13 @@ function validateRegisterCamera() {
     const friendly_name = document.getElementById("add-camera-camera-name");
     const country = document.getElementById("add-camera-country");
     const gps_location = document.getElementById("add-camera-location");
+    const terms01 = document.getElementById("policy-01");
+    const terms02 = document.getElementById("policy-02");
+
+    if (!terms01.checked || !terms02.checked) {
+        alert("Please accept our terms and conditions.");
+        return false;
+    }
 
     if (!friendly_name.value || !country.value || !gps_location.value) {
         alert("Please...");
