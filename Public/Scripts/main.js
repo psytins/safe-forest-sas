@@ -254,6 +254,25 @@ function sendAlert(alertType) {
             break
     }
 }
+
+function toggleCancelMenu() {
+    const menu = document.getElementById('add-camera-menu');
+    if (menu.style.display === 'flex') {
+        menu.style.display = 'none';
+    } else {
+        menu.style.display = 'flex';
+    }
+}
+
+function toggleNotificationMenu() {
+    const menu = document.getElementById('notification-panel');
+    if (menu.style.display === 'flex') {
+        menu.style.display = 'none';
+    } else {
+        menu.style.display = 'flex';
+    }
+}
+
 // ------------------------------------------------
 // Requests to server ----------
 
