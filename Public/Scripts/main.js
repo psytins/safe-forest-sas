@@ -1,5 +1,5 @@
 // DOM Elements
-const VERSION = "1.5.0";
+const VERSION = "1.6.0";
 const AlertType = Object.freeze({
     CAMERA_DOWN: 0,
 });
@@ -20,15 +20,6 @@ function showContainerIndex(id) {
     }
     else if (status == "flex") {
         document.getElementById(id).style.display = "none";
-    }
-}
-
-function toggleCancelMenu() {
-    const menu = document.getElementById('add-camera-menu');
-    if (menu.style.display === 'flex') {
-        menu.style.display = 'none';
-    } else {
-        menu.style.display = 'flex';
     }
 }
 
@@ -250,7 +241,7 @@ function validateAddContact() {
 function sendAlert(alertType) {
     switch (alertType) {
         case 0: // Camera down alert
-            sendEmail("Camera Down");
+            //sendEmail("Camera Down");
             break
     }
 }
@@ -723,11 +714,7 @@ function changeCameraStatus(cameraID) {
 
                 // Handle success ...
                 alert("Camera status changed successfully");
-                //Send alert
-                sendAlert(AlertType.CAMERA_DOWN)
                 location.reload();
-                // ...
-
             })
             .catch(error => {
                 console.error('Status change failed:', error);
@@ -878,7 +865,7 @@ function removeContact(contactID) {
     }
 }
 
-async function sendEmail(subject){
+async function sendEmail(subject) {
     const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
     await fetch('/api/email-sender/send-email', {
         method: 'POST',
@@ -895,6 +882,95 @@ async function sendEmail(subject){
         });
 }
 
+async function loadNotificationList() {
+    const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
+    if (userID ) {
+        console.log("Checking notifications...")
+        const notificationList = await fetch('/api/auth/list-notification', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ userID }),
+        })
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                const tbodyNotification = document.getElementById("dynamicNotificationBody");
+                const notificationNumberDOM = document.getElementById("notification-number");
+
+                let notificationNumber = 0
+
+                tbodyNotification.innerHTML = ""; // clean all notifications first
+
+                data.notifications.forEach(notification => {
+                    if (notification.opened === 0) {
+                        notificationNumber++;
+                    }
+                    // Dynamic Entry for Contact List ----------------
+                    var dynamicEntryNotification =
+                        `
+                    <div class="notification-panel-message" onclick="openNotification(${notification.notificationID})">
+                        <div class="notification-panel-message-top">
+                            <p class="notification-panel-message-top-title">${notification.opened}&nbsp${notification.title}:</p>
+                            <p class="notification-panel-message-top-body">&nbsp${notification.body}</p>
+                        </div>
+                        <div class="notification-panel-message-bottom">
+                            <p class="notification-panel-message-bottom-date">${notification.createdAt}</p>
+                        </div>
+                    </div>
+                `
+                    tbodyNotification.innerHTML += dynamicEntryNotification;
+                });
+
+                notificationNumber === 0 ? notificationNumberDOM.innerHTML = "" : notificationNumberDOM.innerHTML = notificationNumber
+
+                return data.notifications;
+            })
+            .catch(error => {
+                console.error('Notification Listing failed:', error);
+                alert(error);
+            });
+
+        return notificationList;
+    }
+}
+
+function openNotification(notificationID) {
+    fetch('api/auth/open-notification', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(
+            {
+                notificationID
+            }),
+    })
+        .then(response => { // data validation
+            if (response.status == 404) {
+                throw new Error(`Notification don't exist! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Notification opened successfully:', data);
+
+            // Handle success ...
+            //alert("Notification #" + notificationID + " opened!");
+            //Change something here
+            loadNotificationList();
+            // ...
+        })
+        .catch(error => {
+            console.error('Something failed:', error);
+            // Handle error ... 
+            alert(error);
+            // ...
+        });
+}
+
 // ------------------------------------------------
 // Other Functions
 function expandCameraInfo(cameraID) {
@@ -906,6 +982,8 @@ function expandCameraInfo(cameraID) {
 // ------------------------------------------------
 
 // Event Listeners
+// Check for notifications every 20 seconds
+setInterval(loadNotificationList, 20000);
 
 // Initialize - Load Functions
 function loadDashboardInformation(cameraList, l24h, l7days, l30days) {
@@ -976,10 +1054,14 @@ async function loadIndex() {
 
     //Load Contact List
     const contactList = await loadContactList();
+
+    //Load Notifications
+    const notificationList = await loadNotificationList();
 }
 
 //First view - Authentication Load
 function loadAuthentication() {
+    sessionStorage.clear();
     document.getElementById("login").style.display = "none";
     document.getElementById("application-version").innerText = VERSION;
 }
