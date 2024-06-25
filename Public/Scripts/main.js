@@ -1,5 +1,5 @@
 // DOM Elements
-const VERSION = "1.5.0";
+const VERSION = "1.6.0";
 const AlertType = Object.freeze({
     CAMERA_DOWN: 0,
 });
@@ -859,7 +859,7 @@ function removeContact(contactID) {
     }
 }
 
-async function sendEmail(subject){
+async function sendEmail(subject) {
     const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
     await fetch('/api/email-sender/send-email', {
         method: 'POST',
@@ -873,6 +873,111 @@ async function sendEmail(subject){
         })
         .then(data => {
             console.log('Email sent successfully:', data);
+        });
+}
+
+function registNotification(title, body) {
+    const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer // FK
+    const opened = 0;
+
+    fetch('api/auth/regist-notification', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(
+            {
+                userID,
+                title,
+                body,
+                opened,
+            }),
+    })
+        .then(response => { // data validation
+            return response.json();
+        })
+        .then(data => {
+            console.log('Notification added successful:', data);
+
+            // Handle success ...
+            alert("You got a new notification!");
+            // ...
+        })
+        .catch(error => {
+            console.error('Something failed:', error);
+            // Handle error ... 
+            alert(error);
+            // ...
+        });
+}
+
+async function loadNotificationList() {
+    const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
+    const notificationList = await fetch('/api/auth/list-notification', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userID }),
+    })
+        .then(response => {
+            return response.json();
+        })
+        .then(data => { // TODO: Need to change var name
+            const tbodyContacts = document.getElementById("dynamicListContacts");
+            data.contacts.forEach(contact => {
+                // Dynamic Entry for Contact List ----------------
+                var dynamicEntryContact =
+                    `
+                    <tr>
+                        <td>${contact.email_address}</td>
+                        <td><button onclick="removeContact(${contact.contactID})" title="Remove Contact" type="button"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+                    </tr>
+                `
+                tbodyContacts.innerHTML += dynamicEntryContact;
+            });
+
+            return data.contacts;
+        })
+        .catch(error => {
+            console.error('Contact Listing failed:', error);
+            alert(error);
+        });
+
+    return contactList;
+}
+
+function openNotification(notificationID) {
+    fetch('api/auth/open-notification', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(
+            {
+                notificationID
+            }),
+    })
+        .then(response => { // data validation
+            if (response.status == 404) {
+                throw new Error(`Notification don't exist! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Notification opened successfully:', data);
+
+            // Handle success ...
+            alert("Notification #" + notificationID + " opened!");
+            //Change something here
+            // ...
+
+        })
+        .catch(error => {
+            console.error('Something failed:', error);
+            // Handle error ... 
+            alert(error);
+            // ...
         });
 }
 

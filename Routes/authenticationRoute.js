@@ -4,7 +4,8 @@ const router = express.Router();
 //const bcrypt = require('bcrypt');
 //DB Model for authentication
 const User = require('../Model/authenticationModel');
-const Contact = require('../Model/contactModel')
+const Contact = require('../Model/contactModel');
+const Notification = require('../Model/notificationModel');
 
 // CREATE - register
 router.post('/account-regist', (req, res) => {
@@ -114,9 +115,9 @@ router.post('/account-change-profile', (req, res) => {
                 user.email = email_upd;
                 user.reference_code = ref_code_upd;
                 user.country = region_upd;
-                user.logo = logo_upd;                
+                user.logo = logo_upd;
                 user.save();
-                return res.json({ message: 'Profile updated.'});
+                return res.json({ message: 'Profile updated.' });
             }
         })
         .catch(error => {
@@ -124,8 +125,6 @@ router.post('/account-change-profile', (req, res) => {
             return res.status(500).json({ error: 'Error updating user entry' });
         });
 });
-
-
 
 // UPDATE - change password
 router.post('/account-change-password', (req, res) => {
@@ -244,5 +243,63 @@ router.post('/contact-delete', (req, res) => {
         });
 });
 
+//CREATE - Notification
+router.post('/regist-notification', (req, res) => {
+    const newRegist = new Notification({
+        user_id: req.body.userID,
+        title: req.body.title,
+        body: req.body.body,
+        opened: req.body.opened,
+    });
+
+    // Validate Notification Register (if needed)
+    // ...
+    newRegist.save()
+        .then(savedEntry => {
+            return res.status(201).json(savedEntry);
+        })
+        .catch(error => {
+            console.error('Error saving regist entry:', error);
+            return res.status(500).json({ error: 'Error saving regist entry' });
+        });
+});
+
+//List Notifications
+router.post('/list-notification', (req, res) => {
+    Notification.findAll(
+        {
+            where: {
+                user_id: req.body.userID
+            }
+        }
+    )
+        .then(notifications => {
+            return res.json({ notifications });
+
+        })
+        .catch(error => {
+            console.error('Error during notification listing:', error);
+            return res.status(500).json({ error: 'Error during notification listing' });
+        });
+});
+
+//UPDATE - Notification
+router.post('/open-notification', (req, res) => {
+    Notification.findOne({ where: { notificationID: req.body.notificationID } })
+        .then(notification => {
+            if (!notification) {
+                return res.status(404).json({ error: 'Notification not found' });
+            }
+
+            notification.opened = 1;
+            notification.save();
+            return res.json({ message: 'Changes notification status.' });
+
+        })
+        .catch(error => {
+            console.error('Error updating notification entry:', error);
+            return res.status(500).json({ error: 'Error updating notification entry' });
+        });
+});
 
 module.exports = router;
