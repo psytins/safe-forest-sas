@@ -115,10 +115,6 @@ h1 {
     background-position: center;
 }
 
-.logo-nav-hamburguer {
-    width: 30%;
-}
-
 .logo-nav-hamburguer button {
     cursor: pointer;
     background-color: transparent;
@@ -798,6 +794,7 @@ h2 {
 .header-options-language {
     display: flex;
     justify-content: center;
+    user-select: none;
 }
 
 .header-options-language:hover {
@@ -808,6 +805,7 @@ border-radius: 5px;
 .header-options-notifications {
     display: flex;
     justify-content: center;
+    user-select: none;
 }
 
 .header-options-notifications:hover{
@@ -822,6 +820,7 @@ border-radius: 5px;
     background-color: transparent;
     border: none;
     cursor: pointer;
+    user-select: none;
 }
 
 .header-options-leave:hover {
@@ -840,20 +839,25 @@ border-radius: 5px;
     cursor: pointer;
 }
 
-
-
 #notification-panel {
-    display: flex;
+    display: none;
     position: fixed;
     flex-direction: column;
     left:75%;
     height: fit-content;
     background-color: white;
     width: 20%;
+    min-width: 150px;
     padding: 1%;
     z-index: 1000;
     border: 1px black solid;
     border-radius: 5px;
+
+    /*Animation*/
+    opacity: 0;
+    animation: fadeInAnimation ease-in 1;
+    animation-fill-mode: forwards;
+    animation-duration: 0.2s;
 }
 
 .notification-panel-header{
@@ -878,6 +882,10 @@ border-radius: 5px;
 
 .notification-panel-message-top{
     display: flex;
+}
+
+.notification-panel-message-top-body{
+    margin-left: 1%;
 }
 
 
@@ -1951,6 +1959,11 @@ select {
         display: flex;
         justify-content: center;
         size: 10px;
+    }
+
+    #notification-panel {
+        width: 40%;
+        left: 55%;
     }
 
     /*PANEL - DASHBOARD*/
