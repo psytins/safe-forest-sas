@@ -243,27 +243,6 @@ router.post('/contact-delete', (req, res) => {
         });
 });
 
-//CREATE - Notification
-router.post('/regist-notification', (req, res) => {
-    const newRegist = new Notification({
-        user_id: req.body.userID,
-        title: req.body.title,
-        body: req.body.body,
-        opened: req.body.opened,
-    });
-
-    // Validate Notification Register (if needed)
-    // ...
-    newRegist.save()
-        .then(savedEntry => {
-            return res.status(201).json(savedEntry);
-        })
-        .catch(error => {
-            console.error('Error saving regist entry:', error);
-            return res.status(500).json({ error: 'Error saving regist entry' });
-        });
-});
-
 //List Notifications
 router.post('/list-notification', (req, res) => {
     Notification.findAll(

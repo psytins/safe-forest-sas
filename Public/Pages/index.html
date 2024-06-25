@@ -113,6 +113,7 @@
                         <img src="../Images/language-logo.png">
                     </div>
                     <div id="notify-btn" class="header-options-notifications" onclick="toggleNotificationMenu()">
+                        <p id="notification-number"></p>
                         <img src="../Images/notification-logo.png">
                     </div>
                     <button type="button" onclick="signOut()" class="header-options-leave">
@@ -126,78 +127,9 @@
                 <div class="notification-panel-header">
                     <h3>Notifications</h3>
                 </div>
-                <div class="notification-panel-body">
-                    <div class="notification-panel-message">
-                        <div class="notification-panel-message-top">
-                            <p class="notification-panel-message-top-title">Tittle:</p>
-                            <p class="notification-panel-message-top-body"> Body</p>
-                        </div>
-                        <div class="notification-panel-message-bottom">
-                            <p class="notification-panel-message-bottom-date">date</p>
-                        </div>
-                    </div>
-
-                    <div class="notification-panel-message">
-                        <div class="notification-panel-message-top">
-                            <p class="notification-panel-message-top-title">Title:</p>
-                            <p class="notification-panel-message-top-body"> Body</p>
-                        </div>
-                        <div class="notification-panel-message-bottom">
-                            <p class="notification-panel-message-bottom-date">date</p>
-                        </div>
-                    </div>
-
-                    <div class="notification-panel-message">
-                        <div class="notification-panel-message-top">
-                            <p class="notification-panel-message-top-title">Title:</p>
-                            <p class="notification-panel-message-top-body"> Body</p>
-                        </div>
-                        <div class="notification-panel-message-bottom">
-                            <p class="notification-panel-message-bottom-date">date</p>
-                        </div>
-                    </div>
-
-                    <div class="notification-panel-message">
-                        <div class="notification-panel-message-top">
-                            <p class="notification-panel-message-top-title">Title:</p>
-                            <p class="notification-panel-message-top-body"> Body</p>
-                        </div>
-                        <div class="notification-panel-message-bottom">
-                            <p class="notification-panel-message-bottom-date">date</p>
-                        </div>
-                    </div>
-
-                    <div class="notification-panel-message">
-                        <div class="notification-panel-message-top">
-                            <p class="notification-panel-message-top-title">Title:</p>
-                            <p class="notification-panel-message-top-body"> Body</p>
-                        </div>
-                        <div class="notification-panel-message-bottom">
-                            <p class="notification-panel-message-bottom-date">date</p>
-                        </div>
-                    </div>
-
-                    <div class="notification-panel-message">
-                        <div class="notification-panel-message-top">
-                            <p class="notification-panel-message-top-title">Title:</p>
-                            <p class="notification-panel-message-top-body"> Body</p>
-                        </div>
-                        <div class="notification-panel-message-bottom">
-                            <p class="notification-panel-message-bottom-date">date</p>
-                        </div>
-                    </div>
-
-                    <div class="notification-panel-message">
-                        <div class="notification-panel-message-top">
-                            <p class="notification-panel-message-top-title">Title:</p>
-                            <p class="notification-panel-message-top-body"> Body</p>
-                        </div>
-                        <div class="notification-panel-message-bottom">
-                            <p class="notification-panel-message-bottom-date">date</p>
-                        </div>
-                    </div>
+                <div class="notification-panel-body" id="dynamicNotificationBody">
                 </div>
-                
+
             </div>
 
             <div class="panel" id="add-camera-menu">

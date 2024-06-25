@@ -250,7 +250,7 @@ function validateAddContact() {
 function sendAlert(alertType) {
     switch (alertType) {
         case 0: // Camera down alert
-            sendEmail("Camera Down");
+            //sendEmail("Camera Down");
             break
     }
 }
@@ -723,11 +723,7 @@ function changeCameraStatus(cameraID) {
 
                 // Handle success ...
                 alert("Camera status changed successfully");
-                //Send alert
-                sendAlert(AlertType.CAMERA_DOWN)
                 location.reload();
-                // ...
-
             })
             .catch(error => {
                 console.error('Status change failed:', error);
@@ -895,75 +891,59 @@ async function sendEmail(subject) {
         });
 }
 
-function registNotification(title, body) {
-    const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer // FK
-    const opened = 0;
-
-    fetch('api/auth/regist-notification', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(
-            {
-                userID,
-                title,
-                body,
-                opened,
-            }),
-    })
-        .then(response => { // data validation
-            return response.json();
-        })
-        .then(data => {
-            console.log('Notification added successful:', data);
-
-            // Handle success ...
-            alert("You got a new notification!");
-            // ...
-        })
-        .catch(error => {
-            console.error('Something failed:', error);
-            // Handle error ... 
-            alert(error);
-            // ...
-        });
-}
-
 async function loadNotificationList() {
     const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
-    const notificationList = await fetch('/api/auth/list-notification', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ userID }),
-    })
-        .then(response => {
-            return response.json();
+    if (userID ) {
+        console.log("Checking notifications...")
+        const notificationList = await fetch('/api/auth/list-notification', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ userID }),
         })
-        .then(data => { // TODO: Need to change var name
-            const tbodyContacts = document.getElementById("dynamicListContacts");
-            data.contacts.forEach(contact => {
-                // Dynamic Entry for Contact List ----------------
-                var dynamicEntryContact =
-                    `
-                    <tr>
-                        <td>${contact.email_address}</td>
-                        <td><button onclick="removeContact(${contact.contactID})" title="Remove Contact" type="button"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
-                    </tr>
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                const tbodyNotification = document.getElementById("dynamicNotificationBody");
+                const notificationNumberDOM = document.getElementById("notification-number");
+
+                let notificationNumber = 0
+
+                tbodyNotification.innerHTML = ""; // clean all notifications first
+
+                data.notifications.forEach(notification => {
+                    if (notification.opened === 0) {
+                        notificationNumber++;
+                    }
+                    // Dynamic Entry for Contact List ----------------
+                    var dynamicEntryNotification =
+                        `
+                    <div class="notification-panel-message" onclick="openNotification(${notification.notificationID})">
+                        <div class="notification-panel-message-top">
+                            <p class="notification-panel-message-top-title">${notification.opened}&nbsp${notification.title}:</p>
+                            <p class="notification-panel-message-top-body">&nbsp${notification.body}</p>
+                        </div>
+                        <div class="notification-panel-message-bottom">
+                            <p class="notification-panel-message-bottom-date">${notification.createdAt}</p>
+                        </div>
+                    </div>
                 `
-                tbodyContacts.innerHTML += dynamicEntryContact;
+                    tbodyNotification.innerHTML += dynamicEntryNotification;
+                });
+
+                notificationNumber === 0 ? notificationNumberDOM.innerHTML = "" : notificationNumberDOM.innerHTML = notificationNumber
+
+                return data.notifications;
+            })
+            .catch(error => {
+                console.error('Notification Listing failed:', error);
+                alert(error);
             });
 
-            return data.contacts;
-        })
-        .catch(error => {
-            console.error('Contact Listing failed:', error);
-            alert(error);
-        });
-
-    return contactList;
+        return notificationList;
+    }
 }
 
 function openNotification(notificationID) {
@@ -987,10 +967,10 @@ function openNotification(notificationID) {
             console.log('Notification opened successfully:', data);
 
             // Handle success ...
-            alert("Notification #" + notificationID + " opened!");
+            //alert("Notification #" + notificationID + " opened!");
             //Change something here
+            loadNotificationList();
             // ...
-
         })
         .catch(error => {
             console.error('Something failed:', error);
@@ -1011,6 +991,8 @@ function expandCameraInfo(cameraID) {
 // ------------------------------------------------
 
 // Event Listeners
+// Check for notifications every 20 seconds
+setInterval(loadNotificationList, 20000);
 
 // Initialize - Load Functions
 function loadDashboardInformation(cameraList, l24h, l7days, l30days) {
@@ -1081,10 +1063,14 @@ async function loadIndex() {
 
     //Load Contact List
     const contactList = await loadContactList();
+
+    //Load Notifications
+    const notificationList = await loadNotificationList();
 }
 
 //First view - Authentication Load
 function loadAuthentication() {
+    sessionStorage.clear();
     document.getElementById("login").style.display = "none";
     document.getElementById("application-version").innerText = VERSION;
 }
