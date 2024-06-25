@@ -23,15 +23,6 @@ function showContainerIndex(id) {
     }
 }
 
-function toggleCancelMenu() {
-    const menu = document.getElementById('add-camera-menu');
-    if (menu.style.display === 'flex') {
-        menu.style.display = 'none';
-    } else {
-        menu.style.display = 'flex';
-    }
-}
-
 function selectPlan(plan) {
     var plan = document.getElementById(plan)
     var parentElement = plan.parentElement;
