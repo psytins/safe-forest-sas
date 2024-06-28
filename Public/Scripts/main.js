@@ -775,9 +775,120 @@ function removeContact(contactID) {
 // ------------------------------------------------
 // Other Functions
 function expandCameraInfo(cameraID) {
-    if (confirm("Current Action: Expand camera information for camera #" + cameraID + ". You want to proceed?")) {
-        alert("Coming soon...")
-    }
+
+    var cameraDetails = {}; // Object to store camera details
+
+    // Extract camera details from the clicked row
+    cameraDetails.sensitivity = "placeholder";
+    cameraDetails.name = "placeholder";
+    cameraDetails.lastDetectedDate = "placeholder";
+    // Add more details as needed
+
+    var mycamerasContainer = document.getElementById("mycameras");
+    var panelMyCameraContainer = document.createElement('div'); // Create a new div element
+    panelMyCameraContainer.className = "panel-camera-settings"; // Set an id if necessary
+
+    panelMyCameraContainer.innerHTML = `
+        <div class="panel-camera-settings">
+            <div class="panel-camera-settings-header">
+                <h3>${cameraDetails.name}</h3>
+                <div class="panel-camera-settings-edit">
+                    <button>Edit</button>
+                    <button>...</button>
+                </div>
+            </div>
+            <div class="panel-camera-settings-body">
+                <div class="panel-camera-settings-subscription">
+                    <div class="subscription-header">
+                        <h4>Standard Plan</h4>
+                        <button>Edit</button>
+                    </div>
+                    <p>Detection Frequency: 1 min</p>
+                    <p>Images scanned: 1231</p>
+                    <p>i dunno</p>
+                </div>
+                <div class="panel-camera-settings-endpoint">
+                    <h4>Camera Endpoint</h4>
+                    <div class="panel-camera-settings-endpoint-link">
+                        <p>placeholderplaceholderplaceholderplaceholderplaceholderplaceholderplaceholderplaceholderplaceholderplaceholderplaceholder</p>
+                    </div>
+                    <div class="panel-camera-settings-endpoint-buttons">
+                        <button>Copy</button>
+                        <button>Generate New</button>
+                    </div>
+                </div>
+                <div class="panel-camera-settings-sensitivity">
+                    <h4>Sensitivity</h4>
+                    <p>${cameraDetails.sensitivity}</p>
+                    <div class="panel-camera-settings-sensitivity-buttons">
+                        <button>Edit</button>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-camera-settings-overview">
+                <div class="panel-camera-settings-overview-currentstatus">
+                    <h4>Current status</h4>
+                    <h3>Online</h3>
+                    <p>placeholder i guess</p>
+                </div>
+
+                <div class="panel-camera-settings-overview-stats">
+                    <p>Smoke Logs</p>
+                    <div class="panel-camera-settings-overview-stats-body">
+                        <div class="panel-camera-settings-overview-stats-last24">
+                            <h4>6</h4>
+                            <p>Last 24 hours</p>
+                        </div>
+
+                        <div class="panel-camera-settings-overview-stats-last7">
+                            <h4>61</h4>
+                            <p>Last 7 days</p>
+                        </div>
+
+                        <div class="panel-camera-settings-overview-stats-last30">
+                            <h4>96</h4>
+                            <p>Last 30 days</p>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="panel-camera-settings-logs">
+                <h4>Camera Detection Logs</h4>
+                <table id="cameraLogs">
+                <tr>
+                    <th>Warning Level</th>
+                    <th>Detection Date</th>
+                    <th>Time</th>
+                </tr>
+                <tr>
+                    <td>90%</td>
+                    <td>2024-04-10</td>
+                    <td>2024-03-01</td>
+                </tr>
+                <tr>
+                    <td>50%</td>
+                    <td>2024-04-11</td>
+                    <td>2024-02-15</td>
+                </tr>
+                <tr>
+                    <td>30%</td>
+                    <td>2024-04-12</td>
+                    <td>2024-01-20</td>
+                </tr>
+                <!-- Add more camera rows as needed -->
+            </table>
+            </div>
+            
+            <!-- Add more camera details here -->
+    
+        </div>`;
+
+    mycamerasContainer.appendChild(panelMyCameraContainer);
+
+
 }
 
 // ------------------------------------------------
