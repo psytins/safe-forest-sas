@@ -93,7 +93,7 @@ h1 {
 }
 
 /*################# SIDEBAR #################*/
-.side-nav {
+ .side-nav {
      background-color: #22252E; 
     height: 100vh;
     width: 15vw;
@@ -109,10 +109,24 @@ h1 {
 }
 
 .logo-nav-logo {
-    width: 100%;
+    width: 70%;
     background-image: url("../Images/safe-forest.png");
     background-repeat: no-repeat;
     background-position: center;
+
+    /*Animation*/
+    opacity: 0;
+    animation: fadeInAnimation ease-in 1;
+    animation-fill-mode: forwards;
+    animation-duration: 0.2s;
+} 
+
+.logo-nav-hamburguer {
+    width: 30%;
+}
+
+.logo-nav-hamburguer:hover {
+    background: linear-gradient(to right, #b7d93d, #e6f0c0);
 }
 
 .logo-nav-hamburguer button {
@@ -124,6 +138,10 @@ h1 {
     background-image: url("../Images/hamburger-logo.png");
     background-repeat: no-repeat;
     background-position: center;
+}
+
+.logo-nav-hamburguer button:hover {
+    background-image: url("../Images/hamburger-logo-hover.png");
 }
 
 .menu-options-home-dashboard-icon-img {
@@ -193,12 +211,21 @@ h1 {
     justify-content: start;
     align-items: center;
     color: #F2F2F2;
+
+    /*Animation*/
+    opacity: 0;
+    animation: fadeInAnimation ease-in 1;
+    animation-fill-mode: forwards;
+    animation-duration: 0.2s;
 }
 
 .menu-options-home-dashboard:hover {
     background: linear-gradient(to right, #b7d93d, #e6f0c0);
-    color: white;
     animation: pulse 0.25s;
+}
+
+.menu-options-home-dashboard:hover .menu-options-home-dashboard-text {
+    color: black;
 }
 
 .menu-options-home-camera {
@@ -221,12 +248,22 @@ h1 {
     justify-content: start;
     align-items: center;
     color: #F2F2F2;
+
+    /*Animation*/
+    opacity: 0;
+    animation: fadeInAnimation ease-in 1;
+    animation-fill-mode: forwards;
+    animation-duration: 0.2s;
 }
 
 .menu-options-home-camera:hover {
     background: linear-gradient(to right, #b7d93d, #e6f0c0);
     color: white;
     animation: pulse 0.25s;
+}
+
+.menu-options-home-camera:hover .menu-options-home-camera-text {
+    color: black;
 }
 
 .menu-options-settings {
@@ -269,12 +306,22 @@ h1 {
     justify-content: start;
     align-items: center;
     color: #F2F2F2;
+
+    /*Animation*/
+    opacity: 0;
+    animation: fadeInAnimation ease-in 1;
+    animation-fill-mode: forwards;
+    animation-duration: 0.2s;
 }
 
 .menu-options-settings-general:hover {
     background: linear-gradient(to right, #b7d93d, #e6f0c0);
     color: white;
     animation: pulse 0.25s;
+}
+
+.menu-options-settings-general:hover .menu-options-settings-general-text {
+    color: black;
 }
 
 .menu-options-settings-security {
@@ -297,12 +344,22 @@ h1 {
     justify-content: start;
     align-items: center;
     color: #F2F2F2;
+
+    /*Animation*/
+    opacity: 0;
+    animation: fadeInAnimation ease-in 1;
+    animation-fill-mode: forwards;
+    animation-duration: 0.2s;
 }
 
 .menu-options-settings-security:hover {
     background: linear-gradient(to right, #b7d93d, #e6f0c0);
     color: white;
     animation: pulse 0.25s;
+}
+
+.menu-options-settings-security:hover .menu-options-settings-security-text {
+    color: black;
 }
 
 .menu-options-settings-alert {
@@ -325,6 +382,12 @@ h1 {
     justify-content: start;
     align-items: center;
     color: #F2F2F2;
+
+    /*Animation*/
+    opacity: 0;
+    animation: fadeInAnimation ease-in 1;
+    animation-fill-mode: forwards;
+    animation-duration: 0.2s;
 }
 
 
@@ -332,6 +395,10 @@ h1 {
     background: linear-gradient(to right, #b7d93d, #e6f0c0);
     color: white;
     animation: pulse 0.3s;
+}
+
+.menu-options-settings-alert:hover .menu-options-settings-alert-text {
+    color: black;
 }
 
 /* Animation for the pulse */
@@ -357,7 +424,8 @@ h1 {
     transform: translate(-50%, -50%);
     flex-direction: column;
     height: fit-content;
-    width: 50%;
+    width: 50vw;
+    padding: 1%;
     background-color: #C0D966;
     z-index: 1000;
     border: 1px black solid;
@@ -701,7 +769,7 @@ margin-top: 2%;
     display: flex;
     z-index: 90;
     justify-content: end;
-    width: 100%;
+    width: 95%;
     padding: 2%;
     margin-right: 10%;
 }
@@ -722,6 +790,7 @@ margin-top: 2%;
 /*###################################################*/
 
 /*################# SOCIAL NETWORK #################*/
+
 .social-network {
     display: flex;
     justify-content: space-evenly;
@@ -729,24 +798,55 @@ margin-top: 2%;
     width: 15vw;
     height: 9.88vh;
     border-top: 1px #22252E solid;
+    position: relative; 
 }
 
 .social-network img {
     width: 60%;
+
+    /*Animation*/
+    opacity: 0;
+    animation: fadeInAnimation ease-in 1;
+    animation-fill-mode: forwards;
+    animation-duration: 0.4s;
 }
 
-.social-network div {
+.social-network-image {
     width: 25%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative; 
 }
 
-.social-network div:hover {
-    background-color: #C5D97E;
+.social-network-image::after {
+    content: attr(data-hover-text); 
+    color: black;
+    background: #e6f0c0;
+    padding: 5px 10px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 110%; 
+    left: 0;
+    width: fit-content;
+    opacity: 0;
+    white-space: normal; 
+    text-align: center;
+    pointer-events: none; 
+    transition: opacity 0.3s;
+    box-sizing: border-box;
 }
 
+.social-network-image:hover::after {
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+.social-network-image:hover {
+    background: linear-gradient(to right, #b7d93d, #e6f0c0);
+    cursor: pointer;
+}
 
 /*################# HEADER #################*/
 
@@ -1273,6 +1373,10 @@ td {
     border-radius: 5px;
 }
 
+.panel-camera-search{
+    border-radius: 5px;
+}
+
 .panel-camera-container-top {
     width: 100%;
     display: flex;
@@ -1579,8 +1683,35 @@ td {
     width: 100%;
 }
 
+.login-title-container{
+    display: flex;
+    width: 100%;
+    height: 10%;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    width: 30%;
+}
+
 .panel-auth-container-register {
     width: 70%;
+    height: 95%;
+    background-color: #f2f2f2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 10px;
+}
+
+#form-login.panel-auth-container-register {
+    width: 50%;
     height: 95%;
     background-color: #f2f2f2;
     display: flex;
@@ -1919,6 +2050,9 @@ select {
     color: #b7d93d;
 }
 
+.panel-account-search{
+    border-radius: 5px;
+}
 
 .panel-show-contacts-content {
     display: flex;

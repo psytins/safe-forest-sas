@@ -40,34 +40,19 @@ function clicked_menu() {
 
     if (sidebar.style.width != '10%') { // closed
 
-        menu_home.style.width = "50%"
-        menu_settings.style.width = "50%"
+
 
         main.style.width = "90%"
         header.style.width ="100%"
         footer.style.width ="100%"
         panel.style.width= "100%"
 
-
-        dashboard_div.style.justifyContent = "center";
         dashboard_text.style.display = 'none';
-        dashboard_icon.style.justifyContent = 'center';
-
-        camera_div.style.justifyContent = "center";
         camera_text.style.display = 'none';
-        camera_icon.style.justifyContent = 'center';
-
-        general_div.style.justifyContent = "center";
         general_text.style.display = 'none';
-        general_icon.style.justifyContent = 'center';
-
-        security_div.style.justifyContent = "center";
         security_text.style.display = 'none';
-        security_icon.style.justifyContent = 'center';
-
-        alert_div.style.justifyContent = "center";
         alert_text.style.display = 'none';
-        alert_icon.style.justifyContent = 'center';
+
 
         sidebar.style.width = "10%"
         main.style.width = "90%"
@@ -77,9 +62,7 @@ function clicked_menu() {
         }
 
         logo.style.display = "none"
-        hamburger.style.width = "50%"
-        menu_home_label.style.width = "80%"
-        menu_settings_label.style.width = "80%"
+        hamburger.style.width = "100%"
 
     }
     else {
@@ -115,8 +98,6 @@ function clicked_menu() {
     
         hamburger.style.width = "30%";
     
-        menu_home_label.style.width = "60%";
-        menu_settings_label.style.width = "60%";
 
         for (var i = 0; i < network_img.length; i++) {
             network_img[i].style.display = "flex";
