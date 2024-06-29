@@ -1326,13 +1326,63 @@ th {
     text-transform: uppercase;
 }
 
+th:hover{
+    cursor: pointer;
+}
+
 td {
     padding: 15px;
     text-align: left;
     vertical-align: middle;
     font-weight: 300;
-    font-size: 0.6rem;
+    font-size: 0.85rem;
     border-bottom: solid 1px rgba(255, 255, 255, 0.1);
+}
+
+td:hover{
+    cursor: pointer;
+}
+
+#dynamicListCamera-dashboard-last-detection tr{
+    border-bottom: solid 1px rgba(255, 255, 255, 0.1);
+    background-color: #22252E;
+    color: white;
+}
+
+#dynamicListCamera-dashboard-last-detection tr:hover{
+    background-color: gray;
+}
+
+#searchMyCameras tr{
+    border-bottom: solid 1px rgba(255, 255, 255, 0.1);
+}
+
+#searchMyCameras tr:hover {
+    background-color: gray;
+}
+
+#searchMyCameras td {
+    font-size: 1rem;
+}
+
+#searchMyCameras button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    border-radius: 5px;
+}
+
+#searchMyCameras button:hover {
+    cursor: pointer;
+}
+
+
+#dynamicListCamera-dashboard tr{
+    color: black;
+}
+
+#dynamicListCamera-dashboard tr:hover{
+    background-color: gray;
 }
 
 

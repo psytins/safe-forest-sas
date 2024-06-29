@@ -666,7 +666,7 @@ async function loadCameraList() {
                 // Dynamic Entry for Dashboard Camera List ----------------
                 var dynamicEntryDS =
                     `
-                <tr ${camera.current_status === 1 ? "" : "style='color:grey;'"}>
+                <tr ${camera.current_status === 1 ? "style='color: white;'" : "style='color: red;'"}>
                     <td>#${camera.cameraID}</td>
                     <td>${camera.sensitivity}%</td>
                     <td>${camera.camera_name}</td>
@@ -677,16 +677,16 @@ async function loadCameraList() {
                 // Dynamic Entry for My Camera List ----------------
                 var dynamicEntryMC =
                     `
-                <tr ${camera.current_status === 1 ? "" : "style='color:grey;'"}>
+                <tr ${camera.current_status === 1 ? "style='color: white;'" : "style='color: red;'"}>
                     <td>#${camera.cameraID}</td>
                     <td>${camera.sensitivity}%</td>
                     <td>${camera.camera_name}</td>
                     <td>${camera.last_detected === null ? "N/A" : moment(camera.last_detected).local().format('YYYY-MM-DD -> HH:mm:ss')}</td>
                     <td>${camera.current_status === 1 ? "Online" : "Offline"}</td>
                     <td>
-                        <button onclick="changeCameraStatus(${camera.cameraID})" title="On/Off Camera" type="button"><i class="fa fa-power-off" aria-hidden="true"></i></button>
-                        <button onclick="simulateDetection(${camera.cameraID})" title="Simulate a detection" type="button"><i class="fa fa-eye" aria-hidden="true"></i></button>
-                        <button onclick="expandCameraInfo(${camera.cameraID})" title="Expand camera information" type="button"><i class="fa fa-info" aria-hidden="true"></i></button>
+                        <button onclick="changeCameraStatus(${camera.cameraID})" title="On/Off Camera" type="button"><i class="fa fa-power-off" aria-hidden="true" style='color:red;'></i></button>
+                        <button onclick="simulateDetection(${camera.cameraID})" title="Simulate a detection" type="button"><i class="fa fa-eye" aria-hidden="true" style='color:lightgray;'></i></button>
+                        <button onclick="expandCameraInfo(${camera.cameraID})" title="Expand camera information" type="button"><i class="fa fa-info" aria-hidden="true" style='color:lightgray;'></i></button>
                     </td>
                 </tr>
                 `
