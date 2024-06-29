@@ -94,7 +94,7 @@ h1 {
 
 /*################# SIDEBAR #################*/
 .side-nav {
-     background-color: #C0D966; 
+     background-color: #22252E; 
     height: 100vh;
     width: 15vw;
     transition: width 0.3s ease;
@@ -104,7 +104,7 @@ h1 {
     display: flex;
     width: 15vw;
     height: 12.85vh;
-    border-bottom: 1px #102026 solid;
+    border-bottom: 1px #ffffff solid;
     justify-content: center;
 }
 
@@ -157,7 +157,7 @@ h1 {
     width: 100%;
     height: 30%;
     margin-top: 5vh;
-    color: #102026;
+    color: #ffffff;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -168,7 +168,7 @@ h1 {
     display: flex;
     align-items: center;
     margin-left: 10%;
-    border-bottom: 2px #102026 solid;
+    border-bottom: 2px #ffffff solid;
     font-size: 1rem;
 }
 
@@ -192,11 +192,13 @@ h1 {
     display: flex;
     justify-content: start;
     align-items: center;
+    color: #F2F2F2;
 }
 
 .menu-options-home-dashboard:hover {
-    background-color: gray;
+    background: linear-gradient(to right, #b7d93d, #e6f0c0);
     color: white;
+    animation: pulse 0.25s;
 }
 
 .menu-options-home-camera {
@@ -218,15 +220,17 @@ h1 {
     display: flex;
     justify-content: start;
     align-items: center;
+    color: #F2F2F2;
 }
 
 .menu-options-home-camera:hover {
-    background-color: gray;
+    background: linear-gradient(to right, #b7d93d, #e6f0c0);
     color: white;
+    animation: pulse 0.25s;
 }
 
 .menu-options-settings {
-    color: #102026;
+    color: #ffffff;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -240,7 +244,7 @@ h1 {
     display: flex;
     align-items: center;
     margin-left: 10%;
-    border-bottom: 2px #102026 solid;
+    border-bottom: 2px #ffffff solid;
     font-size: 1rem;
 }
 
@@ -264,11 +268,13 @@ h1 {
     display: flex;
     justify-content: start;
     align-items: center;
+    color: #F2F2F2;
 }
 
 .menu-options-settings-general:hover {
-    background-color: gray;
+    background: linear-gradient(to right, #b7d93d, #e6f0c0);
     color: white;
+    animation: pulse 0.25s;
 }
 
 .menu-options-settings-security {
@@ -290,11 +296,13 @@ h1 {
     display: flex;
     justify-content: start;
     align-items: center;
+    color: #F2F2F2;
 }
 
 .menu-options-settings-security:hover {
-    background-color: gray;
+    background: linear-gradient(to right, #b7d93d, #e6f0c0);
     color: white;
+    animation: pulse 0.25s;
 }
 
 .menu-options-settings-alert {
@@ -316,12 +324,27 @@ h1 {
     display: flex;
     justify-content: start;
     align-items: center;
+    color: #F2F2F2;
 }
 
 
 .menu-options-settings-alert:hover {
-    background-color: gray;
+    background: linear-gradient(to right, #b7d93d, #e6f0c0);
     color: white;
+    animation: pulse 0.3s;
+}
+
+/* Animation for the pulse */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 /*################# ADD CAMERA MENU #################*/
@@ -705,7 +728,7 @@ margin-top: 2%;
     align-items: center;
     width: 15vw;
     height: 9.88vh;
-    border-top: 1px #102026 solid;
+    border-top: 1px #22252E solid;
 }
 
 .social-network img {
@@ -904,6 +927,7 @@ border-radius: 5px;
     align-items: center;
     width: 85vw;
     height: 77vh;
+    background-color: #f2f2f2;
 
     /*Animation*/
     opacity: 0;
@@ -1177,7 +1201,7 @@ table {
 }
 
 .tbl-header {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: #C5D97E;
 }
 
 .tbl-content {
@@ -1191,7 +1215,7 @@ table {
     height: 50vh;
     overflow-x: auto;
     margin-top: 0px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid #C5D97E;
 }
 
 th {
@@ -1245,7 +1269,7 @@ td {
 .panel-camera-container {
     width: 95%;
     height: 97%;
-    background-color: #C5D97E;
+    background-color: #22252E;
     border-radius: 5px;
 }
 
@@ -1258,6 +1282,7 @@ td {
 
 .panel-camera-container-top-title {
     margin: 2%;
+    color: #F2F2F2;
 }
 
 .panel-camera-container-top-title h1 {
@@ -1335,10 +1360,11 @@ td {
 .panel-security-information {
     display: flex;
     flex-direction: column;
-    background-color: #C5D97E;
+    background-color: #22252E;
     width: 100%;
     height: 65%;
     margin-bottom: 2.5%;
+    border-radius: 10px;
 }
 
 .panel-security-information-label {
@@ -1346,6 +1372,7 @@ td {
     width: fit-content;
     margin-left: 1%;
     margin-top: 1%;
+    color: #b7d93d;
 }
 
 .panel-security-information-form {
@@ -1359,6 +1386,7 @@ td {
 
 .panel-security-information-current-password {
     height: fit-content;
+    color: #F2F2F2;
 }
 
 .panel-security-information-current-password p {
@@ -1378,6 +1406,7 @@ td {
 .panel-security-information-new-password {
     height: fit-content;
     margin-top: 1%;
+    color: #F2F2F2;
 }
 
 .panel-security-information-new-password p {
@@ -1396,6 +1425,7 @@ td {
 
 .panel-security-information-confirm-password {
     margin-top: 1%;
+    color: #F2F2F2;
 }
 
 .panel-security-information-confirm-password p {
@@ -1430,7 +1460,7 @@ td {
 }
 
 .panel-security-information-change button:hover {
-    background-color: gray;
+    background-color: #b7d93d;
     cursor: pointer;
     color: white;
 }
@@ -1439,8 +1469,9 @@ td {
     display: flex;
     flex-direction: column;
     width: 100%;
-    background-color: #C5D97E;
+    background-color: #22252E;
     height: 30%;
+    border-radius: 10px;
 }
 
 .panel-security-danger-label {
@@ -1450,6 +1481,7 @@ td {
     width: fit-content;
     margin-left: 1%;
     margin-top: 1%;
+    color: #b7d93d;
 }
 
 .panel-security-danger-delete-account {
@@ -1463,6 +1495,7 @@ td {
 .panel-security-danger-delete-account-label {
     display: flex;
     margin-left: 1%;
+    color: #F2F2F2;
 }
 
 .panel-security-danger-delete-account-option {
@@ -1475,6 +1508,7 @@ td {
     flex: 1;
     margin-left: 1%;
     align-items: center;
+    color: #f2f2f2;
 }
 
 .panel-security-danger-delete-account-button {
@@ -1491,7 +1525,7 @@ td {
 }
 
 .panel-security-danger-delete-account-button button:hover {
-    background-color: gray;
+    background-color: #b33737;
     cursor: pointer;
     color: white;
 }
@@ -1505,10 +1539,10 @@ td {
     display: flex;
     justify-items: center;
     align-items: center;
-    background-color: #F2F2F2;
     width: 100vw;
     height: 12.85vh;
     border-bottom: 1px black solid;
+    background-color: #22252E;
 }
 
 .header-auth-logo {
@@ -1518,6 +1552,7 @@ td {
 
 .header-auth-title {
     width: 90%;
+    color: #ffffff;
 }
 
 .panel-auth {
@@ -1526,6 +1561,7 @@ td {
     align-items: center;
     width: 100vw;
     height: 77vh;
+    background-color: #22252E;
 
     /*Animation*/
     opacity: 0;
@@ -1546,11 +1582,12 @@ td {
 .panel-auth-container-register {
     width: 70%;
     height: 95%;
-    background-color: #C5D97E;
+    background-color: #f2f2f2;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+    border-radius: 10px;
 }
 
 .panel-auth-container-register-form {
@@ -1665,16 +1702,17 @@ select {
     width: 60%;
     height: 100%;
     font-size: larger;
-    background-color: lightgray;
-    border: 1px solid black;
+    background-color: #b7d93d;
+    border: 0px solid black;
     border-radius: 5px;
     cursor: pointer;
 }
 
 .panel-auth-container-register-submit button:hover {
     background-color: grey;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Aumenta a sombra ao passar o mouse */
+    transform: translateY(-2px); /* Move o botão ligeiramente para cima */
     cursor: pointer;
-
 }
 
 .panel-auth-container-register-altlogin {
@@ -1688,7 +1726,7 @@ select {
 .footer-auth {
     display: flex;
     justify-content: center;
-    background-color: #F2F2F2;
+    background-color: #22252E;
     width: 100vw;
     height: 9.88vh;
     border-top: 1px black solid;
@@ -1706,15 +1744,17 @@ select {
 
 
 .panel-general-account {
-    background-color: #C5D97E;
+    background-color: #22252E;
     width: 95%;
     height: 97%;
+    border-radius: 10px;
 }
 
 .panel-general-account-title {
     width: 30w;
     margin-left: 3%;
     margin-top: 4%;
+    color: #b7d93d;
 }
 
 .panel-general-account-inputs {
@@ -1743,10 +1783,16 @@ select {
     display: flex;
     justify-content: space-between;
     font-size: 18px;
+    color: #F2F2F2;
+}
+
+.panel-general-account-email {
+    color: #F2F2F2;
 }
 
 .panel-general-account-country {
     width: 97%;
+    color: #F2F2F2;
 }
 
 .panel-general-account-country select {
@@ -1758,9 +1804,15 @@ select {
     background-color: #fff;
 }
 
+.panel-general-account-reference-code {
+    color: #F2F2F2;
+}
+
+
 
 .panel-general-account-upload-logo {
     margin-bottom: 20px;
+    color: #F2F2F2;
 }
 
 
@@ -1783,7 +1835,7 @@ select {
 }
 
 .panel-general-account-button button:hover {
-    background-color: gray;
+    background-color: #b7d93d;
     cursor: pointer;
     color: white;
 }
@@ -1796,18 +1848,20 @@ select {
 }
 
 .panel-add-contacts {
-    background-color: #C5D97E;
+    background-color: #22252E;
     height: 30%;
     width: 90%;
     display: flex;
     flex-direction: column;
     margin-bottom: 2%;
     justify-content: space-evenly;
+    border-radius: 10px;
 }
 
 .panel-add-contacts-title {
     width: 90%;
     padding-left: 2%;
+    color: #b7d93d;
 }
 
 .panel-add-contacts-content {
@@ -1848,17 +1902,23 @@ select {
 }
 
 .panel-add-contacts-addbutton button:hover {
-    background-color: gray;
+    background-color: #b7d93d;
     cursor: pointer;
     color: white;
 }
 
 
 .panel-show-contacts {
-    background-color: #C5D97E;
+    background-color: #22252E;
     height: 60%;
     width: 90%;
+    border-radius: 10px;
 }
+
+.panel-show-contacts-title {
+    color: #b7d93d;
+}
+
 
 .panel-show-contacts-content {
     display: flex;
