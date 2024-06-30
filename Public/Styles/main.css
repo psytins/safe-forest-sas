@@ -2650,6 +2650,11 @@ select {
     }
 
     /*HEADER*/
+
+    .header-options{
+        width: 100%;
+    }
+
     .header-greeting {
         display: flex;
         flex-direction: column;
@@ -2678,6 +2683,10 @@ select {
     }
     
     .header-options-leave p{
+        display: none;
+    }
+
+    .header-greeting{
         display: none;
     }
     
@@ -2806,6 +2815,11 @@ select {
     .panel-account-search {
         width: 15vw;
     }
+
+    #live-feed-container{
+        width: 95%;
+    }
+
 
     /*FRAME*/
     .panel-upload-processed-frame img {
