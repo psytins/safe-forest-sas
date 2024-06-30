@@ -1047,7 +1047,7 @@ async function loadIndex() {
     document.getElementById("security").style.display = "none";
     document.getElementById("contacts").style.display = "none";
 
-    document.getElementById("greetings").innerText = getGreetingTime() + ", " + sessionStorage.getItem("name") + " #" + sessionStorage.getItem("_id");
+    document.getElementById("greetings").innerText = getGreetingTime() + ", " + sessionStorage.getItem("name");
 
     //General Personal Profile - Placeholders
     const fname = sessionStorage.getItem("name").split(" ")[0];

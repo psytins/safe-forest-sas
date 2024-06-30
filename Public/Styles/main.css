@@ -150,6 +150,7 @@ h1 {
     align-self: center;
     cursor: pointer;
     width: 50%;
+    background-color: white;
 }
 
 .menu-options {
@@ -1080,9 +1081,9 @@ border-radius: 5px;
     justify-content: space-evenly;
     width: 90%;
     height: 90%;
-    background-color: #F2F2F2;
-    border: #C5D97E 3px solid;
+    background-color: #22252E;
     border-radius: 5px ;
+    color: #ffffff;
 }
 
 .panel-information-statistics-status-online-container-number {
@@ -1131,9 +1132,9 @@ border-radius: 5px;
     justify-content: space-evenly;
     width: 90%;
     height: 90%;
-    background-color: #F2F2F2;
-    border: #C5D97E 3px solid;
+    background-color: #22252E;
     border-radius: 5px ;
+    color: #ffffff;
 }
 
 .panel-information-statistics-status-offline-container-label {
@@ -1170,8 +1171,24 @@ border-radius: 5px;
     flex-direction: column;
     width: 95%;
     height: 50%;
-    border: #C5D97E 3px solid;
     border-radius: 5px ;
+    background-color: #22252E;
+    color: #ffffff;
+}
+
+.panel-information-statistics-smoke-24-hours-number .fa-fire {
+    color: rgb(255, 115, 0);
+    font-size: 2em;
+}
+
+.panel-information-statistics-smoke-7-days-number .fa-fire {
+    color: rgb(255, 72, 0);
+    font-size: 2em;
+}
+
+.panel-information-statistics-smoke-30-days-number .fa-fire {
+    color: rgb(255, 51, 0);
+    font-size: 2em;
 }
 
 .panel-information-statistics-smoke-title {
@@ -1271,12 +1288,11 @@ border-radius: 5px;
     align-items: center;
     height: 95%;
     width: 95%;
-    background-color: #F2F2F2;
+    background-color: #22252E;
     margin-top: 2%;
     margin-bottom: 2%;
-    border: #C5D97E 3px solid;
     border-radius: 5px ;
-
+    color: #ffffff;
 }
 
 .panel-information-detections-title {
@@ -1292,6 +1308,14 @@ border-radius: 5px;
     margin-top: 2%;
     margin-bottom: 2%;
     font-size: small;
+}
+
+.panel-information-detections-table .tbl-header {
+    color: #000000;
+}
+
+.panel-information-detections-table .tbl-content {
+    border-color: #C0D966;
 }
 
 /*#################################### Table CSS ####################################*/
@@ -1316,6 +1340,7 @@ table {
     overflow-x: auto;
     margin-top: 0px;
     border: 1px solid #C5D97E;
+    color: #ffffff;
 }
 
 th {
@@ -1374,8 +1399,16 @@ td {
 }
 
 .panel-camera-search{
-    border-radius: 5px;
+    width: 100%;
+    max-width: 300px;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
+
 
 .panel-camera-container-top {
     width: 100%;
@@ -1395,7 +1428,10 @@ td {
 }
 
 .panel-camera-container-top-search {
-    margin: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
 }
 
 .panel-camera-container-top-search input {
@@ -1404,7 +1440,7 @@ td {
     height: 25px;
     background-position: 95%;
     background-repeat: no-repeat;
-    padding-left: 5px;
+    padding-left: 20px;
     padding-right: 30px;
 }
 
