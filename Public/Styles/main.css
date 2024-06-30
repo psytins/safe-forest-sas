@@ -839,6 +839,72 @@ input:checked+.slider:after {
 
 /*###################################################*/
 
+/*################# Livefeed #################*/
+
+#live-feed-container {
+    display: none;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    position: fixed;
+    top: 27%;
+    left: 50%;
+    transform: translate(-50%, -12.85vh);
+    width: fit-content;
+    height: fit-content;
+    z-index: 1000;
+    background-color: #C0D966;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 1%;
+    color: black;
+
+    /*Animation*/
+    opacity: 0;
+    animation: fadeInAnimation ease-in 1;
+    animation-fill-mode: forwards;
+    animation-duration: 0.2s;
+    animation-delay: 0.1s
+}
+
+#live-feed-container-title{
+    display: flex;
+    height: 50%;
+    width: 100%;
+    align-items: center;
+    font-weight: normal;
+}
+
+#cancel-btn{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    height: 30px;
+    width: 80px;
+    border: none;
+    background-color: #22252E;
+    border-radius: 5px;
+    color: white;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#cancel-btn:hover {
+    background-color: lightcoral;
+    cursor: pointer;
+    color: black;
+}
+  
+#hls-video {
+    width: 100%;
+    height: auto; 
+    max-width: 100%; 
+}
+
+/*###################################################*/
+
 /*################# SOCIAL NETWORK #################*/
 
 .social-network {
@@ -867,6 +933,7 @@ input:checked+.slider:after {
     animation: fadeInAnimation ease-in 1;
     animation-fill-mode: forwards;
     animation-duration: 0.4s;
+    
 }
 
 .social-network-image {
@@ -1447,7 +1514,6 @@ table {
     height: 25vh;
     overflow-x: auto;
     margin-top: 0px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .tbl-content-large {
@@ -1651,8 +1717,8 @@ td:hover{
     display: flex;
     flex-direction: column;
     width: 95%;
-    height: 97%;
-    background-color: #22252E;
+    max-width: 95%;
+    height: 97%; 
     color: lightgray;
     border-radius: 5px;
 }
@@ -1721,17 +1787,21 @@ td:hover{
     margin-right: 5px;
 }
 
-.panel-camera-settings-endpoint{
+.panel-camera-settings-endpoint {
     width: 100%;
+    max-width: 300px;
+    height: fit-content;
     padding: 1%;
-    overflow-y: auto;
 }
 
-#endpoint{
+#endpoint {
     background-color: white;
     color: black;
     border-radius: 5px;
-    width: 95%;
+    width: 100%; /* Calculate width with padding subtracted */
+    max-width: 100%;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent text from wrapping */
 }
 
 .panel-camera-settings-endpoint-link {
@@ -1753,11 +1823,26 @@ div.panel-camera-settings-endpoint-link p {
     width: 50%;
 }
 
-.panel-camera-settings-sensitivity p{
-    background-color: white;
-    color: black;
-    border-radius: 5px;
+.sensitivity-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* Adjust as needed */
 }
+
+#sensitivity {
+    margin: 0;
+    width: fit-content;
+    padding-right: 5px;
+    background-color: white;
+    border-radius: 5px;
+    color: black;
+}
+
+.sensitivity-container span {
+    padding-left: 5px; /* Optional: space between number and % symbol */
+}
+
 
 .panel-camera-settings-overview {
     display: flex;
@@ -1818,17 +1903,44 @@ div.panel-camera-settings-overview-stats-body div {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 1%;
+    height: 50%;
 }
 
 #cameraLogs{
+    display: flex;
+    flex-direction: column;
     border: 1px #C5D97E solid;
+    width: 100%;
+    height: 100%;
+    background-color: red;
+    overflow-y: auto;
 }
 
 #cameraLogs-header{
     color: black;
     background-color: #C5D97E;
-    border: 1px #C5D97E solid;
+    border: 1px solid #C5D97E;
+    width: 3%;
+}
+
+#cameraLogs-body {
+    width: 100%;
+    height: 50%;
+    background: none;
+    overflow-y: auto;
+    background-color: blue;
+}
+
+#cameraLogs .tbl-content {
+    height: 25vh;
+    max-height: 100px;
+    overflow-y: auto;
+    color: white;
+}
+
+#cameraLogs .tbl-content tr:hover{
+    background-color: lightgrey;
+    color:black
 }
 
 .panel-camera-settings-save{
@@ -2444,6 +2556,7 @@ select {
 .panel-add-contacts-addbox label {
     margin-bottom: 5px;
     font-size: 19px;
+    color: #F2F2F2;
 }
 
 #add-contact {
@@ -2521,7 +2634,6 @@ select {
         display: none;
     }
 
-
     .menu-options-home-dashboard-text {
         display: none;
     }
@@ -2573,6 +2685,11 @@ select {
     }
 
     /*HEADER*/
+
+    .header-options{
+        width: 100%;
+    }
+
     .header-greeting {
         display: flex;
         flex-direction: column;
@@ -2594,7 +2711,19 @@ select {
         align-items: center;
         /* background-color: #f2f2f2; */
     }
+
+    .header-options-leave img{
+        height: 100%; 
+        width: 100%;
+    }
     
+    .header-options-leave p{
+        display: none;
+    }
+
+    .header-greeting{
+        display: none;
+    }
     
     .header-options-addcamera button {
         color: transparent;
@@ -2627,8 +2756,8 @@ select {
     }
 
     #notification-panel {
-        width: 40%;
-        left: 55%;
+        width: 50%;
+        left: 45%;
     }
 
     /*PANEL - DASHBOARD*/
@@ -2654,9 +2783,57 @@ select {
         font-size: 1.5vw;
     }
 
+    .panel-information-statistics-status-online-container-label{
+        font-size: x-large;
+    }
+
+    .panel-information-statistics-status-offline-container-label{
+        font-size: x-large;
+    }
+
+
+    .panel-information-statistics-smoke-24-hours-label{
+        font-size: x-large;
+    }
+
+    .panel-information-statistics-smoke-7-days-label{
+        font-size: x-large;
+    }
+
+    .panel-information-statistics-smoke-30-days-label{
+        font-size: x-large;
+    }
+
+    .tbl-header{
+        font-size: xx-large;
+    }
+
     /*FOOTER*/
     .footer-info {
         font-size: 0.6rem;
+    }
+
+    .social-network{
+        display: none;
+    }
+
+    /*PANEL - ADD CAMERA*/
+
+    .add-camera-menu-title{
+        font-size: small;
+    }
+
+    #add-camera-menu {
+        height: 85vh;
+        width: 80vw;
+    }
+
+    .add-camera-plans{
+        font-size: small;
+    }
+
+    .add-camera-options-confirmations{
+        font-size: small;
     }
 
 
@@ -2674,10 +2851,54 @@ select {
         width: 15vw;
     }
 
+    #live-feed-container{
+        width: 95%;
+    }
+
+
     /*FRAME*/
     .panel-upload-processed-frame img {
         max-width: 100%;
         width: 95%;
     }
 
+    /* CONTACTS */
+
+    .panel-add-contacts-addbutton{
+        width: 50%;
+    }
+
+    .panel-add-contacts-addbutton button{
+        width: 100%;
+    }
+
+    .panel-add-contacts{
+        height: 50%;
+    }
+
+    .panel-show-contacts-searchbar{
+        width: 50%;
+    }
+
+    .panel-account-search{
+        width: 100%;
+    }
+
+    /*################# AUTH #################*/
+
+    .header-auth-logo{
+        display: none;
+    }
+
+    #form-register, #form-login {
+        width: 100%;
+    }
+    #form-login.panel-auth-container-register{
+        width: 100%;
+    }
+
+    .header-auth-title {
+        width: 100%;
+        text-align: center;
+    }
 }
