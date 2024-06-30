@@ -298,6 +298,10 @@ h1 {
     animation-duration: 0.2s;
 }
 
+.menu-options-home-upload:hover .menu-options-home-upload-text {
+    color: black;
+}
+
 .menu-options-home-upload:hover {
     background: linear-gradient(to right, #b7d93d, #e6f0c0);
     color: white;
