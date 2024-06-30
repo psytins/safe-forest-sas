@@ -715,7 +715,7 @@ async function loadCameraList() {
                 // Dynamic Entry for My Camera List ----------------
                 var dynamicEntryMC =
                     `
-                <tr ${camera.current_status === 1 ? "style='color: white;'" : "style='color: red;'"} onclick="expandCameraInfo(${camera.cameraID})">
+                <tr ${camera.current_status === 1 ? "style='color: white;'" : "style='color: red;'"}>
                     <td>#${camera.cameraID}</td>
                     <td>${camera.sensitivity}%</td>
                     <td>${camera.camera_name}</td>
@@ -724,6 +724,8 @@ async function loadCameraList() {
                     <td>
                         <button onclick="changeCameraStatus(${camera.cameraID})" title="On/Off Camera" type="button"><i class="fa fa-power-off" aria-hidden="true" style='color:red;'></i></button>
                         <button onclick="simulateDetection(${camera.cameraID})" title="Simulate a detection" type="button"><i class="fa fa-eye" aria-hidden="true" style='color:lightgray;'></i></button>
+                        <button id="livefeed-btn" title="Livefeed" type="button" onclick="togglePopup()"><i class="fa fa-camera" aria-hidden="true" style="color: lightgray;"></i></button>
+                        <button onclick="expandCameraInfo(${camera.cameraID})" title="Simulate a detection" type="button"><i class="fa fa-info" aria-hidden="true" style='color:lightgray;'></i></button>
                     </td>
                 </tr>
                 `
@@ -1347,6 +1349,18 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+function togglePopup() {
+    var popup = document.getElementById('live-feed-container');
+  
+    if (popup.style.display === 'flex') {
+        popup.style.display = 'none';
+    } else {
+        popup.style.display = 'flex';
+    }
+  }
+  
+  
 
 
 
