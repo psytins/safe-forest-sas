@@ -9,7 +9,11 @@ app = Flask(__name__)
 
 # step 1 - load the model
 
-net = cv2.dnn.readNet('config_files/yolov5m_smoke.onnx')
+# Config YOLO
+yoloPathWeights = "config_files/yolov5m_smoke.onnx"
+yoloDataset = "config_files/coco.names"
+
+net = cv2.dnn.readNet(yoloPathWeights)
 
 # step 2 - feed a 640x640 image to get predictions
 
@@ -71,8 +75,8 @@ def detect():
                 boxes.append(box)
 
     class_list = []
-    with open("config_files/classes.txt", "r") as f:
-        class_list = [cname.strip() for cname in f.readlines()]
+    with open(yoloDataset, 'r') as f:
+        class_list = [line.strip() for line in f.readlines()]
 
     indexes = cv2.dnn.NMSBoxes(boxes, confidences, 0.25, 0.45) 
 
