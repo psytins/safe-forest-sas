@@ -842,7 +842,7 @@ input:checked+.slider:after {
 /*################# Livefeed #################*/
 
 #live-feed-container {
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center; 
     justify-content: center;
@@ -858,11 +858,49 @@ input:checked+.slider:after {
     border-radius: 5px;
     padding: 1%;
     color: black;
+
+    /*Animation*/
+    opacity: 0;
+    animation: fadeInAnimation ease-in 1;
+    animation-fill-mode: forwards;
+    animation-duration: 0.2s;
+    animation-delay: 0.1s
+}
+
+#live-feed-container-title{
+    display: flex;
+    height: 50%;
+    width: 100%;
+    align-items: center;
+    font-weight: normal;
+}
+
+#cancel-btn{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    height: 30px;
+    width: 80px;
+    border: none;
+    background-color: #22252E;
+    border-radius: 5px;
+    color: white;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#cancel-btn:hover {
+    background-color: lightcoral;
+    cursor: pointer;
+    color: black;
 }
   
-#hls-video{
-    display: flex;
-    width: 95%;
+#hls-video {
+    width: 100%;
+    height: auto; 
+    max-width: 100%; 
 }
 
 /*###################################################*/
@@ -2455,6 +2493,7 @@ select {
 .panel-add-contacts-addbox label {
     margin-bottom: 5px;
     font-size: 19px;
+    color: #F2F2F2;
 }
 
 #add-contact {
@@ -2676,4 +2715,12 @@ select {
         width: 95%;
     }
 
+    /*################# AUTH #################*/
+    .panel-auth-container-register{
+        width: 100%;
+    }
+
+    .panel-auth-container-register, #form-login{
+        width: 100%;
+    }
 }

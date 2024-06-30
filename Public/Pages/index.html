@@ -501,7 +501,9 @@
             </div>
 
             <div id="live-feed-container">
-                <h1>Livefeed of Camera: </h1>
+                <button id="cancel-btn" onclick="togglePopup()">Cancel</button>
+                <h3 id="live-feed-container-title">Livefeed of Camera:</h3>
+                <h1 id="live-feed-container-camera_name">Livefeed of Camera:</h1>
                 <video id="hls-video" controls>
                     <!-- Fallback content for browsers that do not support HLS -->
                     <source id="live-source" src="http://172.208.31.254/live/camerasf.m3u8" type="application/x-mpegURL">

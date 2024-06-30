@@ -723,8 +723,7 @@ async function loadCameraList() {
                     <td>${camera.current_status === 1 ? "Online" : "Offline"}</td>
                     <td>
                         <button onclick="changeCameraStatus(${camera.cameraID})" title="On/Off Camera" type="button"><i class="fa fa-power-off" aria-hidden="true" style='color:red;'></i></button>
-                        <button onclick="simulateDetection(${camera.cameraID})" title="Simulate a detection" type="button"><i class="fa fa-eye" aria-hidden="true" style='color:lightgray;'></i></button>
-                        <button id="livefeed-btn" title="Livefeed" type="button" onclick="togglePopup()"><i class="fa fa-camera" aria-hidden="true" style="color: lightgray;"></i></button>
+                        <button onclick="simulateDetection(${camera.cameraID})" title="Simulate a detection" type="button"><i class="fa fa-eye" aria-hidden="true" style='color:lightgray;'></i></button><button id="livefeed-btn" title="Livefeed" type="button" onclick="togglePopup('${camera.camera_name}')"><i class="fa fa-camera" aria-hidden="true" style="color: lightgray;"></i></button>
                         <button onclick="expandCameraInfo(${camera.cameraID})" title="Simulate a detection" type="button"><i class="fa fa-info" aria-hidden="true" style='color:lightgray;'></i></button>
                     </td>
                 </tr>
@@ -1350,15 +1349,20 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-function togglePopup() {
+function togglePopup(cameraName) {
     var popup = document.getElementById('live-feed-container');
-  
-    if (popup.style.display === 'flex') {
-        popup.style.display = 'none';
+
+    if (popup.style.display === 'none' || popup.style.display === '') {
+        // Set the camera name inside the popup content
+        var cameraNameElement = document.getElementById('live-feed-container-camera_name');
+        cameraNameElement.innerHTML = cameraName;
+
+        popup.style.display = 'block';
     } else {
-        popup.style.display = 'flex';
+        popup.style.display = 'none';
     }
-  }
+}
+
   
   
 
