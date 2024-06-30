@@ -500,6 +500,17 @@
                 </div>
             </div>
 
+            <div id="live-feed-container">
+                <video id="hls-video" controls>
+                    <!-- Fallback content for browsers that do not support HLS -->
+                    <source id="live-source" src="http://172.208.31.254/live/camerasf.m3u8" type="application/x-mpegURL">
+                    <!-- Optional: Provide additional sources for fallback -->
+                    <!-- <source src="fallback.mp4" type="video/mp4"> -->
+                    Your browser does not support HTML5 video.
+                </video>
+            </div>
+
+
             <div class="panel" id="general">
                 <div class="panel-general-account">
                     <div class="panel-general-account-title">
@@ -662,6 +673,7 @@
     <script src="../Scripts/main.js"></script>
     <script src="../Scripts/generalSettings.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script> <!-- HSL -->
 
 </body>
 

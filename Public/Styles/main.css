@@ -867,6 +867,7 @@ input:checked+.slider:after {
     animation: fadeInAnimation ease-in 1;
     animation-fill-mode: forwards;
     animation-duration: 0.4s;
+    
 }
 
 .social-network-image {

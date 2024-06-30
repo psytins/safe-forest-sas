@@ -1218,9 +1218,6 @@ function renderCameraDetailsPanel(cameraDetails, detections, cameraID, container
     container.appendChild(panelMyCameraContainer);
 }
 
-
-
-
 // Function to set the detection frequency text based on subscription plan
 function setDetectionFrequencyText(plan) {
     const frequencyText = document.querySelector('#detectionFrequency');
@@ -1269,8 +1266,6 @@ function getDetectionFrequency(plan) {
     }
 }
 
-
-
 async function saveChanges(cameraID, containerID) {
     const panelMyCameraContainer = document.getElementById(containerID);
     const updatedCameraName = panelMyCameraContainer.querySelector('#cameraName').innerText;
@@ -1315,14 +1310,31 @@ async function saveChanges(cameraID, containerID) {
     }
 }
 
-
-
-
 // ------------------------------------------------
 
 // Event Listeners
 // Check for notifications every 20 seconds
 setInterval(loadNotificationList, 20000);
+
+// Temporary
+document.addEventListener('DOMContentLoaded', function() {
+    var video = document.getElementById('hls-video');
+    if (Hls.isSupported()) {
+        var hls = new Hls();
+        hls.loadSource('http://172.208.31.254/live/camerasf.m3u8');
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, function() {
+            video.play();
+        });
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = 'http://172.208.31.254/live/camerasf.m3u8';
+        video.addEventListener('loadedmetadata', function() {
+            video.play();
+        });
+    }
+});
+
+
 
 // Initialize - Load Functions
 function loadDashboardInformation(cameraList, l24h, l7days, l30days) {
