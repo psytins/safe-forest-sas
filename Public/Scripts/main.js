@@ -1029,7 +1029,7 @@ async function sendEmail(subject) {
 async function loadNotificationList() {
     const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
     if (userID) {
-        console.log("Checking notifications...")
+        console.log("Checking notifications...");
         const notificationList = await fetch('/api/auth/list-notification', {
             method: 'POST',
             headers: {
@@ -1037,14 +1037,12 @@ async function loadNotificationList() {
             },
             body: JSON.stringify({ userID }),
         })
-            .then(response => {
-                return response.json();
-            })
+            .then(response => response.json())
             .then(data => {
                 const tbodyNotification = document.getElementById("dynamicNotificationBody");
                 const notificationNumberDOM = document.getElementById("notification-number");
 
-                let notificationNumber = 0
+                let notificationNumber = 0;
 
                 tbodyNotification.innerHTML = ""; // clean all notifications first
 
@@ -1052,10 +1050,12 @@ async function loadNotificationList() {
                     if (notification.opened === 0) {
                         notificationNumber++;
                     }
+                    // Determine the class based on whether the notification is opened or not
+                    const notificationClass = notification.opened === 0 ? 'unread' : 'read';
+
                     // Dynamic Entry for Contact List ----------------
-                    var dynamicEntryNotification =
-                        `
-                    <div class="notification-panel-message" onclick="openNotification(${notification.notificationID})">
+                    var dynamicEntryNotification = `
+                    <div class="notification-panel-message ${notificationClass}" onclick="openNotification(${notification.notificationID})">
                         <div class="notification-panel-message-top">
                             <p class="notification-panel-message-top-title">${notification.title}:</p>
                             <p class="notification-panel-message-top-body">&nbsp${notification.body}</p>
@@ -1065,11 +1065,11 @@ async function loadNotificationList() {
                             <p class="notification-panel-message-bottom-date">${notification.createdAt}</p>
                         </div>
                     </div>
-                `
+                `;
                     tbodyNotification.innerHTML += dynamicEntryNotification;
                 });
 
-                notificationNumber === 0 ? notificationNumberDOM.innerHTML = "" : notificationNumberDOM.innerHTML = notificationNumber
+                notificationNumber === 0 ? notificationNumberDOM.innerHTML = "" : notificationNumberDOM.innerHTML = notificationNumber;
 
                 return data.notifications;
             })
@@ -1081,6 +1081,7 @@ async function loadNotificationList() {
         return notificationList;
     }
 }
+
 
 function openNotification(notificationID) {
     fetch('api/auth/open-notification', {
@@ -1114,6 +1115,16 @@ function openNotification(notificationID) {
             alert(error);
             // ...
         });
+}
+
+async function markAllAsRead() {
+    const notificationList = await loadNotificationList(); // Wait for the list to load
+
+    notificationList.forEach(notification => {
+        if (notification.opened === 0) {
+            openNotification(notification.notificationID);
+        }
+    });
 }
 
 function uploadFrame() {
