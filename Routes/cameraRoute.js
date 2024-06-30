@@ -27,7 +27,7 @@ router.post('/regist', (req, res) => {
         brand_model: req.body.brand_model,
         azimuth_bearing: req.body.azimuth_bearing,
         camera_web_admin: req.body.camera_web_admin,
-        public_ip_address: req.body.public_ip_address,
+        public_ip_address: req.body.list-cameras_ip_address,
         input_method: req.body.input_method,
         current_status: req.body.current_status,
         size_from: req.body.size_from,
@@ -223,7 +223,7 @@ router.post('/change-status', (req, res) => {
 
 //Update Changes
 router.post('/update-camera-details', async (req, res) => {
-    const { cameraID, camera_name, sensitivity, endpoint } = req.body;
+    const { cameraID, camera_name, subscription_plan, sensitivity, endpoint } = req.body;
 
     try {
         const camera = await Camera.findByPk(cameraID);
@@ -235,6 +235,7 @@ router.post('/update-camera-details', async (req, res) => {
         // Update camera details
         camera.camera_name = camera_name;
         camera.sensitivity = sensitivity;
+        camera.subscription_plan = subscription_plan
         camera.camera_endpoint = endpoint;
 
         await camera.save();
