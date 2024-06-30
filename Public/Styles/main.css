@@ -94,7 +94,7 @@ h1 {
 
 /*################# SIDEBAR #################*/
 .side-nav {
-    background-color: #C0D966;
+    background-color: #22252E;
     height: 100vh;
     width: 15vw;
     transition: width 0.3s ease;
@@ -104,19 +104,29 @@ h1 {
     display: flex;
     width: 15vw;
     height: 12.85vh;
-    border-bottom: 1px #102026 solid;
+    border-bottom: 1px #ffffff solid;
     justify-content: center;
 }
 
 .logo-nav-logo {
-    width: 100%;
+    width: 70%;
     background-image: url("../Images/safe-forest.png");
     background-repeat: no-repeat;
     background-position: center;
+
+    /*Animation*/
+    opacity: 0;
+    animation: fadeInAnimation ease-in 1;
+    animation-fill-mode: forwards;
+    animation-duration: 0.2s;
 }
 
 .logo-nav-hamburguer {
     width: 30%;
+}
+
+.logo-nav-hamburguer:hover {
+    background: linear-gradient(to right, #b7d93d, #e6f0c0);
 }
 
 .logo-nav-hamburguer button {
@@ -130,12 +140,17 @@ h1 {
     background-position: center;
 }
 
+.logo-nav-hamburguer button:hover {
+    background-image: url("../Images/hamburger-logo-hover.png");
+}
+
 .menu-options-home-dashboard-icon-img {
     display: flex;
     flex-shrink: 0;
     align-self: center;
     cursor: pointer;
     width: 50%;
+    background-color: white;
 }
 
 .menu-options {
@@ -161,7 +176,7 @@ h1 {
     width: 100%;
     height: 30%;
     margin-top: 5vh;
-    color: #102026;
+    color: #ffffff;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -172,7 +187,7 @@ h1 {
     display: flex;
     align-items: center;
     margin-left: 10%;
-    border-bottom: 2px #102026 solid;
+    border-bottom: 2px #ffffff solid;
     font-size: 1rem;
 }
 
@@ -181,6 +196,7 @@ h1 {
     margin-top: 2%;
     display: flex;
     font-size: 0.8rem;
+    height: 7vh;
 }
 
 .menu-options-home-dashboard-icon {
@@ -195,17 +211,29 @@ h1 {
     display: flex;
     justify-content: start;
     align-items: center;
+    color: #F2F2F2;
+
+    /*Animation*/
+    opacity: 0;
+    animation: fadeInAnimation ease-in 1;
+    animation-fill-mode: forwards;
+    animation-duration: 0.2s;
 }
 
 .menu-options-home-dashboard:hover {
-    background-color: gray;
-    color: white;
+    background: linear-gradient(to right, #b7d93d, #e6f0c0);
+    animation: pulse 0.25s;
+}
+
+.menu-options-home-dashboard:hover .menu-options-home-dashboard-text {
+    color: black;
 }
 
 .menu-options-home-camera {
     display: flex;
     cursor: pointer;
     font-size: 0.8rem;
+    height: 7vh;
 }
 
 .menu-options-home-camera-icon {
@@ -220,11 +248,23 @@ h1 {
     display: flex;
     justify-content: start;
     align-items: center;
+    color: #F2F2F2;
+
+    /*Animation*/
+    opacity: 0;
+    animation: fadeInAnimation ease-in 1;
+    animation-fill-mode: forwards;
+    animation-duration: 0.2s;
 }
 
 .menu-options-home-camera:hover {
-    background-color: gray;
+    background: linear-gradient(to right, #b7d93d, #e6f0c0);
     color: white;
+    animation: pulse 0.25s;
+}
+
+.menu-options-home-camera:hover .menu-options-home-camera-text {
+    color: black;
 }
 
 .menu-options-home-upload {
@@ -253,7 +293,7 @@ h1 {
 }
 
 .menu-options-settings {
-    color: #102026;
+    color: #ffffff;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -267,7 +307,7 @@ h1 {
     display: flex;
     align-items: center;
     margin-left: 10%;
-    border-bottom: 2px #102026 solid;
+    border-bottom: 2px #ffffff solid;
     font-size: 1rem;
 }
 
@@ -276,6 +316,7 @@ h1 {
     margin-top: 2%;
     display: flex;
     font-size: 0.8rem;
+    height: 7vh;
 }
 
 .menu-options-settings-general-icon {
@@ -290,17 +331,30 @@ h1 {
     display: flex;
     justify-content: start;
     align-items: center;
+    color: #F2F2F2;
+
+    /*Animation*/
+    opacity: 0;
+    animation: fadeInAnimation ease-in 1;
+    animation-fill-mode: forwards;
+    animation-duration: 0.2s;
 }
 
 .menu-options-settings-general:hover {
-    background-color: gray;
+    background: linear-gradient(to right, #b7d93d, #e6f0c0);
     color: white;
+    animation: pulse 0.25s;
+}
+
+.menu-options-settings-general:hover .menu-options-settings-general-text {
+    color: black;
 }
 
 .menu-options-settings-security {
     cursor: pointer;
     display: flex;
     font-size: 0.8rem;
+    height: 7vh;
 }
 
 .menu-options-settings-security-icon {
@@ -315,17 +369,30 @@ h1 {
     display: flex;
     justify-content: start;
     align-items: center;
+    color: #F2F2F2;
+
+    /*Animation*/
+    opacity: 0;
+    animation: fadeInAnimation ease-in 1;
+    animation-fill-mode: forwards;
+    animation-duration: 0.2s;
 }
 
 .menu-options-settings-security:hover {
-    background-color: gray;
+    background: linear-gradient(to right, #b7d93d, #e6f0c0);
     color: white;
+    animation: pulse 0.25s;
+}
+
+.menu-options-settings-security:hover .menu-options-settings-security-text {
+    color: black;
 }
 
 .menu-options-settings-alert {
     cursor: pointer;
     display: flex;
     font-size: 0.8rem;
+    height: 7vh;
 }
 
 .menu-options-settings-alert-icon {
@@ -340,12 +407,39 @@ h1 {
     display: flex;
     justify-content: start;
     align-items: center;
+    color: #F2F2F2;
+
+    /*Animation*/
+    opacity: 0;
+    animation: fadeInAnimation ease-in 1;
+    animation-fill-mode: forwards;
+    animation-duration: 0.2s;
 }
 
 
 .menu-options-settings-alert:hover {
-    background-color: gray;
+    background: linear-gradient(to right, #b7d93d, #e6f0c0);
     color: white;
+    animation: pulse 0.3s;
+}
+
+.menu-options-settings-alert:hover .menu-options-settings-alert-text {
+    color: black;
+}
+
+/* Animation for the pulse */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.02);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 /*################# ADD CAMERA MENU #################*/
@@ -358,7 +452,8 @@ h1 {
     transform: translate(-50%, -50%);
     flex-direction: column;
     height: fit-content;
-    width: 50%;
+    width: 50vw;
+    padding: 1%;
     background-color: #C0D966;
     z-index: 1000;
     border: 1px black solid;
@@ -702,7 +797,7 @@ input:checked+.slider:after {
     display: flex;
     z-index: 90;
     justify-content: end;
-    width: 100%;
+    width: 95%;
     padding: 2%;
     margin-right: 10%;
 }
@@ -723,31 +818,63 @@ input:checked+.slider:after {
 /*###################################################*/
 
 /*################# SOCIAL NETWORK #################*/
+
 .social-network {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     width: 15vw;
     height: 9.88vh;
-    border-top: 1px #102026 solid;
+    border-top: 1px #22252E solid;
+    position: relative;
 }
 
 .social-network img {
     width: 60%;
+
+    /*Animation*/
+    opacity: 0;
+    animation: fadeInAnimation ease-in 1;
+    animation-fill-mode: forwards;
+    animation-duration: 0.4s;
 }
 
-.social-network div {
+.social-network-image {
     width: 25%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
-.social-network div:hover {
-    background-color: #C5D97E;
+.social-network-image::after {
+    content: attr(data-hover-text);
+    color: black;
+    background: #e6f0c0;
+    padding: 5px 10px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 110%;
+    left: 0;
+    width: fit-content;
+    opacity: 0;
+    white-space: normal;
+    text-align: center;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    box-sizing: border-box;
 }
 
+.social-network-image:hover::after {
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+.social-network-image:hover {
+    background: linear-gradient(to right, #b7d93d, #e6f0c0);
+    cursor: pointer;
+}
 
 /*################# HEADER #################*/
 
@@ -817,12 +944,14 @@ h2 {
 
 .header-options-addcamera button:hover {
     background-color: gray;
+    cursor: pointer;
     color: white;
 }
 
 .header-options-language {
     display: flex;
     justify-content: center;
+    user-select: none;
 }
 
 .header-options-language:hover {
@@ -833,6 +962,7 @@ h2 {
 .header-options-notifications {
     display: flex;
     justify-content: center;
+    user-select: none;
 }
 
 .header-options-notifications:hover {
@@ -847,6 +977,7 @@ h2 {
     background-color: transparent;
     border: none;
     cursor: pointer;
+    user-select: none;
 }
 
 .header-options-leave:hover {
@@ -865,24 +996,30 @@ h2 {
     cursor: pointer;
 }
 
-
-
 #notification-panel {
-    display: flex;
+    display: none;
     position: fixed;
     flex-direction: column;
     left: 75%;
     height: fit-content;
     background-color: white;
     width: 20%;
+    min-width: 150px;
     padding: 1%;
     z-index: 1000;
     border: 1px black solid;
     border-radius: 5px;
+
+    /*Animation*/
+    opacity: 0;
+    animation: fadeInAnimation ease-in 1;
+    animation-fill-mode: forwards;
+    animation-duration: 0.2s;
 }
 
 .notification-panel-header {
     border-bottom: 1px black solid;
+    padding-bottom: 3%;
 }
 
 .notification-panel-body {
@@ -905,6 +1042,10 @@ h2 {
     display: flex;
 }
 
+.notification-panel-message-top-body {
+    margin-left: 1%;
+}
+
 
 /*################# PANEL #################*/
 
@@ -914,6 +1055,7 @@ h2 {
     align-items: center;
     width: 85vw;
     height: 77vh;
+    background-color: #f2f2f2;
 
     /*Animation*/
     opacity: 0;
@@ -966,9 +1108,9 @@ h2 {
     justify-content: space-evenly;
     width: 90%;
     height: 90%;
-    background-color: #F2F2F2;
-    border: #C5D97E 3px solid;
+    background-color: #22252E;
     border-radius: 5px;
+    color: #ffffff;
 }
 
 .panel-information-statistics-status-online-container-number {
@@ -997,6 +1139,7 @@ h2 {
 
 .panel-information-statistics-status-online-container-cameras button:hover {
     background-color: lightgray;
+    cursor: pointer;
 }
 
 .panel-information-statistics-status-offline {
@@ -1016,9 +1159,9 @@ h2 {
     justify-content: space-evenly;
     width: 90%;
     height: 90%;
-    background-color: #F2F2F2;
-    border: #C5D97E 3px solid;
+    background-color: #22252E;
     border-radius: 5px;
+    color: #ffffff;
 }
 
 .panel-information-statistics-status-offline-container-label {
@@ -1046,6 +1189,7 @@ h2 {
 
 .panel-information-statistics-status-offline-container-cameras button:hover {
     background-color: lightgray;
+    cursor: pointer;
 }
 
 .panel-information-statistics-smoke {
@@ -1054,8 +1198,24 @@ h2 {
     flex-direction: column;
     width: 95%;
     height: 50%;
-    border: #C5D97E 3px solid;
     border-radius: 5px;
+    background-color: #22252E;
+    color: #ffffff;
+}
+
+.panel-information-statistics-smoke-24-hours-number .fa-fire {
+    color: rgb(255, 115, 0);
+    font-size: 2em;
+}
+
+.panel-information-statistics-smoke-7-days-number .fa-fire {
+    color: rgb(255, 72, 0);
+    font-size: 2em;
+}
+
+.panel-information-statistics-smoke-30-days-number .fa-fire {
+    color: rgb(255, 51, 0);
+    font-size: 2em;
 }
 
 .panel-information-statistics-smoke-title {
@@ -1155,12 +1315,11 @@ h2 {
     align-items: center;
     height: 95%;
     width: 95%;
-    background-color: #F2F2F2;
+    background-color: #22252E;
     margin-top: 2%;
     margin-bottom: 2%;
-    border: #C5D97E 3px solid;
     border-radius: 5px;
-
+    color: #ffffff;
 }
 
 .panel-information-detections-title {
@@ -1178,6 +1337,14 @@ h2 {
     font-size: small;
 }
 
+.panel-information-detections-table .tbl-header {
+    color: #000000;
+}
+
+.panel-information-detections-table .tbl-content {
+    border-color: #C0D966;
+}
+
 /*#################################### Table CSS ####################################*/
 table {
     width: 100%;
@@ -1185,7 +1352,7 @@ table {
 }
 
 .tbl-header {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: #C5D97E;
 }
 
 .tbl-content {
@@ -1199,7 +1366,8 @@ table {
     height: 50vh;
     overflow-x: auto;
     margin-top: 0px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid #C5D97E;
+    color: #ffffff;
 }
 
 th {
@@ -1271,9 +1439,21 @@ td {
 .panel-camera-container {
     width: 95%;
     height: 97%;
-    background-color: #C5D97E;
+    background-color: #22252E;
     border-radius: 5px;
 }
+
+.panel-camera-search {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
 
 .panel-camera-container-top {
     width: 100%;
@@ -1284,6 +1464,7 @@ td {
 
 .panel-camera-container-top-title {
     margin: 2%;
+    color: #F2F2F2;
 }
 
 .panel-camera-container-top-title h1 {
@@ -1292,7 +1473,10 @@ td {
 }
 
 .panel-camera-container-top-search {
-    margin: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
 }
 
 .panel-camera-container-top-search input {
@@ -1301,7 +1485,7 @@ td {
     height: 25px;
     background-position: 95%;
     background-repeat: no-repeat;
-    padding-left: 5px;
+    padding-left: 20px;
     padding-right: 30px;
 }
 
@@ -1361,10 +1545,11 @@ td {
 .panel-security-information {
     display: flex;
     flex-direction: column;
-    background-color: #C5D97E;
+    background-color: #22252E;
     width: 100%;
     height: 65%;
     margin-bottom: 2.5%;
+    border-radius: 10px;
 }
 
 .panel-security-information-label {
@@ -1372,6 +1557,7 @@ td {
     width: fit-content;
     margin-left: 1%;
     margin-top: 1%;
+    color: #b7d93d;
 }
 
 .panel-security-information-form {
@@ -1385,6 +1571,7 @@ td {
 
 .panel-security-information-current-password {
     height: fit-content;
+    color: #F2F2F2;
 }
 
 .panel-security-information-current-password p {
@@ -1404,6 +1591,7 @@ td {
 .panel-security-information-new-password {
     height: fit-content;
     margin-top: 1%;
+    color: #F2F2F2;
 }
 
 .panel-security-information-new-password p {
@@ -1422,6 +1610,7 @@ td {
 
 .panel-security-information-confirm-password {
     margin-top: 1%;
+    color: #F2F2F2;
 }
 
 .panel-security-information-confirm-password p {
@@ -1456,7 +1645,8 @@ td {
 }
 
 .panel-security-information-change button:hover {
-    background-color: gray;
+    background-color: #b7d93d;
+    cursor: pointer;
     color: white;
 }
 
@@ -1464,8 +1654,9 @@ td {
     display: flex;
     flex-direction: column;
     width: 100%;
-    background-color: #C5D97E;
+    background-color: #22252E;
     height: 30%;
+    border-radius: 10px;
 }
 
 .panel-security-danger-label {
@@ -1475,6 +1666,7 @@ td {
     width: fit-content;
     margin-left: 1%;
     margin-top: 1%;
+    color: #b7d93d;
 }
 
 .panel-security-danger-delete-account {
@@ -1488,6 +1680,7 @@ td {
 .panel-security-danger-delete-account-label {
     display: flex;
     margin-left: 1%;
+    color: #F2F2F2;
 }
 
 .panel-security-danger-delete-account-option {
@@ -1500,6 +1693,7 @@ td {
     flex: 1;
     margin-left: 1%;
     align-items: center;
+    color: #f2f2f2;
 }
 
 .panel-security-danger-delete-account-button {
@@ -1516,7 +1710,8 @@ td {
 }
 
 .panel-security-danger-delete-account-button button:hover {
-    background-color: gray;
+    background-color: #b33737;
+    cursor: pointer;
     color: white;
 }
 
@@ -1529,10 +1724,10 @@ td {
     display: flex;
     justify-items: center;
     align-items: center;
-    background-color: #F2F2F2;
     width: 100vw;
     height: 12.85vh;
     border-bottom: 1px black solid;
+    background-color: #22252E;
 }
 
 .header-auth-logo {
@@ -1542,6 +1737,7 @@ td {
 
 .header-auth-title {
     width: 90%;
+    color: #ffffff;
 }
 
 .panel-auth {
@@ -1550,6 +1746,7 @@ td {
     align-items: center;
     width: 100vw;
     height: 77vh;
+    background-color: #22252E;
 
     /*Animation*/
     opacity: 0;
@@ -1567,14 +1764,42 @@ td {
     width: 100%;
 }
 
+.login-title-container {
+    display: flex;
+    width: 100%;
+    height: 10%;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    width: 30%;
+}
+
 .panel-auth-container-register {
     width: 70%;
     height: 95%;
-    background-color: #C5D97E;
+    background-color: #f2f2f2;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+    border-radius: 10px;
+}
+
+#form-login.panel-auth-container-register {
+    width: 50%;
+    height: 95%;
+    background-color: #f2f2f2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 10px;
 }
 
 .panel-auth-container-register-form {
@@ -1591,7 +1816,7 @@ select {
     height: 3vh;
     margin-top: 1%;
     border-radius: 5px;
-    background: transparent;
+    background: white;
     border: 1px solid black;
 }
 
@@ -1689,15 +1914,19 @@ select {
     width: 60%;
     height: 100%;
     font-size: larger;
-    background-color: lightgray;
-    border: 1px solid black;
+    background-color: #b7d93d;
+    border: 0px solid black;
     border-radius: 5px;
     cursor: pointer;
 }
 
 .panel-auth-container-register-submit button:hover {
     background-color: grey;
-
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    /* Aumenta a sombra ao passar o mouse */
+    transform: translateY(-2px);
+    /* Move o botão ligeiramente para cima */
+    cursor: pointer;
 }
 
 .panel-auth-container-register-altlogin {
@@ -1711,7 +1940,7 @@ select {
 .footer-auth {
     display: flex;
     justify-content: center;
-    background-color: #F2F2F2;
+    background-color: #22252E;
     width: 100vw;
     height: 9.88vh;
     border-top: 1px black solid;
@@ -1729,20 +1958,22 @@ select {
 
 
 .panel-general-account {
-    background-color: #C5D97E;
+    background-color: #22252E;
     width: 95%;
     height: 97%;
+    border-radius: 10px;
 }
 
 .panel-general-account-title {
     width: 30w;
     margin-left: 3%;
     margin-top: 4%;
+    color: #b7d93d;
 }
 
 .panel-general-account-inputs {
     width: 81%;
-    height: 78%;
+    height: 74%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -1753,6 +1984,7 @@ select {
 .panel-general-account-inputs input[type="text"] {
     width: 95%;
     padding: 1%;
+    padding-bottom: 0%;
 }
 
 .panel-general-account-inputs-names input[type="text"] {
@@ -1765,10 +1997,16 @@ select {
     display: flex;
     justify-content: space-between;
     font-size: 18px;
+    color: #F2F2F2;
+}
+
+.panel-general-account-email {
+    color: #F2F2F2;
 }
 
 .panel-general-account-country {
     width: 97%;
+    color: #F2F2F2;
 }
 
 .panel-general-account-country select {
@@ -1780,28 +2018,39 @@ select {
     background-color: #fff;
 }
 
+.panel-general-account-reference-code {
+    color: #F2F2F2;
+}
+
+
 
 .panel-general-account-upload-logo {
     margin-bottom: 20px;
+    color: #F2F2F2;
 }
 
 
 .panel-general-account-button {
-    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    width: 100%;
     height: 9%;
-    padding-left: 80%;
 }
 
 .panel-general-account-button button {
-    width: 80%;
+    width: 15vw;
     height: 50%;
+    margin-right: 11vw;
+    min-width: 100px;
     cursor: pointer;
     border: none;
     border-radius: 5px;
 }
 
 .panel-general-account-button button:hover {
-    background-color: gray;
+    background-color: #b7d93d;
+    cursor: pointer;
     color: white;
 }
 
@@ -1813,18 +2062,20 @@ select {
 }
 
 .panel-add-contacts {
-    background-color: #C5D97E;
+    background-color: #22252E;
     height: 30%;
     width: 90%;
     display: flex;
     flex-direction: column;
     margin-bottom: 2%;
     justify-content: space-evenly;
+    border-radius: 10px;
 }
 
 .panel-add-contacts-title {
     width: 90%;
     padding-left: 2%;
+    color: #b7d93d;
 }
 
 .panel-add-contacts-content {
@@ -1857,22 +2108,33 @@ select {
 }
 
 .panel-add-contacts-addbutton button {
-    font-size: 20px;
+    min-width: fit-content;
+    width: 200px;
+    padding: 10px 5%;
     border: none;
     border-radius: 5px;
-    padding: 5px;
 }
 
 .panel-add-contacts-addbutton button:hover {
-    background-color: gray;
+    background-color: #b7d93d;
+    cursor: pointer;
     color: white;
 }
 
 
 .panel-show-contacts {
-    background-color: #C5D97E;
+    background-color: #22252E;
     height: 60%;
     width: 90%;
+    border-radius: 10px;
+}
+
+.panel-show-contacts-title {
+    color: #b7d93d;
+}
+
+.panel-account-search {
+    border-radius: 5px;
 }
 
 .panel-show-contacts-content {
@@ -2000,6 +2262,11 @@ select {
         size: 10px;
     }
 
+    #notification-panel {
+        width: 40%;
+        left: 55%;
+    }
+
     /*PANEL - DASHBOARD*/
 
     .panel-camera {
@@ -2044,7 +2311,7 @@ select {
     }
 
     /*FRAME*/
-    .panel-upload-processed-frame img{
+    .panel-upload-processed-frame img {
         max-width: 100%;
         width: 95%;
     }

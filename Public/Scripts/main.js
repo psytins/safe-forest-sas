@@ -13,6 +13,7 @@ function showContainerIndex(id) {
     document.getElementById("general").style.display = "none";
     document.getElementById("security").style.display = "none";
     document.getElementById("contacts").style.display = "none";
+    document.getElementById('add-camera-menu').style.display = "none";
 
     var status = document.getElementById(id).style.display;
 
@@ -23,6 +24,19 @@ function showContainerIndex(id) {
         document.getElementById(id).style.display = "none";
     }
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const socialNetworkImages = document.querySelectorAll('.social-network-image');
+
+    socialNetworkImages.forEach(function(image) {
+        image.addEventListener('click', function() {
+            const url = image.getAttribute('data-url');
+            if (url) {
+                window.open(url, '_blank');
+            }
+        });
+    });
+});
 
 function selectPlan(plan) {
     var plan = document.getElementById(plan)
@@ -1073,7 +1087,7 @@ async function loadIndex() {
     document.getElementById("security").style.display = "none";
     document.getElementById("contacts").style.display = "none";
 
-    document.getElementById("greetings").innerText = getGreetingTime() + ", " + sessionStorage.getItem("name") + " #" + sessionStorage.getItem("_id");
+    document.getElementById("greetings").innerText = getGreetingTime() + ", " + sessionStorage.getItem("name");
 
     //General Personal Profile - Placeholders
     const fname = sessionStorage.getItem("name").split(" ")[0];
