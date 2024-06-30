@@ -1,6 +1,10 @@
 //API route for Authentication using CRUD
 const express = require('express');
 const router = express.Router();
+const axios = require('axios');
+const multer = require('multer');
+const FormData = require('form-data');
+const upload = multer({ storage: multer.memoryStorage() });
 //const bcrypt = require('bcrypt');
 //DB Model for authentication
 const Camera = require('../Model/cameraModel');
@@ -218,6 +222,26 @@ router.post('/change-status', (req, res) => {
 });
 // ...
 
+// Detect Single Frames
+router.post('/detect-frame', upload.single('image'), async (req, res) => {
+    if (!req.file) {
+        return res.status(400).send({ error: 'No image file' });
+    }
+    try {
+        const form = new FormData();
+        form.append('image', req.file.buffer, req.file.originalname);
 
+        const response = await axios.post('http://0.0.0.0:5000/detect', form, {
+            headers: {
+                ...form.getHeaders()
+            }
+        });
+
+        res.send(response.data);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ error: 'Error' });
+    }
+});
 
 module.exports = router;
