@@ -4,7 +4,7 @@ Colors for wireframe:
 #C0D966 -> For components
 #C0D966 -> GREEN 01
 #F2F2F2 -> Light Grey
-#102026 -> Blue Black
+#22252E -> Blue Black
 */
 
 /*################# MAIN #################*/
@@ -267,10 +267,14 @@ h1 {
     color: black;
 }
 
+/*   Upload   */
+
 .menu-options-home-upload {
     display: flex;
     cursor: pointer;
     font-size: 0.8rem;
+    height: 7vh;
+    margin-top: 2%;
 }
 
 .menu-options-home-upload-icon {
@@ -284,12 +288,20 @@ h1 {
 .menu-options-home-upload-text {
     display: flex;
     justify-content: start;
-    align-items: center;
+    align-items: center;    
+    color: #F2F2F2;
+
+    /*Animation*/
+    opacity: 0;
+    animation: fadeInAnimation ease-in 1;
+    animation-fill-mode: forwards;
+    animation-duration: 0.2s;
 }
 
 .menu-options-home-upload:hover {
-    background-color: gray;
+    background: linear-gradient(to right, #b7d93d, #e6f0c0);
     color: white;
+    animation: pulse 0.25s;
 }
 
 .menu-options-settings {
@@ -459,6 +471,13 @@ h1 {
     border: 1px black solid;
     border-radius: 5px;
     color: lightgray;
+
+    /*Animation*/
+    opacity: 0;
+    animation: fadeInAnimation ease-in 1;
+    animation-fill-mode: forwards;
+    animation-duration: 0.2s;
+    animation-delay: 0.1s
 }
 
 .add-camera-menu-cancel {
@@ -828,8 +847,16 @@ input:checked+.slider:after {
     align-items: center;
     width: 15vw;
     height: 9.88vh;
-    border-top: 1px #22252E solid;
+    border-top: 1px #F2F2F2 solid;
     position: relative;
+}
+
+.social-network-made-by{
+    color: #F2F2F2;
+    font-size: 70%;
+    position: absolute;
+    bottom: 94%;
+    background-color: #22252E;
 }
 
 .social-network img {
@@ -840,6 +867,7 @@ input:checked+.slider:after {
     animation: fadeInAnimation ease-in 1;
     animation-fill-mode: forwards;
     animation-duration: 0.4s;
+    
 }
 
 .social-network-image {
@@ -943,26 +971,19 @@ h2 {
 
 .header-options-addcamera button {
     height: 80%;
+    width: 8vw;
     border: none;
-    background-color: lightgray;
+    background-color: #22252E;
     border-radius: 5px;
+    color: white;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: bold;
 }
 
 .header-options-addcamera button:hover {
-    background-color: gray;
+    background-color: #C0D966;
     cursor: pointer;
-    color: white;
-}
-
-.header-options-language {
-    display: flex;
-    justify-content: center;
-    user-select: none;
-}
-
-.header-options-language:hover {
-    background-color: lightgray;
-    border-radius: 5px;
+    color: black;
 }
 
 .header-options-notifications {

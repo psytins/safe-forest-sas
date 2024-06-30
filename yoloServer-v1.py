@@ -1,3 +1,4 @@
+# Script based on this repo: https://github.com/doleron/yolov5-opencv-cpp-python
 import base64
 import io
 from PIL import Image
