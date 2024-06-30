@@ -867,16 +867,19 @@ input:checked+.slider:after {
     pointer-events: none;
     transition: opacity 0.3s;
     box-sizing: border-box;
+    z-index: 1000;
 }
 
 .social-network-image:hover::after {
     opacity: 1;
     transition: opacity 0.3s;
+    z-index: 1000;
 }
 
 .social-network-image:hover {
     background: linear-gradient(to right, #b7d93d, #e6f0c0);
     cursor: pointer;
+    z-index: 1000;
 }
 
 /*################# HEADER #################*/
@@ -1337,7 +1340,6 @@ h2 {
     width: 95%;
     margin-top: 2%;
     margin-bottom: 2%;
-    font-size: small;
 }
 
 .panel-information-detections-table .tbl-header {
@@ -1465,10 +1467,12 @@ td:hover{
 
 .panel-mycamera {
     display: flex;
+    justify-content: space-evenly;
     justify-content: center;
     align-items: center;
     height: 100%;
     width: 100%;
+    min-height: 50%;
 }
 
 .panel-upload {
@@ -1492,6 +1496,7 @@ td:hover{
 .panel-camera-container {
     width: 95%;
     height: 97%;
+    min-width: 50%;
     background-color: #22252E;
     border-radius: 5px;
 }
@@ -1550,6 +1555,214 @@ td:hover{
     margin: 1%;
 }
 
+#panel-mycamera-details{
+    display: none;
+    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 50%;
+}
+
+.panel-camera-settings {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    height: 97%;
+    background-color: #22252E;
+    color: lightgray;
+    border-radius: 5px;
+}
+
+.panel-camera-settings-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 97%;
+    background-color: #22252E;
+    color: lightgray;
+    border-radius: 5px;
+}
+
+.panel-camera-settings button{
+    background-color: lightgray;
+    border:none;
+    border-radius: 5px;
+    color: black;
+}
+
+.panel-camera-settings button:hover{
+    background-color: gray;
+    color: white;
+}
+
+.panel-camera-settings-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1%;
+    border-bottom: 1px white solid;
+}
+.panel-camera-settings-header h3{
+    width: 50%;
+    border-radius: 5px;
+}
+.panel-camera-settings-edit {
+    display: flex;
+    align-items: center;
+}
+
+.panel-camera-settings-body{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 1%;
+}
+
+.panel-camera-settings-subscription {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 50%;
+    border-right: 1px gray solid;
+}
+
+.panel-camera-settings-subscription-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 5px;
+}
+
+.panel-camera-settings-endpoint{
+    width: 100%;
+    padding: 1%;
+    overflow-y: auto;
+}
+
+#endpoint{
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    width: 95%;
+}
+
+.panel-camera-settings-endpoint-link {
+    overflow: auto;
+    white-space: nowrap
+}
+
+div.panel-camera-settings-endpoint-link p {
+    text-align: center;
+    text-decoration: none;
+}
+
+.panel-camera-settings-sensitivity {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 50%;
+}
+
+.panel-camera-settings-sensitivity p{
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+}
+
+.panel-camera-settings-overview {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 1%;
+}
+
+.panel-camera-settings-overview-stats-body {
+    display: flex;
+    flex-direction: row;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+div.panel-camera-settings-overview-stats-body div {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.panel-camera-settings-overview-stats {
+    width: 55%;
+}
+
+.panel-camera-settings-overview-currentstatus{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    border-right: 1px gray solid;
+}
+
+.panel-camera-settings-overview-currentstatus h3{
+    color: green;
+}
+
+.panel-camera-settings-overview-stats{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 50%;
+}
+
+.panel-camera-settings-overview-stats-body h4,
+.panel-camera-settings-overview-stats-body p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.panel-camera-settings-logs{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1%;
+}
+
+#cameraLogs{
+    border: 1px #C5D97E solid;
+}
+
+#cameraLogs-header{
+    color: black;
+    background-color: #C5D97E;
+    border: 1px #C5D97E solid;
+}
+
+.panel-camera-settings-save{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5%;
+}
+
+.panel-camera-settings-save button{
+    padding: 5%;
+}
+
+.panel-camera-settings-save button:hover{
+    background-color: #C5D97E;
+    color: black;
+}
 
 /*################# FOOTER #################*/
 

@@ -610,6 +610,35 @@ async function loadOverallDetection() {
     return overallDetections;
 }
 
+/*
+async function loadCameraDetection(cameraID) {
+    const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
+    const cameraDetection = await fetch('/api/camera/overall-detection', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userID, cameraID }),
+    })
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            return {
+                last24Hours: data.last24Hours,
+                last7Days: data.last7Days,
+                last30Days: data.last30Days
+            };
+        })
+        .catch(error => {
+            console.error('Camera Detection Listing failed:', error);
+            alert(error);
+        });
+
+    return cameraDetection;
+}
+*/
+
 async function loadLastDetectionList() {
     const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
     const lastDetectionList = await fetch('/api/camera/list-last-detection', {
@@ -647,6 +676,41 @@ async function loadLastDetectionList() {
 
     return lastDetectionList;
 }
+
+async function loadCameraDetections(cameraID) {
+    const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
+    try {
+        const response = await fetch('/api/camera/list-last-detection', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ userID, cameraID }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch last detections');
+        }
+
+        const data = await response.json();
+
+        // Filter detections for the specific cameraID
+        const detections = data.detections
+            .filter(detection => detection.camera.cameraID === cameraID)
+            .map(detection => ({
+                detectionID: detection.detectionID,
+                time: moment(detection.date).local().format('HH:mm:ss'),
+                date: moment(detection.date).local().format('YYYY-MM-DD'),
+            }));
+
+        return detections; // Return the structured detections array
+    } catch (error) {
+        console.error('Last Detect Listing failed:', error);
+        throw new Error('Failed to load last detections');
+    }
+}
+
+
 
 async function loadCameraList() {
     const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
@@ -704,6 +768,71 @@ async function loadCameraList() {
 
     return cameraList;
 }
+
+async function loadSingleCamera(cameraID) {
+    const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
+    const response = await fetch('/api/camera/list-cameras', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userID }),
+    });
+
+    if (!response.ok) {
+        const errorMessage = `Failed to fetch camera with ID ${cameraID}`;
+        console.error(errorMessage);
+        alert(errorMessage);
+        return null;
+    }
+
+    const data = await response.json();
+
+    const camera = data.cameras.find(cam => cam.cameraID === cameraID);
+
+    if (!camera) {
+        const errorMessage = `Camera with ID ${cameraID} not found`;
+        console.error(errorMessage);
+        alert(errorMessage);
+        return null;
+    }
+
+    const tbodyCameraDetails = document.getElementById("panel-mycamera-details");
+
+    // Dynamic Entry for Dashboard Camera List ----------------
+    const dynamicEntryDS =
+        `
+    <tr ${camera.current_status === 1 ? "style='color: white;'" : "style='color: red;'"}>
+        <td>#${camera.cameraID}</td>
+        <td>${camera.sensitivity}%</td>
+        <td>${camera.camera_name}</td>
+        <td>${camera.last_detected === null ? "N/A" : moment(camera.last_detected).local().format('YYYY-MM-DD -> HH:mm:ss')}</td>
+        <td>${camera.current_status === 1 ? "Online" : "Offline"}</td>
+    </tr>
+    `;
+
+    // Dynamic Entry for My Camera List ----------------
+    const dynamicEntryMC =
+        `
+    <tr ${camera.current_status === 1 ? "style='color: white;'" : "style='color: red;'"}>
+        <td>#${camera.cameraID}</td>
+        <td>${camera.sensitivity}%</td>
+        <td>${camera.camera_name}</td>
+        <td>${camera.last_detected === null ? "N/A" : moment(camera.last_detected).local().format('YYYY-MM-DD -> HH:mm:ss')}</td>
+        <td>${camera.current_status === 1 ? "Online" : "Offline"}</td>
+        <td>
+            <button onclick="changeCameraStatus(${camera.cameraID})" title="On/Off Camera" type="button"><i class="fa fa-power-off" aria-hidden="true" style='color:red;'></i></button>
+            <button onclick="simulateDetection(${camera.cameraID})" title="Simulate a detection" type="button"><i class="fa fa-eye" aria-hidden="true" style='color:lightgray;'></i></button>
+            <button onclick="expandCameraInfo(${camera.cameraID})" title="Expand camera information" type="button"><i class="fa fa-info" aria-hidden="true" style='color:lightgray;'></i></button>
+        </td>
+    </tr>
+    `;
+
+    tbodyCameraDetails.innerHTML = dynamicEntryMC;
+
+    return camera;
+}
+
 
 function changeCameraStatus(cameraID) {
     if (confirm("Current Action: Change camera status for camera #" + cameraID + ". You want to proceed?")) {
@@ -1026,11 +1155,324 @@ function uploadFrame() {
 
 // ------------------------------------------------
 // Other Functions
-function expandCameraInfo(cameraID) {
-    if (confirm("Current Action: Expand camera information for camera #" + cameraID + ". You want to proceed?")) {
-        alert("Coming soon...")
+
+/*
+async function expandCameraInfo(cameraID) {
+    var mycamerasContainer = document.getElementById("panel-mycamera-details");
+    
+    // Check if mycamerasContainer is already visible
+    const isContainerVisible = mycamerasContainer.style.display === "flex";
+
+    // If container is already visible and contains the same cameraID, close it
+    if (isContainerVisible && mycamerasContainer.dataset.cameraID === cameraID.toString()) {
+        mycamerasContainer.style.display = "none";
+        mycamerasContainer.innerHTML = "";
+        return;
+    }
+
+    // Fetch camera details using loadSingleCamera function
+    const cameraDetails = await loadSingleCamera(cameraID);
+
+    if (!cameraDetails) {
+        return; // Exit if camera details fetching failed
+    }
+
+    // Fetch detection statistics for the specific camera
+    const detections = await loadCameraDetections(cameraID);
+
+    var panelMyCameraContainer = document.createElement('div'); // Create a new div element
+    panelMyCameraContainer.className = "panel-camera-settings"; // Set a class name
+
+    // Determine status color based on current_status
+    const statusColor = cameraDetails.current_status === 1 ? "green" : "red";
+
+    // Prepare the HTML for panelMyCameraContainer
+    panelMyCameraContainer.innerHTML = `
+        <div class="panel-camera-settings-container">
+            <div class="panel-camera-settings-header">
+                <h3>${cameraDetails.camera_name}</h3>
+                <div class="panel-camera-settings-edit">
+                    <button>Edit</button>
+                </div>
+            </div>
+            <div class="panel-camera-settings-body">
+                <div class="panel-camera-settings-subscription">
+                    <div class="subscription-header">
+                        <h4>Standard Plan</h4>
+                        <button>Edit</button>
+                    </div>
+                    <p>Detection Frequency: 1 min</p>
+                    <!-- <p>Images scanned: 1231</p> -->
+                    <!-- Add more details as needed -->
+                </div>
+                <div class="panel-camera-settings-sensitivity">
+                    <h4>Sensitivity</h4>
+                    <p>${cameraDetails.sensitivity}%</p>
+                    <div class="panel-camera-settings-sensitivity-buttons">
+                        <button>Edit</button>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-camera-settings-endpoint">
+                <h4>Camera Endpoint</h4>
+                <div class="panel-camera-settings-endpoint-link">
+                    <p>${cameraDetails.endpoint}</p>
+                </div>
+                <div class="panel-camera-settings-endpoint-buttons">
+                    <button>Copy</button>
+                    <button>Generate New</button>
+                </div>
+            </div>
+            <div class="panel-camera-settings-overview">
+                <div class="panel-camera-settings-overview-currentstatus">
+                    <h4>Current status</h4>
+                    <h3 style="color: ${statusColor};">${cameraDetails.current_status === 1 ? "Online" : "Offline"}</h3>
+                </div>
+                <div class="panel-camera-settings-overview-stats">
+                    <p>Smoke Logs</p>
+                    <div class="panel-camera-settings-overview-stats-body">
+                        <div class="panel-camera-settings-overview-stats-last24">
+                            <h4>${detections.filter(d => moment(d.date).isAfter(moment().subtract(24, 'hours'))).length}</h4>
+                            <p>Last 24 hours</p>
+                        </div>
+                        <div class="panel-camera-settings-overview-stats-last7">
+                            <h4>${detections.filter(d => moment(d.date).isAfter(moment().subtract(7, 'days'))).length}</h4>
+                            <p>Last 7 days</p>
+                        </div>
+                        <div class="panel-camera-settings-overview-stats-last30">
+                            <h4>${detections.filter(d => moment(d.date).isAfter(moment().subtract(30, 'days'))).length}</h4>
+                            <p>Last 30 days</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-camera-settings-logs">
+                <h4>Camera Detection Logs</h4>
+                <table id="cameraLogs">
+                    <tr id="cameraLogs-header">
+                        <th>Warning Level</th>
+                        <th>Detection Date</th>
+                        <th>Time</th>
+                    </tr>
+                    ${detections.map(detection => `
+                        <tr>
+                            <td>90%</td> <!-- Placeholder for warning level -->
+                            <td>${detection.date}</td>
+                            <td>${detection.time}</td>
+                        </tr>
+                    `).join('')}
+                </table>
+            </div>
+            <!-- Add more camera details here -->
+        </div>`;
+
+    mycamerasContainer.style.display = "flex";
+    mycamerasContainer.dataset.cameraID = cameraID.toString(); // Store cameraID in dataset
+    mycamerasContainer.innerHTML = ""; // Clear previous content
+    mycamerasContainer.appendChild(panelMyCameraContainer);
+}
+*/
+var mycamerasContainer = document.getElementById("panel-mycamera-details");
+
+async function expandCameraInfo(cameraID) {
+    // Check if mycamerasContainer is already visible
+    const isContainerVisible = mycamerasContainer.style.display === "flex";
+
+    // If container is already visible and contains the same cameraID, close it
+    if (isContainerVisible && mycamerasContainer.dataset.cameraID === cameraID.toString()) {
+        mycamerasContainer.style.display = "none";
+        mycamerasContainer.innerHTML = "";
+        return;
+    }
+
+    // Fetch camera details using loadSingleCamera function
+    const cameraDetails = await loadSingleCamera(cameraID);
+
+    if (!cameraDetails) {
+        return; // Exit if camera details fetching failed
+    }
+
+    // Fetch detection statistics for the specific camera
+    const detections = await loadCameraDetections(cameraID);
+
+    // Call render function with mycamerasContainer as parameter
+    renderCameraDetailsPanel(cameraDetails, detections, cameraID, mycamerasContainer);
+}
+
+// Function to render the camera details panel
+function renderCameraDetailsPanel(cameraDetails, detections, cameraID, container) {
+    var panelMyCameraContainer = document.createElement('div'); // Create a new div element
+    panelMyCameraContainer.className = "panel-camera-settings"; // Set a class name
+
+    // Determine status color based on current_status
+    const statusColor = cameraDetails.current_status === 1 ? "green" : "red";
+
+    // Prepare the HTML for panelMyCameraContainer
+    panelMyCameraContainer.innerHTML = `
+        <div class="panel-camera-settings-container">
+            <div class="panel-camera-settings-header">
+                <h3 contenteditable="true" id="cameraName">${cameraDetails.camera_name}</h3>
+            </div>
+            <div class="panel-camera-settings-body">
+                <div class="panel-camera-settings-subscription">
+                    <div class="subscription-header">
+                        <h4>Subscription Plan</h4>
+                        <select id="subscriptionPlan">
+                            <option value="free">Free Plan</option>
+                            <option value="standard">Standard Plan</option>
+                            <option value="premium">Premium Plan</option>
+                        </select>
+                    </div>
+                    <p id="detectionFrequency">Detection Frequency: ${getDetectionFrequency(cameraDetails.subscription_plan)}</p>
+                </div>
+                <div class="panel-camera-settings-sensitivity">
+                    <h4>Sensitivity</h4>
+                    <p contenteditable="true" id="sensitivity">${cameraDetails.sensitivity}%</p>
+                </div>
+            </div>
+            <div class="panel-camera-settings-endpoint">
+                <h4>Camera Endpoint</h4>
+                <p contenteditable="true" id="endpoint">${cameraDetails.endpoint}</p>
+            </div>
+            <div class="panel-camera-settings-overview">
+                <div class="panel-camera-settings-overview-currentstatus">
+                    <h4>Current status</h4>
+                    <h3 style="color: ${statusColor};">${cameraDetails.current_status === 1 ? "Online" : "Offline"}</h3>
+                </div>
+                <div class="panel-camera-settings-overview-stats">
+                    <p>Smoke Logs</p>
+                    <div class="panel-camera-settings-overview-stats-body">
+                        <div class="panel-camera-settings-overview-stats-last24">
+                            <h4>${detections.filter(d => moment(d.date).isAfter(moment().subtract(24, 'hours'))).length}</h4>
+                            <p>Last 24 hours</p>
+                        </div>
+                        <div class="panel-camera-settings-overview-stats-last7">
+                            <h4>${detections.filter(d => moment(d.date).isAfter(moment().subtract(7, 'days'))).length}</h4>
+                            <p>Last 7 days</p>
+                        </div>
+                        <div class="panel-camera-settings-overview-stats-last30">
+                            <h4>${detections.filter(d => moment(d.date).isAfter(moment().subtract(30, 'days'))).length}</h4>
+                            <p>Last 30 days</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-camera-settings-logs">
+                <h4>Camera Detection Logs</h4>
+                <table id="cameraLogs">
+                    <tr id="cameraLogs-header">
+                        <th>Warning Level</th>
+                        <th>Detection Date</th>
+                        <th>Time</th>
+                    </tr>
+                    ${detections.map(detection => `
+                        <tr>
+                            <td>90%</td> <!-- Placeholder for warning level -->
+                            <td>${detection.date}</td>
+                            <td>${detection.time}</td>
+                        </tr>
+                    `).join('')}
+                </table>
+            </div>
+            <div class="panel-camera-settings-save">
+                <button onclick="saveChanges(${cameraID}, '${container.id}')">Save Changes</button>
+            </div>
+        </div>`;
+
+    // Set initial detection frequency based on cameraDetails
+    const subscriptionPlanSelect = panelMyCameraContainer.querySelector('#subscriptionPlan');
+    subscriptionPlanSelect.value = getSubscriptionPlanValue(cameraDetails.subscription_plan);
+    setDetectionFrequencyText(cameraDetails.subscription_plan);
+
+    // Add event listener for subscription plan change
+    subscriptionPlanSelect.addEventListener('change', function() {
+        setDetectionFrequencyText(this.value);
+    });
+
+    container.style.display = "flex";
+    container.dataset.cameraID = cameraID.toString(); // Store cameraID in dataset
+    container.innerHTML = ""; // Clear previous content
+    container.appendChild(panelMyCameraContainer);
+}
+
+
+// Function to set the detection frequency text based on subscription plan
+function setDetectionFrequencyText(plan) {
+    const frequencyText = document.querySelector('#detectionFrequency');
+    if (frequencyText) {
+        frequencyText.textContent = `Detection Frequency: ${getDetectionFrequency(plan)}`;
+    } else {
+        console.error('Element #detectionFrequency not found');
     }
 }
+
+// Function to retrieve the correct subscription plan value from camera details
+function getSubscriptionPlanValue(plan) {
+    switch (plan) {
+        case 1:
+            return 'free';
+        case 2:
+            return 'standard';
+        case 3:
+            return 'premium';
+    }
+}
+
+// Function to retrieve the detection frequency based on the selected plan
+function getDetectionFrequency(plan) {
+    switch (plan) {
+        case 1:
+            return '10 min';
+        case 2:
+            return '1 min';
+        case 3:
+            return '30 secs';
+    }
+}
+
+async function saveChanges(cameraID, containerID) {
+    const panelMyCameraContainer = document.getElementById(containerID);
+    const updatedCameraName = panelMyCameraContainer.querySelector('#cameraName').innerText;
+    const updatedSensitivity = parseInt(panelMyCameraContainer.querySelector('#sensitivity').innerText, 10);
+    const updatedEndpoint = panelMyCameraContainer.querySelector('#endpoint').innerText;
+
+    // Optional: Validate the updated data before sending
+    if (!updatedCameraName.trim()) {
+        alert('Camera name cannot be empty');
+        return;
+    }
+
+    // Send updated data to server
+    try {
+        const response = await fetch('/api/camera/update-camera-details', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                cameraID,
+                camera_name: updatedCameraName,
+                sensitivity: updatedSensitivity,
+                endpoint: updatedEndpoint
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to update camera details');
+        }
+
+        // Optionally update local UI state or provide feedback
+        // UpdateUI(updatedCameraName, updatedSensitivity, updatedEndpoint);
+
+        alert('Camera details updated successfully');
+    } catch (error) {
+        console.error('Error updating camera details:', error);
+        alert('Failed to update camera details');
+    }
+}
+
+
+
 
 // ------------------------------------------------
 
