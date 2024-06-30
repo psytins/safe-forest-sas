@@ -220,7 +220,31 @@ router.post('/change-status', (req, res) => {
         }
     });
 });
-// ...
+
+//Update Changes
+router.post('/update-camera-details', async (req, res) => {
+    const { cameraID, camera_name, sensitivity, endpoint } = req.body;
+
+    try {
+        const camera = await Camera.findByPk(cameraID);
+
+        if (!camera) {
+            return res.status(404).json({ error: 'Camera not found' });
+        }
+
+        // Update camera details
+        camera.camera_name = camera_name;
+        camera.sensitivity = sensitivity;
+        camera.camera_endpoint = endpoint;
+
+        await camera.save();
+
+        res.status(200).json({ message: 'Camera details updated successfully', camera });
+    } catch (error) {
+        console.error('Error updating camera details:', error);
+        res.status(500).json({ error: 'Failed to update camera details' });
+    }
+});
 
 // Detect Single Frames
 router.post('/detect-frame', upload.single('image'), async (req, res) => {
