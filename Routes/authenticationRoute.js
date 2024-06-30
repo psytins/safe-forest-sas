@@ -75,7 +75,7 @@ router.post('/account-authentication', (req, res) => {
                 const email = user.email;
                 const country = user.country;
                 const ref_code = user.reference_code;
-                return res.json({ message: 'Login successful', userID, name, email, country, ref_code });
+                return res.json({ message: 'Login successful', token: authToken, userID, name, email, country, ref_code });
             })
             .catch(error => {
                 console.error('Error during login:', error);
