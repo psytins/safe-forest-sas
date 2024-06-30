@@ -4,7 +4,7 @@ Colors for wireframe:
 #C0D966 -> For components
 #C0D966 -> GREEN 01
 #F2F2F2 -> Light Grey
-#102026 -> Blue Black
+#22252E -> Blue Black
 */
 
 /*################# MAIN #################*/
@@ -828,8 +828,16 @@ input:checked+.slider:after {
     align-items: center;
     width: 15vw;
     height: 9.88vh;
-    border-top: 1px #22252E solid;
+    border-top: 1px #F2F2F2 solid;
     position: relative;
+}
+
+.social-network-made-by{
+    color: #F2F2F2;
+    font-size: 80%;
+    position: absolute;
+    bottom: 91%;
+    background-color: #22252E;
 }
 
 .social-network img {
