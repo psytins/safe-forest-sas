@@ -1,5 +1,5 @@
 // DOM Elements
-const VERSION = "1.8.0";
+const VERSION = "1.8.5";
 const AlertType = Object.freeze({
     CAMERA_DOWN: 0,
 });
