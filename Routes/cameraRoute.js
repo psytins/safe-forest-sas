@@ -27,7 +27,7 @@ router.post('/regist', (req, res) => {
         brand_model: req.body.brand_model,
         azimuth_bearing: req.body.azimuth_bearing,
         camera_web_admin: req.body.camera_web_admin,
-        public_ip_address: req.body.list-cameras_ip_address,
+        public_ip_address: req.body.public_ip_address,
         input_method: req.body.input_method,
         current_status: req.body.current_status,
         size_from: req.body.size_from,
