@@ -1118,22 +1118,11 @@ async function expandCameraInfo(cameraID) {
 // Function to render the camera details panel
 
 function renderCameraDetailsPanel(cameraDetails, detections, cameraID, container) {
-    var panelMyCameraContainer = document.createElement('div'); // Create a new div element
-    panelMyCameraContainer.className = "panel-camera-settings"; // Set a class name
+    var panelMyCameraContainer = document.createElement('div');
+    panelMyCameraContainer.className = "panel-camera-settings";
 
-    // Determine status color based on current_status
     const statusColor = cameraDetails.current_status === 1 ? "green" : "red";
 
-    // Map detections to HTML rows and store in a variable
-    const detectionRows = detections.map(detection => `
-        <tr>
-            <td>${detection.description}</td>
-            <td>${detection.date}</td>
-            <td>${detection.time}</td>
-        </tr>
-    `).join('');
-
-    // Prepare the HTML for panelMyCameraContainer
     panelMyCameraContainer.innerHTML = `
         <div class="panel-camera-settings-container">
             <div class="panel-camera-settings-header">
@@ -1153,7 +1142,9 @@ function renderCameraDetailsPanel(cameraDetails, detections, cameraID, container
                 </div>
                 <div class="panel-camera-settings-sensitivity">
                     <h4>Sensitivity</h4>
-                    <p contenteditable="true" id="sensitivity">${cameraDetails.sensitivity}%</p>
+                    <div class="sensitivity-container">
+                        <p contenteditable="true" id="sensitivity">${cameraDetails.sensitivity}</p><span contenteditable="false">%</span>
+                    </div>
                 </div>
             </div>
             <div class="panel-camera-settings-endpoint">
@@ -1194,7 +1185,13 @@ function renderCameraDetailsPanel(cameraDetails, detections, cameraID, container
                         </tr>
                     </thead>
                     <tbody id="cameraLogs-body" class="tbl-content">
-                        ${detectionRows}
+                        ${detections.map(detection => `
+                            <tr>
+                                <td>${detection.description}</td>
+                                <td>${detection.date}</td>
+                                <td>${detection.time}</td>
+                            </tr>
+                        `).join('')}
                     </tbody>
                 </table>
             </div>
@@ -1212,12 +1209,26 @@ function renderCameraDetailsPanel(cameraDetails, detections, cameraID, container
         setDetectionFrequencyText(this.value);
     });
 
+    // Add event listener to ensure sensitivity value is above 100
+    const sensitivityElement = panelMyCameraContainer.querySelector('#sensitivity');
+    sensitivityElement.addEventListener('blur', function(e) {
+        ensureSensitivityAbove100(sensitivityElement);
+    });
+
     container.style.display = "flex";
     container.dataset.cameraID = cameraID.toString();
     container.innerHTML = "";
     container.appendChild(panelMyCameraContainer);
 }
 
+function ensureSensitivityAbove100(element) {
+    let value = parseInt(element.innerText.replace('%', ''), 10);
+    if (isNaN(value) || value > 100) {
+        element.innerText = '100';
+    } else {
+        element.innerText = value;
+    }
+}
 
 
 
@@ -1296,7 +1307,7 @@ async function saveChanges(cameraID, containerID) {
                 camera_name: updatedCameraName,
                 subscription_plan:subscriptionPlan,
                 sensitivity: updatedSensitivity,
-                endpoint: updatedEndpoint
+                public_ip_address: updatedEndpoint
             }),
         });
 

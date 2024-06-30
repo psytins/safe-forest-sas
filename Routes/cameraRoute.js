@@ -223,7 +223,7 @@ router.post('/change-status', (req, res) => {
 
 //Update Changes
 router.post('/update-camera-details', async (req, res) => {
-    const { cameraID, camera_name, subscription_plan, sensitivity, endpoint } = req.body;
+    const { cameraID, camera_name, subscription_plan, sensitivity, public_ip_address } = req.body;
 
     try {
         const camera = await Camera.findByPk(cameraID);
@@ -236,7 +236,7 @@ router.post('/update-camera-details', async (req, res) => {
         camera.camera_name = camera_name;
         camera.sensitivity = sensitivity;
         camera.subscription_plan = subscription_plan
-        camera.camera_endpoint = endpoint;
+        camera.public_ip_address = public_ip_address;
 
         await camera.save();
 
