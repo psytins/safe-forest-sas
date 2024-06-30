@@ -1497,6 +1497,91 @@ td {
     margin: 1%;
 }
 
+.panel-camera-settings {
+    width: 46%;
+    height: 97%;
+    background-color: #C5D97E;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.panel-camera-settings-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.panel-camera-settings-edit {
+    display: flex;
+    align-items: center;
+}
+
+.panel-camera-settings-body{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.panel-camera-settings-subscription {
+    width: 30%;
+    border-style: groove;
+}
+
+.panel-camera-settings-subscription-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 5px;
+}
+
+.panel-camera-settings-endpoint{
+    width: 30%;
+}
+
+.panel-camera-settings-endpoint-link {
+    overflow: auto;
+    white-space: nowrap
+}
+
+div.panel-camera-settings-endpoint-link p {
+    text-align: center;
+    text-decoration: none;
+}
+
+.panel-camera-settings-sensitivity {
+    width: 20%;
+}
+
+.panel-camera-settings-overview {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.panel-camera-settings-overview-stats-body {
+    display: flex;
+    flex-direction: row;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+div.panel-camera-settings-overview-stats-body div {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.panel-camera-settings-overview-stats {
+    width: 55%;
+}
+
+
 
 /*################# FOOTER #################*/
 
