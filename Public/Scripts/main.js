@@ -1,5 +1,5 @@
 // DOM Elements
-const VERSION = "1.6.0";
+const VERSION = "1.7.0";
 const AlertType = Object.freeze({
     CAMERA_DOWN: 0,
 });
@@ -9,6 +9,7 @@ function showContainerIndex(id) {
     //Put all none
     document.getElementById("dashboard").style.display = "none";
     document.getElementById("mycameras").style.display = "none";
+    document.getElementById("uploadArea").style.display = "none";
     document.getElementById("general").style.display = "none";
     document.getElementById("security").style.display = "none";
     document.getElementById("contacts").style.display = "none";
@@ -884,7 +885,7 @@ async function sendEmail(subject) {
 
 async function loadNotificationList() {
     const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
-    if (userID ) {
+    if (userID) {
         console.log("Checking notifications...")
         const notificationList = await fetch('/api/auth/list-notification', {
             method: 'POST',
@@ -913,9 +914,10 @@ async function loadNotificationList() {
                         `
                     <div class="notification-panel-message" onclick="openNotification(${notification.notificationID})">
                         <div class="notification-panel-message-top">
-                            <p class="notification-panel-message-top-title">${notification.opened}&nbsp${notification.title}:</p>
+                            <p class="notification-panel-message-top-title">${notification.title}:</p>
                             <p class="notification-panel-message-top-body">&nbsp${notification.body}</p>
                         </div>
+                        </br>
                         <div class="notification-panel-message-bottom">
                             <p class="notification-panel-message-bottom-date">${notification.createdAt}</p>
                         </div>
@@ -969,6 +971,43 @@ function openNotification(notificationID) {
             alert(error);
             // ...
         });
+}
+
+function uploadFrame() {
+    const input = document.getElementById('frameInput');
+    if (input.files && input.files[0]) {
+        const formData = new FormData();
+        formData.append('image', input.files[0]);
+
+        fetch('/api/camera/detect-frame', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response here
+                const resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = '';
+
+                // Assuming data contains the URL of the processed image or base64 encoded image
+                if (data.image_url) {
+                    const img = document.createElement('img');
+                    img.src = data.image_url;
+                    resultDiv.appendChild(img);
+                } else if (data.image_base64) {
+                    const img = document.createElement('img');
+                    img.src = `data:image/jpeg;base64,${data.image_base64}`;
+                    resultDiv.appendChild(img);
+                } else {
+                    resultDiv.innerText = 'No image returned';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    } else {
+        alert('Please select a frame file first');
+    }
 }
 
 // ------------------------------------------------
@@ -1029,6 +1068,7 @@ function loadDashboardInformation(cameraList, l24h, l7days, l30days) {
 //First view - Index Load
 async function loadIndex() {
     document.getElementById("mycameras").style.display = "none";
+    document.getElementById("uploadArea").style.display = "none";
     document.getElementById("general").style.display = "none";
     document.getElementById("security").style.display = "none";
     document.getElementById("contacts").style.display = "none";

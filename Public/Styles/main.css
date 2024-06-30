@@ -227,6 +227,31 @@ h1 {
     color: white;
 }
 
+.menu-options-home-upload {
+    display: flex;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.menu-options-home-upload-icon {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    height: fit-content;
+    margin-left: 3%;
+}
+
+.menu-options-home-upload-text {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.menu-options-home-upload:hover {
+    background-color: gray;
+    color: white;
+}
+
 .menu-options-settings {
     color: #102026;
     display: flex;
@@ -508,10 +533,10 @@ h1 {
     display: inline-block;
     width: 90px;
     height: 34px;
-  }
-  
+}
+
 .switch input {
-    display:none;
+    display: none;
 }
 
 .slider {
@@ -540,39 +565,39 @@ h1 {
     border-radius: 50%;
 }
 
-input:checked + .slider {
+input:checked+.slider {
     background-color: gray;
 }
 
-input:focus + .slider {
+input:focus+.slider {
     box-shadow: 0 0 1px #2196F3;
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(55px);
 }
 
-.slider:after{
-    content:'No';
+.slider:after {
+    content: 'No';
     color: black;
     display: block;
     position: absolute;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
     font-size: 15px;
     font-family: Verdana, sans-serif;
 }
 
-input:checked + .slider:after{  
-    content:'Yes';
+input:checked+.slider:after {
+    content: 'Yes';
 }
-  
+
 /**/
 
-.add-camera-menu-options{
+.add-camera-menu-options {
     display: flex;
     flex-direction: column;
     overflow-y: auto;
@@ -581,17 +606,17 @@ input:checked + .slider:after{
     overflow-x: hidden;
 }
 
-.add-camera-menu-options div{
+.add-camera-menu-options div {
     margin-left: 2%;
 }
 
-.add-camera-menu-options h3{
+.add-camera-menu-options h3 {
     margin-bottom: 1%;
     margin-top: 1%;
 }
 
 
-.add-camera-menu-title{
+.add-camera-menu-title {
     display: flex;
     justify-content: space-between;
     margin-top: 2%;
@@ -604,57 +629,57 @@ input:checked + .slider:after{
     margin-left: 3%;
 }
 
-.add-camera-menu-options-settings{
+.add-camera-menu-options-settings {
     display: flex;
     width: 100%;
     z-index: 900;
-    justify-content: space-between; 
+    justify-content: space-between;
     /* margin-left: 5%; */
 }
 
-.add-camera-menu-options-settings-left{
+.add-camera-menu-options-settings-left {
     display: flex;
     flex-direction: column;
     width: 50%;
     z-index: 90;
 }
 
-.add-camera-menu-options-settings-left input{
+.add-camera-menu-options-settings-left input {
     margin-bottom: 2%;
     width: 90%;
 }
 
-.add-camera-menu-options-settings-right{
+.add-camera-menu-options-settings-right {
     display: flex;
     flex-direction: column;
     width: 50%;
     z-index: 90;
 }
 
-.add-camera-menu-options-settings-right input{
+.add-camera-menu-options-settings-right input {
     margin-bottom: 2%;
     width: 90%;
 }
 
-.add-camera-options-imageInput-options p{
+.add-camera-options-imageInput-options p {
     margin-left: 2%;
 }
 
-.add-camera-menu-inputs-right input{
+.add-camera-menu-inputs-right input {
     margin-left: 5%;
     margin-bottom: 2%;
 }
 
-.add-camera-options-imageInput-options p{
+.add-camera-options-imageInput-options p {
     margin-left: 2%;
 }
 
-.add-camera-options-detectionBoundary-values{
+.add-camera-options-detectionBoundary-values {
     display: flex;
     align-items: center;
 }
 
-.add-camera-options-detectionBoundary-values input{
+.add-camera-options-detectionBoundary-values input {
     margin-left: 1%;
     margin-right: 1%;
     width: 1.5vw;
@@ -662,18 +687,18 @@ input:checked + .slider:after{
     border: none;
 }
 
-.add-camera-options-confirmations{
+.add-camera-options-confirmations {
     display: flex;
     flex-direction: column;
     align-items: start;
     width: 90%;
 }
 
-.add-camera-options-confirmations input{
-margin-top: 2%;
+.add-camera-options-confirmations input {
+    margin-top: 2%;
 }
 
-.add-camera-menu-button{
+.add-camera-menu-button {
     display: flex;
     z-index: 90;
     justify-content: end;
@@ -682,7 +707,7 @@ margin-top: 2%;
     margin-right: 10%;
 }
 
-.add-camera-menu-button button{
+.add-camera-menu-button button {
     margin-left: 1%;
     cursor: pointer;
     padding: 10px 5%;
@@ -690,7 +715,7 @@ margin-top: 2%;
     border-radius: 5px;
 }
 
-.add-camera-menu-button button:hover{
+.add-camera-menu-button button:hover {
     background-color: gray;
     color: white;
 }
@@ -801,8 +826,8 @@ h2 {
 }
 
 .header-options-language:hover {
-background-color: lightgray;
-border-radius: 5px;
+    background-color: lightgray;
+    border-radius: 5px;
 }
 
 .header-options-notifications {
@@ -810,9 +835,9 @@ border-radius: 5px;
     justify-content: center;
 }
 
-.header-options-notifications:hover{
-background-color: lightgray;
-border-radius: 5px;
+.header-options-notifications:hover {
+    background-color: lightgray;
+    border-radius: 5px;
 }
 
 .header-options-leave {
@@ -846,7 +871,7 @@ border-radius: 5px;
     display: flex;
     position: fixed;
     flex-direction: column;
-    left:75%;
+    left: 75%;
     height: fit-content;
     background-color: white;
     width: 20%;
@@ -856,27 +881,27 @@ border-radius: 5px;
     border-radius: 5px;
 }
 
-.notification-panel-header{
+.notification-panel-header {
     border-bottom: 1px black solid;
 }
 
-.notification-panel-body{
-    max-height: 150px; 
-    overflow-y: auto; 
+.notification-panel-body {
+    max-height: 150px;
+    overflow-y: auto;
     padding-right: 8px;
 }
 
-.notification-panel-message{
+.notification-panel-message {
     display: flex;
     flex-direction: column;
     border-bottom: lightgray 1px solid;
 }
 
-.notification-panel-message:hover{
+.notification-panel-message:hover {
     background-color: lightgray;
 }
 
-.notification-panel-message-top{
+.notification-panel-message-top {
     display: flex;
 }
 
@@ -943,7 +968,7 @@ border-radius: 5px;
     height: 90%;
     background-color: #F2F2F2;
     border: #C5D97E 3px solid;
-    border-radius: 5px ;
+    border-radius: 5px;
 }
 
 .panel-information-statistics-status-online-container-number {
@@ -981,7 +1006,7 @@ border-radius: 5px;
     justify-content: center;
     width: 50%;
     height: 100%;
-    
+
 }
 
 .panel-information-statistics-status-offline-container {
@@ -993,7 +1018,7 @@ border-radius: 5px;
     height: 90%;
     background-color: #F2F2F2;
     border: #C5D97E 3px solid;
-    border-radius: 5px ;
+    border-radius: 5px;
 }
 
 .panel-information-statistics-status-offline-container-label {
@@ -1030,7 +1055,7 @@ border-radius: 5px;
     width: 95%;
     height: 50%;
     border: #C5D97E 3px solid;
-    border-radius: 5px ;
+    border-radius: 5px;
 }
 
 .panel-information-statistics-smoke-title {
@@ -1134,7 +1159,7 @@ border-radius: 5px;
     margin-top: 2%;
     margin-bottom: 2%;
     border: #C5D97E 3px solid;
-    border-radius: 5px ;
+    border-radius: 5px;
 
 }
 
@@ -1223,6 +1248,24 @@ td {
     align-items: center;
     height: 100%;
     width: 100%;
+}
+
+.panel-upload {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.panel-upload-processed-frame {
+    display: flex;
+    justify-content: center;
+}
+
+.panel-upload-processed-frame img {
+    max-width: 100%;
 }
 
 .panel-camera-container {
@@ -1881,6 +1924,10 @@ select {
         display: none;
     }
 
+    .menu-options-home-upload-text {
+        display: none;
+    }
+
 
     .menu-options-settings-label {
         display: none;
@@ -1987,14 +2034,19 @@ select {
         margin: 2%;
     }
 
-    .panel-camera-search{
+    .panel-camera-search {
         width: 15vw;
         height: 10vh;
     }
 
-    .panel-account-search{
+    .panel-account-search {
         width: 15vw;
     }
 
+    /*FRAME*/
+    .panel-upload-processed-frame img{
+        max-width: 100%;
+        width: 95%;
+    }
 
 }

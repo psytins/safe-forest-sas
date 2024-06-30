@@ -45,6 +45,14 @@
                             <p>My Cameras</p>
                         </div>
                     </button>
+                    <button type="button" onclick="showContainerIndex('uploadArea')" class="menu-options-home-upload">
+                        <div class="menu-options-home-upload-icon">
+                            <img src="../Images/upload_icon.png">
+                        </div>
+                        <div class="menu-options-home-upload-text">
+                            <p>Upload</p>
+                        </div>
+                    </button>
                 </div>
 
                 <div class="menu-options-settings">
@@ -476,6 +484,15 @@
                             </div> <!-- End Table Here -->
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div class="panel" id="uploadArea">
+                <div class="panel-upload">
+                    <h1>Upload frame to analyze</h1>
+                    <input type="file" id="frameInput">
+                    <button type="button" onclick="uploadFrame()" id="uploadSingleFrame">Upload and Process Frame</button>
+                    <div class="panel-upload-processed-frame" id="result"></div>
                 </div>
             </div>
 
