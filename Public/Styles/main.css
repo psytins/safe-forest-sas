@@ -989,27 +989,55 @@ h2 {
     display: flex;
     justify-content: center;
     user-select: none;
+    background-color: #22252E;
+    border-radius: 5px;
+    height: 83%;
+    margin-top: 0.65vh;
+    margin-right: 0.8vw;
 }
 
 .header-options-notifications:hover {
-    background-color: lightgray;
+    background-color: #C0D966;
     border-radius: 5px;
 }
+
 
 .header-options-leave {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: transparent;
+    background-color: rgb(252, 53, 53); /* Cor de fundo inicial */
     border: none;
     cursor: pointer;
     user-select: none;
+    border-radius: 5px;
+    height: 83%;
+    margin-top: 0.65vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.header-options-leave::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200%;
+    height: 200%;
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%) rotate(45deg);
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+.header-options-leave:hover::before {
+    width: 150%;
+    height: 150%;
 }
 
 .header-options-leave:hover {
     background-color: lightcoral;
-    border-radius: 5px;
 }
+
 
 .header-options-leave img {
     width: 35%;
@@ -2531,7 +2559,22 @@ select {
         align-items: center;
         /* background-color: #f2f2f2; */
     }
-
+    
+    
+    .header-options-addcamera button {
+        color: transparent;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-image: url("../Images/addcameraicon.png");
+        background-size: 65%;
+    }
+    
+    .header-options-addcamera button:hover {
+        color: transparent;
+        background-color: #C0D966;
+        cursor: pointer;
+    }
+    
     .header-options-leave {
         font-size: 1.5vw;
     }
