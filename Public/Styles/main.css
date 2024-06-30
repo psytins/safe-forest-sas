@@ -1073,7 +1073,7 @@ h2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(252, 53, 53); /* Cor de fundo inicial */
+    background-color: rgb(252, 53, 53);
     border: none;
     cursor: pointer;
     user-select: none;
@@ -1123,7 +1123,7 @@ h2 {
     flex-direction: column;
     left: 75%;
     height: fit-content;
-    background-color: white;
+    background-color: #22252E;
     width: 20%;
     min-width: 150px;
     padding: 1%;
@@ -1141,18 +1141,20 @@ h2 {
 .notification-panel-header {
     border-bottom: 1px black solid;
     padding-bottom: 3%;
+    color: #C0D966;
 }
 
 .notification-panel-body {
-    max-height: 150px;
+    max-height: 40vh;
     overflow-y: auto;
     padding-right: 8px;
+    color: white;
 }
 
 .notification-panel-message {
     display: flex;
     flex-direction: column;
-    border-bottom: lightgray 1px solid;
+    border-bottom: #C0D966 1px solid;
 }
 
 .notification-panel-message:hover {
@@ -1165,6 +1167,39 @@ h2 {
 
 .notification-panel-message-top-body {
     margin-left: 1%;
+}
+
+#mark-all-read {
+    background-color: #C0D966;
+    border: none;
+    padding: 5px 10px;
+    margin: 5px 0;
+    cursor: pointer;
+    color: #22252E;
+    font-weight: bold;
+    border-radius: 3px;
+}
+
+#mark-all-read:hover {
+    background-color: #AFC554;
+}
+
+.notification-panel-header {
+    border-bottom: 1px black solid;
+    padding-bottom: 3%;
+    color: #C0D966;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notification-panel-message.unread {
+    font-weight: bold;
+    border-right: solid 3px rgb(255, 51, 0);
+}
+
+.notification-panel-message.read {
+    background-color: #22252E;
 }
 
 
