@@ -26,6 +26,10 @@ function clicked_menu() {
     var camera_text = document.querySelector('.menu-options-home-camera-text');
     var camera_icon = document.querySelector('.menu-options-home-camera-icon');
 
+    var upload_div = document.querySelector(".menu-options-home-upload");
+    var upload_text = document.querySelector('.menu-options-home-upload-text');
+    var upload_icon = document.querySelector('.menu-options-home-upload-icon');
+
     var general_div = document.querySelector(".menu-options-settings-general");
     var general_text = document.querySelector('.menu-options-settings-general-text');
     var general_icon = document.querySelector('.menu-options-settings-general-icon');
@@ -49,6 +53,7 @@ function clicked_menu() {
 
         dashboard_text.style.display = 'none';
         camera_text.style.display = 'none';
+        upload_text.style.display = 'none';
         general_text.style.display = 'none';
         security_text.style.display = 'none';
         alert_text.style.display = 'none';
@@ -79,6 +84,10 @@ function clicked_menu() {
         camera_div.style.justifyContent = "";
         camera_text.style.display = '';
         camera_icon.style.justifyContent = '';
+
+        upload_div.style.justifyContent = "";
+        upload_text.style.display = '';
+        upload_icon.style.justifyContent = '';
     
         general_div.style.justifyContent = "";
         general_text.style.display = '';
