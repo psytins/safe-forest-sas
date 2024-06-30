@@ -1056,27 +1056,55 @@ h2 {
     display: flex;
     justify-content: center;
     user-select: none;
+    background-color: #22252E;
+    border-radius: 5px;
+    height: 83%;
+    margin-top: 0.65vh;
+    margin-right: 0.8vw;
 }
 
 .header-options-notifications:hover {
-    background-color: lightgray;
+    background-color: #C0D966;
     border-radius: 5px;
 }
+
 
 .header-options-leave {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: transparent;
+    background-color: rgb(252, 53, 53); /* Cor de fundo inicial */
     border: none;
     cursor: pointer;
     user-select: none;
+    border-radius: 5px;
+    height: 83%;
+    margin-top: 0.65vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.header-options-leave::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200%;
+    height: 200%;
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%) rotate(45deg);
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+.header-options-leave:hover::before {
+    width: 150%;
+    height: 150%;
 }
 
 .header-options-leave:hover {
     background-color: lightcoral;
-    border-radius: 5px;
 }
+
 
 .header-options-leave img {
     width: 35%;
@@ -2644,6 +2672,29 @@ select {
         /* background-color: #f2f2f2; */
     }
 
+    .header-options-leave img{
+        height: 100%; 
+        width: 100%;
+    }
+    
+    .header-options-leave p{
+        display: none;
+    }
+    
+    .header-options-addcamera button {
+        color: transparent;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-image: url("../Images/addcameraicon.png");
+        background-size: 65%;
+    }
+    
+    .header-options-addcamera button:hover {
+        color: transparent;
+        background-color: #C0D966;
+        cursor: pointer;
+    }
+    
     .header-options-leave {
         font-size: 1.5vw;
     }
@@ -2661,8 +2712,8 @@ select {
     }
 
     #notification-panel {
-        width: 40%;
-        left: 55%;
+        width: 50%;
+        left: 45%;
     }
 
     /*PANEL - DASHBOARD*/
@@ -2688,9 +2739,57 @@ select {
         font-size: 1.5vw;
     }
 
+    .panel-information-statistics-status-online-container-label{
+        font-size: x-large;
+    }
+
+    .panel-information-statistics-status-offline-container-label{
+        font-size: x-large;
+    }
+
+
+    .panel-information-statistics-smoke-24-hours-label{
+        font-size: x-large;
+    }
+
+    .panel-information-statistics-smoke-7-days-label{
+        font-size: x-large;
+    }
+
+    .panel-information-statistics-smoke-30-days-label{
+        font-size: x-large;
+    }
+
+    .tbl-header{
+        font-size: xx-large;
+    }
+
     /*FOOTER*/
     .footer-info {
         font-size: 0.6rem;
+    }
+
+    .social-network{
+        display: none;
+    }
+
+    /*PANEL - ADD CAMERA*/
+
+    .add-camera-menu-title{
+        font-size: small;
+    }
+
+    #add-camera-menu {
+        height: 85vh;
+        width: 80vw;
+    }
+
+    .add-camera-plans{
+        font-size: small;
+    }
+
+    .add-camera-options-confirmations{
+        font-size: small;
     }
 
 
@@ -2712,6 +2811,28 @@ select {
     .panel-upload-processed-frame img {
         max-width: 100%;
         width: 95%;
+    }
+
+    /* CONTACTS */
+
+    .panel-add-contacts-addbutton{
+        width: 50%;
+    }
+
+    .panel-add-contacts-addbutton button{
+        width: 100%;
+    }
+
+    .panel-add-contacts{
+        height: 50%;
+    }
+
+    .panel-show-contacts-searchbar{
+        width: 50%;
+    }
+
+    .panel-account-search{
+        width: 100%;
     }
 
     /*################# AUTH #################*/
