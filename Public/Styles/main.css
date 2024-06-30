@@ -2571,7 +2571,6 @@ select {
         display: none;
     }
 
-
     .menu-options-home-dashboard-text {
         display: none;
     }
@@ -2716,11 +2715,20 @@ select {
     }
 
     /*################# AUTH #################*/
-    .panel-auth-container-register{
+
+    .header-auth-logo{
+        display: none;
+    }
+
+    #form-register, #form-login {
+        width: 100%;
+    }
+    #form-login.panel-auth-container-register{
         width: 100%;
     }
 
-    .panel-auth-container-register, #form-login{
+    .header-auth-title {
         width: 100%;
+        text-align: center;
     }
 }
