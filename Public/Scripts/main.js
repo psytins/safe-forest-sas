@@ -991,6 +991,16 @@ async function sendEmail(subject) {
         });
 }
 
+function updateNotificationCount(count) {
+    var notificationNumberDOM = document.getElementById('notification-number');
+    if (count > 0) {
+        notificationNumberDOM.textContent = count;
+        notificationNumberDOM.style.display = 'inline';
+    } else {
+        notificationNumberDOM.style.display = 'none';
+    }
+}
+
 async function loadNotificationList() {
     const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
     if (userID) {
@@ -1027,14 +1037,15 @@ async function loadNotificationList() {
                         </div>
                         </br>
                         <div class="notification-panel-message-bottom">
-                            <p class="notification-panel-message-bottom-date">${notification.createdAt}</p>
+                            <p class="notification-panel-message-bottom-date">${moment(notification.createdAt).local().format('YYYY-MM-DD -> HH:mm:ss')}</p>
                         </div>
                     </div>
                 `;
                     tbodyNotification.innerHTML += dynamicEntryNotification;
                 });
 
-                notificationNumber === 0 ? notificationNumberDOM.innerHTML = "" : notificationNumberDOM.innerHTML = notificationNumber;
+                // Atualiza o número de notificações
+                updateNotificationCount(notificationNumber);
 
                 return data.notifications;
             })
@@ -1046,7 +1057,6 @@ async function loadNotificationList() {
         return notificationList;
     }
 }
-
 
 function openNotification(notificationID) {
     fetch('api/auth/open-notification', {
@@ -1242,8 +1252,6 @@ async function expandCameraInfo(cameraID) {
     renderCameraDetailsPanel(cameraDetails, detections, cameraID, mycamerasContainer);
 }
 
-// Function to render the camera details panel
-
 function renderCameraDetailsPanel(cameraDetails, detections, cameraID, container) {
     var panelMyCameraContainer = document.createElement('div');
     panelMyCameraContainer.className = "panel-camera-settings";
@@ -1327,7 +1335,7 @@ function renderCameraDetailsPanel(cameraDetails, detections, cameraID, container
             </div>
         </div>`;
 
-    // Set initial detection frequency based on cameraDetails
+
     const subscriptionPlanSelect = panelMyCameraContainer.querySelector('#subscriptionPlan');
     subscriptionPlanSelect.value = getSubscriptionPlanValue(cameraDetails.subscription_plan);
 
@@ -1347,6 +1355,7 @@ function renderCameraDetailsPanel(cameraDetails, detections, cameraID, container
     container.innerHTML = "";
     container.appendChild(panelMyCameraContainer);
 }
+
 
 function ensureSensitivityAbove100(element) {
     let value = parseInt(element.innerText.replace('%', ''), 10);
