@@ -760,7 +760,7 @@ async function loadCameraList() {
                     <td>${camera.current_status === 1 ? "Online" : "Offline"}</td>
                     <td>
                         <button onclick="changeCameraStatus(${camera.cameraID})" title="On/Off Camera" type="button"><i class="fa fa-power-off" aria-hidden="true" style='color:red;'></i></button>
-                        <button onclick="simulateDetection(${camera.cameraID})" title="Simulate a detection" type="button"><i class="fa fa-eye" aria-hidden="true" style='color:lightgray;'></i></button><button id="livefeed-btn" title="Livefeed" type="button" onclick="togglePopup('${camera.camera_name}')"><i class="fa fa-camera" aria-hidden="true" style="color: lightgray;"></i></button>
+                        <button id="livefeed-btn" title="Livefeed" type="button" onclick="togglePopup('${camera.camera_name}')"><i class="fa fa-camera" aria-hidden="true" style="color: lightgray;"></i></button>
                         <button onclick="expandCameraInfo(${camera.cameraID})" title="Simulate a detection" type="button"><i class="fa fa-info" aria-hidden="true" style='color:lightgray;'></i></button>
                     </td>
                 </tr>
@@ -1032,7 +1032,7 @@ async function loadNotificationList() {
                         </div>
                         </br>
                         <div class="notification-panel-message-bottom">
-                            <p class="notification-panel-message-bottom-date">${notification.createdAt}</p>
+                            <p class="notification-panel-message-bottom-date">${moment(notification.createdAt).local().format('YYYY-MM-DD -> HH:mm:ss')}</p>
                         </div>
                     </div>
                 `;
@@ -1250,7 +1250,8 @@ function renderCameraDetailsPanel(cameraDetails, detections, cameraID, container
     const subscriptionPlanSelect = panelMyCameraContainer.querySelector('#subscriptionPlan');
     subscriptionPlanSelect.value = getSubscriptionPlanValue(cameraDetails.subscription_plan);
 
-    subscriptionPlanSelect.addEventListener('change', function() {
+    // Add event listener for subscription plan change
+    subscriptionPlanSelect.addEventListener('change', function () {
         setDetectionFrequencyText(this.value);
     });
 
