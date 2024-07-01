@@ -959,6 +959,16 @@ async function sendEmail(subject) {
         });
 }
 
+function updateNotificationCount(count) {
+    var notificationNumberDOM = document.getElementById('notification-number');
+    if (count > 0) {
+        notificationNumberDOM.textContent = count;
+        notificationNumberDOM.style.display = 'inline';
+    } else {
+        notificationNumberDOM.style.display = 'none';
+    }
+}
+
 async function loadNotificationList() {
     const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
     if (userID) {
@@ -1002,7 +1012,8 @@ async function loadNotificationList() {
                     tbodyNotification.innerHTML += dynamicEntryNotification;
                 });
 
-                notificationNumber === 0 ? notificationNumberDOM.innerHTML = "" : notificationNumberDOM.innerHTML = notificationNumber;
+                // Atualiza o número de notificações
+                updateNotificationCount(notificationNumber);
 
                 return data.notifications;
             })
@@ -1014,7 +1025,6 @@ async function loadNotificationList() {
         return notificationList;
     }
 }
-
 
 function openNotification(notificationID) {
     fetch('api/auth/open-notification', {
@@ -1129,13 +1139,12 @@ async function expandCameraInfo(cameraID) {
 
 // Function to render the camera details panel
 
-function renderCameraDetailsPanel(cameraDetails, detections, cameraID, container) {
-    var panelMyCameraContainer = document.createElement('div');
-    panelMyCameraContainer.className = "panel-camera-settings";
+function renderCameraDetailsPopup(cameraDetails, detections, cameraID) {
+    const container = document.getElementById('popup-container');
 
     const statusColor = cameraDetails.current_status === 1 ? "green" : "red";
 
-    panelMyCameraContainer.innerHTML = `
+    container.innerHTML = `
         <div class="panel-camera-settings-container">
             <div class="panel-camera-settings-header">
                 <h3 contenteditable="true" id="cameraName">${cameraDetails.camera_name}</h3>
@@ -1208,12 +1217,12 @@ function renderCameraDetailsPanel(cameraDetails, detections, cameraID, container
                 </table>
             </div>
             <div class="panel-camera-settings-save">
-                <button onclick="saveChanges(${cameraID}, '${container.id}')">Save Changes</button>
+                <button onclick="saveChanges(${cameraID}, 'popup-container')">Save Changes</button>
             </div>
         </div>`;
 
     // Set initial detection frequency based on cameraDetails
-    const subscriptionPlanSelect = panelMyCameraContainer.querySelector('#subscriptionPlan');
+    const subscriptionPlanSelect = container.querySelector('#subscriptionPlan');
     subscriptionPlanSelect.value = getSubscriptionPlanValue(cameraDetails.subscription_plan);
 
     // Add event listener for subscription plan change
@@ -1222,16 +1231,21 @@ function renderCameraDetailsPanel(cameraDetails, detections, cameraID, container
     });
 
     // Add event listener to ensure sensitivity value is above 100
-    const sensitivityElement = panelMyCameraContainer.querySelector('#sensitivity');
+    const sensitivityElement = container.querySelector('#sensitivity');
     sensitivityElement.addEventListener('blur', function(e) {
         ensureSensitivityAbove100(sensitivityElement);
     });
 
-    container.style.display = "flex";
-    container.dataset.cameraID = cameraID.toString();
-    container.innerHTML = "";
-    container.appendChild(panelMyCameraContainer);
+    // Display the popup
+    container.style.display = 'block';
 }
+
+function closePopup() {
+    const container = document.getElementById('popup-container');
+    container.style.display = 'none';
+    container.innerHTML = ''; // Clear the content when closing
+}
+
 
 function ensureSensitivityAbove100(element) {
     let value = parseInt(element.innerText.replace('%', ''), 10);
