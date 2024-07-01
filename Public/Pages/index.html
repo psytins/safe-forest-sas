@@ -492,7 +492,6 @@
                     </div>
                 </div>
                 <div id="panel-mycamera-details">
-
                 </div>
             </div>
 
@@ -509,15 +508,30 @@
             </div>
 
             <div id="live-feed-container">
-                <button id="cancel-btn" onclick="togglePopup()">Cancel</button>
+                <button id="cancel-btn" onclick="togglePopup()">Close</button>
+                <h3 id="live-feed-container-title">Livefeed:</h3>
                 <h1 id="live-feed-container-camera_name"></h1>
-                <video id="hls-video" controls>
-                    <!-- Fallback content for browsers that do not support HLS -->
-                    <source id="live-source" src="http://172.208.31.254/live/camerasf.m3u8" type="application/x-mpegURL">
-                    <!-- Optional: Provide additional sources for fallback -->
-                    <!-- <source src="fallback.mp4" type="video/mp4"> -->
+
+                <div id="video-container"></div>
+                <div id="processed-images-container"></div>
+
+                <canvas id="frame-canvas" style="display: none;"></canvas>
+                <img src="../Images/loading.png" class="live-feed-container-yolo" id="processed-image" alt="Processed Image" style="display: none;" />
+                <video autoplay="true" muted="muted" id="hls-video" controls>
                     Your browser does not support HTML5 video.
                 </video>
+            </div>
+
+            <div id="detection-container">
+                <button id="detection-container-cancel-btn" onclick="toggleDetection('none', 'none')">Close</button>
+                <h3 id="detection-container-title">Detection:</h3>
+                <div id="detection-container-date_time-container">
+                    <h2 id="detection-container-date"></h2>
+                    <h2 id="detection-container-time"></h2>
+                </div>
+
+                <img src="../Images/loading.png" class="live-feed-container-yolo" id="processed-image" alt="Processed Image" style="display: none;" />
+                <canvas id="frame-canvas" style="display: none;"></canvas>
             </div>
 
             <div id="popup-container" class="popup"></div>

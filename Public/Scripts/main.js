@@ -649,6 +649,7 @@ async function loadLastDetectionList() {
     return lastDetectionList;
 }
 
+/*
 async function loadCameraDetections(cameraID) {
     const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
     try {
@@ -682,6 +683,42 @@ async function loadCameraDetections(cameraID) {
         throw new Error('Failed to load last detections');
     }
 }
+*/
+// Dynamic Entry for Camera Detections ----------------
+async function loadCameraDetections(cameraID) {
+    const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
+    try {
+        const response = await fetch('/api/camera/list-last-detection', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ userID, cameraID }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch last detections');
+        }
+
+        const data = await response.json();
+
+        // Filter detections for the specific cameraID
+        const detections = data.detections
+            .filter(detection => detection.camera.cameraID === cameraID)
+            .map(detection => ({
+                detectionID: detection.detectionID,
+                description: detection.description === null ? "N/A" : detection.description,
+                time: moment(detection.date).local().format('HH:mm:ss'),
+                date: moment(detection.date).local().format('YYYY-MM-DD'),
+            }));
+
+        return detections; // Return the structured detections array
+    } catch (error) {
+        console.error('Last Detect Listing failed:', error);
+        throw new Error('Failed to load last detections');
+    }
+}
+
 
 
 
@@ -959,16 +996,6 @@ async function sendEmail(subject) {
         });
 }
 
-function updateNotificationCount(count) {
-    var notificationNumberDOM = document.getElementById('notification-number');
-    if (count > 0) {
-        notificationNumberDOM.textContent = count;
-        notificationNumberDOM.style.display = 'inline';
-    } else {
-        notificationNumberDOM.style.display = 'none';
-    }
-}
-
 async function loadNotificationList() {
     const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
     if (userID) {
@@ -1012,8 +1039,7 @@ async function loadNotificationList() {
                     tbodyNotification.innerHTML += dynamicEntryNotification;
                 });
 
-                // Atualiza o número de notificações
-                updateNotificationCount(notificationNumber);
+                notificationNumber === 0 ? notificationNumberDOM.innerHTML = "" : notificationNumberDOM.innerHTML = notificationNumber;
 
                 return data.notifications;
             })
@@ -1025,6 +1051,7 @@ async function loadNotificationList() {
         return notificationList;
     }
 }
+
 
 function openNotification(notificationID) {
     fetch('api/auth/open-notification', {
@@ -1116,6 +1143,9 @@ async function expandCameraInfo(cameraID) {
     // Check if mycamerasContainer is already visible
     const isContainerVisible = mycamerasContainer.style.display === "flex";
 
+    // Close detection details
+    toggleDetection("none", "none")
+
     // If container is already visible and contains the same cameraID, close it
     if (isContainerVisible && mycamerasContainer.dataset.cameraID === cameraID.toString()) {
         mycamerasContainer.style.display = "none";
@@ -1137,6 +1167,8 @@ async function expandCameraInfo(cameraID) {
     renderCameraDetailsPanel(cameraDetails, detections, cameraID, mycamerasContainer);
 }
 
+// Function to render the camera details panel
+
 function renderCameraDetailsPanel(cameraDetails, detections, cameraID, container) {
     var panelMyCameraContainer = document.createElement('div');
     panelMyCameraContainer.className = "panel-camera-settings";
@@ -1147,6 +1179,7 @@ function renderCameraDetailsPanel(cameraDetails, detections, cameraID, container
         <div class="panel-camera-settings-container">
             <div class="panel-camera-settings-header">
                 <h3 contenteditable="true" id="cameraName">${cameraDetails.camera_name}</h3>
+                <button id="cancel-details" onclick="toggleDetails()">Close</button>
             </div>
             <div class="panel-camera-settings-body">
                 <div class="panel-camera-settings-subscription">
@@ -1180,15 +1213,15 @@ function renderCameraDetailsPanel(cameraDetails, detections, cameraID, container
                     <p>Smoke Logs</p>
                     <div class="panel-camera-settings-overview-stats-body">
                         <div class="panel-camera-settings-overview-stats-last24">
-                            <h4>${detections.filter(d => moment(d.date).isAfter(moment().subtract(24, 'hours'))).length}</h4>
+                            <h4>${Array.isArray(detections) ? detections.filter(d => moment(d.date).isAfter(moment().subtract(24, 'hours'))).length : '-'}</h4>
                             <p>Last 24 hours</p>
                         </div>
                         <div class="panel-camera-settings-overview-stats-last7">
-                            <h4>${detections.filter(d => moment(d.date).isAfter(moment().subtract(7, 'days'))).length}</h4>
+                            <h4>${Array.isArray(detections) ? detections.filter(d => moment(d.date).isAfter(moment().subtract(7, 'days'))).length : '-'}</h4>
                             <p>Last 7 days</p>
                         </div>
                         <div class="panel-camera-settings-overview-stats-last30">
-                            <h4>${detections.filter(d => moment(d.date).isAfter(moment().subtract(30, 'days'))).length}</h4>
+                            <h4>${Array.isArray(detections) ? detections.filter(d => moment(d.date).isAfter(moment().subtract(30, 'days'))).length : '-'}</h4>
                             <p>Last 30 days</p>
                         </div>
                     </div>
@@ -1205,13 +1238,7 @@ function renderCameraDetailsPanel(cameraDetails, detections, cameraID, container
                         </tr>
                     </thead>
                     <tbody id="cameraLogs-body" class="tbl-content">
-                        ${detections.map(detection => `
-                            <tr>
-                                <td>${detection.description}</td>
-                                <td>${detection.date}</td>
-                                <td>${detection.time}</td>
-                            </tr>
-                        `).join('')}
+                        <!-- Detection entries will be appended here -->
                     </tbody>
                 </table>
             </div>
@@ -1219,7 +1246,6 @@ function renderCameraDetailsPanel(cameraDetails, detections, cameraID, container
                 <button onclick="saveChanges(${cameraID}, '${container.id}')">Save Changes</button>
             </div>
         </div>`;
-
 
     const subscriptionPlanSelect = panelMyCameraContainer.querySelector('#subscriptionPlan');
     subscriptionPlanSelect.value = getSubscriptionPlanValue(cameraDetails.subscription_plan);
@@ -1234,10 +1260,49 @@ function renderCameraDetailsPanel(cameraDetails, detections, cameraID, container
         ensureSensitivityAbove100(sensitivityElement);
     });
 
+    // Append detections dynamically if available
+    if (Array.isArray(detections)) {
+        const tbodyLogs = panelMyCameraContainer.querySelector('#cameraLogs-body');
+        detections.forEach(detection => {
+            const tr = document.createElement('tr');
+            tr.onclick = () => toggleDetection(detection.date, detection.time);
+            tr.innerHTML = `
+                <td>${detection.description}</td>
+                <td>${detection.date}</td>
+                <td>${detection.time}</td>
+            `;
+            tbodyLogs.appendChild(tr);
+        });
+    } else {
+        const tbodyLogs = panelMyCameraContainer.querySelector('#cameraLogs-body');
+        tbodyLogs.innerHTML = '<tr><td colspan="3">No detections found</td></tr>';
+    }
+
     container.style.display = "flex";
     container.dataset.cameraID = cameraID.toString();
     container.innerHTML = "";
     container.appendChild(panelMyCameraContainer);
+}
+
+
+function toggleDetection(date, time) {
+    var popup = document.getElementById('detection-container');
+
+    if (date === "none" && time === "none") {
+        popup.style.display = 'none';
+        return;
+    }
+
+    if (popup.style.display === 'none') {
+        var dateElement = document.getElementById('detection-container-date');
+        var timeElement = document.getElementById('detection-container-time');
+        dateElement.innerHTML = `Date: ${date}`;
+        timeElement.innerHTML = `Time:  ${time}`;
+
+        popup.style.display = 'block';
+    } else {
+        popup.style.display = 'none';
+    }
 }
 
 
@@ -1380,10 +1445,12 @@ function togglePopup(cameraName) {
     }
 }
 
+function toggleDetails() {
+    var popup = document.getElementById('panel-mycamera-details')
+        popup.style.display = 'none';
+        toggleDetection("none", "none")
+    }
   
-  
-
-
 
 // Initialize - Load Functions
 function loadDashboardInformation(cameraList, l24h, l7days, l30days) {
