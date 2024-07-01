@@ -1028,6 +1028,16 @@ async function sendEmail(subject) {
         });
 }
 
+function updateNotificationCount(count) {
+    var notificationNumberDOM = document.getElementById('notification-number');
+    if (count > 0) {
+        notificationNumberDOM.textContent = count;
+        notificationNumberDOM.style.display = 'inline';
+    } else {
+        notificationNumberDOM.style.display = 'none';
+    }
+}
+
 async function loadNotificationList() {
     const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
     if (userID) {
@@ -1071,7 +1081,7 @@ async function loadNotificationList() {
                     tbodyNotification.innerHTML += dynamicEntryNotification;
                 });
 
-                notificationNumber === 0 ? notificationNumberDOM.innerHTML = "" : notificationNumberDOM.innerHTML = notificationNumber;
+                updateNotificationCount(notificationNumber);
 
                 return data.notifications;
             })
