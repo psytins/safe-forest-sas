@@ -107,7 +107,7 @@ def detect():
     _, buffer = cv2.imencode('.jpg', image)  # Encode OpenCV image as JPEG
     img_base64 = base64.b64encode(buffer).decode('utf-8')
     
-    return jsonify({'image_base64': img_base64})
+    return jsonify({'image_base64': img_base64, "class_list": class_list, "result_class_ids": result_class_ids})
 
 
 if __name__ == '__main__':

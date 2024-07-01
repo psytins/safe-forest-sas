@@ -723,7 +723,6 @@ async function loadCameraList() {
                     <td>${camera.current_status === 1 ? "Online" : "Offline"}</td>
                     <td>
                         <button onclick="changeCameraStatus(${camera.cameraID})" title="On/Off Camera" type="button"><i class="fa fa-power-off" aria-hidden="true" style='color:red;'></i></button>
-                        <button onclick="simulateDetection(${camera.cameraID})" title="Simulate a detection" type="button"><i class="fa fa-eye" aria-hidden="true" style='color:lightgray;'></i></button>
                         <button onclick="toggleLifeFeed(${camera.cameraID}, '${camera.camera_name}', '${camera.public_ip_address}')" id="livefeed-btn" title="Livefeed" type="button" ><i class="fa fa-camera" aria-hidden="true" style="color: lightgray;"></i></button>
                         <button onclick="expandCameraInfo(${camera.cameraID})" title="Simulate a detection" type="button"><i class="fa fa-info" aria-hidden="true" style='color:lightgray;'></i></button>
                     </td>
@@ -803,41 +802,38 @@ function changeCameraStatus(cameraID) {
     }
 }
 
-function simulateDetection(cameraID) {
-    if (confirm("Current Action: Simulate detection for camera #" + cameraID + ". You want to proceed?")) {
-        alert("Proceeding...")
-        fetch('api/camera/simulate-detection', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(
-                {
-                    cameraID
-                }),
+function newDetection(cameraID, class_name, image) {
+    fetch('api/camera/simulate-detection', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(
+            {
+                cameraID,
+                class_name,
+                image
+            }),
+    })
+        .then(response => { // data validation
+            if (response.status == 401) {
+                throw new Error(`Camera don't exist or it is offline! Status: ${response.status}`);
+            }
+            return response.json();
         })
-            .then(response => { // data validation
-                if (response.status == 401) {
-                    throw new Error(`Camera don't exist or it is offline! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Detection simulation successful:', data);
+        .then(data => {
+            console.log('Detection simulation successful:', data);
 
-                // Handle success ...
-                alert("Detection simulation successful");
-                location.reload();
-                // ...
+            loadNotificationList()
 
-            })
-            .catch(error => {
-                console.error('Registration failed:', error);
-                // Handle error ... 
-                alert(error);
-                // ...
-            });
-    }
+        })
+        .catch(error => {
+            console.error('Registration failed:', error);
+            // Handle error ... 
+            alert(error);
+            // ...
+        });
+
 }
 
 async function loadContactList() {
@@ -1061,7 +1057,7 @@ async function markAllAsRead() {
     });
 }
 
-function uploadFrame(frame) {
+function uploadFrame(frame, camID) {
     const formData = new FormData();
 
     const blob = base64ToBlob(frame, 'image/png');
@@ -1073,7 +1069,7 @@ function uploadFrame(frame) {
     })
         .then(response => response.json())
         .then(data => {
-            var processedImage = document.getElementById('processed-image');
+            const processedImage = document.getElementById(`${camID}-processed-image`);
             processedImage.src = ''
 
             // Assuming data contains the URL of the processed image or base64 encoded image
@@ -1085,6 +1081,22 @@ function uploadFrame(frame) {
             } else {
                 processedImage.src = '' // no image returned :(
             }
+
+            //Check detected stuff
+            data.result_class_ids.forEach(result_id => {
+                if (data.class_list[result_id] === "Pessoa") {
+                    // Found People
+                    
+
+
+                } else if (data.class_list[result_id] === "Fumo") {
+                    // Found Smoke
+
+
+                }
+
+            });
+
         })
         .catch(error => {
             console.error('Error:', error);
@@ -1377,15 +1389,34 @@ async function saveChanges(cameraID, containerID) {
 // Event Listeners
 // Check for notifications every 20 seconds
 setInterval(loadNotificationList, 20000);
-// Capture frames every 60 seconds
-setInterval(captureFrame, 60000)
 
-// HSL --------
-var hls;
-var video = document.getElementById('hls-video');
-var canvas = document.getElementById('frame-canvas');
-var context = canvas.getContext('2d');
-function startHls() {
+function startCameraStreaming(camera) {
+    const videoContainer = document.getElementById('video-container');
+    const processedImagesContainer = document.getElementById('processed-images-container');
+
+    videoContainer.innerHTML = '';
+    processedImagesContainer.innerHTML = '';
+
+    // Create video element
+    const video = document.createElement('video');
+    video.id = camera.cameraID;
+    video.controls = true;
+    videoContainer.appendChild(video);
+
+    // Create canvas element
+    const canvas = document.createElement('canvas');
+    canvas.id = `${camera.cameraID}-canvas`;
+    canvas.style.display = 'none';
+    videoContainer.appendChild(canvas);
+
+    // Create image element for processed frames
+    const img = document.createElement('img');
+    img.id = `${camera.cameraID}-processed-image`;
+    processedImagesContainer.appendChild(img);
+
+    const context = canvas.getContext('2d');
+    let hls;
+
     if (Hls.isSupported()) {
         hls = new Hls();
         hls.loadSource('http://172.208.31.254/live/camerasf.m3u8'); // hard coded, but this is the only IP we have for the livestream.
@@ -1399,30 +1430,42 @@ function startHls() {
             video.play();
         });
     }
+
+    // Function to capture frame and send it to backend
+    function captureFrame() {
+        const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
+        if (userID) {
+            console.log("Capturing frame for camera " + camera.cameraID)
+            // Set canvas size to match the video dimensions
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+    
+            // Draw the current frame of the video onto the canvas
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    
+            // Get the frame as a Base64-encoded PNG
+            var dataURL = canvas.toDataURL('image/png');
+    
+            // Send the frame to the backend
+            uploadFrame(dataURL, camera.cameraID);
+        }
+    }
+
+    // Capture frames every X seconds
+    setInterval(captureFrame, 10000); // Adjust with the camera plan
 }
+
+
+// HSL --------
+var hls;
+var video = document.getElementById('hls-video');
+var canvas = document.getElementById('frame-canvas');
+var context = canvas.getContext('2d');
 
 function stopHls() {
     if (hls) {
         hls.destroy();
         hls = null;
-    }
-}
-
-function captureFrame() {
-    const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
-    if (userID) {
-        // Set canvas size to match the video dimensions
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-
-        // Draw the current frame of the video onto the canvas
-        context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-        // Get the frame as a Base64-encoded PNG
-        var dataURL = canvas.toDataURL('image/png');
-
-        // Send the frame to the backend
-        uploadFrame(dataURL);
     }
 }
 
@@ -1529,8 +1572,8 @@ async function loadIndex() {
     //Load Notifications
     const notificationList = await loadNotificationList();
 
-    // Start HSL 
-    startHls()
+    //Start camera streaming
+    cameraList.forEach(startCameraStreaming);
 }
 
 //First view - Authentication Load
