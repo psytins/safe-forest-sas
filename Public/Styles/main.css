@@ -1919,7 +1919,7 @@ div.panel-camera-settings-overview-stats-body div {
     text-align: center;
 }
 
-.panel-camera-settings-logs{
+.panel-camera-settings-logs {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -1929,10 +1929,10 @@ div.panel-camera-settings-overview-stats-body div {
 #cameraLogs {
     display: flex;
     flex-direction: column;
-    border: 1px #C5D97E solid;
     width: 100%;
     height: 100%;
     background-color: #22252E;
+    border: 1px #C5D97E solid;
     overflow-y: auto;
 }
 
@@ -1959,30 +1959,36 @@ div.panel-camera-settings-overview-stats-body div {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 0%;
     background-color: #22252E;
 }
 
-#cameraLogs-body td {
+#cameraLogs-body .tbl-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow-y: auto;
+}
+
+#cameraLogs-body .tbl-content tr {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#cameraLogs-body .tbl-content td {
     flex: 1;
     text-align: center;
     padding: 10px;
     border-right: 1px solid #444;
 }
 
-#cameraLogs-body td:last-child {
+#cameraLogs-body .tbl-content td:last-child {
     border-right: none;
 }
 
-#cameraLogs .tbl-content {
-    height: 25vh;
-    max-height: 25vh;
-    color: white;
-}
-
-#cameraLogs .tbl-content tr:hover{
+#cameraLogs-body .tbl-content tr:hover {
     background-color: lightgrey;
-    color:black
+    color: black;
 }
 
 .panel-camera-settings-save{

@@ -1137,14 +1137,13 @@ async function expandCameraInfo(cameraID) {
     renderCameraDetailsPanel(cameraDetails, detections, cameraID, mycamerasContainer);
 }
 
-// Function to render the camera details panel
-
-function renderCameraDetailsPopup(cameraDetails, detections, cameraID) {
-    const container = document.getElementById('popup-container');
+function renderCameraDetailsPanel(cameraDetails, detections, cameraID, container) {
+    var panelMyCameraContainer = document.createElement('div');
+    panelMyCameraContainer.className = "panel-camera-settings";
 
     const statusColor = cameraDetails.current_status === 1 ? "green" : "red";
 
-    container.innerHTML = `
+    panelMyCameraContainer.innerHTML = `
         <div class="panel-camera-settings-container">
             <div class="panel-camera-settings-header">
                 <h3 contenteditable="true" id="cameraName">${cameraDetails.camera_name}</h3>
@@ -1217,33 +1216,28 @@ function renderCameraDetailsPopup(cameraDetails, detections, cameraID) {
                 </table>
             </div>
             <div class="panel-camera-settings-save">
-                <button onclick="saveChanges(${cameraID}, 'popup-container')">Save Changes</button>
+                <button onclick="saveChanges(${cameraID}, '${container.id}')">Save Changes</button>
             </div>
         </div>`;
 
-    // Set initial detection frequency based on cameraDetails
-    const subscriptionPlanSelect = container.querySelector('#subscriptionPlan');
+
+    const subscriptionPlanSelect = panelMyCameraContainer.querySelector('#subscriptionPlan');
     subscriptionPlanSelect.value = getSubscriptionPlanValue(cameraDetails.subscription_plan);
 
-    // Add event listener for subscription plan change
     subscriptionPlanSelect.addEventListener('change', function() {
         setDetectionFrequencyText(this.value);
     });
 
     // Add event listener to ensure sensitivity value is above 100
-    const sensitivityElement = container.querySelector('#sensitivity');
+    const sensitivityElement = panelMyCameraContainer.querySelector('#sensitivity');
     sensitivityElement.addEventListener('blur', function(e) {
         ensureSensitivityAbove100(sensitivityElement);
     });
 
-    // Display the popup
-    container.style.display = 'block';
-}
-
-function closePopup() {
-    const container = document.getElementById('popup-container');
-    container.style.display = 'none';
-    container.innerHTML = ''; // Clear the content when closing
+    container.style.display = "flex";
+    container.dataset.cameraID = cameraID.toString();
+    container.innerHTML = "";
+    container.appendChild(panelMyCameraContainer);
 }
 
 
