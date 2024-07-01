@@ -180,7 +180,7 @@ function validateLoginForm() {
     const loginPassword = document.getElementById('login-input-pass');
 
     if (!loginEmail.value || !loginPassword.value) {
-        alert("Please...");
+        alert("Empty fields");
         return false;
     }
 
