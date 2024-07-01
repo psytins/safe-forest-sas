@@ -4,6 +4,8 @@ const router = express.Router();
 //const bcrypt = require('bcrypt');
 //DB Model for authentication
 const User = require('../Model/authenticationModel');
+const Contact = require('../Model/contactModel');
+const Notification = require('../Model/notificationModel');
 
 // CREATE - register
 router.post('/account-regist', (req, res) => {
@@ -89,6 +91,41 @@ router.post('/account-signout', (req, res) => {
     return res.json({ message: 'Sign out successful' });
 });
 
+// UPDATE - change profile
+router.post('/account-change-profile', (req, res) => {
+    const searchUser = new User({
+        userID: req.body.userID,
+    });
+
+    fname_upd = req.body.fname_upd;
+    lname_upd = req.body.lname_upd;
+    email_upd = req.body.email_upd;
+    ref_code_upd = req.body.ref_code_upd;
+    region_upd = req.body.region_upd;
+    logo_upd = null // tmp
+
+    User.findOne({ where: { userID: searchUser.userID } })
+        .then(user => {
+            if (!user) {
+                return res.status(401).json({ error: 'User not found' });
+            } else {
+                // save the new password
+                user.first_name = fname_upd;
+                user.last_name = lname_upd;
+                user.email = email_upd;
+                user.reference_code = ref_code_upd;
+                user.country = region_upd;
+                user.logo = logo_upd;
+                user.save();
+                return res.json({ message: 'Profile updated.' });
+            }
+        })
+        .catch(error => {
+            console.error('Error updating user entry:', error);
+            return res.status(500).json({ error: 'Error updating user entry' });
+        });
+});
+
 // UPDATE - change password
 router.post('/account-change-password', (req, res) => {
     const searchUser = new User({
@@ -130,7 +167,7 @@ router.post('/account-change-password', (req, res) => {
         });
 });
 
-//DELETE ACCOUNT
+//DELETE - ACCOUNT
 router.post('/account-delete', (req, res) => {
     const searchUser = new User({
         userID: req.body.userID,
@@ -143,6 +180,104 @@ router.post('/account-delete', (req, res) => {
         .catch(error => {
             console.error('Error deleting user:', error);
             return res.status(500).json({ error: 'Error deleting user' });
+        });
+});
+
+// ADD - Contacts
+router.post('/add-contacts', (req, res) => {
+    const newRegist = new Contact({
+        user_id: req.body.userID,
+        email_address: req.body.email,
+    });
+
+    // Validate Contact Register - TODO: Limit to 20 contacts max.
+    // ...
+    Contact.findOne({ where: { email_address: newRegist.email_address } }).then(contact => {
+        if (contact) { // found existing camera
+            return res.status(402).json({ error: 'Email already exists' });
+        } else {
+            newRegist.save()
+                .then(savedEntry => {
+                    return res.status(201).json(savedEntry);
+                })
+                .catch(error => {
+                    console.error('Error saving regist entry:', error);
+                    return res.status(500).json({ error: 'Error saving regist entry' });
+                });
+        }
+    });
+});
+
+// List Contacts
+router.post('/list-contacts', (req, res) => {
+    Contact.findAll(
+        {
+            where: {
+                user_id: req.body.userID
+            }
+        }
+    )
+        .then(contacts => {
+            return res.json({ contacts });
+
+        })
+        .catch(error => {
+            console.error('Error during contact listing:', error);
+            return res.status(500).json({ error: 'Error during contact listing' });
+        });
+});
+
+//DELETE - Contacts
+router.post('/contact-delete', (req, res) => {
+    const searchContact = new Contact({
+        contactID: req.body.contactID,
+    });
+
+    Contact.destroy({ where: { contactID: searchContact.contactID } })
+        .then(rowsDestroyed => {
+            res.json({ message: `Deleted ${rowsDestroyed} row(s).` });
+        })
+        .catch(error => {
+            console.error('Error deleting contact:', error);
+            return res.status(500).json({ error: 'Error deleting contac' });
+        });
+});
+
+//List Notifications
+router.post('/list-notification', (req, res) => {
+    Notification.findAll(
+        {
+            where: {
+                user_id: req.body.userID
+            }
+        }
+    )
+        .then(notifications => {
+            return res.json({ notifications });
+
+        })
+        .catch(error => {
+            console.error('Error during notification listing:', error);
+            return res.status(500).json({ error: 'Error during notification listing' });
+        });
+});
+
+//UPDATE - Notification
+router.post('/open-notification', (req, res) => {
+    Notification.findOne({ where: { notificationID: req.body.notificationID } })
+        .then(notification => {
+            if (!notification) {
+                return res.status(404).json({ error: 'Notification not found' });
+            }
+
+            notification.opened = 1;
+            notification.save();
+            return res.json({ message: 'Changes notification status.' });
+
+        })
+        .catch(error => {
+            console.error('Error updating notification entry:', error);
+            return res.status(500).json({ error: 'Error updating notification entry' });
         });
 });
 

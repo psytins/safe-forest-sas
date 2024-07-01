@@ -19,6 +19,7 @@ const Detection = sequelize.define('detection', {
         type: Sequelize.DATE,
         allowNull: false
     },
+    image: Sequelize.BLOB("long"),
     // -- must have in every table:
     createdAt: {
         type: Sequelize.DATE,
