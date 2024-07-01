@@ -27,7 +27,6 @@ Colors for wireframe:
 
 a {
     color: #000;
-    /* for browsers that don't support 'inherit' as a color value */
     color: inherit;
     text-decoration: none;
 }
@@ -755,7 +754,6 @@ input:checked+.slider:after {
     width: 100%;
     z-index: 900;
     justify-content: space-between;
-    /* margin-left: 5%; */
 }
 
 .add-camera-menu-options-settings-left {
@@ -1007,7 +1005,6 @@ input:checked+.slider:after {
 .header-greeting h1,
 h2 {
     font-weight: 600;
-    /*Defines from thin to thick characters. 400 is the same as normal, and 700 is the same as bold*/
 }
 
 .header-greeting-top {
@@ -1015,7 +1012,6 @@ h2 {
     align-items: center;
     height: 50%;
     width: 100%;
-    /* background-color: #f2f2f2;*/
 }
 
 .header-greeting-bottom {
@@ -1023,7 +1019,6 @@ h2 {
     height: 50%;
     width: 100%;
     align-items: center;
-    /* background-color: #f2f2f2; */
 }
 
 .header-options {
@@ -1243,7 +1238,6 @@ h2 {
 
 .panel-information-statistics h1 {
     font-weight: 500;
-    /*Defines from thin to thick characters. 400 is the same as normal, and 700 is the same as bold*/
 }
 
 .panel-information-statistics-status {
@@ -1630,11 +1624,22 @@ td:hover{
 
 .panel-upload {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    color:#F2F2F2
+}
+
+.panel-upload-container{
+    display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    height: 100%;
-    width: 100%;
+    height: 97%;
+    width: 95%;
+    border-radius: 5px;
+    background-color: #22252E;
 }
 
 .panel-upload-processed-frame {
@@ -1652,6 +1657,7 @@ td:hover{
     min-width: 50%;
     background-color: #22252E;
     border-radius: 5px;
+    transition: width 0.3s ease;
 }
 
 .panel-camera-search {
@@ -1680,7 +1686,6 @@ td:hover{
 
 .panel-camera-container-top-title h1 {
     font-weight: 500;
-    /*Defines from thin to thick characters. 400 is the same as normal, and 700 is the same as bold*/
 }
 
 .panel-camera-container-top-search {
@@ -1715,6 +1720,7 @@ td:hover{
     align-items: center;
     height: 100%;
     width: 50%;
+    transition: width 0.3s ease;
 }
 
 .panel-camera-settings {
@@ -1802,10 +1808,10 @@ td:hover{
     background-color: white;
     color: black;
     border-radius: 5px;
-    width: 100%; /* Calculate width with padding subtracted */
+    width: 100%; 
     max-width: 100%;
-    overflow-x: auto; /* Enable horizontal scrolling */
-    white-space: nowrap; /* Prevent text from wrapping */
+    overflow-x: auto; 
+    white-space: nowrap;
 }
 
 .panel-camera-settings-endpoint-link {
@@ -1831,7 +1837,7 @@ div.panel-camera-settings-endpoint-link p {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%; /* Adjust as needed */
+    width: 100%;
 }
 
 #sensitivity {
@@ -1844,7 +1850,7 @@ div.panel-camera-settings-endpoint-link p {
 }
 
 .sensitivity-container span {
-    padding-left: 5px; /* Optional: space between number and % symbol */
+    padding-left: 5px;
 }
 
 
@@ -2388,9 +2394,7 @@ select {
 .panel-auth-container-register-submit button:hover {
     background-color: grey;
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-    /* Aumenta a sombra ao passar o mouse */
     transform: translateY(-2px);
-    /* Move o botão ligeiramente para cima */
     cursor: pointer;
 }
 
@@ -2620,7 +2624,6 @@ select {
     margin: 2%;
 }
 
-/* Margin for the show contacts remove buttons */
 .margin-right {
     margin-left: 50%;
     display: block;
@@ -2706,14 +2709,12 @@ select {
         display: flex;
         align-items: center;
         font-size: 1.5vw;
-        /* background-color: #f2f2f2;*/
     }
 
     .header-greeting-bottom {
 
         font-size: 1.5vw;
         align-items: center;
-        /* background-color: #f2f2f2; */
     }
 
     .header-options-leave img{
@@ -2765,7 +2766,7 @@ select {
     }
 
     /*PANEL - DASHBOARD*/
-
+    
     .panel-camera {
         display: none;
     }

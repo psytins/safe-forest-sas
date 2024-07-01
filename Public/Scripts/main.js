@@ -1212,11 +1212,10 @@ function renderCameraDetailsPanel(cameraDetails, detections, cameraID, container
             </div>
         </div>`;
 
-    // Set initial detection frequency based on cameraDetails
+
     const subscriptionPlanSelect = panelMyCameraContainer.querySelector('#subscriptionPlan');
     subscriptionPlanSelect.value = getSubscriptionPlanValue(cameraDetails.subscription_plan);
 
-    // Add event listener for subscription plan change
     subscriptionPlanSelect.addEventListener('change', function() {
         setDetectionFrequencyText(this.value);
     });
@@ -1299,13 +1298,12 @@ async function saveChanges(cameraID, containerID) {
     const updatedSensitivity = parseInt(panelMyCameraContainer.querySelector('#sensitivity').innerText, 10);
     const updatedEndpoint = panelMyCameraContainer.querySelector('#endpoint').innerText;
 
-    // Optional: Validate the updated data before sending
+
     if (!updatedCameraName.trim()) {
         alert('Camera name cannot be empty');
         return;
     }
 
-    // Send updated data to server
     try {
         const response = await fetch('/api/camera/update-camera-details', {
             method: 'POST',
@@ -1364,7 +1362,6 @@ function togglePopup(cameraName) {
     var popup = document.getElementById('live-feed-container');
 
     if (popup.style.display === 'none' || popup.style.display === '') {
-        // Set the camera name inside the popup content
         var cameraNameElement = document.getElementById('live-feed-container-camera_name');
         cameraNameElement.innerHTML = cameraName;
 
