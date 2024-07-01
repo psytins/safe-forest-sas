@@ -27,7 +27,6 @@ Colors for wireframe:
 
 a {
     color: #000;
-    /* for browsers that don't support 'inherit' as a color value */
     color: inherit;
     text-decoration: none;
 }
@@ -755,7 +754,6 @@ input:checked+.slider:after {
     width: 100%;
     z-index: 900;
     justify-content: space-between;
-    /* margin-left: 5%; */
 }
 
 .add-camera-menu-options-settings-left {
@@ -842,6 +840,71 @@ input:checked+.slider:after {
 }
 
 /*###################################################*/
+
+/*################# Detection #################*/
+
+#detection-container {
+    display: none;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    position: fixed;
+    top: 27%;
+    left: 50%;
+    transform: translate(-50%, -12.85vh);
+    width: fit-content;
+    height: fit-content;
+    z-index: 1000;
+    background-color: #C0D966;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 1%;
+    color: black;
+
+    /*Animation*/
+    opacity: 0;
+    animation: fadeInAnimation ease-in 1;
+    animation-fill-mode: forwards;
+    animation-duration: 0.2s;
+    animation-delay: 0.1s
+}
+
+#detection-container-title{
+    display: flex;
+    height: 50%;
+    width: 100%;
+    align-items: center;
+    font-weight: normal;
+    color: black;
+}
+
+#detection-container-date_time-container{
+    display: flex;
+    flex-direction: column;
+}
+
+#detection-container-cancel-btn{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    height: 30px;
+    width: 80px;
+    border: none;
+    background-color: black;
+    border-radius: 5px;
+    color: white;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#detection-container-cancel-btn:hover {
+    background-color: lightcoral;
+    cursor: pointer;
+    color: black;
+}
+
 
 /*################# Livefeed #################*/
 
@@ -1007,7 +1070,6 @@ input:checked+.slider:after {
 .header-greeting h1,
 h2 {
     font-weight: 600;
-    /*Defines from thin to thick characters. 400 is the same as normal, and 700 is the same as bold*/
 }
 
 .header-greeting-top {
@@ -1015,7 +1077,6 @@ h2 {
     align-items: center;
     height: 50%;
     width: 100%;
-    /* background-color: #f2f2f2;*/
 }
 
 .header-greeting-bottom {
@@ -1023,7 +1084,6 @@ h2 {
     height: 50%;
     width: 100%;
     align-items: center;
-    /* background-color: #f2f2f2; */
 }
 
 .header-options {
@@ -1262,7 +1322,6 @@ h2 {
 
 .panel-information-statistics h1 {
     font-weight: 500;
-    /*Defines from thin to thick characters. 400 is the same as normal, and 700 is the same as bold*/
 }
 
 .panel-information-statistics-status {
@@ -1649,11 +1708,22 @@ td:hover {
 
 .panel-upload {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    color:#F2F2F2
+}
+
+.panel-upload-container{
+    display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    height: 100%;
-    width: 100%;
+    height: 97%;
+    width: 95%;
+    border-radius: 5px;
+    background-color: #22252E;
 }
 
 .panel-upload-processed-frame {
@@ -1671,6 +1741,7 @@ td:hover {
     min-width: 50%;
     background-color: #22252E;
     border-radius: 5px;
+    transition: width 0.3s ease;
 }
 
 .panel-camera-search {
@@ -1699,7 +1770,6 @@ td:hover {
 
 .panel-camera-container-top-title h1 {
     font-weight: 500;
-    /*Defines from thin to thick characters. 400 is the same as normal, and 700 is the same as bold*/
 }
 
 .panel-camera-container-top-search {
@@ -1729,11 +1799,48 @@ td:hover {
 
 #panel-mycamera-details {
     display: none;
-    justify-content: space-between;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 50%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    justify-content: center; 
+    align-items: center; 
+    height: fit-content;
+    width: 40%;
+    z-index: 1000;
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    /*Animation*/
+    opacity: 0;
+    animation: fadeInAnimation ease-in 1;
+    animation-fill-mode: forwards;
+    animation-duration: 0.2s;
+    animation-delay: 0.1s
+    
+}
+
+#cancel-details{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    height: 30px;
+    width: 80px;
+    border: none;
+    margin-right: 3%;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    color: black;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#cancel-details:hover {
+    background-color: lightcoral;
+    cursor: pointer;
 }
 
 .panel-camera-settings {
@@ -1744,6 +1851,7 @@ td:hover {
     height: 97%;
     color: lightgray;
     border-radius: 5px;
+    border: 1px solid #C0D966 ;
 }
 
 .panel-camera-settings-container {
@@ -1772,13 +1880,18 @@ td:hover {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 100%;
+    width: 98%;
     padding: 1%;
     border-bottom: 1px white solid;
 }
+<<<<<<< HEAD
 
 .panel-camera-settings-header h3 {
     width: 50%;
+=======
+.panel-camera-settings-header h3{
+    width: 80%;
+>>>>>>> 3130e9ec2650886396e57162cc118ec8f7cfa27d
     border-radius: 5px;
 }
 
@@ -1813,8 +1926,7 @@ td:hover {
 }
 
 .panel-camera-settings-endpoint {
-    width: 100%;
-    max-width: 300px;
+    width: 97%;
     height: fit-content;
     padding: 1%;
 }
@@ -1823,6 +1935,7 @@ td:hover {
     background-color: white;
     color: black;
     border-radius: 5px;
+<<<<<<< HEAD
     width: 100%;
     /* Calculate width with padding subtracted */
     max-width: 100%;
@@ -1830,6 +1943,12 @@ td:hover {
     /* Enable horizontal scrolling */
     white-space: nowrap;
     /* Prevent text from wrapping */
+=======
+    width: 100%; 
+    max-width: 100%;
+    overflow-x: auto; 
+    white-space: nowrap;
+>>>>>>> 3130e9ec2650886396e57162cc118ec8f7cfa27d
 }
 
 .panel-camera-settings-endpoint-link {
@@ -1856,7 +1975,10 @@ div.panel-camera-settings-endpoint-link p {
     align-items: center;
     justify-content: center;
     width: 100%;
+<<<<<<< HEAD
     /* Adjust as needed */
+=======
+>>>>>>> 3130e9ec2650886396e57162cc118ec8f7cfa27d
 }
 
 #sensitivity {
@@ -1870,7 +1992,10 @@ div.panel-camera-settings-endpoint-link p {
 
 .sensitivity-container span {
     padding-left: 5px;
+<<<<<<< HEAD
     /* Optional: space between number and % symbol */
+=======
+>>>>>>> 3130e9ec2650886396e57162cc118ec8f7cfa27d
 }
 
 
@@ -1932,14 +2057,19 @@ div.panel-camera-settings-overview-stats-body div {
 .panel-camera-settings-logs {
     display: flex;
     flex-direction: column;
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
     width: 100%;
     height: 50%;
 }
 
+
 #cameraLogs {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
     height: 100%;
     background-color: #22252E;
     border: 1px #C5D97E solid;
@@ -1949,9 +2079,15 @@ div.panel-camera-settings-overview-stats-body div {
 #cameraLogs-header {
     <<<<<<< HEAD=======display: flex;
     justify-content: space-between;
+<<<<<<< HEAD
     >>>>>>>b0bcb3a3d2b463a45992c4fdc2428210827d2146 color: black;
+=======
+    align-items: center;
+    color: black;
+>>>>>>> 3130e9ec2650886396e57162cc118ec8f7cfa27d
     background-color: #C5D97E;
     border: 1px solid #C5D97E;
+    width: 100%;
 }
 
 #cameraLogs-header th {
@@ -1968,6 +2104,7 @@ div.panel-camera-settings-overview-stats-body div {
 #cameraLogs-body {
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 100%;
     background-color: #22252E;
 }
@@ -1979,9 +2116,40 @@ div.panel-camera-settings-overview-stats-body div {
     overflow-y: auto;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD #cameraLogs .tbl-content tr:hover {
+=======
+#cameraLogs-body .tbl-content tr {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#cameraLogs-body tr{
+    width: 100%;
+}
+
+#cameraLogs-body tr:hover {
+    background-color: #f2f2f2;
+    color: black;
+}
+
+#cameraLogs-body .tbl-content td {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    border-right: 1px solid #444;
+}
+
+#cameraLogs-body .tbl-content td:last-child {
+    border-right: none;
+}
+
+#cameraLogs-body .tbl-content tr:hover {
+>>>>>>> 3130e9ec2650886396e57162cc118ec8f7cfa27d
     background-color: lightgrey;
 
+<<<<<<< HEAD
     color: black=======#cameraLogs-body .tbl-content tr {
         display: flex;
         justify-content: space-between;
@@ -1994,6 +2162,19 @@ div.panel-camera-settings-overview-stats-body div {
         padding: 10px;
         border-right: 1px solid #444;
     }
+=======
+
+.panel-camera-settings-save{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5%;
+}
+
+.panel-camera-settings-save button{
+    padding: 3%;
+}
+>>>>>>> 3130e9ec2650886396e57162cc118ec8f7cfa27d
 
     #cameraLogs-body .tbl-content td:last-child {
         border-right: none;
@@ -2232,11 +2413,272 @@ div.panel-camera-settings-overview-stats-body div {
         border-radius: 5px;
     }
 
+<<<<<<< HEAD
     .panel-security-danger-delete-account-button button:hover {
         background-color: #b33737;
         cursor: pointer;
         color: white;
     }
+=======
+.header-auth {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    width: 100vw;
+    height: 12.85vh;
+    border-bottom: 1px black solid;
+    background-color: #22252E;
+}
+
+.header-auth-logo {
+    width: 10%;
+    text-align: center;
+}
+
+.header-auth-title {
+    width: 90%;
+    color: #ffffff;
+}
+
+.panel-auth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 77vh;
+    background-color: #22252E;
+
+    /*Animation*/
+    opacity: 0;
+    animation: fadeInAnimation ease-in 1;
+    animation-fill-mode: forwards;
+    animation-duration: 0.2s;
+    animation-delay: 0.1s
+}
+
+.panel-auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.login-title-container {
+    display: flex;
+    width: 100%;
+    height: 10%;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    width: 30%;
+}
+
+.panel-auth-container-register {
+    width: 70%;
+    height: 95%;
+    background-color: #f2f2f2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 10px;
+}
+
+#form-login.panel-auth-container-register {
+    width: 50%;
+    height: 95%;
+    background-color: #f2f2f2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 10px;
+}
+
+.panel-auth-container-register-form {
+    width: 95%;
+    height: 70%;
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
+.panel-auth-container-register-form input,
+select {
+    width: 90%;
+    height: 3vh;
+    margin-top: 1%;
+    border-radius: 5px;
+    background: white;
+    border: 1px solid black;
+}
+
+.panel-auth-container-register-form select {
+    width: 92.5%;
+}
+
+#input-terms {
+    width: 15px;
+}
+
+.panel-auth-container-register-form-base-info {
+    height: 70%;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-top: 5%
+}
+
+
+.panel-auth-container-register-form-base-info-name {
+    display: flex;
+}
+
+.panel-auth-container-register-form-base-info-name input {
+    width: 80%;
+}
+
+.panel-auth-container-register-form-base-info-email {
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-auth-container-register-form-base-info-password {
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-auth-container-register-form-base-info-confirm-password {
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-auth-container-register-form-division {
+    height: 70%;
+    border: 1px solid black;
+    margin-top: 5%
+}
+
+.panel-auth-container-register-form-contact-info {
+    height: 70%;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-top: 5%
+}
+
+.panel-auth-container-register-form-contact-info-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 60%;
+}
+
+.panel-auth-container-register-form-contact-info-info-phone {
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-auth-container-register-form-contact-info-info-region {
+    display: flex;
+    flex-direction: column
+}
+
+.panel-auth-container-register-form-contact-info-terms {
+    display: flex;
+}
+
+.panel-auth-container-register-form-contact-info-terms p {
+    font-size: small;
+    margin-right: 2%;
+}
+
+
+.panel-auth-container-register-submit {
+    width: 100%;
+    height: 8%;
+    display: flex;
+    justify-content: center;
+}
+
+.panel-auth-container-register-submit button {
+    width: 60%;
+    height: 100%;
+    font-size: larger;
+    background-color: #b7d93d;
+    border: 0px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.panel-auth-container-register-submit button:hover {
+    background-color: grey;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+    cursor: pointer;
+}
+
+.panel-auth-container-register-altlogin {
+    width: 100%;
+    height: 5%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.footer-auth {
+    display: flex;
+    justify-content: center;
+    background-color: #22252E;
+    width: 100vw;
+    height: 9.88vh;
+    border-top: 1px black solid;
+    color: gray;
+    font-size: small;
+}
+
+/*#######################################################*/
+
+/*################# END AUTHENTICATION PAGE #################*/
+/*#######################################################*/
+
+/*#######################################################*/
+/*      General Account Settings CSS     */
+
+
+.panel-general-account {
+    background-color: #22252E;
+    width: 95%;
+    height: 97%;
+    border-radius: 10px;
+}
+
+.panel-general-account-title {
+    width: 30w;
+    margin-left: 3%;
+    margin-top: 4%;
+    color: #b7d93d;
+}
+
+.panel-general-account-inputs {
+    width: 81%;
+    height: 74%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    font-size: 16px;
+    padding-left: 7%;
+}
+>>>>>>> 3130e9ec2650886396e57162cc118ec8f7cfa27d
 
 
     /*#######################################################*/
@@ -2443,6 +2885,7 @@ div.panel-camera-settings-overview-stats-body div {
         cursor: pointer;
     }
 
+<<<<<<< HEAD
     .panel-auth-container-register-submit button:hover {
         background-color: grey;
         box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
@@ -2451,6 +2894,12 @@ div.panel-camera-settings-overview-stats-body div {
         /* Move o botão ligeiramente para cima */
         cursor: pointer;
     }
+=======
+.margin-right {
+    margin-left: 50%;
+    display: block;
+}
+>>>>>>> 3130e9ec2650886396e57162cc118ec8f7cfa27d
 
     .panel-auth-container-register-altlogin {
         width: 100%;
@@ -2571,14 +3020,27 @@ div.panel-camera-settings-overview-stats-body div {
         border-radius: 5px;
     }
 
+<<<<<<< HEAD
     .panel-general-account-button button:hover {
         background-color: #b7d93d;
         cursor: pointer;
         color: white;
+=======
+    .header-greeting-top {
+        display: flex;
+        align-items: center;
+        font-size: 1.5vw;
+>>>>>>> 3130e9ec2650886396e57162cc118ec8f7cfa27d
     }
 
 
+<<<<<<< HEAD
     /*    Alert Contacts CSS    */
+=======
+        font-size: 1.5vw;
+        align-items: center;
+    }
+>>>>>>> 3130e9ec2650886396e57162cc118ec8f7cfa27d
 
     #contacts {
         flex-direction: column;
@@ -2621,6 +3083,7 @@ div.panel-camera-settings-overview-stats-body div {
         color: #F2F2F2;
     }
 
+<<<<<<< HEAD
     #add-contact {
         width: 90%;
         height: 15%;
@@ -2629,6 +3092,12 @@ div.panel-camera-settings-overview-stats-body div {
 
     .panel-add-contacts-addbutton {
         padding-top: 3.2vh;
+=======
+    /*PANEL - DASHBOARD*/
+    
+    .panel-camera {
+        display: none;
+>>>>>>> 3130e9ec2650886396e57162cc118ec8f7cfa27d
     }
 
     .panel-add-contacts-addbutton button {
@@ -2944,11 +3413,28 @@ div.panel-camera-settings-overview-stats-body div {
         }
 
 
+<<<<<<< HEAD
         /*FRAME*/
         .panel-upload-processed-frame img {
             max-width: 100%;
             width: 95%;
         }
+=======
+    #panel-mycamera-details{
+        width: 90%;
+        height: fit-content;
+    }
+
+    #cancel-details{
+        margin-top: 1%;
+        height: 5%;
+    }
+
+    #cameraLogs-body{
+        font-size: xx-large;
+    }
+
+>>>>>>> 3130e9ec2650886396e57162cc118ec8f7cfa27d
 
         /* CONTACTS */
 

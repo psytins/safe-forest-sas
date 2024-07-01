@@ -306,13 +306,13 @@
                 <div class="add-camera-options-confirmations">
                     <div class="add-camera-options-confirmations-imageAnonymity">
                         <input id="policy-01" type="checkbox">
-                        <label>Customer Understands and agrees that RoboticsCats may randomly sample customer's
+                        <label>Customer Understands and agrees that Leitek may randomly sample customer's
                             image for AI wildfire detection development. All images will be used anonymously and
                             deleted after development</label>
                     </div>
                     <div class="add-camera-options-confirmations-storagePrivacy">
                         <input id="policy-02" type="checkbox">
-                        <label>Customer understands and agrees that RoboticsCats will delete raw images after 7
+                        <label>Customer understands and agrees that Leitek will delete raw images after 7
                             days. Please uncheck if you want to delete raw images immediatly after AI
                             detection</label>
                     </div>
@@ -492,17 +492,18 @@
                     </div>
                 </div>
                 <div id="panel-mycamera-details">
-
                 </div>
             </div>
 
             <div class="panel" id="uploadArea">
                 <div class="panel-upload">
-                    <h1>Upload frame to analyze</h1>
-                    <input type="file" id="frameInput">
-                    <button type="button" onclick="uploadSingleFrame()" id="uploadSingleFrame">Upload and Process
-                        Frame</button>
-                    <div class="panel-upload-processed-frame" id="result"></div>
+                    <div class="panel-upload-container">
+                        <h1>Upload frame to analyze</h1>
+                        <input type="file" id="frameInput">
+                        <button type="button" onclick="uploadFrame()" id="uploadSingleFrame">Upload and Process
+                            Frame</button>
+                        <div class="panel-upload-processed-frame" id="result"></div>
+                    </div>
                 </div>
             </div>
 
@@ -513,6 +514,18 @@
 
                 <div id="video-container"></div>
                 <div id="processed-images-container"></div>
+            </div>
+
+            <div id="detection-container">
+                <button id="detection-container-cancel-btn" onclick="toggleDetection('none', 'none')">Close</button>
+                <h3 id="detection-container-title">Detection:</h3>
+                <div id="detection-container-date_time-container">
+                    <h2 id="detection-container-date"></h2>
+                    <h2 id="detection-container-time"></h2>
+                </div>
+
+                <img src="../Images/loading.png" class="live-feed-container-yolo" id="processed-image" alt="Processed Image" style="display: none;" />
+                <canvas id="frame-canvas" style="display: none;"></canvas>
             </div>
 
             <div id="popup-container" class="popup"></div>
