@@ -2626,6 +2626,12 @@ select {
     display: block;
 }
 
+.live-feed-container-yolo{
+    max-width: 100%;
+}
+
+
+
 @media only screen and (max-width: 968px) {
 
     /*################# SIDEBAR #################*/
