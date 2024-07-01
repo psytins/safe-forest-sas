@@ -1,10 +1,6 @@
 //API route for Authentication using CRUD
 const express = require('express');
 const router = express.Router();
-const axios = require('axios');
-const multer = require('multer');
-const FormData = require('form-data');
-const upload = multer({ storage: multer.memoryStorage() });
 //const bcrypt = require('bcrypt');
 //DB Model for authentication
 const Camera = require('../Model/cameraModel');
@@ -30,11 +26,6 @@ router.post('/regist', (req, res) => {
         public_ip_address: req.body.public_ip_address,
         input_method: req.body.input_method,
         current_status: req.body.current_status,
-        size_from: req.body.size_from,
-        size_to: req.body.size_to,
-        double_positive: req.body.double_positive,
-        time_to_live: req.body.time_to_live,
-        down_status_email: req.body.down_status_email,
     });
 
     // Validate Camera Register
@@ -172,19 +163,16 @@ router.post('/simulate-detection', (req, res) => {
     const now = new Date().toISOString(); // storing in the database in UTC (in the front-end, convert to local)
 
     const camID = req.body.cameraID;
-    const className = req.body.class_name;
-    const blob = req.body.formData;
 
     const newDetection = new Detection({
         camera_id: camID,
-        description: className,
+        description: null,
         date: now,
-        image: blob,
     });
 
     Camera.findOne({ where: { cameraID: camID } }).then(camera => {
-        if (!camera || camera.current_status === 0) { // don't found camera or it's offline
-            return res.status(401).json({ error: 'Camera not found or it is offline!' });
+        if (!camera) { // don't found camera
+            return res.status(401).json({ error: 'Camera not found' });
         } else {
             newDetection.save()
                 .then(savedEntry => {
@@ -199,77 +187,8 @@ router.post('/simulate-detection', (req, res) => {
         }
     });
 });
+// ...
 
-//Change camera status
-router.post('/change-status', (req, res) => {
-    const camID = req.body.cameraID;
-    Camera.findOne({ where: { cameraID: camID } }).then(camera => {
-        if (!camera) { // don't found camera
-            return res.status(401).json({ error: 'Camera not found' });
-        } else {
-            if (camera.current_status === 1) {
-                // Turn off
-                camera.current_status = 0
-                camera.save()
-                return res.status(201).json(camera);
-            } else if (camera.current_status === 0) {
-                // Turn on
-                camera.current_status = 1
-                camera.save()
-                return res.status(201).json(camera);
-            } else {
-                return res.status(500).json({ error: 'Something went wrong...' });
-            }
-        }
-    });
-});
 
-//Update Changes
-router.post('/update-camera-details', async (req, res) => {
-    const { cameraID, camera_name, subscription_plan, sensitivity, public_ip_address } = req.body;
-
-    try {
-        const camera = await Camera.findByPk(cameraID);
-
-        if (!camera) {
-            return res.status(404).json({ error: 'Camera not found' });
-        }
-
-        // Update camera details
-        camera.camera_name = camera_name;
-        camera.sensitivity = sensitivity;
-        camera.subscription_plan = subscription_plan
-        camera.public_ip_address = public_ip_address;
-
-        await camera.save();
-
-        res.status(200).json({ message: 'Camera details updated successfully', camera });
-    } catch (error) {
-        console.error('Error updating camera details:', error);
-        res.status(500).json({ error: 'Failed to update camera details' });
-    }
-});
-
-// Detect Single Frames
-router.post('/detect-frame', upload.single('image'), async (req, res) => {
-    if (!req.file) {
-        return res.status(400).send({ error: 'No image file' });
-    }
-    try {
-        const form = new FormData();
-        form.append('image', req.file.buffer, req.file.originalname);
-
-        const response = await axios.post('http://0.0.0.0:5000/detect', form, {
-            headers: {
-                ...form.getHeaders()
-            }
-        });
-
-        res.send(response.data);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send({ error: 'Error' });
-    }
-});
 
 module.exports = router;

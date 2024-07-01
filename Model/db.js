@@ -12,10 +12,9 @@ const db_user = process.env.DB_USER //para mudar para mysql azure, descomentar
 const db_pass = process.env.DB_SECRET; //para mudar para mysql azure, descomentar
 //const db_pass = process.env.DB_LOCAL_SECRET; //para mudar para local, descomentar
 
-
-const cert_path = process.env.GV_DB_PATH; // for development
+/// const cert_path = process.env.GV_DB_PATH; // for development
 /// const cert_path = process.env.GVT_DB_PATH; // for development
-/// const cert_path = process.env.DB_CERT_PATH; // for production
+const cert_path = process.env.DB_CERT_PATH; // for production
 
 const host = process.env.DB_HOST //para mudar para mysql azure, descomentar
 //const host = process.env.DB_LOCAL_HOST //para mudar para local, descomentar

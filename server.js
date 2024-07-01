@@ -3,45 +3,22 @@
 //Import External Routes ------------
 require('dotenv').config();
 const express = require('express');
-const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const path = require('path');
-const { spawn } = require('child_process');
 
 const app = express();
 const port = 8080;
-
-// ---------- START YOLO PYTHON SERVICE -------------
-// --------------------------------------------------
-// Start the Python service
-const yoloService = spawn('python', ['yoloServer-v1.py']);
-
-yoloService.stdout.on('data', (data) => {
-    console.log(`YOLO said: ${data}`);
-});
-
-yoloService.stderr.on('data', (data) => {
-    console.error(`YOLO service stderr: ${data}`);
-});
-
-yoloService.on('close', (code) => {
-    console.log(`YOLO service exited with code ${code}`);
-});
-// --------------------------------------------------
-// --------------------------------------------------
 
 //Import Internal Routes ------------
 //note: first go into internal route, then go into internal db model, then go into internal db connection
 //      to create the db connection.
 const authenticationRoute = require('./Routes/authenticationRoute');
 const cameraRoute = require('./Routes/cameraRoute');
-const emailRoute = require('./Routes/emailRoute');
 const verifyToken = require('./Secure/verifyToken');
 //...
 
 //Apply application Routes ------------
 //External application routes (Middleware)
-app.use(cors()); // Enable CORS for all routes
 app.use(express.json());
 app.use(cookieParser());
 
@@ -56,7 +33,6 @@ app.use(cookieParser());
 //Internal application routes ------------
 app.use('/api/auth', authenticationRoute);
 app.use('/api/camera', cameraRoute);
-app.use('/api/email-sender', emailRoute);
 //...
 
 //Default route

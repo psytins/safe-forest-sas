@@ -22,6 +22,7 @@ const Camera = sequelize.define('camera', {
         type: Sequelize.INTEGER,
         allowNull: false, unique: true
     },
+    camera_endpoint: Sequelize.STRING,
     country: Sequelize.STRING,
     gps_location: Sequelize.STRING,
     site_name: Sequelize.STRING,
@@ -31,11 +32,6 @@ const Camera = sequelize.define('camera', {
     public_ip_address: Sequelize.STRING,
     input_method: Sequelize.INTEGER,
     current_status: Sequelize.INTEGER,
-    size_from: Sequelize.INTEGER,
-    size_to: Sequelize.INTEGER,
-    double_positive: Sequelize.INTEGER,
-    time_to_live: Sequelize.INTEGER,
-    down_status_email: Sequelize.INTEGER,
     // -- must have in every table:
     createdAt: {
         type: Sequelize.DATE,
