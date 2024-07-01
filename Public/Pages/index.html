@@ -102,7 +102,7 @@
                     <img src="../Images/duarteimg.png" style="border-radius: 20px;">
                 </div>
                 <div class="social-network-image" data-hover-text="João Calisto"
-                    data-url="https://www.youtube.com/watch?v=YvrWzbp7B4g">
+                    data-url="https://www.linkedin.com/in/jo%C3%A3o-calisto-552272317/">
                     <img src="../Images/joaocalistoimg.png" style="border-radius: 20px;">
                 </div>
             </div>
@@ -126,7 +126,7 @@
 
                     </div>
                     <div id="notify-btn" class="header-options-notifications" onclick="toggleNotificationMenu()">
-                        <p id="notification-number" style="color: white"></p>
+                        <p id="notification-number" style="color: black; display: none;"></p>
                         <img src="../Images/notification-logo.png">
                     </div>
                     <button type="button" onclick="signOut()" class="header-options-leave">
@@ -143,7 +143,7 @@
                 </div>
                 <div class="notification-panel-body" id="dynamicNotificationBody">
                 </div>
-                
+
             </div>
 
             <div id="add-camera-menu">
@@ -510,7 +510,6 @@
 
             <div id="live-feed-container">
                 <button id="cancel-btn" onclick="togglePopup()">Cancel</button>
-                <h3 id="live-feed-container-title">Livefeed:</h3>
                 <h1 id="live-feed-container-camera_name"></h1>
                 <video id="hls-video" controls>
                     <!-- Fallback content for browsers that do not support HLS -->
@@ -520,6 +519,8 @@
                     Your browser does not support HTML5 video.
                 </video>
             </div>
+
+            <div id="popup-container" class="popup"></div>
 
 
             <div class="panel" id="general">
@@ -650,8 +651,8 @@
                             <table cellpadding="0" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>Accounts</th>
-                                        <th>Action</th>
+                                        <th class="header-black">Accounts</th>
+                                        <th class="header-black">Action</th>
                                     </tr>
                                 </thead>
                             </table>

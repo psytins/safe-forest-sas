@@ -855,7 +855,7 @@ input:checked+.slider:after {
     width: fit-content;
     height: fit-content;
     z-index: 1000;
-    background-color: #C0D966;
+    background-color: #f2f2f2;
     border: 1px solid black;
     border-radius: 5px;
     padding: 1%;
@@ -875,6 +875,7 @@ input:checked+.slider:after {
     width: 100%;
     align-items: center;
     font-weight: normal;
+    color: black;
 }
 
 #cancel-btn{
@@ -884,7 +885,7 @@ input:checked+.slider:after {
     height: 30px;
     width: 80px;
     border: none;
-    background-color: #22252E;
+    background-color: black;
     border-radius: 5px;
     color: white;
     transition: background-color 0.3s ease, color 0.3s ease;
@@ -1052,14 +1053,17 @@ h2 {
 }
 
 .header-options-notifications {
+    position: relative;
     display: flex;
     justify-content: center;
+    align-items: center;
     user-select: none;
     background-color: #22252E;
     border-radius: 5px;
     height: 83%;
     margin-top: 0.65vh;
     margin-right: 0.8vw;
+    width: 40px;
 }
 
 .header-options-notifications:hover {
@@ -1067,6 +1071,22 @@ h2 {
     border-radius: 5px;
 }
 
+#notify-btn img {
+    width: 20px;
+    height: 20px;
+}
+
+#notification-number {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #C0D966;
+    color: black;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+    line-height: 12px;
+}
 
 .header-options-leave {
     display: flex;
@@ -1681,7 +1701,7 @@ td:hover{
 
 .panel-camera-container-top-title {
     margin: 2%;
-    color: #F2F2F2;
+    color: #C0D966;
 }
 
 .panel-camera-container-top-title h1 {
@@ -1909,48 +1929,76 @@ div.panel-camera-settings-overview-stats-body div {
     text-align: center;
 }
 
-.panel-camera-settings-logs{
+.panel-camera-settings-logs {
     display: flex;
     flex-direction: column;
     width: 100%;
     height: 50%;
 }
 
-#cameraLogs{
+#cameraLogs {
     display: flex;
     flex-direction: column;
-    border: 1px #C5D97E solid;
     width: 100%;
     height: 100%;
-    background-color: red;
+    background-color: #22252E;
+    border: 1px #C5D97E solid;
     overflow-y: auto;
 }
 
-#cameraLogs-header{
+#cameraLogs-header {
+    display: flex;
+    justify-content: space-between;
     color: black;
     background-color: #C5D97E;
     border: 1px solid #C5D97E;
-    width: 3%;
+}
+
+#cameraLogs-header th {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    border-right: 1px solid #C5D97E;
+}
+
+#cameraLogs-header th:last-child {
+    border-right: none;
 }
 
 #cameraLogs-body {
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    height: 50%;
-    background: none;
-    overflow-y: auto;
-    background-color: blue;
+    background-color: #22252E;
 }
 
-#cameraLogs .tbl-content {
-    height: 25vh;
-    max-height: 100px;
+#cameraLogs-body .tbl-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
     overflow-y: auto;
-    color: white;
 }
 
-#cameraLogs .tbl-content tr:hover{
+#cameraLogs-body .tbl-content tr {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#cameraLogs-body .tbl-content td {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    border-right: 1px solid #444;
+}
+
+#cameraLogs-body .tbl-content td:last-child {
+    border-right: none;
+}
+
+#cameraLogs-body .tbl-content tr:hover {
     background-color: lightgrey;
-    color:black
+    color: black;
 }
 
 .panel-camera-settings-save{
@@ -2544,7 +2592,7 @@ select {
 .panel-add-contacts-title {
     width: 90%;
     padding-left: 2%;
-    color: #b7d93d;
+    color: #C0D966;
 }
 
 .panel-add-contacts-content {
@@ -2600,7 +2648,7 @@ select {
 }
 
 .panel-show-contacts-title {
-    color: #b7d93d;
+    color: #C0D966
 }
 
 .panel-account-search {
@@ -2618,10 +2666,35 @@ select {
 
 .panel-show-contacts-searchbar {
     padding-top: 1%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.panel-account-search {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    outline: none;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.panel-account-search:focus {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border-color: #888;
+}
+
+.header-black {
+    color: black;
 }
 
 .panel-show-contacts-table {
     margin: 2%;
+    color: #f2f2f2;
 }
 
 .margin-right {
@@ -2829,8 +2902,9 @@ select {
     }
 
     #add-camera-menu {
-        height: 85vh;
-        width: 80vw;
+        height: 80vh;
+        width: 75vw;
+        margin: 10%;
     }
 
     .add-camera-plans{
@@ -2857,7 +2931,8 @@ select {
     }
 
     #live-feed-container{
-        width: 95%;
+        width: 70%;
+        margin: 10%;
     }
 
 
