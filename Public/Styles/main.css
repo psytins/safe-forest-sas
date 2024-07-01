@@ -2897,8 +2897,9 @@ select {
     }
 
     #add-camera-menu {
-        height: 85vh;
-        width: 80vw;
+        height: 80vh;
+        width: 75vw;
+        margin: 10%;
     }
 
     .add-camera-plans{
