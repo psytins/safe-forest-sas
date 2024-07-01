@@ -173,13 +173,13 @@ router.post('/simulate-detection', (req, res) => {
 
     const camID = req.body.cameraID;
     const className = req.body.class_name;
-    const image64 = req.body.image;
+    const blob = req.body.formData;
 
     const newDetection = new Detection({
         camera_id: camID,
         description: className,
         date: now,
-        image: image64,
+        image: blob,
     });
 
     Camera.findOne({ where: { cameraID: camID } }).then(camera => {
