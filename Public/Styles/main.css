@@ -846,7 +846,7 @@ input:checked+.slider:after {
 #detection-container {
     display: none;
     flex-direction: column;
-    align-items: center; 
+    align-items: center;
     justify-content: center;
     position: fixed;
     top: 27%;
@@ -869,7 +869,7 @@ input:checked+.slider:after {
     animation-delay: 0.1s
 }
 
-#detection-container-title{
+#detection-container-title {
     display: flex;
     height: 50%;
     width: 100%;
@@ -878,12 +878,12 @@ input:checked+.slider:after {
     color: black;
 }
 
-#detection-container-date_time-container{
+#detection-container-date_time-container {
     display: flex;
     flex-direction: column;
 }
 
-#detection-container-cancel-btn{
+#detection-container-cancel-btn {
     position: absolute;
     top: 5px;
     right: 5px;
@@ -917,7 +917,8 @@ input:checked+.slider:after {
     top: 27%;
     left: 50%;
     transform: translate(-50%, -12.85vh);
-    width: 60%;
+    width: fit-content;
+    height: fit-content;
     z-index: 1000;
     background-color: #f2f2f2;
     border: 1px solid black;
@@ -1712,10 +1713,10 @@ td:hover {
     justify-content: center;
     height: 100%;
     width: 100%;
-    color:#F2F2F2
+    color: #F2F2F2
 }
 
-.panel-upload-container{
+.panel-upload-container {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -1802,12 +1803,12 @@ td:hover {
     position: fixed;
     top: 50%;
     left: 50%;
-    justify-content: center; 
-    align-items: center; 
+    justify-content: center;
+    align-items: center;
     height: fit-content;
     width: 40%;
     z-index: 1000;
-    position: absolute; 
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -1818,10 +1819,9 @@ td:hover {
     animation-fill-mode: forwards;
     animation-duration: 0.2s;
     animation-delay: 0.1s
-    
 }
 
-#cancel-details{
+#cancel-details {
     position: absolute;
     top: 5px;
     right: 5px;
@@ -1851,7 +1851,7 @@ td:hover {
     height: 97%;
     color: lightgray;
     border-radius: 5px;
-    border: 1px solid #C0D966 ;
+    border: 1px solid #C0D966;
 }
 
 .panel-camera-settings-container {
@@ -1884,14 +1884,9 @@ td:hover {
     padding: 1%;
     border-bottom: 1px white solid;
 }
-<<<<<<< HEAD
 
 .panel-camera-settings-header h3 {
-    width: 50%;
-=======
-.panel-camera-settings-header h3{
     width: 80%;
->>>>>>> 3130e9ec2650886396e57162cc118ec8f7cfa27d
     border-radius: 5px;
 }
 
@@ -1935,20 +1930,10 @@ td:hover {
     background-color: white;
     color: black;
     border-radius: 5px;
-<<<<<<< HEAD
     width: 100%;
-    /* Calculate width with padding subtracted */
     max-width: 100%;
     overflow-x: auto;
-    /* Enable horizontal scrolling */
     white-space: nowrap;
-    /* Prevent text from wrapping */
-=======
-    width: 100%; 
-    max-width: 100%;
-    overflow-x: auto; 
-    white-space: nowrap;
->>>>>>> 3130e9ec2650886396e57162cc118ec8f7cfa27d
 }
 
 .panel-camera-settings-endpoint-link {
@@ -1975,10 +1960,6 @@ div.panel-camera-settings-endpoint-link p {
     align-items: center;
     justify-content: center;
     width: 100%;
-<<<<<<< HEAD
-    /* Adjust as needed */
-=======
->>>>>>> 3130e9ec2650886396e57162cc118ec8f7cfa27d
 }
 
 #sensitivity {
@@ -1992,10 +1973,6 @@ div.panel-camera-settings-endpoint-link p {
 
 .sensitivity-container span {
     padding-left: 5px;
-<<<<<<< HEAD
-    /* Optional: space between number and % symbol */
-=======
->>>>>>> 3130e9ec2650886396e57162cc118ec8f7cfa27d
 }
 
 
@@ -2057,8 +2034,10 @@ div.panel-camera-settings-overview-stats-body div {
 .panel-camera-settings-logs {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Center vertically */
-    align-items: center; /* Center horizontally */
+    justify-content: center;
+    /* Center vertically */
+    align-items: center;
+    /* Center horizontally */
     width: 100%;
     height: 50%;
 }
@@ -2077,14 +2056,10 @@ div.panel-camera-settings-overview-stats-body div {
 }
 
 #cameraLogs-header {
-    <<<<<<< HEAD=======display: flex;
+    display: flex;
     justify-content: space-between;
-<<<<<<< HEAD
-    >>>>>>>b0bcb3a3d2b463a45992c4fdc2428210827d2146 color: black;
-=======
     align-items: center;
     color: black;
->>>>>>> 3130e9ec2650886396e57162cc118ec8f7cfa27d
     background-color: #C5D97E;
     border: 1px solid #C5D97E;
     width: 100%;
@@ -2116,16 +2091,13 @@ div.panel-camera-settings-overview-stats-body div {
     overflow-y: auto;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD #cameraLogs .tbl-content tr:hover {
-=======
 #cameraLogs-body .tbl-content tr {
     display: flex;
     justify-content: space-between;
     width: 100%;
 }
 
-#cameraLogs-body tr{
+#cameraLogs-body tr {
     width: 100%;
 }
 
@@ -2146,280 +2118,249 @@ div.panel-camera-settings-overview-stats-body div {
 }
 
 #cameraLogs-body .tbl-content tr:hover {
->>>>>>> 3130e9ec2650886396e57162cc118ec8f7cfa27d
     background-color: lightgrey;
+    color: black;
+}
 
-<<<<<<< HEAD
-    color: black=======#cameraLogs-body .tbl-content tr {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-    }
 
-    #cameraLogs-body .tbl-content td {
-        flex: 1;
-        text-align: center;
-        padding: 10px;
-        border-right: 1px solid #444;
-    }
-=======
-
-.panel-camera-settings-save{
+.panel-camera-settings-save {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 5%;
 }
 
-.panel-camera-settings-save button{
+.panel-camera-settings-save button {
     padding: 3%;
 }
->>>>>>> 3130e9ec2650886396e57162cc118ec8f7cfa27d
 
-    #cameraLogs-body .tbl-content td:last-child {
-        border-right: none;
-    }
+.panel-camera-settings-save button:hover {
+    background-color: #C5D97E;
+    color: black;
+}
 
-    #cameraLogs-body .tbl-content tr:hover {
-        background-color: lightgrey;
-        color: black;
-        >>>>>>>b0bcb3a3d2b463a45992c4fdc2428210827d2146
-    }
+/*################# FOOTER #################*/
 
-    .panel-camera-settings-save {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 5%;
-    }
-
-    .panel-camera-settings-save button {
-        padding: 5%;
-    }
-
-    .panel-camera-settings-save button:hover {
-        background-color: #C5D97E;
-        color: black;
-    }
-
-    /*################# FOOTER #################*/
-
-    .footer {
-        display: flex;
-        justify-content: space-between;
-        background-color: #F2F2F2;
-        width: 85vw;
-        height: 9.88vh;
-        border-top: 1px black solid;
-        color: gray;
-        font-size: small;
-    }
+.footer {
+    display: flex;
+    justify-content: space-between;
+    background-color: #F2F2F2;
+    width: 85vw;
+    height: 9.88vh;
+    border-top: 1px black solid;
+    color: gray;
+    font-size: small;
+}
 
 
-    .footer-info {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        height: 100%;
-        margin-left: 2%;
-    }
+.footer-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    margin-left: 2%;
+}
 
-    .footer-info-top {
-        margin-bottom: 2%;
-    }
+.footer-info-top {
+    margin-bottom: 2%;
+}
 
 
-    /*#################### SECURITY PAGE ####################*/
+/*#################### SECURITY PAGE ####################*/
 
-    #security {
-        justify-content: start;
-    }
+#security {
+    justify-content: start;
+}
 
-    .panel-security {
-        height: 95%;
-        width: 95%;
-        margin-left: 2.5%;
-        display: flex;
-        justify-content: center;
-        justify-self: start;
-        align-items: center;
-        flex-direction: column;
-    }
+.panel-security {
+    height: 95%;
+    width: 95%;
+    margin-left: 2.5%;
+    display: flex;
+    justify-content: center;
+    justify-self: start;
+    align-items: center;
+    flex-direction: column;
+}
 
-    .panel-security-information {
-        display: flex;
-        flex-direction: column;
-        background-color: #22252E;
-        width: 100%;
-        height: 65%;
-        margin-bottom: 2.5%;
-        border-radius: 10px;
-    }
+.panel-security-information {
+    display: flex;
+    flex-direction: column;
+    background-color: #22252E;
+    width: 100%;
+    height: 65%;
+    margin-bottom: 2.5%;
+    border-radius: 10px;
+}
 
-    .panel-security-information-label {
-        height: fit-content;
-        width: fit-content;
-        margin-left: 1%;
-        margin-top: 1%;
-        color: #b7d93d;
-    }
+.panel-security-information-label {
+    height: fit-content;
+    width: fit-content;
+    margin-left: 1%;
+    margin-top: 1%;
+    color: #b7d93d;
+}
 
-    .panel-security-information-form {
-        display: flex;
-        flex-direction: column;
-        justify-self: flex-end;
-        justify-content: center;
-        height: 100%;
-        width: 100%;
-    }
+.panel-security-information-form {
+    display: flex;
+    flex-direction: column;
+    justify-self: flex-end;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
 
-    .panel-security-information-current-password {
-        height: fit-content;
-        color: #F2F2F2;
-    }
+.panel-security-information-current-password {
+    height: fit-content;
+    color: #F2F2F2;
+}
 
-    .panel-security-information-current-password p {
-        width: fit-content;
-        height: fit-content;
-        margin-left: 1%;
-    }
+.panel-security-information-current-password p {
+    width: fit-content;
+    height: fit-content;
+    margin-left: 1%;
+}
 
-    .panel-security-information-current-password input {
-        width: fit-content;
-        height: fit-content;
-        margin-left: 1%;
-        width: 95%;
-        height: 25px
-    }
+.panel-security-information-current-password input {
+    width: fit-content;
+    height: fit-content;
+    margin-left: 1%;
+    width: 95%;
+    height: 25px
+}
 
-    .panel-security-information-new-password {
-        height: fit-content;
-        margin-top: 1%;
-        color: #F2F2F2;
-    }
+.panel-security-information-new-password {
+    height: fit-content;
+    margin-top: 1%;
+    color: #F2F2F2;
+}
 
-    .panel-security-information-new-password p {
-        width: fit-content;
-        height: fit-content;
-        margin-left: 1%;
-    }
+.panel-security-information-new-password p {
+    width: fit-content;
+    height: fit-content;
+    margin-left: 1%;
+}
 
-    .panel-security-information-new-password input {
-        width: fit-content;
-        height: fit-content;
-        margin-left: 1%;
-        width: 95%;
-        height: 25px
-    }
+.panel-security-information-new-password input {
+    width: fit-content;
+    height: fit-content;
+    margin-left: 1%;
+    width: 95%;
+    height: 25px
+}
 
-    .panel-security-information-confirm-password {
-        margin-top: 1%;
-        color: #F2F2F2;
-    }
+.panel-security-information-confirm-password {
+    margin-top: 1%;
+    color: #F2F2F2;
+}
 
-    .panel-security-information-confirm-password p {
-        width: fit-content;
-        height: fit-content;
-        margin-left: 1%;
-        width: 90%;
-        height: 25px
-    }
+.panel-security-information-confirm-password p {
+    width: fit-content;
+    height: fit-content;
+    margin-left: 1%;
+    width: 90%;
+    height: 25px
+}
 
-    .panel-security-information-confirm-password input {
-        width: fit-content;
-        height: fit-content;
-        margin-left: 1%;
-        width: 95%;
-        height: 25px
-    }
+.panel-security-information-confirm-password input {
+    width: fit-content;
+    height: fit-content;
+    margin-left: 1%;
+    width: 95%;
+    height: 25px
+}
 
-    .panel-security-information-change {
-        display: flex;
-        justify-content: end;
-        align-content: end;
-        width: 95%;
-        margin-top: 2%;
-        margin-left: 1.5%;
-    }
+.panel-security-information-change {
+    display: flex;
+    justify-content: end;
+    align-content: end;
+    width: 95%;
+    margin-top: 2%;
+    margin-left: 1.5%;
+}
 
-    .panel-security-information-change button {
-        padding: 10px 5%;
-        border: none;
-        border-radius: 5px;
-    }
+.panel-security-information-change button {
+    padding: 10px 5%;
+    border: none;
+    border-radius: 5px;
+}
 
-    .panel-security-information-change button:hover {
-        background-color: #b7d93d;
-        cursor: pointer;
-        color: white;
-    }
+.panel-security-information-change button:hover {
+    background-color: #b7d93d;
+    cursor: pointer;
+    color: white;
+}
 
-    .panel-security-danger {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        background-color: #22252E;
-        height: 30%;
-        border-radius: 10px;
-    }
+.panel-security-danger {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: #22252E;
+    height: 30%;
+    border-radius: 10px;
+}
 
-    .panel-security-danger-label {
-        display: flex;
-        align-self: start;
-        height: fit-content;
-        width: fit-content;
-        margin-left: 1%;
-        margin-top: 1%;
-        color: #b7d93d;
-    }
+.panel-security-danger-label {
+    display: flex;
+    align-self: start;
+    height: fit-content;
+    width: fit-content;
+    margin-left: 1%;
+    margin-top: 1%;
+    color: #b7d93d;
+}
 
-    .panel-security-danger-delete-account {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        height: 50%;
-        width: 100%;
-    }
+.panel-security-danger-delete-account {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 50%;
+    width: 100%;
+}
 
-    .panel-security-danger-delete-account-label {
-        display: flex;
-        margin-left: 1%;
-        color: #F2F2F2;
-    }
+.panel-security-danger-delete-account-label {
+    display: flex;
+    margin-left: 1%;
+    color: #F2F2F2;
+}
 
-    .panel-security-danger-delete-account-option {
-        display: flex;
-        width: 100%;
-    }
+.panel-security-danger-delete-account-option {
+    display: flex;
+    width: 100%;
+}
 
-    .panel-security-danger-delete-account-text {
-        display: flex;
-        flex: 1;
-        margin-left: 1%;
-        align-items: center;
-        color: #f2f2f2;
-    }
+.panel-security-danger-delete-account-text {
+    display: flex;
+    flex: 1;
+    margin-left: 1%;
+    align-items: center;
+    color: #f2f2f2;
+}
 
-    .panel-security-danger-delete-account-button {
-        display: flex;
-        flex: 1;
-        margin-right: 4%;
-        justify-content: end;
-    }
+.panel-security-danger-delete-account-button {
+    display: flex;
+    flex: 1;
+    margin-right: 4%;
+    justify-content: end;
+}
 
-    .panel-security-danger-delete-account-button button {
-        padding: 10px 5%;
-        border: none;
-        border-radius: 5px;
-    }
+.panel-security-danger-delete-account-button button {
+    padding: 10px 5%;
+    border: none;
+    border-radius: 5px;
+}
 
-<<<<<<< HEAD
-    .panel-security-danger-delete-account-button button:hover {
-        background-color: #b33737;
-        cursor: pointer;
-        color: white;
-    }
-=======
+.panel-security-danger-delete-account-button button:hover {
+    background-color: #b33737;
+    cursor: pointer;
+    color: white;
+}
+
+
+/*#######################################################*/
+
+/*################# AUTHENTICATION PAGE #################*/
+
 .header-auth {
     display: flex;
     justify-items: center;
@@ -2678,803 +2619,510 @@ select {
     font-size: 16px;
     padding-left: 7%;
 }
->>>>>>> 3130e9ec2650886396e57162cc118ec8f7cfa27d
+
+.panel-general-account-inputs input[type="text"] {
+    width: 95%;
+    padding: 1%;
+    padding-bottom: 0%;
+}
+
+.panel-general-account-inputs-names input[type="text"] {
+    width: 30vw;
+    height: 50%;
+    padding: 1%;
+}
+
+.panel-general-account-inputs-names {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    color: #F2F2F2;
+}
+
+.panel-general-account-email {
+    color: #F2F2F2;
+}
+
+.panel-general-account-country {
+    width: 97%;
+    color: #F2F2F2;
+}
+
+.panel-general-account-country select {
+    width: 100%;
+    height: 67%;
+    padding: 8px;
+    border: 1px solid #000000;
+    border-radius: 0px;
+    background-color: #fff;
+}
+
+.panel-general-account-reference-code {
+    color: #F2F2F2;
+}
 
 
-    /*#######################################################*/
 
-    /*################# AUTHENTICATION PAGE #################*/
-
-    .header-auth {
-        display: flex;
-        justify-items: center;
-        align-items: center;
-        width: 100vw;
-        height: 12.85vh;
-        border-bottom: 1px black solid;
-        background-color: #22252E;
-    }
-
-    .header-auth-logo {
-        width: 10%;
-        text-align: center;
-    }
-
-    .header-auth-title {
-        width: 90%;
-        color: #ffffff;
-    }
-
-    .panel-auth {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100vw;
-        height: 77vh;
-        background-color: #22252E;
-
-        /*Animation*/
-        opacity: 0;
-        animation: fadeInAnimation ease-in 1;
-        animation-fill-mode: forwards;
-        animation-duration: 0.2s;
-        animation-delay: 0.1s
-    }
-
-    .panel-auth-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-        width: 100%;
-    }
-
-    .login-title-container {
-        display: flex;
-        width: 100%;
-        height: 10%;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .login-title {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 40px;
-        width: 30%;
-    }
-
-    .panel-auth-container-register {
-        width: 70%;
-        height: 95%;
-        background-color: #f2f2f2;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-evenly;
-        border-radius: 10px;
-    }
-
-    #form-login.panel-auth-container-register {
-        width: 50%;
-        height: 95%;
-        background-color: #f2f2f2;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-evenly;
-        border-radius: 10px;
-    }
-
-    .panel-auth-container-register-form {
-        width: 95%;
-        height: 70%;
-        display: flex;
-        justify-content: space-evenly;
-
-    }
-
-    .panel-auth-container-register-form input,
-    select {
-        width: 90%;
-        height: 3vh;
-        margin-top: 1%;
-        border-radius: 5px;
-        background: white;
-        border: 1px solid black;
-    }
-
-    .panel-auth-container-register-form select {
-        width: 92.5%;
-    }
-
-    #input-terms {
-        width: 15px;
-    }
-
-    .panel-auth-container-register-form-base-info {
-        height: 70%;
-        width: 45%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        margin-top: 5%
-    }
+.panel-general-account-upload-logo {
+    margin-bottom: 20px;
+    color: #F2F2F2;
+}
 
 
-    .panel-auth-container-register-form-base-info-name {
-        display: flex;
-    }
+.panel-general-account-button {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    width: 100%;
+    height: 9%;
+}
 
-    .panel-auth-container-register-form-base-info-name input {
-        width: 80%;
-    }
+.panel-general-account-button button {
+    width: 15vw;
+    height: 50%;
+    margin-right: 11vw;
+    min-width: 100px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
 
-    .panel-auth-container-register-form-base-info-email {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .panel-auth-container-register-form-base-info-password {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .panel-auth-container-register-form-base-info-confirm-password {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .panel-auth-container-register-form-division {
-        height: 70%;
-        border: 1px solid black;
-        margin-top: 5%
-    }
-
-    .panel-auth-container-register-form-contact-info {
-        height: 70%;
-        width: 45%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        margin-top: 5%
-    }
-
-    .panel-auth-container-register-form-contact-info-info {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        height: 60%;
-    }
-
-    .panel-auth-container-register-form-contact-info-info-phone {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .panel-auth-container-register-form-contact-info-info-region {
-        display: flex;
-        flex-direction: column
-    }
-
-    .panel-auth-container-register-form-contact-info-terms {
-        display: flex;
-    }
-
-    .panel-auth-container-register-form-contact-info-terms p {
-        font-size: small;
-        margin-right: 2%;
-    }
+.panel-general-account-button button:hover {
+    background-color: #b7d93d;
+    cursor: pointer;
+    color: white;
+}
 
 
-    .panel-auth-container-register-submit {
-        width: 100%;
-        height: 8%;
-        display: flex;
-        justify-content: center;
-    }
+/*    Alert Contacts CSS    */
 
-    .panel-auth-container-register-submit button {
-        width: 60%;
-        height: 100%;
-        font-size: larger;
-        background-color: #b7d93d;
-        border: 0px solid black;
-        border-radius: 5px;
-        cursor: pointer;
-    }
+#contacts {
+    flex-direction: column;
+}
 
-<<<<<<< HEAD
-    .panel-auth-container-register-submit button:hover {
-        background-color: grey;
-        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-        /* Aumenta a sombra ao passar o mouse */
-        transform: translateY(-2px);
-        /* Move o botão ligeiramente para cima */
-        cursor: pointer;
-    }
-=======
+.panel-add-contacts {
+    background-color: #22252E;
+    height: 30%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2%;
+    justify-content: space-evenly;
+    border-radius: 10px;
+}
+
+.panel-add-contacts-title {
+    width: 90%;
+    padding-left: 2%;
+    color: #C0D966;
+}
+
+.panel-add-contacts-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+    padding-left: 2%;
+}
+
+.panel-add-contacts-addbox {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.panel-add-contacts-addbox label {
+    margin-bottom: 5px;
+    font-size: 19px;
+    color: #F2F2F2;
+}
+
+#add-contact {
+    width: 90%;
+    height: 15%;
+    padding: 10px;
+}
+
+.panel-add-contacts-addbutton {
+    padding-top: 3.2vh;
+}
+
+.panel-add-contacts-addbutton button {
+    min-width: fit-content;
+    width: 200px;
+    padding: 10px 5%;
+    border: none;
+    border-radius: 5px;
+}
+
+.panel-add-contacts-addbutton button:hover {
+    background-color: #b7d93d;
+    cursor: pointer;
+    color: white;
+}
+
+
+.panel-show-contacts {
+    background-color: #22252E;
+    height: 60%;
+    width: 90%;
+    border-radius: 10px;
+}
+
+.panel-show-contacts-title {
+    color: #C0D966
+}
+
+.panel-account-search {
+    border-radius: 5px;
+}
+
+.panel-show-contacts-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+    padding-left: 2%;
+    padding-top: 1.5%;
+}
+
+.panel-show-contacts-searchbar {
+    padding-top: 1%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.panel-account-search {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    outline: none;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.panel-account-search:focus {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border-color: #888;
+}
+
+.header-black {
+    color: black;
+}
+
+.panel-show-contacts-table {
+    margin: 2%;
+    color: #f2f2f2;
+}
+
 .margin-right {
     margin-left: 50%;
     display: block;
 }
->>>>>>> 3130e9ec2650886396e57162cc118ec8f7cfa27d
 
-    .panel-auth-container-register-altlogin {
+.live-feed-container-yolo {
+    max-width: 100%;
+}
+
+
+
+@media only screen and (max-width: 968px) {
+
+    /*################# SIDEBAR #################*/
+
+    .logo-nav-hamburguer {
+        display: none;
+    }
+
+    .menu-options-home-label {
+        display: none;
+    }
+
+    .menu-options-home-dashboard-text {
+        display: none;
+    }
+
+    .menu-options-home-dashboard:hover {
+        background-color: gray;
+        color: white;
+    }
+
+    .menu-options-home-camera-text {
+        display: none;
+    }
+
+    .menu-options-home-upload-text {
+        display: none;
+    }
+
+
+    .menu-options-settings-label {
+        display: none;
+    }
+
+    .menu-options-settings-general-text {
+        display: none;
+    }
+
+    .menu-options-settings-general:hover {
+        background-color: gray;
+        color: white;
+    }
+
+    .menu-options-settings-security-text {
+        display: none;
+    }
+
+    .menu-options-settings-security:hover {
+        background-color: gray;
+        color: white;
+    }
+
+    .menu-options-settings-alert-text {
+        display: none;
+    }
+
+
+    .menu-options-settings-alert:hover {
+        background-color: gray;
+        color: white;
+    }
+
+    /*HEADER*/
+
+    .header-options {
         width: 100%;
-        height: 5%;
-        align-items: center;
-        justify-content: center;
-        display: flex;
     }
 
-    .footer-auth {
-        display: flex;
-        justify-content: center;
-        background-color: #22252E;
-        width: 100vw;
-        height: 9.88vh;
-        border-top: 1px black solid;
-        color: gray;
-        font-size: small;
-    }
-
-    /*#######################################################*/
-
-    /*################# END AUTHENTICATION PAGE #################*/
-    /*#######################################################*/
-
-    /*#######################################################*/
-    /*      General Account Settings CSS     */
-
-
-    .panel-general-account {
-        background-color: #22252E;
-        width: 95%;
-        height: 97%;
-        border-radius: 10px;
-    }
-
-    .panel-general-account-title {
-        width: 30w;
-        margin-left: 3%;
-        margin-top: 4%;
-        color: #b7d93d;
-    }
-
-    .panel-general-account-inputs {
-        width: 81%;
-        height: 74%;
+    .header-greeting {
         display: flex;
         flex-direction: column;
-        justify-content: space-evenly;
-        font-size: 16px;
-        padding-left: 7%;
+        width: 50%;
+        height: 60%;
+        margin-left: 5%;
     }
 
-    .panel-general-account-inputs input[type="text"] {
-        width: 95%;
-        padding: 1%;
-        padding-bottom: 0%;
-    }
-
-    .panel-general-account-inputs-names input[type="text"] {
-        width: 30vw;
-        height: 50%;
-        padding: 1%;
-    }
-
-    .panel-general-account-inputs-names {
-        display: flex;
-        justify-content: space-between;
-        font-size: 18px;
-        color: #F2F2F2;
-    }
-
-    .panel-general-account-email {
-        color: #F2F2F2;
-    }
-
-    .panel-general-account-country {
-        width: 97%;
-        color: #F2F2F2;
-    }
-
-    .panel-general-account-country select {
-        width: 100%;
-        height: 67%;
-        padding: 8px;
-        border: 1px solid #000000;
-        border-radius: 0px;
-        background-color: #fff;
-    }
-
-    .panel-general-account-reference-code {
-        color: #F2F2F2;
-    }
-
-
-
-    .panel-general-account-upload-logo {
-        margin-bottom: 20px;
-        color: #F2F2F2;
-    }
-
-
-    .panel-general-account-button {
-        display: flex;
-        align-items: center;
-        justify-content: end;
-        width: 100%;
-        height: 9%;
-    }
-
-    .panel-general-account-button button {
-        width: 15vw;
-        height: 50%;
-        margin-right: 11vw;
-        min-width: 100px;
-        cursor: pointer;
-        border: none;
-        border-radius: 5px;
-    }
-
-<<<<<<< HEAD
-    .panel-general-account-button button:hover {
-        background-color: #b7d93d;
-        cursor: pointer;
-        color: white;
-=======
     .header-greeting-top {
         display: flex;
         align-items: center;
         font-size: 1.5vw;
->>>>>>> 3130e9ec2650886396e57162cc118ec8f7cfa27d
     }
 
+    .header-greeting-bottom {
 
-<<<<<<< HEAD
-    /*    Alert Contacts CSS    */
-=======
         font-size: 1.5vw;
         align-items: center;
     }
->>>>>>> 3130e9ec2650886396e57162cc118ec8f7cfa27d
 
-    #contacts {
-        flex-direction: column;
+    .header-options-leave img {
+        height: 100%;
+        width: 100%;
     }
 
-    .panel-add-contacts {
-        background-color: #22252E;
-        height: 30%;
-        width: 90%;
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 2%;
-        justify-content: space-evenly;
-        border-radius: 10px;
-    }
-
-    .panel-add-contacts-title {
-        width: 90%;
-        padding-left: 2%;
-        color: #C0D966;
-    }
-
-    .panel-add-contacts-content {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        width: 90%;
-        padding-left: 2%;
-    }
-
-    .panel-add-contacts-addbox {
-        display: flex;
-        flex-direction: column;
-        width: 70%;
-    }
-
-    .panel-add-contacts-addbox label {
-        margin-bottom: 5px;
-        font-size: 19px;
-        color: #F2F2F2;
-    }
-
-<<<<<<< HEAD
-    #add-contact {
-        width: 90%;
-        height: 15%;
-        padding: 10px;
-    }
-
-    .panel-add-contacts-addbutton {
-        padding-top: 3.2vh;
-=======
-    /*PANEL - DASHBOARD*/
-    
-    .panel-camera {
+    .header-options-leave p {
         display: none;
->>>>>>> 3130e9ec2650886396e57162cc118ec8f7cfa27d
     }
 
-    .panel-add-contacts-addbutton button {
-        min-width: fit-content;
-        width: 200px;
-        padding: 10px 5%;
-        border: none;
-        border-radius: 5px;
+    .header-greeting {
+        display: none;
     }
 
-    .panel-add-contacts-addbutton button:hover {
-        background-color: #b7d93d;
+    .header-options-addcamera button {
+        color: transparent;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-image: url("../Images/addcameraicon.png");
+        background-size: 65%;
+    }
+
+    .header-options-addcamera button:hover {
+        color: transparent;
+        background-color: #C0D966;
         cursor: pointer;
-        color: white;
     }
 
-
-    .panel-show-contacts {
-        background-color: #22252E;
-        height: 60%;
-        width: 90%;
-        border-radius: 10px;
+    .header-options-leave {
+        font-size: 1.5vw;
     }
 
-    .panel-show-contacts-title {
-        color: #C0D966
-    }
-
-    .panel-account-search {
-        border-radius: 5px;
-    }
-
-    .panel-show-contacts-content {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        width: 90%;
-        padding-left: 2%;
-        padding-top: 1.5%;
-    }
-
-    .panel-show-contacts-searchbar {
-        padding-top: 1%;
+    .header-options-language {
         display: flex;
         justify-content: center;
+        size: 10px;
+    }
+
+    .header-options-notifications {
+        display: flex;
+        justify-content: center;
+        size: 10px;
+    }
+
+    #notification-panel {
+        width: 50%;
+        left: 45%;
+    }
+
+    /*PANEL - DASHBOARD*/
+
+    .panel-camera {
+        display: none;
+    }
+
+    .panel-information {
+        display: flex;
+        flex-direction: column;
         align-items: center;
+        height: 100%;
+        width: 100%;
+        font-size: 2vw;
+    }
+
+    th {
+        font-size: 1.5vw;
+    }
+
+    td {
+        font-size: 1.5vw;
+    }
+
+    .panel-information-statistics-status-online-container-label {
+        font-size: x-large;
+    }
+
+    .panel-information-statistics-status-offline-container-label {
+        font-size: x-large;
+    }
+
+
+    .panel-information-statistics-smoke-24-hours-label {
+        font-size: x-large;
+    }
+
+    .panel-information-statistics-smoke-7-days-label {
+        font-size: x-large;
+    }
+
+    .panel-information-statistics-smoke-30-days-label {
+        font-size: x-large;
+    }
+
+    .tbl-header {
+        font-size: xx-large;
+    }
+
+    /*FOOTER*/
+    .footer-info {
+        font-size: 0.6rem;
+    }
+
+    .social-network {
+        display: none;
+    }
+
+    /*PANEL - ADD CAMERA*/
+
+    .add-camera-menu-title {
+        font-size: small;
+    }
+
+    #add-camera-menu {
+        height: 80vh;
+        width: 75vw;
+        margin: 10%;
+    }
+
+    .add-camera-plans {
+        font-size: small;
+    }
+
+    .add-camera-options-confirmations {
+        font-size: small;
+    }
+
+
+    /*PANEL - MY CAMERAS*/
+    .panel-camera-container-top-search {
+        margin: 2%;
+    }
+
+    .panel-camera-search {
+        width: 15vw;
+        height: 10vh;
     }
 
     .panel-account-search {
-        width: 100%;
-        max-width: 400px;
-        padding: 10px 20px;
-        border: 1px solid #ccc;
-        border-radius: 25px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        font-size: 16px;
-        outline: none;
-        transition: box-shadow 0.3s ease-in-out;
+        width: 15vw;
     }
 
-    .panel-account-search:focus {
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        border-color: #888;
+    #live-feed-container {
+        width: 70%;
+        margin: 10%;
     }
 
-    .header-black {
-        color: black;
-    }
-
-    .panel-show-contacts-table {
-        margin: 2%;
-        color: #f2f2f2;
-    }
-
-    /* Margin for the show contacts remove buttons */
-    .margin-right {
-        margin-left: 50%;
-        display: block;
-    }
-
-    @media only screen and (max-width: 968px) {
-
-        /*################# SIDEBAR #################*/
-
-        .logo-nav-hamburguer {
-            display: none;
-        }
-
-        .menu-options-home-label {
-            display: none;
-        }
-
-        .menu-options-home-dashboard-text {
-            display: none;
-        }
-
-        .menu-options-home-dashboard:hover {
-            background-color: gray;
-            color: white;
-        }
-
-        .menu-options-home-camera-text {
-            display: none;
-        }
-
-        .menu-options-home-upload-text {
-            display: none;
-        }
-
-
-        .menu-options-settings-label {
-            display: none;
-        }
-
-        .menu-options-settings-general-text {
-            display: none;
-        }
-
-        .menu-options-settings-general:hover {
-            background-color: gray;
-            color: white;
-        }
-
-        .menu-options-settings-security-text {
-            display: none;
-        }
-
-        .menu-options-settings-security:hover {
-            background-color: gray;
-            color: white;
-        }
-
-        .menu-options-settings-alert-text {
-            display: none;
-        }
-
-
-        .menu-options-settings-alert:hover {
-            background-color: gray;
-            color: white;
-        }
-
-        /*HEADER*/
-
-        .header-options {
-            width: 100%;
-        }
-
-        .header-greeting {
-            display: flex;
-            flex-direction: column;
-            width: 50%;
-            height: 60%;
-            margin-left: 5%;
-        }
-
-        .header-greeting-top {
-            display: flex;
-            align-items: center;
-            font-size: 1.5vw;
-            /* background-color: #f2f2f2;*/
-        }
-
-        .header-greeting-bottom {
-
-            font-size: 1.5vw;
-            align-items: center;
-            /* background-color: #f2f2f2; */
-        }
-
-        .header-options-leave img {
-            height: 100%;
-            width: 100%;
-        }
-
-        .header-options-leave p {
-            display: none;
-        }
-
-        .header-greeting {
-            display: none;
-        }
-
-        .header-options-addcamera button {
-            color: transparent;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-image: url("../Images/addcameraicon.png");
-            background-size: 65%;
-        }
-
-        .header-options-addcamera button:hover {
-            color: transparent;
-            background-color: #C0D966;
-            cursor: pointer;
-        }
-
-        .header-options-leave {
-            font-size: 1.5vw;
-        }
-
-        .header-options-language {
-            display: flex;
-            justify-content: center;
-            size: 10px;
-        }
-
-        .header-options-notifications {
-            display: flex;
-            justify-content: center;
-            size: 10px;
-        }
-
-        #notification-panel {
-            width: 50%;
-            left: 45%;
-        }
-
-        /*PANEL - DASHBOARD*/
-
-        .panel-camera {
-            display: none;
-        }
-
-        .panel-information {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            height: 100%;
-            width: 100%;
-            font-size: 2vw;
-        }
-
-        th {
-            font-size: 1.5vw;
-        }
-
-        td {
-            font-size: 1.5vw;
-        }
-
-        .panel-information-statistics-status-online-container-label {
-            font-size: x-large;
-        }
-
-        .panel-information-statistics-status-offline-container-label {
-            font-size: x-large;
-        }
-
-
-        .panel-information-statistics-smoke-24-hours-label {
-            font-size: x-large;
-        }
-
-        .panel-information-statistics-smoke-7-days-label {
-            font-size: x-large;
-        }
-
-        .panel-information-statistics-smoke-30-days-label {
-            font-size: x-large;
-        }
-
-        .tbl-header {
-            font-size: xx-large;
-        }
-
-        /*FOOTER*/
-        .footer-info {
-            font-size: 0.6rem;
-        }
-
-        .social-network {
-            display: none;
-        }
-
-        /*PANEL - ADD CAMERA*/
-
-        .add-camera-menu-title {
-            font-size: small;
-        }
-
-        #add-camera-menu {
-            height: 80vh;
-            width: 75vw;
-            margin: 10%;
-        }
-
-        .add-camera-plans {
-            font-size: small;
-        }
-
-        .add-camera-options-confirmations {
-            font-size: small;
-        }
-
-
-        /*PANEL - MY CAMERAS*/
-        .panel-camera-container-top-search {
-            margin: 2%;
-        }
-
-        .panel-camera-search {
-            width: 15vw;
-            height: 10vh;
-        }
-
-        .panel-account-search {
-            width: 15vw;
-        }
-
-        #live-feed-container {
-            width: 60%;
-        }
-
-
-<<<<<<< HEAD
-        /*FRAME*/
-        .panel-upload-processed-frame img {
-            max-width: 100%;
-            width: 95%;
-        }
-=======
-    #panel-mycamera-details{
+    #panel-mycamera-details {
         width: 90%;
         height: fit-content;
     }
 
-    #cancel-details{
+    #cancel-details {
         margin-top: 1%;
         height: 5%;
     }
 
-    #cameraLogs-body{
+    #cameraLogs-body {
         font-size: xx-large;
     }
 
->>>>>>> 3130e9ec2650886396e57162cc118ec8f7cfa27d
 
-        /* CONTACTS */
-
-        .panel-add-contacts-addbutton {
-            width: 50%;
-        }
-
-        .panel-add-contacts-addbutton button {
-            width: 100%;
-        }
-
-        .panel-add-contacts {
-            height: 50%;
-        }
-
-        .panel-show-contacts-searchbar {
-            width: 50%;
-        }
-
-        .panel-account-search {
-            width: 100%;
-        }
-
-        /*################# AUTH #################*/
-
-        .header-auth-logo {
-            display: none;
-        }
-
-        #form-register,
-        #form-login {
-            width: 100%;
-        }
-
-        #form-login.panel-auth-container-register {
-            width: 100%;
-        }
-
-        .header-auth-title {
-            width: 100%;
-            text-align: center;
-        }
+    /*FRAME*/
+    .panel-upload-processed-frame img {
+        max-width: 100%;
+        width: 95%;
     }
+
+    /* CONTACTS */
+
+    .panel-add-contacts-addbutton {
+        width: 50%;
+    }
+
+    .panel-add-contacts-addbutton button {
+        width: 100%;
+    }
+
+    .panel-add-contacts {
+        height: 50%;
+    }
+
+    .panel-show-contacts-searchbar {
+        width: 50%;
+    }
+
+    .panel-account-search {
+        width: 100%;
+    }
+
+    /*################# AUTH #################*/
+
+    .header-auth-logo {
+        display: none;
+    }
+
+    #form-register,
+    #form-login {
+        width: 100%;
+    }
+
+    #form-login.panel-auth-container-register {
+        width: 100%;
+    }
+
+    .header-auth-title {
+        width: 100%;
+        text-align: center;
+    }
+}
