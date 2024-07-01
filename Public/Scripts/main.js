@@ -1002,7 +1002,7 @@ async function loadNotificationList() {
                         </div>
                         </br>
                         <div class="notification-panel-message-bottom">
-                            <p class="notification-panel-message-bottom-date">${notification.createdAt}</p>
+                            <p class="notification-panel-message-bottom-date">${moment(notification.createdAt).local().format('YYYY-MM-DD -> HH:mm:ss')}</p>
                         </div>
                     </div>
                 `;
