@@ -1,5 +1,5 @@
 // DOM Elements
-const VERSION = "1.8.5";
+const VERSION = "1.9.0";
 const AlertType = Object.freeze({
     CAMERA_DOWN: 0,
 });
@@ -25,11 +25,11 @@ function showContainerIndex(id) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const socialNetworkImages = document.querySelectorAll('.social-network-image');
 
-    socialNetworkImages.forEach(function(image) {
-        image.addEventListener('click', function() {
+    socialNetworkImages.forEach(function (image) {
+        image.addEventListener('click', function () {
             const url = image.getAttribute('data-url');
             if (url) {
                 window.open(url, '_blank');
@@ -723,7 +723,7 @@ async function loadCameraList() {
                     <td>${camera.current_status === 1 ? "Online" : "Offline"}</td>
                     <td>
                         <button onclick="changeCameraStatus(${camera.cameraID})" title="On/Off Camera" type="button"><i class="fa fa-power-off" aria-hidden="true" style='color:red;'></i></button>
-                        <button onclick="simulateDetection(${camera.cameraID})" title="Simulate a detection" type="button"><i class="fa fa-eye" aria-hidden="true" style='color:lightgray;'></i></button><button id="livefeed-btn" title="Livefeed" type="button" onclick="togglePopup('${camera.camera_name}')"><i class="fa fa-camera" aria-hidden="true" style="color: lightgray;"></i></button>
+                        <button onclick="toggleLifeFeed(${camera.cameraID}, '${camera.camera_name}', '${camera.public_ip_address}')" id="livefeed-btn" title="Livefeed" type="button" ><i class="fa fa-camera" aria-hidden="true" style="color: lightgray;"></i></button>
                         <button onclick="expandCameraInfo(${camera.cameraID})" title="Simulate a detection" type="button"><i class="fa fa-info" aria-hidden="true" style='color:lightgray;'></i></button>
                     </td>
                 </tr>
@@ -802,41 +802,38 @@ function changeCameraStatus(cameraID) {
     }
 }
 
-function simulateDetection(cameraID) {
-    if (confirm("Current Action: Simulate detection for camera #" + cameraID + ". You want to proceed?")) {
-        alert("Proceeding...")
-        fetch('api/camera/simulate-detection', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(
-                {
-                    cameraID
-                }),
+function newDetection(cameraID, class_name, image) {
+    fetch('api/camera/simulate-detection', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(
+            {
+                cameraID,
+                class_name,
+                image
+            }),
+    })
+        .then(response => { // data validation
+            if (response.status == 401) {
+                throw new Error(`Camera don't exist or it is offline! Status: ${response.status}`);
+            }
+            return response.json();
         })
-            .then(response => { // data validation
-                if (response.status == 401) {
-                    throw new Error(`Camera don't exist or it is offline! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Detection simulation successful:', data);
+        .then(data => {
+            console.log('Detection simulation successful:', data);
 
-                // Handle success ...
-                alert("Detection simulation successful");
-                location.reload();
-                // ...
+            loadNotificationList()
 
-            })
-            .catch(error => {
-                console.error('Registration failed:', error);
-                // Handle error ... 
-                alert(error);
-                // ...
-            });
-    }
+        })
+        .catch(error => {
+            console.error('Registration failed:', error);
+            // Handle error ... 
+            alert(error);
+            // ...
+        });
+
 }
 
 async function loadContactList() {
@@ -1070,8 +1067,55 @@ async function markAllAsRead() {
     });
 }
 
-function uploadFrame() {
+function uploadFrame(frame, camID) {
+    const formData = new FormData();
+
+    const blob = base64ToBlob(frame, 'image/png');
+    formData.append('image', blob, 'frame.png');
+
+    fetch('/api/camera/detect-frame', {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => response.json())
+        .then(data => {
+            const processedImage = document.getElementById(`${camID}-processed-image`);
+            processedImage.src = ''
+
+            // Assuming data contains the URL of the processed image or base64 encoded image
+            if (data.image_url) {
+                // Display the processed image
+                processedImage.src = data.image_url;
+            } else if (data.image_base64) {
+                processedImage.src = `data:image/jpeg;base64,${data.image_base64}`;
+            } else {
+                processedImage.src = '' // no image returned :(
+            }
+
+            //Check detected stuff
+            data.result_class_ids.forEach(result_id => {
+                if (data.class_list[result_id] === "Pessoa") {
+                    // Found People
+                    
+
+
+                } else if (data.class_list[result_id] === "Fumo") {
+                    // Found Smoke
+
+
+                }
+
+            });
+
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
+function uploadSingleFrame() {
     const input = document.getElementById('frameInput');
+
     if (input.files && input.files[0]) {
         const formData = new FormData();
         formData.append('image', input.files[0]);
@@ -1103,12 +1147,23 @@ function uploadFrame() {
                 console.error('Error:', error);
             });
     } else {
-        alert('Please select a frame file first');
+        alert("Please select a image.")
     }
 }
 
 // ------------------------------------------------
 // Other Functions
+
+// Convert Base64 image to Blob
+function base64ToBlob(base64, mime) {
+    const byteString = atob(base64.split(',')[1]);
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+    for (let i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+    return new Blob([ab], { type: mime });
+}
 
 var mycamerasContainer = document.getElementById("panel-mycamera-details");
 
@@ -1224,13 +1279,14 @@ function renderCameraDetailsPanel(cameraDetails, detections, cameraID, container
     const subscriptionPlanSelect = panelMyCameraContainer.querySelector('#subscriptionPlan');
     subscriptionPlanSelect.value = getSubscriptionPlanValue(cameraDetails.subscription_plan);
 
-    subscriptionPlanSelect.addEventListener('change', function() {
+    // Add event listener for subscription plan change
+    subscriptionPlanSelect.addEventListener('change', function () {
         setDetectionFrequencyText(this.value);
     });
 
     // Add event listener to ensure sensitivity value is above 100
     const sensitivityElement = panelMyCameraContainer.querySelector('#sensitivity');
-    sensitivityElement.addEventListener('blur', function(e) {
+    sensitivityElement.addEventListener('blur', function (e) {
         ensureSensitivityAbove100(sensitivityElement);
     });
 
@@ -1249,8 +1305,6 @@ function ensureSensitivityAbove100(element) {
         element.innerText = value;
     }
 }
-
-
 
 // Function to set the detection frequency text based on subscription plan
 function setDetectionFrequencyText(plan) {
@@ -1271,14 +1325,13 @@ function getSubscriptionPlanValue(plan) {
             return 'standard';
         case "3":
             return 'premium';
-    
-    default:
-        return plan; 
+
+        default:
+            return plan;
     }
 }
 
 // Function to retrieve the detection frequency based on the selected plan
-
 function getDetectionFrequency(plan) {
     switch (plan) {
         case "1":
@@ -1288,13 +1341,13 @@ function getDetectionFrequency(plan) {
         case "3":
             return '30 secs';
         default:
-            if(plan=="1"){
+            if (plan == "1") {
                 return '10 min';
             }
-            else if(plan=="2"){
+            else if (plan == "2") {
                 return '1 min';
             }
-            else{
+            else {
                 return "30 secs"
             }
     }
@@ -1307,7 +1360,6 @@ async function saveChanges(cameraID, containerID) {
     const updatedSensitivity = parseInt(panelMyCameraContainer.querySelector('#sensitivity').innerText, 10);
     const updatedEndpoint = panelMyCameraContainer.querySelector('#endpoint').innerText;
 
-    // Optional: Validate the updated data before sending
     if (!updatedCameraName.trim()) {
         alert('Camera name cannot be empty');
         return;
@@ -1323,7 +1375,7 @@ async function saveChanges(cameraID, containerID) {
             body: JSON.stringify({
                 cameraID,
                 camera_name: updatedCameraName,
-                subscription_plan:subscriptionPlan,
+                subscription_plan: subscriptionPlan,
                 sensitivity: updatedSensitivity,
                 public_ip_address: updatedEndpoint
             }),
@@ -1332,9 +1384,6 @@ async function saveChanges(cameraID, containerID) {
         if (!response.ok) {
             throw new Error('Failed to update camera details');
         }
-
-        // Optionally update local UI state or provide feedback
-        // UpdateUI(updatedCameraName, updatedSensitivity, updatedEndpoint);
 
         alert('Camera details updated successfully');
         location.reload();
@@ -1350,42 +1399,113 @@ async function saveChanges(cameraID, containerID) {
 // Check for notifications every 20 seconds
 setInterval(loadNotificationList, 20000);
 
-// Temporary
-document.addEventListener('DOMContentLoaded', function() {
-    var video = document.getElementById('hls-video');
+function startCameraStreaming(camera) {
+    const videoContainer = document.getElementById('video-container');
+    const processedImagesContainer = document.getElementById('processed-images-container');
+
+    videoContainer.innerHTML = '';
+    processedImagesContainer.innerHTML = '';
+
+    // Create video element
+    const video = document.createElement('video');
+    video.id = camera.cameraID;
+    video.controls = true;
+    videoContainer.appendChild(video);
+
+    // Create canvas element
+    const canvas = document.createElement('canvas');
+    canvas.id = `${camera.cameraID}-canvas`;
+    canvas.style.display = 'none';
+    videoContainer.appendChild(canvas);
+
+    // Create image element for processed frames
+    const img = document.createElement('img');
+    img.id = `${camera.cameraID}-processed-image`;
+    processedImagesContainer.appendChild(img);
+
+    const context = canvas.getContext('2d');
+    let hls;
+
     if (Hls.isSupported()) {
-        var hls = new Hls();
-        hls.loadSource('http://172.208.31.254/live/camerasf.m3u8');
+        hls = new Hls();
+        hls.loadSource('http://172.208.31.254/live/camerasf.m3u8'); // hard coded, but this is the only IP we have for the livestream.
         hls.attachMedia(video);
-        hls.on(Hls.Events.MANIFEST_PARSED, function() {
+        hls.on(Hls.Events.MANIFEST_PARSED, function () {
             video.play();
         });
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        video.src = 'http://172.208.31.254/live/camerasf.m3u8';
-        video.addEventListener('loadedmetadata', function() {
+        video.src = 'http://172.208.31.254/live/camerasf.m3u8'; // hard coded, but this is the only IP we have for the livestream.
+        video.addEventListener('loadedmetadata', function () {
             video.play();
         });
     }
-});
 
-function togglePopup(cameraName) {
-    var popup = document.getElementById('live-feed-container');
+    // Function to capture frame and send it to backend
+    function captureFrame() {
+        const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
+        if (userID) {
+            console.log("Capturing frame for camera " + camera.cameraID)
+            // Set canvas size to match the video dimensions
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+    
+            // Draw the current frame of the video onto the canvas
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    
+            // Get the frame as a Base64-encoded PNG
+            var dataURL = canvas.toDataURL('image/png');
+    
+            // Send the frame to the backend
+            uploadFrame(dataURL, camera.cameraID);
+        }
+    }
 
-    if (popup.style.display === 'none' || popup.style.display === '') {
+    // Capture frames every X seconds
+    setInterval(captureFrame, 10000); // Adjust with the camera plan
+}
+
+
+// HSL --------
+var hls;
+var video = document.getElementById('hls-video');
+var canvas = document.getElementById('frame-canvas');
+var context = canvas.getContext('2d');
+
+function stopHls() {
+    if (hls) {
+        hls.destroy();
+        hls = null;
+    }
+}
+
+function toggleLifeFeed(cameraID, cameraName, cameraIP) {
+    const popup = document.getElementById('live-feed-container');
+
+    if (popup.style.display === 'none' || popup.style.display === '') // open live feed
+    {
         // Set the camera name inside the popup content
         var cameraNameElement = document.getElementById('live-feed-container-camera_name');
         cameraNameElement.innerHTML = cameraName;
-
         popup.style.display = 'block';
-    } else {
+    } else // close live feed 
+    {
         popup.style.display = 'none';
     }
 }
 
-  
-  
-
-
+function toggleYolo() {
+    const popup = document.getElementById('processed-image');
+    const popupVideo = document.getElementById('hls-video');
+    if (popup.style.display === 'none' || popup.style.display === '') // open yolo
+    {
+        popup.style.display = 'block';
+        popupVideo.style.display = 'none';
+    } else // close yolo 
+    {
+        popup.style.display = 'none';
+        popupVideo.style.display = 'block';
+    }
+}
 
 // Initialize - Load Functions
 function loadDashboardInformation(cameraList, l24h, l7days, l30days) {
@@ -1460,11 +1580,15 @@ async function loadIndex() {
 
     //Load Notifications
     const notificationList = await loadNotificationList();
+
+    //Start camera streaming
+    cameraList.forEach(startCameraStreaming);
 }
 
 //First view - Authentication Load
 function loadAuthentication() {
     sessionStorage.clear();
+    stopHls();
     document.getElementById("login").style.display = "none";
     document.getElementById("application-version").innerText = VERSION;
 }

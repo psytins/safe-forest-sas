@@ -500,20 +500,24 @@
                 <div class="panel-upload">
                     <h1>Upload frame to analyze</h1>
                     <input type="file" id="frameInput">
-                    <button type="button" onclick="uploadFrame()" id="uploadSingleFrame">Upload and Process
+                    <button type="button" onclick="uploadSingleFrame()" id="uploadSingleFrame">Upload and Process
                         Frame</button>
                     <div class="panel-upload-processed-frame" id="result"></div>
                 </div>
             </div>
 
             <div id="live-feed-container">
-                <button id="cancel-btn" onclick="togglePopup()">Cancel</button>
+                <button id="cancel-btn" onclick="toggleLifeFeed()">Cancel</button>
+                <button id="yolo-btn" onclick="toggleYolo()">YOLO</button>
+                <h3 id="live-feed-container-title">Livefeed:</h3>
                 <h1 id="live-feed-container-camera_name"></h1>
-                <video id="hls-video" controls>
-                    <!-- Fallback content for browsers that do not support HLS -->
-                    <source id="live-source" src="http://172.208.31.254/live/camerasf.m3u8" type="application/x-mpegURL">
-                    <!-- Optional: Provide additional sources for fallback -->
-                    <!-- <source src="fallback.mp4" type="video/mp4"> -->
+
+                <div id="video-container"></div>
+                <div id="processed-images-container"></div>
+
+                <canvas id="frame-canvas" style="display: none;"></canvas>
+                <img src="../Images/loading.png" class="live-feed-container-yolo" id="processed-image" alt="Processed Image" style="display: none;" />
+                <video autoplay="true" muted="muted" id="hls-video" controls>
                     Your browser does not support HTML5 video.
                 </video>
             </div>

@@ -172,11 +172,14 @@ router.post('/simulate-detection', (req, res) => {
     const now = new Date().toISOString(); // storing in the database in UTC (in the front-end, convert to local)
 
     const camID = req.body.cameraID;
+    const className = req.body.class_name;
+    const image64 = req.body.image;
 
     const newDetection = new Detection({
         camera_id: camID,
-        description: null,
+        description: className,
         date: now,
+        image: image64,
     });
 
     Camera.findOne({ where: { cameraID: camID } }).then(camera => {
