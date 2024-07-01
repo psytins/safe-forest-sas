@@ -1,5 +1,5 @@
 // DOM Elements
-const VERSION = "1.8.5";
+const VERSION = "1.9.0";
 const AlertType = Object.freeze({
     CAMERA_DOWN: 0,
 });
@@ -1378,7 +1378,7 @@ async function saveChanges(cameraID, containerID) {
 // Check for notifications every 20 seconds
 setInterval(loadNotificationList, 20000);
 // Capture frames every 60 seconds
-setInterval(captureFrame, 5000)
+setInterval(captureFrame, 60000)
 
 // HSL --------
 var hls;
