@@ -14,7 +14,7 @@ const port = 8080;
 // ---------- START YOLO PYTHON SERVICE -------------
 // --------------------------------------------------
 // Start the Python service
-const yoloService = spawn('python', ['yoloServer-v1.py']);
+const yoloService = spawn('python', ['./yoloServer-v1.py']);
 
 yoloService.stdout.on('data', (data) => {
     console.log(`YOLO said: ${data}`);

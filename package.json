@@ -21,6 +21,7 @@
   "homepage": "https://github.com/psytins/safe-forest-sas#readme",
   "dependencies": {
     "axios": "^1.7.2",
+    "child_process": "^1.0.2",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
