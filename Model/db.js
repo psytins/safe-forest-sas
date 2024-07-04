@@ -20,16 +20,16 @@ const cert_path = process.env.DB_CERT_PATH; // for production
 const host = process.env.DB_HOST //para mudar para mysql azure, descomentar
 //const host = process.env.DB_LOCAL_HOST //para mudar para local, descomentar
 
-// Test Connection
-mysql.createConnection(
-    {
-        host: host,
-        user: db_user,
-        password: db_pass,
-        database: db_table,
-        port: 3306,
-        ssl: { ca: fs.readFileSync(cert_path) } // comentar esta linha se for usado a base de dados local.
-    });
+// // Test Connection
+// mysql.createConnection(
+//     {
+//         host: host,
+//         user: db_user,
+//         password: db_pass,
+//         database: db_table,
+//         port: 3306,
+//         ssl: { ca: fs.readFileSync(cert_path) } // comentar esta linha se for usado a base de dados local.
+//     });
 
 // Connect to MySQL DB
 const connectionSQL = new Sequelize(db_table, db_user, db_pass, {
