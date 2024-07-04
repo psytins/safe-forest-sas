@@ -37,7 +37,7 @@ jobs:
           path: release.zip
       
       - name: Install system dependencies
-        run: apt-get install -y python3-distutils
+        run: sudo apt-get install -y python3-distutils
 
       - name: Set up Python
         uses: actions/setup-python@v2
