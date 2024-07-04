@@ -1,4 +1,4 @@
-Flask==3.0.3
-Pillow==10.2.0
-numpy==1.24.1
-opencv-python-headless==4.10.0.84
+Flask
+Pillow
+numpy
+opencv-python
