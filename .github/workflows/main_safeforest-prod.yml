@@ -77,6 +77,16 @@ jobs:
         with:
           python-version: '3.x'
 
+      - name: Ensure pip and distutils are available (for Azure deployment)
+        run: |
+            python -m ensurepip --upgrade
+            python -m pip install --upgrade pip setuptools wheel
+        
+      - name: Install Python dependencies (for Azure deployment)
+        run: |
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
+
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
