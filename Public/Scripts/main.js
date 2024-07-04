@@ -1578,13 +1578,13 @@ function startCameraStreaming(camera) {
 
         if (Hls.isSupported()) {
             hls = new Hls();
-            hls.loadSource('http://172.208.31.254/live/camerasf.m3u8'); // hard coded, but this is the only IP we have for the livestream.
+            hls.loadSource('https://172.208.31.254/live/camerasf.m3u8'); // hard coded, but this is the only IP we have for the livestream.
             hls.attachMedia(video);
             hls.on(Hls.Events.MANIFEST_PARSED, function () {
                 video.play();
             });
         } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            video.src = 'http://172.208.31.254/live/camerasf.m3u8'; // hard coded, but this is the only IP we have for the livestream.
+            video.src = 'https://172.208.31.254/live/camerasf.m3u8'; // hard coded, but this is the only IP we have for the livestream.
             video.addEventListener('loadedmetadata', function () {
                 video.play();
             });
