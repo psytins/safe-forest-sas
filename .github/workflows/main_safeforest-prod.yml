@@ -35,14 +35,16 @@ jobs:
         with:
           name: node-app
           path: release.zip
-      
-      - name: Install system dependencies
-        run: sudo apt-get install -y python3-distutils
 
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: '3.x'
+
+      - name: Ensure pip and distutils are available
+        run: |
+            python -m ensurepip --upgrade
+            python -m pip install --upgrade pip setuptools
       
       - name: Install Python dependencies
         run: |
