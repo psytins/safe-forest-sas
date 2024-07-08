@@ -36,6 +36,8 @@ const Camera = sequelize.define('camera', {
     double_positive: Sequelize.INTEGER,
     time_to_live: Sequelize.INTEGER,
     down_status_email: Sequelize.INTEGER,
+    user: Sequelize.STRING,
+    pass: Sequelize.STRING,
     // -- must have in every table:
     createdAt: {
         type: Sequelize.DATE,

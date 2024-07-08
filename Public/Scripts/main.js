@@ -1,6 +1,6 @@
 // DOM Elements
 const intervals = {};
-const VERSION = "2.0.0";
+const VERSION = "3.0.0";
 const AlertType = Object.freeze({
     CAMERA_DOWN: 0,
 });
@@ -380,11 +380,11 @@ function performLogin() {
                 alert('Login successful! ' + data);
 
                 //Handle Success ...
-                sessionStorage.setItem('_id', data.userID);
-                sessionStorage.setItem('name', data.name);
-                sessionStorage.setItem('email', data.email);
-                sessionStorage.setItem('country', data.country);
-                sessionStorage.setItem('refCode', data.ref_code);
+                localStorage.setItem('_id', data.userID);
+                localStorage.setItem('name', data.name);
+                localStorage.setItem('email', data.email);
+                localStorage.setItem('country', data.country);
+                localStorage.setItem('refCode', data.ref_code);
                 window.location.href = '/dashboard';
             })
             .catch(error => {
@@ -404,7 +404,7 @@ function signOut() {
     })
         .then(response => {
             // Handle response, then redirect
-            sessionStorage.clear();
+            localStorage.clear();
             window.location.href = '/authentication';
         })
         .catch(error => {
@@ -419,7 +419,7 @@ function changePassword() {
     const new_password = document.getElementById("input-new-password").value;
     const confirm_new_password = document.getElementById("input-confirm-password").value;
 
-    const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
+    const userID = parseInt(localStorage.getItem("_id"), 10); // Convert to integer
 
     if (validateNewPasswordForm()) {
 
@@ -469,7 +469,7 @@ function changePersonalProfile() {
     const region_upd = document.getElementById('input-region-upd').value === "" ? document.getElementById('input-region-upd').placeholder : document.getElementById('input-region-upd').value;
     const logo_upd = null // tmp
 
-    const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
+    const userID = parseInt(localStorage.getItem("_id"), 10); // Convert to integer
 
     if (validatePersonalProfileForm()) {
 
@@ -492,10 +492,10 @@ function changePersonalProfile() {
 
                 // Handle success ...
                 alert("Personal Profile updated!");
-                sessionStorage.setItem('name', fname_upd + " " + lname_upd);
-                sessionStorage.setItem('email', email_upd);
-                sessionStorage.setItem('country', region_upd);
-                sessionStorage.setItem('refCode', ref_code_upd);
+                localStorage.setItem('name', fname_upd + " " + lname_upd);
+                localStorage.setItem('email', email_upd);
+                localStorage.setItem('country', region_upd);
+                localStorage.setItem('refCode', ref_code_upd);
                 location.reload();
                 // ...
 
@@ -510,7 +510,7 @@ function changePersonalProfile() {
 }
 
 function deleteAccount() {
-    const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
+    const userID = parseInt(localStorage.getItem("_id"), 10); // Convert to integer
 
     if (validateDeleteAccount()) {
         fetch('/api/auth/account-delete', {
@@ -533,7 +533,7 @@ function deleteAccount() {
 }
 
 function registerCamera() {
-    const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer // FK
+    const userID = parseInt(localStorage.getItem("_id"), 10); // Convert to integer // FK
     const camera_name = document.getElementById("add-camera-camera-name").value;
     const friendly_name = document.getElementById("add-camera-camera-name").value;
     const sensitivity = parseInt(document.querySelector('input[name="detection-option"]:checked').value);
@@ -553,6 +553,8 @@ function registerCamera() {
     const double_positive = document.getElementById('tglBtn').checked ? 1 : 0;
     const time_to_live = parseInt(document.getElementById('time-to-live').value);
     const down_status_email = document.getElementById('email-alert').checked ? 1 : 0;
+    const user = document.getElementById("camera-user").value;
+    const pass = document.getElementById("camera-pass").value;
 
     if (validateRegisterCamera()) {
 
@@ -582,7 +584,9 @@ function registerCamera() {
                     size_to,
                     double_positive,
                     time_to_live,
-                    down_status_email
+                    down_status_email,
+                    user,
+                    pass,
                 }),
         })
             .then(response => { // data validation
@@ -614,7 +618,7 @@ function registerCamera() {
 }
 
 async function loadOverallDetection() {
-    const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
+    const userID = parseInt(localStorage.getItem("_id"), 10); // Convert to integer
     const overallDetections = await fetch('/api/camera/overall-detection', {
         method: 'POST',
         headers: {
@@ -639,7 +643,7 @@ async function loadOverallDetection() {
 
 
 async function loadLastDetectionList() {
-    const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
+    const userID = parseInt(localStorage.getItem("_id"), 10); // Convert to integer
     const lastDetectionList = await fetch('/api/camera/list-last-detection', {
         method: 'POST',
         headers: {
@@ -652,7 +656,7 @@ async function loadLastDetectionList() {
         })
         .then(data => {
             const tbodyLastDetect = document.getElementById("dynamicListCamera-dashboard-last-detection")
-            data.detections.forEach(detection => {
+            data.detections.reverse().forEach(detection => {
                 var dynamicEntryLD =
                     `
                 <tr>
@@ -676,44 +680,9 @@ async function loadLastDetectionList() {
     return lastDetectionList;
 }
 
-/*
-async function loadCameraDetections(cameraID) {
-    const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
-    try {
-        const response = await fetch('/api/camera/list-last-detection', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ userID, cameraID }),
-        });
-
-        if (!response.ok) {
-            throw new Error('Failed to fetch last detections');
-        }
-
-        const data = await response.json();
-
-        // Filter detections for the specific cameraID
-        const detections = data.detections
-            .filter(detection => detection.camera.cameraID === cameraID)
-            .map(detection => ({
-                detectionID: detection.detectionID,
-                description: detection.description,
-                time: moment(detection.date).local().format('HH:mm:ss'),
-                date: moment(detection.date).local().format('YYYY-MM-DD'),
-            }));
-
-        return detections; // Return the structured detections array
-    } catch (error) {
-        console.error('Last Detect Listing failed:', error);
-        throw new Error('Failed to load last detections');
-    }
-}
-*/
 // Dynamic Entry for Camera Detections ----------------
 async function loadCameraDetections(cameraID) {
-    const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
+    const userID = parseInt(localStorage.getItem("_id"), 10); // Convert to integer
     try {
         const response = await fetch('/api/camera/list-last-detection', {
             method: 'POST',
@@ -746,11 +715,8 @@ async function loadCameraDetections(cameraID) {
     }
 }
 
-
-
-
 async function loadCameraList() {
-    const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
+    const userID = parseInt(localStorage.getItem("_id"), 10); // Convert to integer
     const cameraList = await fetch('/api/camera/list-cameras', {
         method: 'POST',
         headers: {
@@ -807,7 +773,7 @@ async function loadCameraList() {
 }
 
 async function loadSingleCamera(cameraID) {
-    const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
+    const userID = parseInt(localStorage.getItem("_id"), 10); // Convert to integer
     const response = await fetch('/api/camera/list-cameras', {
         method: 'POST',
         headers: {
@@ -832,38 +798,35 @@ async function loadSingleCamera(cameraID) {
 
 
 function changeCameraStatus(cameraID) {
-    if (confirm("Current Action: Change camera status for camera #" + cameraID + ". You want to proceed?")) {
-        alert("Proceeding...")
-        fetch('api/camera/change-status', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(
-                {
-                    cameraID
-                }),
+    fetch('api/camera/change-status', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(
+            {
+                cameraID
+            }),
+    })
+        .then(response => { // data validation
+            if (response.status == 401) {
+                throw new Error(`Camera don't exist! Status: ${response.status}`);
+            }
+            return response.json();
         })
-            .then(response => { // data validation
-                if (response.status == 401) {
-                    throw new Error(`Camera don't exist! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Camera status changed successfully:', data);
+        .then(data => {
+            console.log('Camera status changed successfully:', data);
 
-                // Handle success ...
-                alert("Camera status changed successfully");
-                location.reload();
-            })
-            .catch(error => {
-                console.error('Status change failed:', error);
-                // Handle error ... 
-                alert(error);
-                // ...
-            });
-    }
+            // Handle success ...
+            alert("Camera status was changed. Please check.");
+            location.reload();
+        })
+        .catch(error => {
+            console.error('Status change failed:', error);
+            // Handle error ... 
+            alert(error);
+            // ...
+        });
 }
 
 function newDetection(cameraID, class_name, image) {
@@ -909,7 +872,7 @@ function newDetection(cameraID, class_name, image) {
 }
 
 async function loadContactList() {
-    const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
+    const userID = parseInt(localStorage.getItem("_id"), 10); // Convert to integer
     const contactList = await fetch('/api/auth/list-contacts', {
         method: 'POST',
         headers: {
@@ -945,7 +908,7 @@ async function loadContactList() {
 }
 
 function addContact() {
-    const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer // FK
+    const userID = parseInt(localStorage.getItem("_id"), 10); // Convert to integer // FK
     const email = document.getElementById("add-contact").value;
 
     if (validateAddContact()) {
@@ -991,7 +954,6 @@ function addContact() {
 
 function removeContact(contactID) {
     if (confirm("Current Action: Remove contact ID #" + contactID + ". You want to proceed?")) {
-        alert("Proceeding...")
         fetch('/api/auth/contact-delete', {
             method: 'POST',
             headers: {
@@ -1012,7 +974,7 @@ function removeContact(contactID) {
 }
 
 async function sendEmail(subject) {
-    const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
+    const userID = parseInt(localStorage.getItem("_id"), 10); // Convert to integer
     await fetch('/api/email-sender/send-email', {
         method: 'POST',
         headers: {
@@ -1039,7 +1001,7 @@ function updateNotificationCount(count) {
 }
 
 async function loadNotificationList() {
-    const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
+    const userID = parseInt(localStorage.getItem("_id"), 10); // Convert to integer
     if (userID) {
         console.log("Checking notifications...");
         const notificationList = await fetch('/api/auth/list-notification', {
@@ -1058,7 +1020,7 @@ async function loadNotificationList() {
 
                 tbodyNotification.innerHTML = ""; // clean all notifications first
 
-                data.notifications.forEach(notification => {
+                data.notifications.reverse().forEach(notification => {
                     if (notification.opened === 0) {
                         notificationNumber++;
                     }
@@ -1185,7 +1147,8 @@ function uploadFrame(frame, camID) {
                     resolve();
                 })
                 .catch(error => {
-                    console.error('Error:', error);
+                    //console.error('Error:', error);
+                    changeCameraStatus(camID); // change camera status in case of failure
                     reject();
                 });
         });
@@ -1351,6 +1314,12 @@ function renderCameraDetailsPanel(cameraDetails, detections, cameraID, container
                     </div>
                 </div>
             </div>
+            <div class="panel-camera-settings-auth">
+                <h4>User: </h4>
+                <p contenteditable="true" id="update-camera-user">${cameraDetails.user}</p>
+                <h4>Password: </h4>
+                <p contenteditable="true" id="update-camera-pass">${cameraDetails.pass}</p>
+            </div>
             <div class="panel-camera-settings-logs">
                 <h4>Camera Detection Logs</h4>
                 <table id="cameraLogs">
@@ -1496,7 +1465,8 @@ async function saveChanges(cameraID, containerID) {
     const subscriptionPlan = document.getElementById("subscriptionPlan").value;
     const updatedSensitivity = parseInt(panelMyCameraContainer.querySelector('#sensitivity').innerText, 10);
     const updatedEndpoint = panelMyCameraContainer.querySelector('#endpoint').innerText;
-
+    const user = document.getElementById("update-camera-user").innerText;
+    const pass = document.getElementById("update-camera-pass").innerText;
 
     if (!updatedCameraName.trim()) {
         alert('Camera name cannot be empty');
@@ -1514,14 +1484,16 @@ async function saveChanges(cameraID, containerID) {
                 camera_name: updatedCameraName,
                 subscription_plan: subscriptionPlan,
                 sensitivity: updatedSensitivity,
-                public_ip_address: updatedEndpoint
+                public_ip_address: updatedEndpoint,
+                user: user,
+                pass: pass,
             }),
         });
 
         if (!response.ok) {
             throw new Error('Failed to update camera details');
         }
-        
+
         alert('Camera details updated successfully');
         location.reload();
     } catch (error) {
@@ -1536,81 +1508,105 @@ async function saveChanges(cameraID, containerID) {
 // Check for notifications every 20 seconds
 setInterval(loadNotificationList, 20000);
 
-// Store intervals and debounce timers
 function startCameraStreaming(camera) {
-    const userID = parseInt(sessionStorage.getItem("_id"), 10); // Convert to integer
-    if (camera.current_status && userID) {
-        const videoContainer = document.getElementById('video-container');
-        const processedImagesContainer = document.getElementById('processed-images-container');
+    return new Promise((resolve, reject) => {
+        const userID = parseInt(localStorage.getItem("_id"), 10); // Convert to integer
+        if (camera.current_status && userID) {
+            //Setup ffmpeg -------------
+            fetch('api/camera/setup-ffmpeg', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    cameraID: camera.cameraID,
+                    cameraIP: camera.public_ip_address,
+                    user: camera.user,
+                    pass: camera.pass,
+                }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Continue operation ...
+                    const videoContainer = document.getElementById('video-container');
+                    const processedImagesContainer = document.getElementById('processed-images-container');
 
-        // Check if the video element for this camera already exists
-        if (document.getElementById(camera.cameraID)) {
-            return; // Video element already exists, do nothing
+                    // Create video element
+                    const video = document.createElement('video');
+                    video.className = "live-feed";
+                    video.id = camera.cameraID;
+                    video.controls = true;
+                    video.style.width = "90%";
+                    video.style.display = 'none';
+                    video.autoplay = true;
+                    videoContainer.appendChild(video);
+
+                    // Create canvas element
+                    const canvas = document.createElement('canvas');
+                    canvas.id = `${camera.cameraID}-canvas`;
+                    canvas.style.display = 'none';
+                    videoContainer.appendChild(canvas);
+
+                    // Create image element for processed frames
+                    const img = document.createElement('img');
+                    img.className = "processed-image"
+                    img.src = "../Images/loading.png"
+                    img.id = `${camera.cameraID}-processed-image`;
+                    img.style.width = "90%";
+                    img.style.display = 'none';
+                    processedImagesContainer.appendChild(img);
+
+
+                    const context = canvas.getContext('2d');
+                    let hls;
+
+                    if (Hls.isSupported()) {
+                        hls = new Hls();
+                        hls.loadSource(`/hls/${camera.cameraID}/stream.m3u8`);
+                        hls.attachMedia(video);
+                        hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                            video.muted = true;
+                            video.play();
+                        });
+                    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                        video.src = `/hls/${camera.cameraID}/stream.m3u8`;
+                        video.addEventListener('loadedmetadata', function () {
+                            video.muted = true;
+                            video.play();
+                        });
+                    }
+
+                    // Function to capture frame and send it to backend
+                    function captureFrame() {
+                        console.log("Capturing frame for camera " + camera.cameraID)
+                        // Set canvas size to match the video dimensions
+                        canvas.width = video.videoWidth;
+                        canvas.height = video.videoHeight;
+
+                        // Draw the current frame of the video onto the canvas
+                        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                        // Get the frame as a Base64-encoded PNG
+                        var dataURL = canvas.toDataURL('image/png');
+
+                        // Send the frame to the backend
+                        uploadFrame(dataURL, camera.cameraID);
+
+                    }
+
+                    // Capture frames every X seconds
+                    intervals[camera.cameraID] = setInterval(captureFrame, 10000); // Adjust with the camera plan
+                    resolve();
+                })
+                .catch(error => {
+                    //console.error('Error:', error);
+                    changeCameraStatus(camera.cameraID); // change camera status in case of failure
+                    reject(error);
+                });
+        } else {
+            resolve();
         }
-
-        // Create video element
-        const video = document.createElement('video');
-        video.className = "live-feed";
-        video.id = camera.cameraID;
-        video.controls = true;
-        video.style.width = "90%";
-        video.style.display = 'none';
-        videoContainer.appendChild(video);
-
-        // Create canvas element
-        const canvas = document.createElement('canvas');
-        canvas.id = `${camera.cameraID}-canvas`;
-        canvas.style.display = 'none';
-        videoContainer.appendChild(canvas);
-
-        // Create image element for processed frames
-        const img = document.createElement('img');
-        img.className = "processed-image"
-        img.src = "../Images/loading.png"
-        img.id = `${camera.cameraID}-processed-image`;
-        img.style.width = "90%";
-        img.style.display = 'none';
-        processedImagesContainer.appendChild(img);
-
-
-        const context = canvas.getContext('2d');
-        let hls;
-
-        if (Hls.isSupported()) {
-            hls = new Hls();
-            hls.loadSource('https://172.208.31.254/live/camerasf.m3u8'); // hard coded, but this is the only IP we have for the livestream.
-            hls.attachMedia(video);
-            hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                video.play();
-            });
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            video.src = 'https://172.208.31.254/live/camerasf.m3u8'; // hard coded, but this is the only IP we have for the livestream.
-            video.addEventListener('loadedmetadata', function () {
-                video.play();
-            });
-        }
-
-        // Function to capture frame and send it to backend
-        function captureFrame() {
-            console.log("Capturing frame for camera " + camera.cameraID)
-            // Set canvas size to match the video dimensions
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-
-            // Draw the current frame of the video onto the canvas
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-            // Get the frame as a Base64-encoded PNG
-            var dataURL = canvas.toDataURL('image/png');
-
-            // Send the frame to the backend
-            uploadFrame(dataURL, camera.cameraID);
-
-        }
-
-        // Capture frames every X seconds
-        intervals[camera.cameraID] = setInterval(captureFrame, 10000); // Adjust with the camera plan
-    }
+    });
 }
 
 // Function to stop the camera stream
@@ -1653,6 +1649,7 @@ function toggleLifeFeed(cameraID, cameraName, cameraIP, currentStatus) {
 
         popup.style.display = 'block';
         video.style.display = 'block';
+        video.muted = false;
     } else // close live feed 
     {
         const yoloBtnDom = document.getElementsByClassName("yolo-btn");
@@ -1661,6 +1658,7 @@ function toggleLifeFeed(cameraID, cameraName, cameraIP, currentStatus) {
         yoloBtnDom[0].remove();
 
         for (let i = 0; i < videos.length; i++) {
+            videos[i].muted = true;
             videos[i].style.display = 'none'
         }
 
@@ -1747,17 +1745,17 @@ async function loadIndex() {
     document.getElementById("security").style.display = "none";
     document.getElementById("contacts").style.display = "none";
 
-    document.getElementById("greetings").innerText = getGreetingTime() + ", " + sessionStorage.getItem("name");
+    document.getElementById("greetings").innerText = getGreetingTime() + ", " + localStorage.getItem("name");
 
     //General Personal Profile - Placeholders
-    const fname = sessionStorage.getItem("name").split(" ")[0];
-    const lname = sessionStorage.getItem("name").split(" ")[1];
+    const fname = localStorage.getItem("name").split(" ")[0];
+    const lname = localStorage.getItem("name").split(" ")[1];
 
     document.getElementById("input-fname-upd").placeholder = fname;
     document.getElementById("input-lname-upd").placeholder = lname;
-    document.getElementById("input-email-upd").placeholder = sessionStorage.getItem('email');
-    document.getElementById("input-region-upd").value = sessionStorage.getItem('country');
-    document.getElementById("input-ref-code-upd").placeholder = sessionStorage.getItem('refCode');;
+    document.getElementById("input-email-upd").placeholder = localStorage.getItem('email');
+    document.getElementById("input-region-upd").value = localStorage.getItem('country');
+    document.getElementById("input-ref-code-upd").placeholder = localStorage.getItem('refCode');;
     document.getElementById("application-version").innerText = VERSION;
 
     // Load Dashboard Data and MyCamera List
@@ -1773,12 +1771,22 @@ async function loadIndex() {
     const notificationList = await loadNotificationList();
 
     //Start camera streaming
-    cameraList.forEach(startCameraStreaming);
+    Promise.all(cameraList.map(camera => startCameraStreaming(camera)))
+        .then(() => {
+            const loadingScreen = document.getElementById('loading-screen');
+            const content = document.getElementById('main-page');
+            loadingScreen.style.display = 'none';
+            content.style.display = 'flex';
+            //console.log('All camera streaming setups are complete.');
+        })
+        .catch(error => {
+            console.error('An error occurred during the camera streaming setup:', error);
+        });
 }
 
 //First view - Authentication Load
 function loadAuthentication() {
-    sessionStorage.clear();
+    localStorage.clear();
     document.getElementById("login").style.display = "none";
     document.getElementById("application-version").innerText = VERSION;
 }

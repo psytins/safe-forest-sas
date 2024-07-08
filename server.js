@@ -14,7 +14,8 @@ const port = 8080;
 // ---------- START YOLO PYTHON SERVICE -------------
 // --------------------------------------------------
 // Start the Python service
-const yoloService = spawn('python3', ['./yoloServer-v1.py']);
+const yoloService = spawn('python3', ['./yoloServer-v1.py']); // For production
+/// const yoloService = spawn('python', ['./yoloServer-v1.py']); // For development
 
 yoloService.stdout.on('data', (data) => {
     console.log(`YOLO said: ${data}`);
@@ -77,6 +78,7 @@ app.get('/authentication', (req, res) => {
 });
 
 //Static Routes ------------
+app.use('/hls', express.static(path.join(__dirname, 'Public/Pages/hls')));
 app.use(express.static('Public/Pages'));
 app.use(express.static('Public'));
 

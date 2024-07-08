@@ -5,6 +5,9 @@ const axios = require('axios');
 const multer = require('multer');
 const FormData = require('form-data');
 const upload = multer({ storage: multer.memoryStorage() });
+const fs = require('fs');
+const { spawn } = require('child_process');
+const path = require('path');
 //const bcrypt = require('bcrypt');
 //DB Model for authentication
 const Camera = require('../Model/cameraModel');
@@ -35,6 +38,8 @@ router.post('/regist', (req, res) => {
         double_positive: req.body.double_positive,
         time_to_live: req.body.time_to_live,
         down_status_email: req.body.down_status_email,
+        user: req.body.user,
+        pass: req.body.pass,
     });
 
     // Validate Camera Register
@@ -226,7 +231,7 @@ router.post('/change-status', (req, res) => {
 
 //Update Changes
 router.post('/update-camera-details', async (req, res) => {
-    const { cameraID, camera_name, subscription_plan, sensitivity, public_ip_address } = req.body;
+    const { cameraID, camera_name, subscription_plan, sensitivity, public_ip_address, user, pass } = req.body;
 
     try {
         const camera = await Camera.findByPk(cameraID);
@@ -238,8 +243,10 @@ router.post('/update-camera-details', async (req, res) => {
         // Update camera details
         camera.camera_name = camera_name;
         camera.sensitivity = sensitivity;
-        camera.subscription_plan = subscription_plan
+        camera.subscription_plan = subscription_plan;
         camera.public_ip_address = public_ip_address;
+        camera.user = user;
+        camera.pass = pass;
 
         await camera.save();
 
@@ -271,5 +278,104 @@ router.post('/detect-frame', upload.single('image'), async (req, res) => {
         res.status(500).send({ error: 'Error' });
     }
 });
+
+// Setup ffmpeg
+const ffmpegProcesses = {};
+router.post('/setup-ffmpeg', async (req, res) => {
+    const camID = req.body.cameraID;
+    const camIP = req.body.cameraIP;
+    const user = req.body.user;
+    const pass = req.body.pass;
+    const rtspFile = 'h264_hd.sdp';
+
+    try {
+        // Check if camera exists
+        const camera = await Camera.findOne({ where: { cameraID: camID } });
+        if (!camera) {
+            return res.status(404).json({ error: 'Camera not found' });
+        }
+
+        //Check if there is already a ffmepg process for this camera
+        if (ffmpegProcesses[camID]) {
+            // Kill the existing process
+            ffmpegProcesses[camID].kill();
+        }
+
+        const directoryPath = path.join(__dirname, `../Public/Pages/hls/${camID}`);
+        const streamFilesPath = path.join(directoryPath, 'stream.m3u8');
+        // create directory
+        if (!fs.existsSync(directoryPath)) {
+            fs.mkdirSync(directoryPath);
+        } else {
+            // Erase existing files in the directory
+            fs.readdirSync(directoryPath).forEach(file => {
+                const filePath = path.join(directoryPath, file);
+                fs.unlinkSync(filePath);
+            });
+        }
+
+        // Configure and start ffmpeg
+        const absolutePath = path.resolve(directoryPath);
+        const ffmpegCommand = 'ffmpeg';
+        const ffmpegArgs = [
+            '-i', `rtsp://${user}:${pass}@${camIP}/${rtspFile}`,
+            '-c:v', 'libx264',
+            '-hls_time', '2',
+            '-hls_list_size', '10',
+            '-hls_flags', 'delete_segments',
+            '-f', 'hls',
+            path.join(absolutePath, 'stream.m3u8'),
+        ];
+
+        const childProcess = spawn(ffmpegCommand, ffmpegArgs);
+
+        // Store the process in the dictionary
+        ffmpegProcesses[camID] = childProcess;
+
+        childProcess.stdout.on('data', (data) => {
+            console.log(`stdout: ${data}`);
+        });
+
+        childProcess.stderr.on('data', (data) => {
+            console.error(`stderr: ${data}`);
+        });
+
+        childProcess.on('error', (error) => {
+            console.error(`Error starting ffmpeg: ${error.message}`);
+            return res.status(500).json({ message: `Error starting ffmpeg: ${error.message}` });
+
+        });
+
+        childProcess.on('close', (code) => {
+            if (code !== 0) {
+                console.error(`ffmpeg process exited with code ${code}`);
+            } else {
+                console.log('ffmpeg process exited successfully');
+            }
+        });
+
+        const timeout = 15000;
+        const interval = 1000;
+        const endTime = Date.now() + timeout;
+        while (Date.now() < endTime) {
+            if (fs.existsSync(streamFilesPath)) {
+                return res.status(201).json(childProcess);
+            }
+            // Wait for interval milliseconds before checking again
+            sleep(interval);
+        }
+
+        return res.status(500).json({ message: `File not found` }); // Timeout reached, file not found
+
+    } catch (error) {
+        return res.status(500).json({ error: `Error in /setup-ffmpeg route: ${error.message}` });
+    }
+});
+
+// Aux Functions
+const sleep = (milliseconds) => {
+    const start = Date.now();
+    while (Date.now() - start < milliseconds) { }
+};
 
 module.exports = router;

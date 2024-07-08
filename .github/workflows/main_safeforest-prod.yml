@@ -19,7 +19,12 @@ jobs:
       - name: Install System Dependencies
         run: |
           sudo apt-get update
+          sudo apt-get install -y ffmpeg
           sudo apt-get install -y python3-distutils python3-dev build-essential libopencv-dev
+          sudo apt-get install -y python3-PIL
+          sudo apt-get install -y python3-flask
+          sudo apt-get install -y python3-numpy
+          sudo apt-get install -y python3-opencv
 
       - name: Set up Node.js version
         uses: actions/setup-node@v3
