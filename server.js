@@ -14,18 +14,18 @@ const port = 8080;
 // ---------- START YOLO PYTHON SERVICE -------------
 // --------------------------------------------------
 // Start the Python service
-const yoloService = spawn('python3', ['./yoloServer-v1.py']); // For production
-/// const yoloService = spawn('python', ['./yoloServer-v1.py']); // For development
+const appInit = spawn('sh', ['./appInit.sh']); // For production
+/// const appInit = spawn('python', ['./yoloServer-v1.py']); // For development
 
-yoloService.stdout.on('data', (data) => {
+appInit.stdout.on('data', (data) => {
     console.log(`YOLO said: ${data}`);
 });
 
-yoloService.stderr.on('data', (data) => {
+appInit.stderr.on('data', (data) => {
     console.error(`YOLO service stderr: ${data}`);
 });
 
-yoloService.on('close', (code) => {
+appInit.on('close', (code) => {
     console.log(`YOLO service exited with code ${code}`);
 });
 // --------------------------------------------------

@@ -16,16 +16,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install System Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y ffmpeg
-          sudo apt-get install -y python3-distutils python3-dev build-essential libopencv-dev
-          sudo apt-get install -y python3-pillow
-          sudo apt-get install -y python3-flask
-          sudo apt-get install -y python3-numpy
-          sudo apt-get install -y python3-opencv
-
       - name: Set up Node.js version
         uses: actions/setup-node@v3
         with:
@@ -41,16 +31,6 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.x'
-
-      - name: Ensure pip and distutils are available
-        run: |
-            python -m ensurepip --upgrade
-            python -m pip install --upgrade pip setuptools wheel
-      
-      - name: Install Python dependencies
-        run: |
-            python -m pip install --upgrade pip
-            pip install -r requirements.txt
 
       - name: Zip artifact for deployment
         run: zip release.zip ./* -r
@@ -74,16 +54,6 @@ jobs:
         with:
           name: node-app
 
-      - name: Install System Dependencies - Deploy
-        run: |
-            sudo apt-get update
-            sudo apt-get install -y ffmpeg
-            sudo apt-get install -y python3-distutils python3-dev build-essential libopencv-dev
-            sudo apt-get install -y python3-pillow
-            sudo apt-get install -y python3-flask
-            sudo apt-get install -y python3-numpy
-            sudo apt-get install -y python3-opencv
-
       - name: Unzip artifact for deployment
         run: unzip release.zip
 
@@ -91,16 +61,6 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.x'
-
-      - name: Ensure pip and distutils are available (for Azure deployment)
-        run: |
-            python -m ensurepip --upgrade
-            python -m pip install --upgrade pip setuptools wheel
-        
-      - name: Install Python dependencies (for Azure deployment)
-        run: |
-            python -m pip install --upgrade pip
-            pip install -r requirements.txt
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
