@@ -1,8 +1,11 @@
 // DOM Elements
 const intervals = {};
+let contactListDOM = [];
 const VERSION = "3.0.0";
 const AlertType = Object.freeze({
     CAMERA_DOWN: 0,
+    DETECT_PEOPLE: 1,
+    DETECT_SMOKE: 2,
 });
 
 // Queue System ---------
@@ -280,11 +283,28 @@ function validateAddContact() {
     return true;
 }
 
-function sendAlert(alertType) {
+async function sendAlert(alertType, camera) {
+    const userID = parseInt(localStorage.getItem("_id"), 10); // Convert to integer
+    const userEmail = localStorage.getItem('email');
     switch (alertType) {
         case 0: // Camera down alert
-            sendEmail("Camera Down", 'joaop3152@gmail.com');
+            await sendEmail(alertType, "Camera Status Changed", userEmail, camera);
+            await Promise.all(contactListDOM.map(async (contact) => {
+                await sendEmail(alertType, "Camera Status Changed", contact.email_address, camera);
+            }));
             break
+        case 1: // detected people
+            await sendEmail(alertType, "Camera Detected Motion", userEmail, camera);
+            await Promise.all(contactListDOM.map(async (contact) => {
+                await sendEmail(alertType, "Camera Detected Motion", contact.email_address, camera);
+            }));
+            break;
+        case 2: // detected smoke
+            await sendEmail(alertType, "Camera Detected Smoke", userEmail, camera);
+            await Promise.all(contactListDOM.map(async (contact) => {
+                await sendEmail(alertType, "Camera Detected Smoke", contact.email_address, camera);
+            }));
+            break;
     }
 }
 
@@ -818,7 +838,7 @@ function changeCameraStatus(cameraID) {
             console.log('Camera status changed successfully:', data);
 
             // Handle success ...
-            //sendAlert(0);
+            sendAlert(0, data);
             alert("Camera status was changed. Please check.");
             location.reload();
         })
@@ -974,14 +994,14 @@ function removeContact(contactID) {
     }
 }
 
-async function sendEmail(subject, to) {
+async function sendEmail(alertType, subject, to, camera) {
     const userID = parseInt(localStorage.getItem("_id"), 10); // Convert to integer
     await fetch('/api/email-sender/send-email', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ userID, subject, to }),
+        body: JSON.stringify({ userID, subject, to, alertType, camera }),
     })
         .then(response => {
             return response.json();
@@ -1832,7 +1852,7 @@ async function loadIndex() {
     loadDashboardInformation(cameraList, odDetections[0], odDetections[1], odDetections[2]);
 
     //Load Contact List
-    const contactList = await loadContactList();
+    contactListDOM = await loadContactList();
 
     //Load Notifications
     const notificationList = await loadNotificationList();

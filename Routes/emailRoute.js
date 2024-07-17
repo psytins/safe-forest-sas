@@ -79,12 +79,116 @@ router.post('/send-email', async (req, res) => {
             },
         });
 
+        let bodyText;
+        let bodyHTML;
+        switch (req.body.alertType) {
+            case 0:
+                bodyText = 'The status of your camera has been changed.';
+                bodyHTML = `
+                    <div style="font-family: Arial, sans-serif; color: #333;">
+                        <div style="background-color: #f8f9fa; padding: 20px; border-radius: 10px;">
+                            <h1 style="color: #22252E; text-align: center;">Safe-Forest Camera Status Update</h1>
+                            <p>Hello,</p>
+                            <p>We wanted to inform you that the status of your camera has been changed. Here are the details:</p>
+                            <table style="width: 100%; border-collapse: collapse;">
+                                <tr>
+                                    <td style="padding: 8px; border: 1px solid #ddd;"><strong>Camera ID:</strong></td>
+                                    <td style="padding: 8px; border: 1px solid #ddd;">${req.body.camera.cameraID}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px; border: 1px solid #ddd;"><strong>New Status:</strong></td>
+                                    <td style="padding: 8px; border: 1px solid #ddd;">${req.body.camera.current_status ? 'Online' : 'Offline'}</td>
+                                </tr>
+                            </table>
+                            <p style="margin-top: 20px;">If you did not make this change or if you have any questions, please login into your dashboard or contact our support team immediately.</p>
+                            <p>Thank you for using Safe-Forest.</p>
+                            <p style="margin-top: 40px; text-align: center;">&copy; 2024 Safe-Forest</p>
+                        </div>
+                    </div>
+                `;
+                break;
+            case 1:
+                bodyText = 'Your camera has detected motion.';
+                bodyHTML = `
+                    <div style="font-family: Arial, sans-serif; color: #333;">
+                        <div style="background-color: #f8f9fa; padding: 20px; border-radius: 10px;">
+                            <h1 style="color: #22252E; text-align: center;">Safe-Forest Camera Alert</h1>
+                            <p>Hello,</p>
+                            <p>Your camera has detected motion (people). Here are the details:</p>
+                            <table style="width: 100%; border-collapse: collapse;">
+                                <tr>
+                                    <td style="padding: 8px; border: 1px solid #ddd;"><strong>Camera ID:</strong></td>
+                                    <td style="padding: 8px; border: 1px solid #ddd;">${req.body.camera.cameraID}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px; border: 1px solid #ddd;"><strong>Detection Type:</strong></td>
+                                    <td style="padding: 8px; border: 1px solid #ddd;">Motion (People)</td>
+                                </tr>
+                            </table>
+                            <p style="margin-top: 20px;">If you did not expect this detection or if you have any questions, please contact our support team immediately.</p>
+                            <p>Thank you for using Safe-Forest.</p>
+                            <p style="margin-top: 40px; text-align: center;">&copy; 2024 Safe-Forest</p>
+                        </div>
+                    </div>
+                `;
+                break;
+            case 2:
+                bodyText = 'Your camera has detected smoke.';
+                bodyHTML = `
+                    <div style="font-family: Arial, sans-serif; color: #333;">
+                        <div style="background-color: #f8f9fa; padding: 20px; border-radius: 10px;">
+                            <h1 style="color: #22252E; text-align: center;">Safe-Forest Smoke Alert</h1>
+                            <p>Hello,</p>
+                            <p>Your camera has detected smoke. Here are the details:</p>
+                            <table style="width: 100%; border-collapse: collapse;">
+                                <tr>
+                                    <td style="padding: 8px; border: 1px solid #ddd;"><strong>Camera ID:</strong></td>
+                                    <td style="padding: 8px; border: 1px solid #ddd;">${req.body.camera.cameraID}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px; border: 1px solid #ddd;"><strong>Detection Type:</strong></td>
+                                    <td style="padding: 8px; border: 1px solid #ddd;">Smoke</td>
+                                </tr>
+                            </table>
+                            <p style="margin-top: 20px;">If you did not expect this detection or if you have any questions, please contact our support team immediately.</p>
+                            <p>Thank you for using Safe-Forest.</p>
+                            <p style="margin-top: 40px; text-align: center;">&copy; 2024 Safe-Forest</p>
+                        </div>
+                    </div>
+                `;
+                break;
+            default:
+                bodyText = 'Your camera has detected an unknown event.';
+                bodyHTML = `
+                    <div style="font-family: Arial, sans-serif; color: #333;">
+                        <div style="background-color: #f8f9fa; padding: 20px; border-radius: 10px;">
+                            <h1 style="color: #22252E; text-align: center;">Safe-Forest Camera Alert</h1>
+                            <p>Hello,</p>
+                            <p>Your camera has detected an unknown event. Here are the details:</p>
+                            <table style="width: 100%; border-collapse: collapse;">
+                                <tr>
+                                    <td style="padding: 8px; border: 1px solid #ddd;"><strong>Camera ID:</strong></td>
+                                    <td style="padding: 8px; border: 1px solid #ddd;">${req.body.camera.cameraID}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px; border: 1px solid #ddd;"><strong>Detection Type:</strong></td>
+                                    <td style="padding: 8px; border: 1px solid #ddd;">Unknown</td>
+                                </tr>
+                            </table>
+                            <p style="margin-top: 20px;">If you did not expect this detection or if you have any questions, please contact our support team immediately.</p>
+                            <p>Thank you for using Safe-Forest.</p>
+                            <p style="margin-top: 40px; text-align: center;">&copy; 2024 Safe-Forest</p>
+                        </div>
+                    </div>
+                `;
+        }
+
         const mailOptions = {
             from: 'Safe-Forest <grupodois31@gmail.com>',
             to: req.body.to,
             subject: req.body.subject,
-            text: 'Body',
-            html: '<h1>Email body</h1>',
+            text: bodyText,
+            html: bodyHTML,
         };
 
         const result = await transporter.sendMail(mailOptions);
