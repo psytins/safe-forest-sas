@@ -283,7 +283,7 @@ function validateAddContact() {
 function sendAlert(alertType) {
     switch (alertType) {
         case 0: // Camera down alert
-            //sendEmail("Camera Down");
+            sendEmail("Camera Down", 'joaop3152@gmail.com');
             break
     }
 }
@@ -818,6 +818,7 @@ function changeCameraStatus(cameraID) {
             console.log('Camera status changed successfully:', data);
 
             // Handle success ...
+            //sendAlert(0);
             alert("Camera status was changed. Please check.");
             location.reload();
         })
@@ -973,14 +974,14 @@ function removeContact(contactID) {
     }
 }
 
-async function sendEmail(subject) {
+async function sendEmail(subject, to) {
     const userID = parseInt(localStorage.getItem("_id"), 10); // Convert to integer
     await fetch('/api/email-sender/send-email', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ userID, subject }),
+        body: JSON.stringify({ userID, subject, to }),
     })
         .then(response => {
             return response.json();
@@ -1288,7 +1289,7 @@ function renderCameraDetailsPanel(cameraDetails, detections, cameraID, container
                 </div>
             </div>
             <div class="panel-camera-settings-endpoint">
-                <h4>Camera Endpoint</h4>
+                <h4>Camera Endpoint (shareID)</h4>
                 <p contenteditable="true" id="endpoint">${cameraDetails.public_ip_address}</p>
             </div>
             <div class="panel-camera-settings-overview">
@@ -1315,7 +1316,7 @@ function renderCameraDetailsPanel(cameraDetails, detections, cameraID, container
                 </div>
             </div>
             <div class="panel-camera-settings-auth">
-                <h4>User: </h4>
+                <h4>User (parentID): </h4>
                 <p contenteditable="true" id="update-camera-user">${cameraDetails.user}</p>
                 <h4>Password: </h4>
                 <p contenteditable="true" id="update-camera-pass">${cameraDetails.pass}</p>
@@ -1512,8 +1513,10 @@ function startCameraStreaming(camera) {
     return new Promise((resolve, reject) => {
         const userID = parseInt(localStorage.getItem("_id"), 10); // Convert to integer
         if (camera.current_status && userID) {
-            //Setup ffmpeg -------------
-            fetch('api/camera/setup-ffmpeg', {
+            // Start server processing -------------
+            const imageURL = `https://cameraftpapi.drivehq.com/api/Camera/LastImageaspx/shareID${camera.public_ip_address}/frame.png`;
+
+            fetch('api/camera/start-capture', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1523,23 +1526,26 @@ function startCameraStreaming(camera) {
                     cameraIP: camera.public_ip_address,
                     user: camera.user,
                     pass: camera.pass,
+                    imageURL: imageURL,
                 }),
             })
                 .then(response => response.json())
                 .then(data => {
                     // Continue operation ...
+                    const videoURL = `https://www.cameraftp.com/Camera/Cameraplayer.aspx?parentID=${camera.user}&shareID=${camera.public_ip_address}`;
+
                     const videoContainer = document.getElementById('video-container');
                     const processedImagesContainer = document.getElementById('processed-images-container');
 
-                    // Create video element
-                    const video = document.createElement('video');
-                    video.className = "live-feed";
-                    video.id = camera.cameraID;
-                    video.controls = true;
-                    video.style.width = "90%";
-                    video.style.display = 'none';
-                    video.autoplay = true;
-                    videoContainer.appendChild(video);
+                    // Create iframe element
+                    const iframe = document.createElement('iframe');
+                    iframe.className = "live-feed";
+                    iframe.id = camera.cameraID;
+                    iframe.style.width = "100%";
+                    iframe.style.display = 'none';
+                    iframe.src = videoURL
+                    iframe.allow = "autoplay";
+                    videoContainer.appendChild(iframe);
 
                     // Create canvas element
                     const canvas = document.createElement('canvas');
@@ -1556,50 +1562,10 @@ function startCameraStreaming(camera) {
                     img.style.display = 'none';
                     processedImagesContainer.appendChild(img);
 
-
-                    const context = canvas.getContext('2d');
-                    let hls;
-
-                    if (Hls.isSupported()) {
-                        hls = new Hls();
-                        hls.loadSource(`/hls/${camera.cameraID}/stream.m3u8`);
-                        hls.attachMedia(video);
-                        hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                            video.muted = true;
-                            video.play();
-                        });
-                    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                        video.src = `/hls/${camera.cameraID}/stream.m3u8`;
-                        video.addEventListener('loadedmetadata', function () {
-                            video.muted = true;
-                            video.play();
-                        });
-                    }
-
-                    // Function to capture frame and send it to backend
-                    function captureFrame() {
-                        console.log("Capturing frame for camera " + camera.cameraID)
-                        // Set canvas size to match the video dimensions
-                        canvas.width = video.videoWidth;
-                        canvas.height = video.videoHeight;
-
-                        // Draw the current frame of the video onto the canvas
-                        context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-                        // Get the frame as a Base64-encoded PNG
-                        var dataURL = canvas.toDataURL('image/png');
-
-                        // Send the frame to the backend
-                        uploadFrame(dataURL, camera.cameraID);
-
-                    }
-
-                    // Capture frames every X seconds
-                    intervals[camera.cameraID] = setInterval(captureFrame, 10000); // Adjust with the camera plan
                     resolve();
                 })
                 .catch(error => {
-                    //console.error('Error:', error);
+                    console.error('Error in front end for stream camera:', error);
                     changeCameraStatus(camera.cameraID); // change camera status in case of failure
                     reject(error);
                 });
@@ -1608,6 +1574,107 @@ function startCameraStreaming(camera) {
         }
     });
 }
+
+// function startCameraStreaming(camera) { OLD WAY
+//     return new Promise((resolve, reject) => {
+//         const userID = parseInt(localStorage.getItem("_id"), 10); // Convert to integer
+//         if (camera.current_status && userID) {
+//             //Setup ffmpeg -------------
+//             fetch('api/camera/setup-ffmpeg', {
+//                 method: 'POST',
+//                 headers: {
+//                     'Content-Type': 'application/json',
+//                 },
+//                 body: JSON.stringify({
+//                     cameraID: camera.cameraID,
+//                     cameraIP: camera.public_ip_address,
+//                     user: camera.user,
+//                     pass: camera.pass,
+//                 }),
+//             })
+//                 .then(response => response.json())
+//                 .then(data => {
+//                     // Continue operation ...
+//                     const videoContainer = document.getElementById('video-container');
+//                     const processedImagesContainer = document.getElementById('processed-images-container');
+
+//                     // Create video element
+//                     const video = document.createElement('video');
+//                     video.className = "live-feed";
+//                     video.id = camera.cameraID;
+//                     video.controls = true;
+//                     video.style.width = "90%";
+//                     video.style.display = 'none';
+//                     video.autoplay = true;
+//                     videoContainer.appendChild(video);
+
+//                     // Create canvas element
+//                     const canvas = document.createElement('canvas');
+//                     canvas.id = `${camera.cameraID}-canvas`;
+//                     canvas.style.display = 'none';
+//                     videoContainer.appendChild(canvas);
+
+//                     // Create image element for processed frames
+//                     const img = document.createElement('img');
+//                     img.className = "processed-image"
+//                     img.src = "../Images/loading.png"
+//                     img.id = `${camera.cameraID}-processed-image`;
+//                     img.style.width = "90%";
+//                     img.style.display = 'none';
+//                     processedImagesContainer.appendChild(img);
+
+
+//                     const context = canvas.getContext('2d');
+//                     let hls;
+
+//                     if (Hls.isSupported()) {
+//                         hls = new Hls();
+//                         hls.loadSource(`/hls/${camera.cameraID}/stream.m3u8`);
+//                         hls.attachMedia(video);
+//                         hls.on(Hls.Events.MANIFEST_PARSED, function () {
+//                             video.muted = true;
+//                             video.play();
+//                         });
+//                     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+//                         video.src = `/hls/${camera.cameraID}/stream.m3u8`;
+//                         video.addEventListener('loadedmetadata', function () {
+//                             video.muted = true;
+//                             video.play();
+//                         });
+//                     }
+
+//                     // Function to capture frame and send it to backend
+//                     function captureFrame() {
+//                         console.log("Capturing frame for camera " + camera.cameraID)
+//                         // Set canvas size to match the video dimensions
+//                         canvas.width = video.videoWidth;
+//                         canvas.height = video.videoHeight;
+
+//                         // Draw the current frame of the video onto the canvas
+//                         context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+//                         // Get the frame as a Base64-encoded PNG
+//                         var dataURL = canvas.toDataURL('image/png');
+
+//                         // Send the frame to the backend
+//                         uploadFrame(dataURL, camera.cameraID);
+
+//                     }
+
+//                     // Capture frames every X seconds
+//                     intervals[camera.cameraID] = setInterval(captureFrame, 10000); // Adjust with the camera plan
+//                     resolve();
+//                 })
+//                 .catch(error => {
+//                     //console.error('Error:', error);
+//                     changeCameraStatus(camera.cameraID); // change camera status in case of failure
+//                     reject(error);
+//                 });
+//         } else {
+//             resolve();
+//         }
+//     });
+// }
 
 // Function to stop the camera stream
 function stopCameraStream(cameraId) {
@@ -1649,7 +1716,7 @@ function toggleLifeFeed(cameraID, cameraName, cameraIP, currentStatus) {
 
         popup.style.display = 'block';
         video.style.display = 'block';
-        video.muted = false;
+        //video.muted = false;
     } else // close live feed 
     {
         const yoloBtnDom = document.getElementsByClassName("yolo-btn");
@@ -1658,7 +1725,7 @@ function toggleLifeFeed(cameraID, cameraName, cameraIP, currentStatus) {
         yoloBtnDom[0].remove();
 
         for (let i = 0; i < videos.length; i++) {
-            videos[i].muted = true;
+            //videos[i].muted = true;
             videos[i].style.display = 'none'
         }
 

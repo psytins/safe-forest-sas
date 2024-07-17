@@ -44,6 +44,7 @@ const verifyToken = require('./Secure/verifyToken');
 //External application routes (Middleware)
 app.use(cors()); // Enable CORS for all routes
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // ------------ Debug ------------ 

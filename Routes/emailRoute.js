@@ -65,30 +65,64 @@ router.post('/send-email', async (req, res) => {
         return res.status(401).json({ error: 'User is not authenticated' });
     }
 
-    const accessToken = await globalOAuth2Client.getAccessToken();
-    const transporter = createTransport({
-        service: 'gmail',
-        auth: {
-            type: 'OAuth2',
-            user: process.env.EMAIL_SENDER,
-            clientId: globalOAuth2Client._clientId,
-            clientSecret: globalOAuth2Client._clientSecret,
-            refreshToken: globalOAuth2Client.credentials.refresh_token,
-            accessToken: accessToken.token,
-        },
-    });
+    try {
+        const accessToken = await globalOAuth2Client.getAccessToken();
+        const transporter = createTransport({
+            service: 'gmail',
+            auth: {
+                type: 'OAuth2',
+                user: process.env.EMAIL_SENDER,
+                clientId: globalOAuth2Client._clientId,
+                clientSecret: globalOAuth2Client._clientSecret,
+                refreshToken: globalOAuth2Client.credentials.refresh_token,
+                accessToken: accessToken.token,
+            },
+        });
 
-    const mailOptions = {
-        from: 'Safe-Forest <grupodois31@gmail.com>',
-        to: 'duarte.m.rodrigues@sapo.pt',
-        subject: req.body.subject,
-        text: 'Body',
-        html: '<h1>Email body</h1>',
-    };
+        const mailOptions = {
+            from: 'Safe-Forest <grupodois31@gmail.com>',
+            to: req.body.to,
+            subject: req.body.subject,
+            text: 'Body',
+            html: '<h1>Email body</h1>',
+        };
 
-    const result = await transporter.sendMail(mailOptions);
-    console.log('Email sent:', result);
-    return res.json({ message: 'Email sent successfully.' });
+        const result = await transporter.sendMail(mailOptions);
+        console.log('Email sent:', result);
+        return res.json({ message: 'Email sent successfully.' });
+    } catch (error) {
+        if (error.message.includes('invalid_grant')) {
+            // Handle invalid grant error by removing the invalid token and re-authenticating
+            console.error('Invalid grant error:', error);
+            try {
+                fs.unlinkSync(process.env.EMAIL_TOKEN); // Remove the invalid token
+                globalOAuth2Client = null; // Reset the OAuth2 client
+                initializeOAuth2Client(); // Re-initialize the OAuth2 client
+                // Send an instruction to re-authenticate
+                return res.status(401).json({ error: 'Invalid grant error. Please re-authenticate.' });
+            } catch (refreshError) {
+                console.error('Error refreshing token:', refreshError);
+                return res.status(500).json({ error: 'Failed to refresh token' });
+            }
+        } else {
+            console.error('Error sending email:', error);
+            return res.status(500).json({ error: 'Failed to send email' });
+        }
+    }
 });
+
+// Function to refresh the OAuth2 token
+const refreshToken = async () => {
+    if (!globalOAuth2Client) {
+        throw new Error('OAuth2 client is not initialized');
+    }
+
+    const newTokens = await globalOAuth2Client.refreshAccessToken();
+    const token = newTokens.credentials;
+    globalOAuth2Client.setCredentials(token);
+
+    // Save the new token to a file or database
+    fs.writeFileSync(process.env.EMAIL_TOKEN, JSON.stringify(token));
+};
 
 module.exports = router;

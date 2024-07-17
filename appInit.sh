@@ -2,7 +2,6 @@
 
 # Update package list and install FFmpeg
 apt-get update
-apt-get install -y ffmpeg
 
 # Install Python dependencies
 apt-get install -y python3-flask

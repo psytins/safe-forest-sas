@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
+const { createCanvas, loadImage } = require('canvas');
 const multer = require('multer');
 const FormData = require('form-data');
 const upload = multer({ storage: multer.memoryStorage() });
@@ -205,6 +206,33 @@ router.post('/simulate-detection', (req, res) => {
     });
 });
 
+async function simulateDetection(camID, className) {
+    try {
+        const now = new Date().toISOString(); // Storing in UTC (convert to local in frontend)
+
+        const newDetection = new Detection({
+            camera_id: camID,
+            description: className,
+            date: now,
+            image: null, // temp
+        });
+
+        const camera = await Camera.findOne({ where: { cameraID: camID } });
+
+        if (!camera || camera.current_status === 0) {
+            throw new Error('Camera not found or it is offline');
+        }
+
+        const savedEntry = await newDetection.save();
+        camera.last_detected = now;
+        await camera.save();
+
+        return savedEntry; // Return saved detection entry if needed
+    } catch (error) {
+        throw new Error(`Error simulating detection for camera ${camID}: ${error.message}`);
+    }
+}
+
 //Change camera status
 router.post('/change-status', (req, res) => {
     const camID = req.body.cameraID;
@@ -214,6 +242,7 @@ router.post('/change-status', (req, res) => {
         } else {
             if (camera.current_status === 1) {
                 // Turn off
+                stopCapture(camID)
                 camera.current_status = 0
                 camera.save()
                 return res.status(201).json(camera);
@@ -228,6 +257,32 @@ router.post('/change-status', (req, res) => {
         }
     });
 });
+
+async function changeStatus(camID) {
+    try {
+        const camera = await Camera.findOne({ where: { cameraID: camID } });
+
+        if (!camera) {
+            throw new Error('Camera not found');
+        }
+        if (camera.current_status === 1) {
+            // Turn off
+            stopCapture(camID)
+            camera.current_status = 0
+            await camera.save()
+        } else if (camera.current_status === 0) {
+            // Turn on
+            camera.current_status = 1
+            await camera.save()
+        } else {
+            throw new Error('Something went wrong...');
+        }
+
+        return camera; // Return updated camera object if needed
+    } catch (error) {
+        throw new Error(`Error changing status for camera ${camID}: ${error.message}`);
+    }
+}
 
 //Update Changes
 router.post('/update-camera-details', async (req, res) => {
@@ -279,7 +334,7 @@ router.post('/detect-frame', upload.single('image'), async (req, res) => {
     }
 });
 
-// Setup ffmpeg
+// Setup ffmpeg - not using
 const ffmpegProcesses = {};
 router.post('/setup-ffmpeg', async (req, res) => {
     const camID = req.body.cameraID;
@@ -370,6 +425,126 @@ router.post('/setup-ffmpeg', async (req, res) => {
     } catch (error) {
         return res.status(500).json({ error: `Error in /setup-ffmpeg route: ${error.message}` });
     }
+});
+
+let cameraIntervals = {};
+
+// Function to upload frame to detection endpoint
+async function uploadFrameToDetection(imageBuffer) {
+    try {
+        const form = new FormData();
+        form.append('image', imageBuffer, { contentType: 'image/png', filename: 'frame.png' });
+
+        const response = await axios.post('http://0.0.0.0:5000/detect', form, {
+            headers: {
+                ...form.getHeaders()
+            }
+        });
+
+        return response.data;
+    } catch (error) {
+        console.error('Error uploading frame to detection:', error);
+        throw error;
+    }
+}
+
+// Function to capture and process frame
+async function captureAndProcessFrame(imageURL, cameraID) {
+    try {
+        const response = await axios.get(imageURL, { responseType: 'arraybuffer' });
+        const buffer = Buffer.from(response.data, 'binary');
+        const img = await loadImage(buffer);
+
+        const canvas = createCanvas(img.width, img.height);
+        const context = canvas.getContext('2d');
+        context.drawImage(img, 0, 0, img.width, img.height);
+
+        const dataURL = canvas.toDataURL('image/png');
+        console.log(`Captured frame for camera ${cameraID}`);
+
+        const imageBuffer = Buffer.from(dataURL.split(',')[1], 'base64');
+        const detectionResult = await uploadFrameToDetection(imageBuffer);
+
+        // Process detection result as needed
+        console.log(`Total detected: ${detectionResult.result_class_ids.length} for cam ${cameraID}`);
+        detectionResult.result_class_ids.forEach(result_id => {
+            if (detectionResult.class_list[result_id] === "Fumo") {
+                console.log(`Found smoke for cam ${cameraID}`);
+                // Handle smoke detection
+                simulateDetection(cameraID, "Fumo");
+                return false;
+            } else if (detectionResult.class_list[result_id] === "Pessoa") {
+                console.log(`Found people for cam ${cameraID}`);
+                // Handle people detection
+                simulateDetection(cameraID, "Pessoa");
+                return false;
+            }
+        });
+
+    } catch (error) {
+        console.error(`Error capturing and processing frame for camera ${cameraID}:`, error);
+        throw error;
+    }
+}
+
+// Endpoint to start capturing frames for a camera
+router.post('/start-capture', async (req, res) => {
+    const { cameraID, imageURL } = req.body;
+
+    if (cameraIntervals[cameraID]) {
+        return res.status(400).json({ error: 'Capture already in progress for this camera' });
+    }
+
+    const captureFrame = async () => {
+        try {
+            await captureAndProcessFrame(imageURL, cameraID);
+        } catch (error) {
+            console.error(`Error capturing and processing frame for camera ${cameraID}:`, error);
+            changeStatus(cameraID);
+        }
+    };
+
+    cameraIntervals[cameraID] = setInterval(captureFrame, 60000); // Capture every 60 seconds
+    res.status(201).json({ message: 'Started capturing frames' });
+});
+
+// Endpoint to stop capturing frames for a camera
+router.post('/stop-capture', (req, res) => {
+    const { cameraID } = req.body;
+
+    if (cameraIntervals[cameraID]) {
+        clearInterval(cameraIntervals[cameraID]);
+        delete cameraIntervals[cameraID];
+        return res.status(201).json({ message: 'Stopped capturing frames' });
+    }
+
+    res.status(400).json({ error: 'No processing for this camera' });
+
+});
+
+function stopCapture(cameraID) {
+    return new Promise((resolve, reject) => {
+        try {
+            if (cameraIntervals[cameraID]) {
+                clearInterval(cameraIntervals[cameraID]);
+                delete cameraIntervals[cameraID];
+                resolve({ message: 'Stopped capturing frames' });
+            } else {
+                reject(new Error('No processing for this camera'));
+            }
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+
+// Endpoint to get the status of frame capture for a camera
+router.get('/capture-status/:cameraID', (req, res) => {
+    const { cameraID } = req.params;
+    if (cameraIntervals[cameraID]) {
+        return res.status(201).json({ message: 'Capture in progress' });
+    }
+    res.status(400).json({ error: 'No processing for this camera' });
 });
 
 // Aux Functions
